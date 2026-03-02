@@ -1,25 +1,34 @@
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
+import DiagnosticTicker from '../../../shared/ui/DiagnosticTicker.jsx'
 
 const struggleCards = [
   {
-    title: 'Hard to know where to start',
-    text: 'Too many scattered sources and no clear path for beginners.',
-    tone: 'bg-uape-green/25',
+    title: 'It’s unclear where to start',
+    text: 'Beginners don’t know what to learn first and what really matters.',
+    iconBg: 'bg-uape-green',
+    iconPath:
+      'M18 28.5C19.2426 28.5 20.25 29.5074 20.25 30.75C20.25 31.9926 19.2426 33 18 33C16.7574 33 15.75 31.9926 15.75 30.75C15.75 29.5074 16.7574 28.5 18 28.5ZM18 3C22.9705 3 27 7.02944 27 12C27 15.2469 25.8711 16.9361 22.9889 19.3847C20.0979 21.8406 19.5 22.9454 19.5 25.5H16.5C16.5 21.789 17.6805 19.9578 21.0465 17.0984C23.3219 15.1653 24 14.1506 24 12C24 8.68629 21.3137 6 18 6C14.6863 6 12 8.68629 12 12V13.5H9V12C9 7.02944 13.0294 3 18 3Z',
   },
   {
-    title: 'Courses do not fit your level',
-    text: 'Materials are often too basic or too advanced from day one.',
-    tone: 'bg-uape-blue-glow/25',
+    title: 'Courses are either too difficult or too basic',
+    text: 'The same content is shown to everyone, regardless of their level.',
+    iconBg: 'bg-uape-blue-glow',
+    iconPath:
+      'M18 32.995C9.71572 32.995 3 26.2793 3 17.995C3 9.71074 9.71572 2.995 18 2.995C26.2842 2.995 33 9.71074 33 17.995C33 26.2793 26.2842 32.995 18 32.995ZM18 29.995V5.995C11.3726 5.995 6 11.3676 6 17.995C6 24.6224 11.3726 29.995 18 29.995Z',
   },
   {
-    title: 'No measure of progress',
-    text: 'Without checkpoints, motivation drops quickly.',
-    tone: 'bg-uape-violet-glow/25',
+    title: 'No sense of progress',
+    text: 'It’s hard to understand how far you’ve come and what level you’re at.',
+    iconBg: 'bg-uape-violet-glow',
+    iconPath:
+      'M3 18C3 26.2842 9.71572 33 18 33C26.2842 33 33 26.2842 33 18C33 9.71572 26.2842 3 18 3C9.71572 3 3 9.71572 3 18ZM30 18C30 24.6275 24.6275 30 18 30C11.3726 30 6 24.6275 6 18C6 11.3726 11.3726 6 18 6C24.6275 6 30 11.3726 30 18ZM18 18V9C20.4854 9 22.7353 10.0074 24.3639 11.636L18 18Z',
   },
   {
-    title: 'Too much theory, not enough practice',
-    text: 'Real coding tasks are usually missing in classic courses.',
-    tone: 'bg-uape-amber-glow/25',
+    title: 'Too much unnecessary content',
+    text: 'You spend time on topics you already know or will never use.',
+    iconBg: 'bg-uape-amber-glow',
+    iconPath:
+      'M25.5 9H33V12H30V31.5C30 32.3284 29.3284 33 28.5 33H7.5C6.67158 33 6 32.3284 6 31.5V12H3V9H10.5V4.5C10.5 3.67158 11.1716 3 12 3H24C24.8284 3 25.5 3.67158 25.5 4.5V9ZM13.5 16.5V25.5H16.5V16.5H13.5ZM19.5 16.5V25.5H22.5V16.5H19.5ZM13.5 6V9H22.5V6H13.5Z',
   },
 ]
 
@@ -71,112 +80,130 @@ function LandingPage() {
       <SiteHeader />
 
       <main>
-        <section className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-20 pt-14 text-center sm:px-6 lg:px-8">
-          <p className="mb-4 inline-flex rounded-full border border-uape-border-soft bg-uape-surface px-4 py-1 text-xs tracking-[0.2em] text-uape-muted uppercase">
-            UAPE learning platform
-          </p>
-          <h1 className="max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
-            Learn programming based on your real skill level
+        <section className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-20 pt-8 text-center sm:px-6 lg:px-8">
+          <h1 className="max-w-5xl text-4xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">
+            Learn programming based
+            <br />
+            on your real skill level
           </h1>
-          <p className="mt-5 max-w-2xl text-base text-uape-muted sm:text-lg">
-            Personalized path, practical tasks, and transparent progress so you know exactly where you are growing.
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-uape-muted sm:text-lg">
+            Most platforms guess what you need. <br /> UAPE measures your actual knowledge and builds a learning <br /> path that fits you
+            &mdash; no more, no less.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
               href="/signup"
-              className="rounded-xl bg-uape-accent px-6 py-3 text-sm font-semibold text-uape-white transition hover:brightness-110"
+              className="rounded-[10px] bg-uape-accent px-7 py-3 text-base font-medium text-uape-white transition hover:brightness-110"
             >
-              Sign up free
+              Start diagnostic
             </a>
             <a
-              href="/login"
-              className="rounded-xl border border-uape-border-soft px-6 py-3 text-sm font-semibold text-uape-white transition hover:border-uape-white/40"
+              href="#solution"
+              className="rounded-[10px] bg-white px-7 py-3 text-base font-medium text-[#0e1011] transition hover:bg-white/90"
             >
-              Log in
+              How does it work?
             </a>
           </div>
 
-          <div className="mt-12 grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <article className="rounded-2xl border border-uape-border-soft bg-uape-surface p-4 text-left">
-              <p className="text-xs text-uape-muted">Adaptive map</p>
-              <h3 className="mt-2 text-lg font-semibold">Your path</h3>
-              <p className="mt-2 text-sm text-uape-muted">Curriculum updates as your skills grow.</p>
-            </article>
-            <article className="rounded-2xl border border-uape-border-soft bg-uape-surface p-4 text-left">
-              <p className="text-xs text-uape-muted">Dynamic tasks</p>
-              <h3 className="mt-2 text-lg font-semibold">Practice first</h3>
-              <p className="mt-2 text-sm text-uape-muted">Tasks tuned to your current level.</p>
-            </article>
-            <article className="rounded-2xl border border-uape-border-soft bg-uape-surface p-4 text-left">
-              <p className="text-xs text-uape-muted">Progress report</p>
-              <h3 className="mt-2 text-lg font-semibold">Track growth</h3>
-              <p className="mt-2 text-sm text-uape-muted">Visual analytics for each topic.</p>
-            </article>
-            <article className="rounded-2xl border border-uape-border-soft bg-uape-surface p-4 text-left">
-              <p className="text-xs text-uape-muted">Mentor-ready</p>
-              <h3 className="mt-2 text-lg font-semibold">Real outcomes</h3>
-              <p className="mt-2 text-sm text-uape-muted">Build a portfolio with practical projects.</p>
-            </article>
-          </div>
+          <DiagnosticTicker />
         </section>
 
-        <section id="why-hard" className="border-y border-uape-border-soft bg-uape-overlay/30">
-          <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold sm:text-3xl">Why is learning programming hard?</h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {struggleCards.map((card) => (
-                <article key={card.title} className={`rounded-2xl border border-uape-border-soft p-5 ${card.tone}`}>
-                  <h3 className="text-lg font-semibold">{card.title}</h3>
-                  <p className="mt-3 text-sm text-uape-muted">{card.text}</p>
-                </article>
-              ))}
-            </div>
+        <section id="problems" className="bg-uape-bg">
+  <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 className="text-center text-2xl font-bold sm:text-3xl">Why is learning programming hard?</h2>
+    <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      {struggleCards.map((card) => (
+        <article key={card.title} className="rounded-2xl border border-uape-border-soft bg-uape-surface p-5">
+          <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${card.iconBg}`}>
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d={card.iconPath} fill="white" />
+            </svg>
           </div>
-        </section>
+          <h3 className="text-lg font-semibold">{card.title}</h3>
+          <p className="mt-3 text-sm text-uape-muted">{card.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
 
-        <section id="how-help" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+        <section id="solution" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold sm:text-3xl">How UAPE helps you learn effectively</h2>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <article className="overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface">
-              <div className="h-48 bg-[radial-gradient(circle_at_35%_50%,#3ec486_0%,#173a2d_45%,#0f1112_90%)]" />
-              <div className="p-5">
+            <article className="relative overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface-strong" style={{ minHeight: '360px' }}>
+              <img
+                src="/assets/solution/skill-level.jpg"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/25" />
+              <div className="relative z-10 p-5">
                 <h3 className="text-lg font-semibold">We identify your real skill level</h3>
-                <p className="mt-2 text-sm text-uape-muted">Initial diagnostics let you skip generic content and start at the right point.</p>
+                <p className="mt-1 text-sm text-uape-muted">Not by guesses, but by actual tasks and code analysis.</p>
+              </div>
+              <div className="absolute bottom-5 left-5 z-10 flex gap-3">
+                {['</>', '>_', '{ }', '[ ]', '*'].map((icon) => (
+                  <div
+                    key={icon}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-sm backdrop-blur-sm"
+                  >
+                    {icon}
+                  </div>
+                ))}
               </div>
             </article>
 
-            <article className="overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface">
-              <div className="h-48 bg-[radial-gradient(circle_at_65%_35%,#4f6ad4_0%,#242b4f_45%,#0f1112_90%)]" />
-              <div className="p-5">
+            <article className="relative overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface-strong" style={{ minHeight: '360px' }}>
+              <div className="relative z-10 p-5">
                 <h3 className="text-lg font-semibold">We adapt learning to you</h3>
-                <p className="mt-2 text-sm text-uape-muted">Your learning track updates continuously based on speed and accuracy.</p>
+                <p className="mt-1 text-sm text-uape-muted">Content changes based on your knowledge and progress.</p>
               </div>
+              <img
+                src="/frame-157.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute bottom-5 left-5 z-10 h-auto w-[44%] max-w-[235px]"
+              />
+              <img
+                src="/assets/solution/frame-158.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute bottom-[72px] right-5 z-20 h-auto w-[40%] max-w-[190px]"
+              />
             </article>
 
-            <article className="rounded-2xl border border-uape-border-soft bg-uape-surface p-5">
+            <article className="relative overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface-strong p-5" style={{ minHeight: '360px' }}>
               <h3 className="text-lg font-semibold">We show your progress</h3>
-              <div className="mt-4 flex items-center gap-4 rounded-xl bg-uape-bg p-4">
-                <div className="size-28 rounded-full border-8 border-uape-lime/30 border-t-uape-lime" />
-                <div>
-                  <p className="text-3xl font-bold text-uape-lime">67%</p>
-                  <p className="text-sm text-uape-muted">Current milestone complete</p>
-                </div>
+              <p className="mt-1 text-sm text-uape-muted">You clearly see your level, growth, and next steps.</p>
+              <div className="mt-8 flex items-center justify-center">
+                <img
+                  src="/assets/solution/frame-231.png"
+                  alt="67 percent progress ring"
+                  className="h-auto w-full max-w-[220px]"
+                />
               </div>
             </article>
 
-            <article className="overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface">
-              <div className="h-48 bg-[linear-gradient(115deg,#23272a_15%,#4a3e3a_45%,#1e2023_90%)]" />
-              <div className="p-5">
+            <article className="relative overflow-hidden rounded-2xl border border-uape-border-soft bg-uape-surface-strong" style={{ minHeight: '360px' }}>
+              <img
+                src="/assets/solution/save-time.jpg"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="relative z-10 p-5">
                 <h3 className="text-lg font-semibold">We save your time</h3>
-                <p className="mt-2 text-sm text-uape-muted">Focus on what matters and avoid repeating what you already know.</p>
+                <p className="mt-1 text-sm text-uape-muted">You focus only on what you really need to learn.</p>
               </div>
             </article>
           </div>
         </section>
 
-        <section className="border-y border-uape-border-soft bg-uape-overlay/30">
+        <section id="technology" className="border-y border-uape-border-soft bg-uape-overlay/30">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div>
               <h2 className="text-2xl font-bold">Programming languages we support</h2>
@@ -220,7 +247,7 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+        <section id="for-whom" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <h2 className="text-center text-2xl font-bold sm:text-3xl">Who the platform is for</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {audienceCards.map((card) => (
@@ -235,7 +262,7 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="border-y border-uape-border-soft bg-uape-overlay/30">
+        <section id="assessment" className="border-y border-uape-border-soft bg-uape-overlay/30">
           <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:px-8">
             <div className="rounded-2xl border border-uape-border-soft bg-[radial-gradient(circle_at_30%_40%,#54c7ff55_0%,#132436_40%,#0f1112_90%)]" />
             <article className="rounded-2xl border border-uape-border-soft bg-uape-surface p-6">
@@ -310,3 +337,4 @@ function LandingPage() {
 }
 
 export default LandingPage
+

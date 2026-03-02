@@ -11,7 +11,7 @@
   --color-uape-surface-strong: #292e31;
   --color-uape-overlay: #1b1e208f;
   --color-uape-border-soft: #ffffff1f;
-  --color-uape-green: #30a14e;
+  --color-uape-green: #30A14E8F;
   --color-uape-blue-glow: #4183c48f;
   --color-uape-violet-glow: #b05bff8f;
   --color-uape-amber-glow: #febe028f;
@@ -36,4 +36,19 @@ body {
   margin: 0;
   background: #0e1011;
   color: #ffffff;
+}
+
+@keyframes uape-orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.uape-orbit-spin {
+  animation: uape-orbit-spin 12s linear infinite;
+  transform-origin: center;
 }
