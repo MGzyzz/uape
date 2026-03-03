@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -7,6 +7,7 @@
   --color-uape-muted: #ffffffc2;
   --color-uape-accent: #eb4823;
   --color-uape-surface: #1b1e20c2;
+  --color-uape-form-bg: #27292A;
   --color-uape-lime: #eaf27c;
   --color-uape-surface-strong: #292e31;
   --color-uape-overlay: #1b1e208f;
@@ -15,10 +16,11 @@
   --color-uape-blue-glow: #4183c48f;
   --color-uape-violet-glow: #b05bff8f;
   --color-uape-amber-glow: #febe028f;
+  --color-uape-header: #181A1B;
 }
 
 :root {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Figtree', sans-serif;
 }
 
 * {
@@ -30,6 +32,23 @@ body,
 #root {
   min-height: 100%;
   width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  /* scroll-snap-type: y proximity; SCROLL-SNAP: убрать чтобы отключить притяжение */
+}
+
+/* SCROLL-SNAP: убрать весь блок чтобы отключить полноэкранные секции */
+/* main > section {
+  scroll-snap-align: start;
+  min-height: 100svh;
+} */
+/* END SCROLL-SNAP */
+
+main > section + section {
+  margin-top: clamp(24px, 4vw, 56px);
 }
 
 body {

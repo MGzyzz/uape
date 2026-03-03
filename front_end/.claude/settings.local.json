@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(poetry run python -m django startproject config .)",
+      "Bash(poetry run django-admin startproject config .)",
+      "Bash(poetry run django-admin startapp accounts)",
+      "Bash(poetry run django-admin startapp api)",
+      "Bash(poetry run django-admin startapp uape)",
+      "Bash(poetry add djangorestframework-simplejwt)",
+      "Bash(npm install axios)"
+    ]
+  }
+}

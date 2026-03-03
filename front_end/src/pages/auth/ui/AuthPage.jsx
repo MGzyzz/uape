@@ -1,7 +1,13 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
+import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
+import authImage from '../../../shared/assets/solution/auth.jpg'
+import eyeIcon from '../../../shared/assets/icons/Eye.svg'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
     <div className="min-h-screen bg-uape-bg text-uape-white">
@@ -9,65 +15,87 @@ function AuthPage({ mode }) {
 
       <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-          <section className="rounded-2xl border border-uape-border-soft bg-uape-bg p-6 sm:p-10">
-            <h1 className="text-3xl font-bold sm:text-5xl">{isSignup ? 'Registration by email' : 'Log in by email'}</h1>
 
-            <form className="mt-8 space-y-6" autoComplete="off">
+          {/* Form section */}
+          <section className="rounded-lg p-6 sm:p-10">
+            <h1 className="text-3xl font-bold sm:text-4xl">
+              {isSignup ? 'Registration by email' : 'Log in by email'}
+            </h1>
+
+            <form className="mt-8 space-y-5" autoComplete="off">
               {isSignup ? (
                 <div className="grid gap-4 sm:grid-cols-2">
                   <label className="space-y-2">
-                    <span className="block text-sm font-medium text-uape-muted">First name</span>
+                    <span className="block text-xl font-medium text-uape">First name</span>
                     <input
                       type="text"
+                      name="firstName"
                       placeholder="John"
-                      className="h-12 w-full rounded-xl border border-uape-border-soft bg-uape-surface px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/80 focus:border-uape-accent"
+                      className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-2"
                     />
                   </label>
                   <label className="space-y-2">
-                    <span className="block text-sm font-medium text-uape-muted">Last name</span>
+                    <span className="block text-xl font-medium text-uape">Last name</span>
                     <input
                       type="text"
+                      name="lastName"
                       placeholder="Doe"
-                      className="h-12 w-full rounded-xl border border-uape-border-soft bg-uape-surface px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/80 focus:border-uape-accent"
+                      className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
                     />
                   </label>
                 </div>
               ) : null}
 
               <label className="space-y-2">
-                <span className="block text-sm font-medium text-uape-muted">Your email</span>
+                <span className="block text-xl font-medium text-uape">Your email</span>
                 <input
                   type="email"
+                  name="email"
                   placeholder="example@gmail.com"
-                  className="h-12 w-full rounded-xl border border-uape-border-soft bg-uape-surface px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/80 focus:border-uape-accent"
+                  className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-5"
                 />
               </label>
 
               <label className="space-y-2">
-                <span className="block text-sm font-medium text-uape-muted">Your password</span>
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  className="h-12 w-full rounded-xl border border-uape-border-soft bg-uape-surface px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/80 focus:border-uape-accent"
-                />
+                <span className="block text-xl font-medium text-uape">Your password</span>
+                <div className="relative h-12">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    placeholder="Enter your password"
+                    className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(v => !v)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-70 transition hover:opacity-100"
+                    aria-label="Toggle password visibility"
+                  >
+                    <img src={eyeIcon} alt="" className="h-5 w-5" />
+                  </button>
+                </div>
               </label>
 
               {!isSignup ? (
                 <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-uape-muted">
-                  <input type="checkbox" className="size-4 rounded border-uape-border-soft bg-uape-surface" />
+                  <input
+                    type="checkbox"
+                    name="rememberMe"
+                    className="size-4 rounded border-uape-border-soft bg-uape-surface"
+                  />
                   Remember me
                 </label>
               ) : null}
 
               <button
                 type="submit"
-                className="h-12 w-full rounded-xl bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110"
+                className="!mt-10 h-12 w-full rounded-lg bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110"
               >
                 {isSignup ? 'Sign up' : 'Log in'}
               </button>
             </form>
 
-            <div className="my-8 flex items-center gap-4 text-sm text-uape-muted">
+            <div className="my-7 flex items-center gap-4 text-sm text-uape-muted">
               <span className="h-px flex-1 bg-uape-border-soft" />
               <span>Other {isSignup ? 'sign up' : 'log in'} options</span>
               <span className="h-px flex-1 bg-uape-border-soft" />
@@ -76,55 +104,73 @@ function AuthPage({ mode }) {
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className="rounded-xl border border-uape-border-soft bg-uape-surface px-4 py-3 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
+                className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
               >
+                <GoogleIcon />
                 Google
               </button>
               <button
                 type="button"
-                className="rounded-xl border border-uape-border-soft bg-uape-surface px-4 py-3 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
+                className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
               >
+                <FacebookIcon />
                 Facebook
               </button>
             </div>
 
-            <p className="mt-7 text-sm text-uape-muted">
+            <p className="mt-7 text-center text-sm text-uape-muted">
               {isSignup ? 'Already have an account? ' : 'No account yet? '}
-              <a className="font-semibold text-uape-white underline underline-offset-4" href={isSignup ? '/login' : '/signup'}>
+              <Link
+                className="font-semibold text-uape-white underline underline-offset-4"
+                to={isSignup ? '/login' : '/signup'}
+              >
                 {isSignup ? 'Log in' : 'Sign up'}
-              </a>
+              </Link>
             </p>
           </section>
 
-          <section className="relative overflow-hidden rounded-3xl border border-uape-border-soft bg-[radial-gradient(circle_at_70%_15%,#ff9f36_0%,#eb4823_30%,#60111a_60%,#0f1112_95%)] p-8 sm:p-10">
-            <div className="absolute inset-0 bg-[linear-gradient(150deg,#ffffff05_0%,#00000040_60%)]" />
-            <div className="relative flex h-full min-h-[320px] items-end">
-              <h2 className="max-w-md text-3xl font-bold leading-tight sm:text-5xl">
+          {/* Image section */}
+          <section className="relative overflow-hidden rounded-3xl">
+            <img
+              src={authImage}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ transform: 'translateX(-35%) rotate(270deg) scale(1.5)', transformOrigin: 'center' }}
+            />
+            <div className="relative flex h-full min-h-130 items-end p-8 sm:p-10">
+              <h2 className="text-3xl font-bold leading-tight sm:text-4xl [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
                 Start with clarity.
                 <br />
                 Learn with confidence.
               </h2>
             </div>
           </section>
+
         </div>
       </main>
 
-      <footer className="mt-12 border-t border-uape-border-soft bg-[radial-gradient(circle_at_10%_5%,#2b344388_0%,#0f1112_40%)]">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-          <p className="text-3xl font-bold tracking-wide text-uape-lime sm:text-5xl">YOU&apos;RE ADAPTIVE PROGRAMMING EDUCATION</p>
-          <div className="mt-8 flex flex-col justify-between gap-6 border-t border-uape-border-soft pt-6 text-uape-muted md:flex-row md:items-center">
-            <div>
-              <p>Project developed as part of a final qualification work</p>
-              <p className="mt-2">&copy; Copyright 2026 UAPE</p>
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-uape-white">
-              <a href="mailto:example@gmail.com">example@gmail.com</a>
-              <a href="tel:+77777777777">+7 777 777 7777</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
+  )
+}
+
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.566 2.684-3.874 2.684-6.615z" fill="#4285F4" />
+      <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853" />
+      <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05" />
+      <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 6.293C4.672 4.166 6.656 3.58 9 3.58z" fill="#EA4335" />
+    </svg>
+  )
+}
+
+function FacebookIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M18 9a9 9 0 1 0-10.406 8.891v-6.29H5.313V9h2.281V7.019c0-2.252 1.341-3.497 3.396-3.497.984 0 2.013.176 2.013.176v2.213H11.93c-1.117 0-1.465.693-1.465 1.404V9h2.492l-.398 2.601H10.47v6.29A9.003 9.003 0 0 0 18 9z" fill="#1877F2" />
+      <path d="M12.559 11.601L12.957 9H10.47V7.315c0-.711.348-1.404 1.464-1.404h1.074V1.698S11.98 1.522 10.996 1.522c-2.055 0-3.397 1.245-3.397 3.497V9H5.318v2.601h2.281v6.29a9.074 9.074 0 0 0 2.875 0v-6.29h2.085z" fill="white" />
+    </svg>
   )
 }
 

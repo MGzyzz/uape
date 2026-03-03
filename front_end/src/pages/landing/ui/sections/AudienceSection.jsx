@@ -1,0 +1,53 @@
+import { BugIcon, GraduationCapIcon, PlantIcon, SearchIcon } from '../../../../shared/ui/AudienceIcons.jsx'
+
+const audienceCards = [
+  {
+    title: 'Beginners',
+    text: 'Who want a clear and structured start.',
+    bgColor: 'bg-uape-green',
+    Icon: PlantIcon,
+    iconColor: '#30A14E',
+  },
+  {
+    title: 'Students',
+    text: 'Who want to strengthen their knowledge and prepare for exams or interviews.',
+    bgColor: 'bg-uape-blue-glow',
+    Icon: GraduationCapIcon,
+    iconColor: '#4183C4',
+  },
+  {
+    title: 'Self-taught learners',
+    text: 'Who feel gaps in their knowledge and want structure.',
+    bgColor: 'bg-uape-violet-glow',
+    Icon: SearchIcon,
+    iconColor: '#B05BFF',
+  },
+  {
+    title: 'Junior developers',
+    text: 'Who want to grow faster and understand their real level.',
+    bgColor: 'bg-uape-amber-glow',
+    Icon: BugIcon,
+    iconColor: '#FEBE02',
+  },
+]
+
+function AudienceSection() {
+  return (
+    <section id="for-whom" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 className="text-center text-2xl font-bold sm:text-3xl">Who the platform is for</h2>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {audienceCards.map((card) => (
+          <article key={card.title} className={`rounded-3xl p-6 ${card.bgColor}`}>
+            <div className="mb-5 inline-flex rounded-2xl bg-white p-3">
+              <card.Icon style={{ color: card.iconColor }} />
+            </div>
+            <h3 className="text-lg font-bold text-white">{card.title}</h3>
+            <p className="mt-2 text-sm text-white/80">{card.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export default AudienceSection
