@@ -7,7 +7,8 @@
       "Bash(poetry run django-admin startapp api)",
       "Bash(poetry run django-admin startapp uape)",
       "Bash(poetry add djangorestframework-simplejwt)",
-      "Bash(npm install axios)"
+      "Bash(npm install axios)",
+      "Bash(xargs grep -l \"Router\\\\|Route\\\\|BrowserRouter\")"
     ]
   }
 }

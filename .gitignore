@@ -1,0 +1,74 @@
+# ──────────────────────────────────────────
+# Python / Django
+# ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+/back_end/staticfiles/
+/back_end/mediafiles/
+/back_end/media/
+/back_end/static/
+
+# Secrets & environment
+.env
+.env.*
+!.env.example
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# mypy / pyright
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ──────────────────────────────────────────
+# Node / React / Vite
+# ──────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Vite cache
+.vite/
+
+# ──────────────────────────────────────────
+# IDEs & editors
+# ──────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# ──────────────────────────────────────────
+# OS
+# ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ──────────────────────────────────────────
+# Misc
+# ──────────────────────────────────────────
+*.bak
+*.tmp

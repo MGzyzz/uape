@@ -3,149 +3,167 @@ import { Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import authImage from '../../../shared/assets/solution/auth.jpg'
+import welcomeBackImage from '../../../shared/assets/solution/welcome-back.png'
 import eyeIcon from '../../../shared/assets/icons/Eye.svg'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
   const [showPassword, setShowPassword] = useState(false)
 
+  const imageSection = (
+    <section className="relative overflow-hidden rounded-3xl">
+      <img
+        src={isSignup ? authImage : welcomeBackImage}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        style={isSignup
+          ? { transform: 'translateX(-35%) rotate(270deg) scale(1.5)', transformOrigin: 'center' }
+          : undefined
+        }
+      />
+      <div className={`relative flex h-full items-end p-8 sm:p-10 ${isSignup ? 'min-h-130' : 'min-h-190'}`}>
+        <h2 className="text-3xl font-bold leading-tight sm:text-4xl [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
+          {isSignup ? (
+            <>Start with clarity.<br />Learn with confidence.</>
+          ) : (
+            <>Welcome back.</>
+          )}
+        </h2>
+      </div>
+    </section>
+  )
+
+  const formSection = (
+    <section className="rounded-lg p-6 sm:p-10">
+      <h1 className="text-3xl font-bold sm:text-4xl">
+        {isSignup ? 'Registration by email' : 'Log in by email'}
+      </h1>
+
+      <form className="mt-8 space-y-5" autoComplete="off">
+        {isSignup ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="space-y-2">
+              <span className="block text-xl font-medium text-uape">First name</span>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="John"
+                className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-2"
+              />
+            </label>
+            <label className="space-y-2">
+              <span className="block text-xl font-medium text-uape">Last name</span>
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Doe"
+                className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
+              />
+            </label>
+          </div>
+        ) : null}
+
+        <label className="space-y-2">
+          <span className="block text-xl font-medium text-uape">Your email</span>
+          <input
+            type="email"
+            name="email"
+            placeholder="example@gmail.com"
+            className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-5"
+          />
+        </label>
+
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xl font-medium text-uape">Your password</span>
+            {!isSignup && (
+              <Link
+                to="/forgot-password"
+                className="text-sm text-uape-muted transition hover:text-uape-white"
+              >
+                Forgot password?
+              </Link>
+            )}
+          </div>
+          <div className="relative h-12">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Enter your password"
+              className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(v => !v)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-70 transition hover:opacity-100"
+              aria-label="Toggle password visibility"
+            >
+              <img src={eyeIcon} alt="" className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
+
+        <button
+          type="submit"
+          className="mt-10! h-12 w-full rounded-lg bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110"
+        >
+          {isSignup ? 'Sign up' : 'Log in'}
+        </button>
+      </form>
+
+      <div className="my-7 flex items-center gap-4 text-sm text-uape-muted">
+        <span className="h-px flex-1 bg-uape-border-soft" />
+        <span>Other {isSignup ? 'sign up' : 'log in'} options</span>
+        <span className="h-px flex-1 bg-uape-border-soft" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        <button
+          type="button"
+          className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
+        >
+          <GoogleIcon />
+          Google
+        </button>
+        <button
+          type="button"
+          className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
+        >
+          <FacebookIcon />
+          Facebook
+        </button>
+      </div>
+
+      <p className="mt-7 text-center text-sm text-uape-muted">
+        {isSignup ? 'Already have an account? ' : 'No account yet? '}
+        <Link
+          className="font-semibold text-uape-white underline underline-offset-4"
+          to={isSignup ? '/login' : '/signup'}
+        >
+          {isSignup ? 'Log in' : 'Sign up'}
+        </Link>
+      </p>
+    </section>
+  )
+
   return (
-    <div className="min-h-screen bg-uape-bg text-uape-white">
+    <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader compact />
 
-      <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-
-          {/* Form section */}
-          <section className="rounded-lg p-6 sm:p-10">
-            <h1 className="text-3xl font-bold sm:text-4xl">
-              {isSignup ? 'Registration by email' : 'Log in by email'}
-            </h1>
-
-            <form className="mt-8 space-y-5" autoComplete="off">
-              {isSignup ? (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="space-y-2">
-                    <span className="block text-xl font-medium text-uape">First name</span>
-                    <input
-                      type="text"
-                      name="firstName"
-                      placeholder="John"
-                      className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-2"
-                    />
-                  </label>
-                  <label className="space-y-2">
-                    <span className="block text-xl font-medium text-uape">Last name</span>
-                    <input
-                      type="text"
-                      name="lastName"
-                      placeholder="Doe"
-                      className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
-                    />
-                  </label>
-                </div>
-              ) : null}
-
-              <label className="space-y-2">
-                <span className="block text-xl font-medium text-uape">Your email</span>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="example@gmail.com"
-                  className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-5"
-                />
-              </label>
-
-              <label className="space-y-2">
-                <span className="block text-xl font-medium text-uape">Your password</span>
-                <div className="relative h-12">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    placeholder="Enter your password"
-                    className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(v => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center opacity-70 transition hover:opacity-100"
-                    aria-label="Toggle password visibility"
-                  >
-                    <img src={eyeIcon} alt="" className="h-5 w-5" />
-                  </button>
-                </div>
-              </label>
-
-              {!isSignup ? (
-                <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-uape-muted">
-                  <input
-                    type="checkbox"
-                    name="rememberMe"
-                    className="size-4 rounded border-uape-border-soft bg-uape-surface"
-                  />
-                  Remember me
-                </label>
-              ) : null}
-
-              <button
-                type="submit"
-                className="!mt-10 h-12 w-full rounded-lg bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110"
-              >
-                {isSignup ? 'Sign up' : 'Log in'}
-              </button>
-            </form>
-
-            <div className="my-7 flex items-center gap-4 text-sm text-uape-muted">
-              <span className="h-px flex-1 bg-uape-border-soft" />
-              <span>Other {isSignup ? 'sign up' : 'log in'} options</span>
-              <span className="h-px flex-1 bg-uape-border-soft" />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
-              >
-                <GoogleIcon />
-                Google
-              </button>
-              <button
-                type="button"
-                className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
-              >
-                <FacebookIcon />
-                Facebook
-              </button>
-            </div>
-
-            <p className="mt-7 text-center text-sm text-uape-muted">
-              {isSignup ? 'Already have an account? ' : 'No account yet? '}
-              <Link
-                className="font-semibold text-uape-white underline underline-offset-4"
-                to={isSignup ? '/login' : '/signup'}
-              >
-                {isSignup ? 'Log in' : 'Sign up'}
-              </Link>
-            </p>
-          </section>
-
-          {/* Image section */}
-          <section className="relative overflow-hidden rounded-3xl">
-            <img
-              src={authImage}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              style={{ transform: 'translateX(-35%) rotate(270deg) scale(1.5)', transformOrigin: 'center' }}
-            />
-            <div className="relative flex h-full min-h-130 items-end p-8 sm:p-10">
-              <h2 className="text-3xl font-bold leading-tight sm:text-4xl [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
-                Start with clarity.
-                <br />
-                Learn with confidence.
-              </h2>
-            </div>
-          </section>
-
+      <main className="mx-auto w-full flex-1 max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+        <div className={`grid gap-6 ${isSignup ? 'lg:grid-cols-[1fr_1.2fr]' : 'lg:grid-cols-[1.2fr_1fr]'}`}>
+          {isSignup ? (
+            <>
+              {formSection}
+              {imageSection}
+            </>
+          ) : (
+            <>
+              {imageSection}
+              {formSection}
+            </>
+          )}
         </div>
       </main>
 

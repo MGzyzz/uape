@@ -13,9 +13,9 @@ import CtaSection from './sections/CtaSection.jsx'
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-uape-bg text-uape-white">
+    <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader />
-      <main>
+      <main className="flex-1">
         <HeroSection />
         <ProblemsSection />
         <SolutionSection />
