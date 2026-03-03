@@ -1,22 +1,19 @@
-[project]
+[tool.poetry]
 name = "back-end"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Madi",email = "madi_gaziz@mail.ru"}
-]
-license = {text = "source /Users/madi_gaziz/Desktop/alter_work/instagram/venv/bin/activate"}
+authors = ["Madi <madi_gaziz@mail.ru>"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "django (>=6.0.2,<7.0.0)",
-    "ruff (>=0.15.4,<0.16.0)",
-    "djangorestframework (>=3.16.1,<4.0.0)",
-    "psycopg2 (>=2.9.11,<3.0.0)",
-    "djangorestframework-simplejwt (>=5.5.1,<6.0.0)"
-]
 
+[tool.poetry.dependencies]
+python = "^3.11"
+djangorestframework-simplejwt = "^5.5.1"
+psycopg2 = "^2.9.11"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.15.4"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
