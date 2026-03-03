@@ -1,14 +1,58 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import authImage from '../../../shared/assets/solution/auth.jpg'
 import welcomeBackImage from '../../../shared/assets/solution/welcome-back.png'
 import eyeIcon from '../../../shared/assets/icons/Eye.svg'
+import { register, login, saveTokens } from '../../../api/auth.js'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
+  const navigate = useNavigate()
+
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [fields, setFields] = useState({
+    firstName: '', lastName: '', email: '', password: '',
+  })
+
+  const handleChange = (e) => {
+    setFields(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    setError('')
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+    try {
+      let tokens
+      if (isSignup) {
+        tokens = await register({
+          first_name: fields.firstName,
+          last_name: fields.lastName,
+          email: fields.email,
+          password: fields.password,
+        })
+      } else {
+        tokens = await login({ email: fields.email, password: fields.password })
+      }
+      saveTokens(tokens)
+      navigate('/')
+    } catch (err) {
+      const data = err?.response?.data
+      if (data && typeof data === 'object') {
+        const first = Object.values(data).flat()[0]
+        setError(typeof first === 'string' ? first : 'Something went wrong.')
+      } else {
+        setError('Something went wrong. Please try again.')
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const imageSection = (
     <section className="relative overflow-hidden rounded-3xl">
@@ -39,7 +83,7 @@ function AuthPage({ mode }) {
         {isSignup ? 'Registration by email' : 'Log in by email'}
       </h1>
 
-      <form className="mt-8 space-y-5" autoComplete="off">
+      <form className="mt-8 space-y-5" autoComplete="off" onSubmit={handleSubmit}>
         {isSignup ? (
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="space-y-2">
@@ -48,6 +92,9 @@ function AuthPage({ mode }) {
                 type="text"
                 name="firstName"
                 placeholder="John"
+                value={fields.firstName}
+                onChange={handleChange}
+                required
                 className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-2"
               />
             </label>
@@ -57,6 +104,9 @@ function AuthPage({ mode }) {
                 type="text"
                 name="lastName"
                 placeholder="Doe"
+                value={fields.lastName}
+                onChange={handleChange}
+                required
                 className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
               />
             </label>
@@ -69,6 +119,9 @@ function AuthPage({ mode }) {
             type="email"
             name="email"
             placeholder="example@gmail.com"
+            value={fields.email}
+            onChange={handleChange}
+            required
             className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-5"
           />
         </label>
@@ -90,6 +143,9 @@ function AuthPage({ mode }) {
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
+              value={fields.password}
+              onChange={handleChange}
+              required
               className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
             />
             <button
@@ -103,12 +159,16 @@ function AuthPage({ mode }) {
           </div>
         </div>
 
+        {error && (
+          <p className="text-sm text-red-400">{error}</p>
+        )}
 
         <button
           type="submit"
-          className="mt-10! h-12 w-full rounded-lg bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110"
+          disabled={loading}
+          className="mt-10! h-12 w-full rounded-lg bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {isSignup ? 'Sign up' : 'Log in'}
+          {loading ? (isSignup ? 'Signing up…' : 'Logging in…') : (isSignup ? 'Sign up' : 'Log in')}
         </button>
       </form>
 
