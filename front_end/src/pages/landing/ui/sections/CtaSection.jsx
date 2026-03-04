@@ -7,8 +7,7 @@ function CtaSection() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-[#181A1B]" aria-hidden="true" />
       <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-4 px-4 pb-20 sm:px-6 lg:grid-cols-2 lg:px-8">
         <article
-          className="rounded-[24px] bg-[#27292A] p-8 md:p-10"
-          style={{ boxShadow: '0px 0px 32px 0px #0000001F' }}
+          className="uape-shadow-soft-32 rounded-[24px] bg-[#27292A] p-8 md:p-10"
         >
           <h3 className="font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
             Start learning with a clear understanding of your level
@@ -26,8 +25,7 @@ function CtaSection() {
         </article>
 
         <article
-          className="relative min-h-[320px] overflow-hidden rounded-[24px] md:min-h-[420px]"
-          style={{ boxShadow: '0px 0px 32px 0px #0000001F' }}
+          className="uape-shadow-soft-32 relative min-h-[320px] overflow-hidden rounded-[24px] md:min-h-[420px]"
         >
           <img
             src={ctaImage}

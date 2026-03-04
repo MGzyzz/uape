@@ -5,7 +5,7 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import authImage from '../../../shared/assets/solution/auth.jpg'
 import welcomeBackImage from '../../../shared/assets/solution/welcome-back.png'
 import eyeIcon from '../../../shared/assets/icons/Eye.svg'
-import { register, login, saveTokens, saveUser } from '../../../api/auth.js'
+import { register, login, saveTokens, saveUser, getProfile } from '../../../api/auth.js'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
@@ -17,14 +17,57 @@ function AuthPage({ mode }) {
   const [fields, setFields] = useState({
     firstName: '', lastName: '', email: '', password: '',
   })
+  const [fieldErrors, setFieldErrors] = useState({})
+
+  const validateField = (name, value) => {
+    if (name === 'firstName' && isSignup) {
+      if (!value.trim()) return 'First name is required'
+    }
+    if (name === 'lastName' && isSignup) {
+      if (!value.trim()) return 'Last name is required'
+    }
+    if (name === 'email') {
+      if (!value.trim()) return 'Email is required'
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Enter a valid email address'
+    }
+    if (name === 'password') {
+      if (!value) return 'Password is required'
+      if (isSignup && value.length < 8) return 'Password must be at least 8 characters'
+    }
+    return ''
+  }
 
   const handleChange = (e) => {
-    setFields(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    const { name, value } = e.target
+    setFields(prev => ({ ...prev, [name]: value }))
     setError('')
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => ({ ...prev, [name]: '' }))
+    }
+  }
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target
+    const err = validateField(name, value)
+    setFieldErrors(prev => ({ ...prev, [name]: err }))
+  }
+
+  const validateAll = () => {
+    const keys = isSignup
+      ? ['firstName', 'lastName', 'email', 'password']
+      : ['email', 'password']
+    const errors = {}
+    keys.forEach(k => {
+      const err = validateField(k, fields[k])
+      if (err) errors[k] = err
+    })
+    setFieldErrors(errors)
+    return Object.keys(errors).length === 0
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!validateAll()) return
     setLoading(true)
     setError('')
     try {
@@ -40,8 +83,13 @@ function AuthPage({ mode }) {
         tokens = await login({ email: fields.email, password: fields.password })
       }
       saveTokens(tokens)
-      saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
-      navigate('/')
+      try {
+        const profile = await getProfile()
+        saveUser({ first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null })
+      } catch {
+        saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
+      }
+      navigate('/profile')
     } catch (err) {
       const data = err?.response?.data
       if (data && typeof data === 'object') {
@@ -84,10 +132,10 @@ function AuthPage({ mode }) {
         {isSignup ? 'Registration by email' : 'Log in by email'}
       </h1>
 
-      <form className="mt-8 space-y-5" autoComplete="off" onSubmit={handleSubmit}>
+      <form className="mt-8 space-y-5" autoComplete="off" noValidate onSubmit={handleSubmit}>
         {isSignup ? (
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="space-y-2">
+            <div className="space-y-2">
               <span className="block text-xl font-medium text-uape">First name</span>
               <input
                 type="text"
@@ -95,11 +143,12 @@ function AuthPage({ mode }) {
                 placeholder="John"
                 value={fields.firstName}
                 onChange={handleChange}
-                required
-                className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-2"
+                onBlur={handleBlur}
+                className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.firstName ? 'border-red-500' : 'border-uape-border-soft'}`}
               />
-            </label>
-            <label className="space-y-2">
+              {fieldErrors.firstName && <FieldError msg={fieldErrors.firstName} />}
+            </div>
+            <div className="space-y-2">
               <span className="block text-xl font-medium text-uape">Last name</span>
               <input
                 type="text"
@@ -107,14 +156,15 @@ function AuthPage({ mode }) {
                 placeholder="Doe"
                 value={fields.lastName}
                 onChange={handleChange}
-                required
-                className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
+                onBlur={handleBlur}
+                className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.lastName ? 'border-red-500' : 'border-uape-border-soft'}`}
               />
-            </label>
+              {fieldErrors.lastName && <FieldError msg={fieldErrors.lastName} />}
+            </div>
           </div>
         ) : null}
 
-        <label className="space-y-2">
+        <div className="space-y-2">
           <span className="block text-xl font-medium text-uape">Your email</span>
           <input
             type="email"
@@ -122,10 +172,11 @@ function AuthPage({ mode }) {
             placeholder="example@gmail.com"
             value={fields.email}
             onChange={handleChange}
-            required
-            className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent mb-5"
+            onBlur={handleBlur}
+            className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.email ? 'border-red-500' : 'border-uape-border-soft'}`}
           />
-        </label>
+          {fieldErrors.email && <FieldError msg={fieldErrors.email} />}
+        </div>
 
         <div className="space-y-2">
           <div className="flex items-center justify-between">
@@ -146,8 +197,8 @@ function AuthPage({ mode }) {
               placeholder="Enter your password"
               value={fields.password}
               onChange={handleChange}
-              required
-              className="h-12 w-full rounded-lg border border-uape-border-soft bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent"
+              onBlur={handleBlur}
+              className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.password ? 'border-red-500' : 'border-uape-border-soft'}`}
             />
             <button
               type="button"
@@ -158,6 +209,7 @@ function AuthPage({ mode }) {
               <img src={eyeIcon} alt="" className="h-5 w-5" />
             </button>
           </div>
+          {fieldErrors.password && <FieldError msg={fieldErrors.password} />}
         </div>
 
         {error && (
@@ -230,6 +282,19 @@ function AuthPage({ mode }) {
 
       <SiteFooter />
     </div>
+  )
+}
+
+function FieldError({ msg }) {
+  return (
+    <p className="flex items-center gap-1.5 text-sm text-red-400 mt-1">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="shrink-0">
+        <circle cx="7" cy="7" r="7" fill="#ef4444" fillOpacity="0.2" />
+        <path d="M7 4v3.5" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="7" cy="10" r="0.75" fill="#ef4444" />
+      </svg>
+      {msg}
+    </p>
   )
 }
 

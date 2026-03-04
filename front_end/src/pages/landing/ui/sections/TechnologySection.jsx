@@ -28,13 +28,11 @@ function TechnologyIcon({ item }) {
     return (
       <span className="relative block h-9 w-9">
         <SiPython
-          className="absolute inset-0 h-full w-full text-[#3B82C4]"
-          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 52%, 0 52%)' }}
+          className="uape-tech-python-top absolute inset-0 h-full w-full text-[#3B82C4]"
           aria-hidden="true"
         />
         <SiPython
-          className="absolute inset-0 h-full w-full text-[#f7d047]"
-          style={{ clipPath: 'polygon(0 48%, 100% 48%, 100% 100%, 0 100%)' }}
+          className="uape-tech-python-bottom absolute inset-0 h-full w-full text-[#f7d047]"
           aria-hidden="true"
         />
       </span>

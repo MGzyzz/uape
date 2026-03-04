@@ -10,16 +10,14 @@ function UserAvatar({ firstName, lastName, photo }) {
       <img
         src={photo}
         alt={`${firstName} ${lastName}`}
-        className="h-10 w-10 object-cover"
-        style={{ borderRadius: '1000px' }}
+        className="uape-radius-1000 h-10 w-10 object-cover"
       />
     )
   }
 
   return (
     <span
-      className="flex h-10 w-10 items-center justify-center bg-uape-accent text-sm font-semibold text-uape-white"
-      style={{ borderRadius: '1000px' }}
+      className="uape-radius-1000 flex h-10 w-10 items-center justify-center bg-uape-accent text-sm font-semibold text-uape-white"
     >
       {initials}
     </span>
@@ -40,8 +38,7 @@ function SiteHeader({ compact = false }) {
 
     return (
       <header
-        className="sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]"
-        style={{ background: '#141719c2' }}
+        className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]"
       >
         <div className="mx-auto grid w-full max-w-6xl grid-cols-3 items-center px-4 py-3 sm:px-6 lg:px-8">
           <BrandLogo />
@@ -82,10 +79,7 @@ function SiteHeader({ compact = false }) {
             >
               Выйти
             </button>
-            <span
-              className="text-uape-white"
-              style={{ fontFamily: 'Figtree', fontWeight: 500, fontSize: '16px', lineHeight: '20px', letterSpacing: '0%' }}
-            >
+            <span className="uape-header-user-name text-uape-white">
               {user.last_name} {user.first_name}
             </span>
             <UserAvatar
@@ -101,8 +95,7 @@ function SiteHeader({ compact = false }) {
 
   return (
     <header
-      className="sticky top-0 z-20 backdrop-blur-[80px]"
-      style={{ background: '#181A1Bc2' }}
+      className="uape-header-guest-bg sticky top-0 z-20 backdrop-blur-[80px]"
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">

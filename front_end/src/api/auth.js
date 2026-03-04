@@ -1,5 +1,7 @@
 import client from './client'
 
+const MEDIA_BASE = (import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api').replace(/\/api\/?$/, '')
+
 /**
  * Register a new user.
  * @param {{ first_name: string, last_name: string, email: string, password: string }} data
@@ -31,10 +33,23 @@ export function saveTokens({ access, refresh }) {
 
 /**
  * Save user info to localStorage.
- * @param {{ first_name: string, last_name: string }} user
+ * @param {{ first_name: string, last_name: string, photo?: string|null }} user
  */
-export function saveUser({ first_name, last_name }) {
-  localStorage.setItem('user', JSON.stringify({ first_name, last_name }))
+export function saveUser({ first_name, last_name, photo = null }) {
+  localStorage.setItem('user', JSON.stringify({ first_name, last_name, photo }))
+}
+
+/**
+ * Fetch the current user's profile from the API.
+ * @returns {{ first_name: string, last_name: string, avatar: string|null, bio: string, phone: string }}
+ */
+export async function getProfile() {
+  const response = await client.get('/profile/')
+  const data = response.data
+  if (data.avatar && !data.avatar.startsWith('http')) {
+    data.avatar = `${MEDIA_BASE}${data.avatar}`
+  }
+  return data
 }
 
 /**
