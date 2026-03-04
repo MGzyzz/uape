@@ -5,7 +5,7 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import authImage from '../../../shared/assets/solution/auth.jpg'
 import welcomeBackImage from '../../../shared/assets/solution/welcome-back.png'
 import eyeIcon from '../../../shared/assets/icons/Eye.svg'
-import { register, login, saveTokens } from '../../../api/auth.js'
+import { register, login, saveTokens, saveUser } from '../../../api/auth.js'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
@@ -40,6 +40,7 @@ function AuthPage({ mode }) {
         tokens = await login({ email: fields.email, password: fields.password })
       }
       saveTokens(tokens)
+      saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
       navigate('/')
     } catch (err) {
       const data = err?.response?.data

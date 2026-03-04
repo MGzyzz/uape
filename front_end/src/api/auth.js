@@ -30,9 +30,30 @@ export function saveTokens({ access, refresh }) {
 }
 
 /**
- * Remove tokens from localStorage (logout).
+ * Save user info to localStorage.
+ * @param {{ first_name: string, last_name: string }} user
+ */
+export function saveUser({ first_name, last_name }) {
+  localStorage.setItem('user', JSON.stringify({ first_name, last_name }))
+}
+
+/**
+ * Get stored user info from localStorage.
+ * @returns {{ first_name: string, last_name: string } | null}
+ */
+export function getStoredUser() {
+  try {
+    return JSON.parse(localStorage.getItem('user'))
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Remove tokens and user from localStorage (logout).
  */
 export function clearTokens() {
   localStorage.removeItem('access')
   localStorage.removeItem('refresh')
+  localStorage.removeItem('user')
 }
