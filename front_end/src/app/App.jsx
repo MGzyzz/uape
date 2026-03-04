@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LandingPage from '../pages/landing/ui/LandingPage.jsx'
 import AuthPage from '../pages/auth/ui/AuthPage.jsx'
 import ProfilePage from '../pages/profile/ui/ProfilePage.jsx'
+import OnboardingPage from '../pages/onboarding/ui/OnboardingPage.jsx'
 import NotFoundPage from '../pages/not-found/ui/NotFoundPage.jsx'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/signup" element={<AuthPage mode="signup" />} />
         <Route path="/login" element={<AuthPage mode="login" />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
