@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from accounts.models import User, Profile
+from accounts.models import User, Profile, UserOnboarding
 
 
 class ProfileInline(admin.StackedInline):
@@ -10,9 +10,17 @@ class ProfileInline(admin.StackedInline):
     verbose_name = 'Profile'
 
 
+class UserOnboardingInline(admin.StackedInline):
+    model = UserOnboarding
+    can_delete = False
+    verbose_name = 'Onboarding'
+    fields = ('field', 'occupation', 'skills', 'current_step')
+    readonly_fields = ('current_step',)
+
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    inlines = [ProfileInline]
+    inlines = [ProfileInline, UserOnboardingInline]
     ordering = ['email']
     list_display = ['email', 'first_name', 'last_name', 'is_staff', 'is_active']
     fieldsets = (
