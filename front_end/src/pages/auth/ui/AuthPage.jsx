@@ -89,7 +89,7 @@ function AuthPage({ mode }) {
       } catch {
         saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
       }
-      navigate('/profile')
+      navigate(isSignup ? '/onboarding' : '/profile')
     } catch (err) {
       const data = err?.response?.data
       if (data && typeof data === 'object') {

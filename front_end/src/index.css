@@ -162,6 +162,7 @@ body {
 .uape-learn-nav-arrow-btn-disabled {
   pointer-events: none;
   cursor: default;
+  opacity: 0.3;
 }
 
 .uape-learn-content-card {
@@ -389,6 +390,117 @@ body {
   color: #fff;
   margin: 0 0 48px;
 }
+
+/* ─── Onboarding ──────────────────────────────────────────────────────────── */
+
+.uape-onboarding-progress-segment {
+  flex: 1;
+  height: 4px;
+  background-color: #eb482333;
+}
+
+.uape-onboarding-progress-segment-active {
+  background-color: #eb4823;
+}
+
+.uape-onboarding-info-block {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #181a1b;
+  border: 1px solid #ffffff1f;
+}
+
+.uape-onboarding-info-text {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.uape-onboarding-title {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 36px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.uape-onboarding-option-label {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.uape-onboarding-radio-outer {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #ffffff;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.uape-onboarding-radio-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #eb4823;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.uape-onboarding-save-exit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #ffffff;
+  padding: 0;
+}
+
+.uape-onboarding-next-btn {
+  background-color: #eb4823;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.uape-onboarding-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  padding: 0;
+}
+
+/* ─── End Onboarding ──────────────────────────────────────────────────────── */
 
 .uape-tech-python-top {
   clip-path: polygon(0 0, 100% 0, 100% 52%, 0 52%);

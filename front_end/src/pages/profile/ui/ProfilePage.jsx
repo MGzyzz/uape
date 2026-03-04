@@ -88,6 +88,13 @@ function HeroSection({ user }) {
               <a href="#" className="uape-profile-hero-link">
                 Add occupation and interests
               </a>
+              <button
+                onClick={() => navigate('/onboarding')}
+                className="uape-profile-hero-link"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+              >
+                → Onboarding (temp)
+              </button>
             </div>
           </div>
         </div>
