@@ -20,6 +20,8 @@ class RegisterView(APIView):
                 {
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
                 },
                 status=status.HTTP_201_CREATED,
             )
@@ -43,6 +45,8 @@ class LoginView(APIView):
                     {
                         'refresh': str(refresh),
                         'access': str(refresh.access_token),
+                        'first_name': user.first_name,
+                        'last_name': user.last_name,
                     }
                 )
             return Response(

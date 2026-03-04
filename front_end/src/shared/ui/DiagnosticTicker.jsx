@@ -166,8 +166,7 @@ function CenterDiagnosticBlock() {
     <div className="absolute left-1/2 top-1/2 z-20 isolate -translate-x-1/2 -translate-y-1/2">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{ boxShadow: '0px 0px 250px 0px #EAF27C1F' }}
+        className="uape-diagnostic-center-glow pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full"
       />
       <div className="relative rounded-[56px] border border-[#FFFFFF1F] bg-[#0E1011] p-3">
         <div className="h-[220px] w-[220px] rounded-[32px] bg-[#0E1011] p-3">
@@ -218,11 +217,7 @@ function DiagnosticTicker() {
     <div className="mt-12 w-full overflow-hidden rounded-[26px] bg-[#0E1011] px-2 py-4 sm:px-4">
       <div
         ref={frameRef}
-        className="relative h-65 overflow-hidden rounded-[20px]"
-        style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-        }}
+        className="uape-diagnostic-mask relative h-65 overflow-hidden rounded-[20px]"
       >
         <MovingRow items={topRowItems} rowTop={38} speed={46} rowOffset={24} frameWidth={frameWidth} />
         <MovingRow items={bottomRowItems} rowTop={122} speed={46} rowOffset={120} frameWidth={frameWidth} />

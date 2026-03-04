@@ -5,16 +5,14 @@ function HeroSection() {
   return (
     <section className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-20 pt-8 text-center sm:px-6 lg:px-8">
       <h1
-        className="max-w-5xl font-bold text-white"
-        style={{ fontSize: '76px', lineHeight: '80px', letterSpacing: '0%' }}
+        className="uape-hero-title max-w-5xl font-bold text-white"
       >
         Learn programming based
         <br />
         on your real skill level
       </h1>
       <p
-        className="mt-6 max-w-3xl font-normal text-uape-muted"
-        style={{ fontSize: '16px', lineHeight: '24px', letterSpacing: '0%' }}
+        className="uape-hero-subtitle mt-6 max-w-3xl font-normal text-uape-muted"
       >
         Most platforms guess what you need. <br /> UAPE measures your actual knowledge and builds a learning <br /> path
         that fits you &mdash; no more, no less.

@@ -1,5 +1,7 @@
 import client from './client'
 
+const MEDIA_BASE = (import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api').replace(/\/api\/?$/, '')
+
 /**
  * Register a new user.
  * @param {{ first_name: string, last_name: string, email: string, password: string }} data
@@ -30,9 +32,43 @@ export function saveTokens({ access, refresh }) {
 }
 
 /**
- * Remove tokens from localStorage (logout).
+ * Save user info to localStorage.
+ * @param {{ first_name: string, last_name: string, photo?: string|null }} user
+ */
+export function saveUser({ first_name, last_name, photo = null }) {
+  localStorage.setItem('user', JSON.stringify({ first_name, last_name, photo }))
+}
+
+/**
+ * Fetch the current user's profile from the API.
+ * @returns {{ first_name: string, last_name: string, avatar: string|null, bio: string, phone: string }}
+ */
+export async function getProfile() {
+  const response = await client.get('/profile/')
+  const data = response.data
+  if (data.avatar && !data.avatar.startsWith('http')) {
+    data.avatar = `${MEDIA_BASE}${data.avatar}`
+  }
+  return data
+}
+
+/**
+ * Get stored user info from localStorage.
+ * @returns {{ first_name: string, last_name: string } | null}
+ */
+export function getStoredUser() {
+  try {
+    return JSON.parse(localStorage.getItem('user'))
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Remove tokens and user from localStorage (logout).
  */
 export function clearTokens() {
   localStorage.removeItem('access')
   localStorage.removeItem('refresh')
+  localStorage.removeItem('user')
 }

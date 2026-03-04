@@ -38,16 +38,10 @@ function FaqSection() {
 
         {/* Heading */}
         <div className="mb-16 text-center">
-          <h2
-            className="font-semibold text-white"
-            style={{ fontSize: '44px', lineHeight: '52px', letterSpacing: '0%' }}
-          >
+          <h2 className="uape-faq-heading font-semibold text-white">
             Got any questions?
           </h2>
-          <h2
-            className="font-semibold"
-            style={{ fontSize: '44px', lineHeight: '52px', letterSpacing: '0%', color: '#FFFFFF8F' }}
-          >
+          <h2 className="uape-faq-heading uape-faq-heading-muted font-semibold">
             We&apos;ve got answers
           </h2>
         </div>
@@ -57,18 +51,12 @@ function FaqSection() {
           {faqItems.map((item) => (
             <div key={item.q} className="border-b border-white/10 pb-6">
               <div className="flex items-start justify-between gap-6">
-                <h3
-                  className="font-semibold text-white"
-                  style={{ fontSize: '28px', lineHeight: '32px', letterSpacing: '0%' }}
-                >
+                <h3 className="uape-faq-question font-semibold text-white">
                   {item.q}
                 </h3>
                 <img src={arrowUpIcon} alt="" aria-hidden="true" className="mt-1 h-8 w-8 shrink-0" />
               </div>
-              <p
-                className="mt-4 text-uape-muted"
-                style={{ fontSize: '16px', lineHeight: '24px', fontWeight: 400, letterSpacing: '0%' }}
-              >
+              <p className="uape-faq-answer mt-4 text-uape-muted">
                 {item.a}
               </p>
             </div>

@@ -46,20 +46,9 @@ function HowItWorksSection() {
             3) repeating-linear-gradient = длина штриха и зазор.
           */}
           <div
-            className="relative mt-14 lg:pt-20 lg:[--step-bottom:18px] lg:[--step-height:50px] lg:[--dash-h:21px] lg:[--dash-size:8px] lg:[--dash-gap:6px]"
-            style={{ '--dash-rgb': '234 242 124' }}
+            className="uape-how-dash-vars relative mt-14 lg:pt-20 lg:[--step-bottom:18px] lg:[--step-height:50px] lg:[--dash-h:21px] lg:[--dash-size:8px] lg:[--dash-gap:6px]"
           >
-            <div
-              className="pointer-events-none absolute inset-x-5 hidden lg:block lg:bottom-[calc(var(--step-bottom)+var(--step-height)/2-var(--dash-h)/2)] lg:h-[var(--dash-h)]"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(90deg, rgb(var(--dash-rgb)) 0 var(--dash-size), transparent var(--dash-size) calc(var(--dash-size) + var(--dash-gap)))',
-                WebkitMaskImage:
-                  'linear-gradient(to right, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.55) 22%, rgba(255,255,255,0.95) 64%, rgba(255,255,255,0.78) 100%)',
-                maskImage:
-                  'linear-gradient(to right, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.55) 22%, rgba(255,255,255,0.95) 64%, rgba(255,255,255,0.78) 100%)',
-              }}
-            />
+            <div className="uape-how-dash-line pointer-events-none absolute inset-x-5 hidden lg:block lg:bottom-[calc(var(--step-bottom)+var(--step-height)/2-var(--dash-h)/2)] lg:h-[var(--dash-h)]" />
 
             <div className="relative z-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
               {howItWorksSteps.map((item) => (
@@ -69,10 +58,7 @@ function HowItWorksSection() {
                 >
                   {item.hasGlow && (
                     <div
-                      className="pointer-events-none absolute left-1/2 top-[30%] -z-10 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[72px]"
-                      style={{
-                        background: 'radial-gradient(circle, #EAF27C44 0%, #EAF27C1F 42%, #EAF27C00 72%)',
-                      }}
+                      className="uape-how-step-glow pointer-events-none absolute left-1/2 top-[30%] -z-10 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[72px]"
                     />
                   )}
                   <div className={`relative z-10 mx-auto max-w-[16rem] ${item.offsetClass}`}>
@@ -84,10 +70,7 @@ function HowItWorksSection() {
 
                   {/* flex-1 растягивает вертикальную линию, фиксируя бейдж у нижнего края */}
                   <div className="mt-5 flex flex-1 items-start justify-center lg:pb-[calc(var(--step-bottom)+var(--step-height)/2)]">
-                    <span
-                      className="h-full w-px"
-                      style={{ background: 'linear-gradient(to bottom, rgb(var(--dash-rgb)), rgb(var(--dash-rgb) / 0))' }}
-                    />
+                    <span className="uape-how-step-connector h-full w-px" />
                   </div>
 
                   {/* EDITABLE: единый размер Step-блоков (h-*, w-*), и можно поднять/опустить через lg:mb-* */}

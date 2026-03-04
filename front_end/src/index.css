@@ -16,7 +16,10 @@
   --color-uape-blue-glow: #4183c48f;
   --color-uape-violet-glow: #b05bff8f;
   --color-uape-amber-glow: #febe028f;
+  --color-uape-amber: #febe02;
+  --color-uape-muted-soft: #ffffff8f;
   --color-uape-header: #181A1B;
+  --color-uape-header-auth: #141719c2;
 }
 
 :root {
@@ -70,4 +73,421 @@ body {
 .uape-orbit-spin {
   animation: uape-orbit-spin 12s linear infinite;
   transform-origin: center;
+}
+
+/* Extracted component styles (replacing inline style props) */
+
+.uape-radius-1000 {
+  border-radius: 1000px;
+}
+
+.uape-shadow-soft-32 {
+  box-shadow: 0 0 32px 0 #0000001f;
+}
+
+.uape-icon-button-reset {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.uape-profile-hero-section {
+  min-height: 700px;
+}
+
+.uape-profile-hero-overlay {
+  background: rgb(14 16 17 / 52%);
+}
+
+.uape-profile-hero-content {
+  min-height: 560px;
+}
+
+.uape-profile-avatar-shell {
+  width: 72px;
+  height: 72px;
+  border-radius: 1000px;
+  transform: translateY(-20px);
+}
+
+.uape-profile-hero-title {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.uape-profile-hero-link {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #eb4823;
+  text-decoration: underline;
+  text-decoration-style: solid;
+}
+
+.uape-profile-profession {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.uape-learn-tag {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #febe02;
+}
+
+.uape-learn-nav-arrow-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+  padding: 4px;
+  line-height: 0;
+}
+
+.uape-learn-nav-arrow-btn-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.uape-learn-content-card {
+  background-color: #181a1b;
+  border-radius: 16px;
+  overflow: hidden;
+  flex: 0 0 calc(33.333% - 16px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.uape-learn-thumb-wrap {
+  padding: 12px 12px 0;
+}
+
+.uape-learn-thumb-frame {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.uape-learn-thumb-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.uape-learn-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #0e1011c2;
+  backdrop-filter: blur(20px);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  color: #fff;
+  line-height: 20px;
+}
+
+.uape-learn-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.uape-learn-title-row {
+  margin-bottom: 12px;
+}
+
+.uape-learn-card-title {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: #fff;
+  margin: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uape-learn-meta {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff8f;
+  margin: 0 0 12px;
+}
+
+.uape-learn-actions {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.uape-learn-primary-btn {
+  background-color: #eb4823;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.uape-learn-link-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Figtree', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 24px;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.uape-learn-channel-card {
+  background-color: #181a1b;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uape-learn-channel-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #eb4823;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Figtree', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.uape-flex-1-min-w-0 {
+  flex: 1;
+  min-width: 0;
+}
+
+.uape-learn-channel-name {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uape-learn-channel-followers {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff8f;
+  margin: 0;
+}
+
+.uape-learn-channel-description {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff8f;
+  margin: 0;
+}
+
+.uape-learn-channel-footer {
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.uape-learn-section {
+  margin-bottom: 56px;
+}
+
+.uape-learn-section-header {
+  margin-bottom: 24px;
+}
+
+.uape-learn-section-title {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 32px;
+  color: #fff;
+  margin: 0;
+}
+
+.uape-learn-section-subtitle {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+  margin: 6px 0 0;
+}
+
+.uape-learn-cards-row {
+  display: flex;
+  gap: 24px;
+}
+
+.uape-learn-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.uape-learn-root {
+  padding-top: 64px;
+  padding-bottom: 80px;
+}
+
+.uape-learn-root-inner {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.uape-learn-page-title {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  color: #fff;
+  margin: 0 0 48px;
+}
+
+.uape-tech-python-top {
+  clip-path: polygon(0 0, 100% 0, 100% 52%, 0 52%);
+}
+
+.uape-tech-python-bottom {
+  clip-path: polygon(0 48%, 100% 48%, 100% 100%, 0 100%);
+}
+
+.uape-header-auth-bg {
+  background: #141719c2;
+}
+
+.uape-header-guest-bg {
+  background: #181a1bc2;
+}
+
+.uape-header-user-name {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.uape-diagnostic-center-glow {
+  box-shadow: 0 0 250px 0 #eaf27c1f;
+}
+
+.uape-diagnostic-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.uape-how-dash-vars {
+  --dash-rgb: 234 242 124;
+}
+
+.uape-how-dash-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(var(--dash-rgb)) 0 var(--dash-size),
+    transparent var(--dash-size) calc(var(--dash-size) + var(--dash-gap))
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgb(255 255 255 / 35%) 0%,
+    rgb(255 255 255 / 55%) 22%,
+    rgb(255 255 255 / 95%) 64%,
+    rgb(255 255 255 / 78%) 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgb(255 255 255 / 35%) 0%,
+    rgb(255 255 255 / 55%) 22%,
+    rgb(255 255 255 / 95%) 64%,
+    rgb(255 255 255 / 78%) 100%
+  );
+}
+
+.uape-how-step-glow {
+  background: radial-gradient(circle, #eaf27c44 0%, #eaf27c1f 42%, #eaf27c00 72%);
+}
+
+.uape-how-step-connector {
+  background: linear-gradient(to bottom, rgb(var(--dash-rgb)), rgb(var(--dash-rgb) / 0));
+}
+
+.uape-hero-title {
+  font-size: 76px;
+  line-height: 80px;
+  letter-spacing: 0;
+}
+
+.uape-hero-subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.uape-faq-heading {
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+}
+
+.uape-faq-heading-muted {
+  color: #ffffff8f;
+}
+
+.uape-faq-question {
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+
+.uape-faq-answer {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
