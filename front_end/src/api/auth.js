@@ -23,8 +23,8 @@ export async function login(data) {
 }
 
 /**
- * Authenticate with Google using a credential token from @react-oauth/google.
- * @param {{ credential: string }} data
+ * Authenticate with Google using an access token from useGoogleLogin hook.
+ * @param {{ access_token: string }} data
  * @returns {{ access: string, refresh: string, first_name: string, last_name: string, is_new: boolean }}
  */
 export async function googleAuth(data) {

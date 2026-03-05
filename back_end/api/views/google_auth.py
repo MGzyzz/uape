@@ -1,6 +1,4 @@
-from django.conf import settings
-from google.oauth2 import id_token
-from google.auth.transport.requests import Request
+import requests as http_requests
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -14,26 +12,22 @@ class GoogleAuthView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        if not settings.GOOGLE_CLIENT_ID:
+        access_token = request.data.get('access_token')
+        if not access_token:
             return Response(
-                {'detail': 'Google auth not configured'},
-                status=status.HTTP_503_SERVICE_UNAVAILABLE,
-            )
-
-        credential = request.data.get('credential')
-        if not credential:
-            return Response(
-                {'detail': 'credential is required'},
+                {'detail': 'access_token is required'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         try:
-            payload = id_token.verify_oauth2_token(
-                credential,
-                Request(),
-                settings.GOOGLE_CLIENT_ID,
+            resp = http_requests.get(
+                'https://www.googleapis.com/oauth2/v3/userinfo',
+                headers={'Authorization': f'Bearer {access_token}'},
+                timeout=10,
             )
-        except ValueError as e:
+            resp.raise_for_status()
+            payload = resp.json()
+        except Exception as e:
             return Response(
                 {'detail': f'Invalid Google token: {e}'},
                 status=status.HTTP_400_BAD_REQUEST,

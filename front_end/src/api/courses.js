@@ -95,8 +95,7 @@ export async function getVideos() {
 
 export async function getRecommended() {
   const res = await client.get('/courses/recommended/')
-  console.log('Recommended:', res.data)
-  return normalizeSection(res.data)
+return normalizeSection(res.data)
 }
 
 export async function addBookmark(contentType, objectId) {

@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { GoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import authImage from '../../../shared/assets/solution/auth.jpg'
@@ -16,7 +16,6 @@ function AuthPage({ mode }) {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState('')
-  const googleBtnContainerRef = useRef(null)
   const [fields, setFields] = useState({
     firstName: '', lastName: '', email: '', password: '',
   })
@@ -68,25 +67,28 @@ function AuthPage({ mode }) {
     return Object.keys(errors).length === 0
   }
 
-  const handleGoogleSuccess = async (credentialResponse) => {
-    setGoogleLoading(true)
-    setError('')
-    try {
-      const tokens = await googleAuth({ credential: credentialResponse.credential })
-      saveTokens(tokens)
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setGoogleLoading(true)
+      setError('')
       try {
-        const profile = await getProfile()
-        saveUser({ first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null })
+        const tokens = await googleAuth({ access_token: tokenResponse.access_token })
+        saveTokens(tokens)
+        try {
+          const profile = await getProfile()
+          saveUser({ first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null })
+        } catch {
+          saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
+        }
+        navigate(tokens.is_new ? '/onboarding' : '/profile')
       } catch {
-        saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
+        setError('Google sign-in failed. Please try again.')
+      } finally {
+        setGoogleLoading(false)
       }
-      navigate(tokens.is_new ? '/onboarding' : '/profile')
-    } catch {
-      setError('Google sign-in failed. Please try again.')
-    } finally {
-      setGoogleLoading(false)
-    }
-  }
+    },
+    onError: () => setError('Google sign-in failed.'),
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -255,24 +257,11 @@ function AuthPage({ mode }) {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <div className="relative">
-          <div
-            ref={googleBtnContainerRef}
-            className="absolute opacity-0 overflow-hidden w-0 h-0 pointer-events-none"
-            aria-hidden="true"
-          >
-            <GoogleLogin
-              onSuccess={handleGoogleSuccess}
-              onError={() => setError('Google sign-in failed.')}
-            />
-          </div>
+        <div>
           <button
             type="button"
             disabled={googleLoading}
-            onClick={() => {
-              const btn = googleBtnContainerRef.current?.querySelector('[role="button"], button')
-              btn?.click()
-            }}
+            onClick={() => loginWithGoogle()}
             className="flex w-full items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <GoogleIcon />
