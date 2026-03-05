@@ -23,6 +23,16 @@ export async function login(data) {
 }
 
 /**
+ * Authenticate with Google using a credential token from @react-oauth/google.
+ * @param {{ credential: string }} data
+ * @returns {{ access: string, refresh: string, first_name: string, last_name: string, is_new: boolean }}
+ */
+export async function googleAuth(data) {
+  const response = await client.post('/auth/google/', data)
+  return response.data
+}
+
+/**
  * Save tokens to localStorage after a successful auth.
  * @param {{ access: string, refresh: string }} tokens
  */

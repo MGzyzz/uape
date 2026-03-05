@@ -1,5 +1,15 @@
 import client from './client'
 
+function formatCount(n) {
+  if (!n) return ''
+  if (n >= 1_000_000) {
+    const v = n / 1_000_000
+    return `${Number.isInteger(v) ? v : v.toFixed(1)}M`
+  }
+  if (n >= 1_000) return `${Math.round(n / 1_000)}K`
+  return String(n)
+}
+
 /**
  * Normalize a playlist from API to component format.
  */
@@ -8,7 +18,7 @@ function normalizePlaylist(p) {
     id: p.id,
     title: p.title,
     author: p.channel?.name ?? '',
-    followers: p.channel?.subscribers ? `${p.channel.subscribers} Followers` : '',
+    followers: p.channel?.subscribers ? `${formatCount(p.channel.subscribers)} Followers` : '',
     tags: p.tags.map((t) => ({ id: t.id, name: `#${t.name}`, color: t.color })),
     badge: `${p.video_count} Videos`,
     image: p.thumbnail_url,
@@ -26,7 +36,7 @@ function normalizeVideo(v) {
     id: v.id,
     title: v.title,
     author: v.channel?.name ?? '',
-    followers: v.channel?.subscribers ? `${v.channel.subscribers} Followers` : '',
+    followers: v.channel?.subscribers ? `${formatCount(v.channel.subscribers)} Followers` : '',
     tags: v.tags.map((t) => ({ id: t.id, name: `#${t.name}`, color: t.color })),
     badge: v.duration,
     image: v.thumbnail_url,
@@ -43,7 +53,7 @@ function normalizeChannel(c) {
   return {
     id: c.id,
     name: c.name,
-    followers: c.subscribers ? `${c.subscribers} Followers` : '',
+    followers: c.subscribers ? `${formatCount(c.subscribers)} Followers` : '',
     description: c.description,
     tags: c.tags.map((t) => ({ id: t.id, name: `#${t.name}`, color: t.color })),
     avatar_url: c.avatar_url,

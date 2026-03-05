@@ -41,23 +41,13 @@ function ProfilePage() {
 }
 
 function HeroSection({ user }) {
+  const navigate = useNavigate()
   const initials = `${user.first_name?.[0] ?? ''}${user.last_name?.[0] ?? ''}`.toUpperCase()
 
   return (
-    <section className="uape-profile-hero-section relative overflow-hidden">
-      {/* Background image — full cover */}
-      <img
-        src={authPageBg}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
-      />
-
-      {/* Dark overlay */}
-      <div className="uape-profile-hero-overlay absolute inset-0" />
-
-      {/* Content */}
-      <div className="uape-profile-hero-content relative mx-auto flex w-full max-w-6xl items-center px-4 sm:px-6 lg:px-8">
+    <section>
+      {/* Welcome area — above background image */}
+      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           {/* Avatar */}
           <div className="uape-profile-avatar-shell shrink-0 overflow-hidden">
@@ -77,29 +67,46 @@ function HeroSection({ user }) {
           {/* Text */}
           <div className="flex flex-col gap-2">
             <h1 className="uape-profile-hero-title">
-              Welcome back,<br />
-              {user.first_name} {user.last_name}
+              Welcome back, {user.first_name} {user.last_name}
             </h1>
-            {/* TODO (backend): добавить поле profession в модель пользователя,
-                возвращать его в /api/profile/ и сохранять через saveUser.
-                Пока что отображается временная заглушка ниже. */}
-            <div className="flex items-center gap-4">
-              <span className="uape-profile-profession">Python Developer</span>
-              <a href="#" className="uape-profile-hero-link">
-                Add occupation and interests
-              </a>
-              <button
-                onClick={() => navigate('/onboarding')}
-                className="uape-profile-hero-link"
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-              >
-                → Onboarding (temp)
-              </button>
-            </div>
+            <a href="#" className="uape-profile-hero-link">
+              Add occupation and interests
+            </a>
           </div>
         </div>
       </div>
+
+      {/* Background image area — diagnostic card inside */}
+      <div className="uape-profile-hero-image-area relative overflow-hidden">
+        <img
+          src={authPageBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
+        />
+        <div className="uape-profile-hero-overlay absolute inset-0" />
+        <div className="uape-profile-hero-content relative mx-auto flex w-full max-w-6xl items-center px-4 sm:px-6 lg:px-8">
+          <DiagnosticCard navigate={navigate} />
+        </div>
+      </div>
     </section>
+  )
+}
+
+function DiagnosticCard({ navigate }) {
+  return (
+    <div className="uape-diagnostic-card">
+      <h2 className="uape-diagnostic-card-title">Not sure where to start?</h2>
+      <p className="uape-diagnostic-card-text">
+        Take a quick assessment and get courses that match your real skill level.
+      </p>
+      <button
+        className="uape-learn-primary-btn uape-diagnostic-start-btn"
+        onClick={() => navigate('/onboarding')}
+      >
+        Start diagnostic
+      </button>
+    </div>
   )
 }
 

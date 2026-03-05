@@ -124,29 +124,13 @@ class VideoAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-class SectionPlaylistInline(admin.TabularInline):
-    model = Section.playlists.through
-    extra = 1
-    verbose_name = 'Playlist'
-
-
-class SectionVideoInline(admin.TabularInline):
-    model = Section.videos.through
-    extra = 1
-    verbose_name = 'Video'
-
-
-class SectionChannelInline(admin.TabularInline):
-    model = Section.channels.through
-    extra = 1
-    verbose_name = 'Channel'
-
-
 @admin.register(Section)
 class SectionAdmin(admin.ModelAdmin):
     list_display = ('title', 'content_type', 'order')
     list_editable = ('order',)
-    inlines = [SectionPlaylistInline, SectionVideoInline, SectionChannelInline]
+
+    class Media:
+        js = ('admin/js/section_inline_toggle.js',)
 
 
 @admin.register(Bookmark)

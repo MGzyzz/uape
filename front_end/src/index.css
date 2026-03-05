@@ -94,8 +94,15 @@ body {
   flex-shrink: 0;
 }
 
-.uape-profile-hero-section {
-  min-height: 700px;
+.uape-profile-hero-image-area {
+  height: 492px;
+  max-width: 72rem;
+  margin: 0 auto;
+  border-radius: 24px;
+}
+
+.uape-profile-hero-image-area > img {
+  transform: scale(1.02);
 }
 
 .uape-profile-hero-overlay {
@@ -103,14 +110,14 @@ body {
 }
 
 .uape-profile-hero-content {
-  min-height: 560px;
+  min-height: 500px;
 }
 
 .uape-profile-avatar-shell {
   width: 72px;
   height: 72px;
   border-radius: 1000px;
-  transform: translateY(-20px);
+  transform: translateY(0px);
 }
 
 .uape-profile-hero-title {
@@ -136,6 +143,45 @@ body {
 .uape-profile-profession {
   font-family: 'Figtree', sans-serif;
   font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.uape-diagnostic-start-btn {
+  width: 163px;
+  height: 48px;
+  padding: 12px 24px;
+  align-self: flex-start;
+}
+
+.uape-diagnostic-card {
+  width: 472px;
+  height: 332px;
+  padding: 48px 32px;
+  border-radius: 16px;
+  border: 1px solid #FFFFFF1F;
+  background: #181A1B8F;
+  backdrop-filter: blur(80px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.uape-diagnostic-card-title {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.uape-diagnostic-card-text {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
@@ -375,6 +421,18 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+
+@keyframes uape-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.uape-skeleton {
+  background: linear-gradient(90deg, #1e2022 25%, #2c2f31 50%, #1e2022 75%);
+  background-size: 200% 100%;
+  animation: uape-shimmer 1.5s infinite linear;
+  border-radius: 8px;
 }
 
 .uape-learn-root {

@@ -53,6 +53,65 @@ function NavArrows({ onPrev, onNext, canPrev, canNext }) {
   )
 }
 
+// ─── Lazy image with shimmer placeholder ──────────────────────────────────────
+
+function LazyImage({ src, alt, className }) {
+  const [loaded, setLoaded] = useState(false)
+  return (
+    <>
+      {!loaded && <div className="uape-skeleton absolute inset-0" />}
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+      />
+    </>
+  )
+}
+
+// ─── Skeleton cards ────────────────────────────────────────────────────────────
+
+function SkeletonContentCard() {
+  return (
+    <div className="uape-learn-content-card">
+      <div className="uape-learn-thumb-wrap">
+        <div className="uape-learn-thumb-frame" style={{ aspectRatio: '16/9' }}>
+          <div className="uape-skeleton" style={{ width: '100%', height: '100%', borderRadius: 0 }} />
+        </div>
+      </div>
+      <div className="uape-learn-card-body" style={{ gap: 12 }}>
+        <div className="uape-skeleton" style={{ height: 28, width: '80%' }} />
+        <div className="uape-skeleton" style={{ height: 20, width: '50%' }} />
+        <div style={{ display: 'flex', gap: 8 }}>
+          <div className="uape-skeleton" style={{ height: 20, width: 70, borderRadius: 10 }} />
+          <div className="uape-skeleton" style={{ height: 20, width: 70, borderRadius: 10 }} />
+        </div>
+        <div className="uape-skeleton" style={{ height: 44, width: 140, marginTop: 'auto' }} />
+      </div>
+    </div>
+  )
+}
+
+function SkeletonSection() {
+  return (
+    <div className="uape-learn-section">
+      <div className="uape-learn-section-header">
+        <div className="uape-skeleton" style={{ height: 32, width: 240 }} />
+      </div>
+      <div style={{ display: 'flex', gap: 24 }}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} style={{ flex: '0 0 calc((100% - 48px) / 3)', minWidth: 0 }}>
+            <SkeletonContentCard />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── Playlist / Video card ────────────────────────────────────────────────────
 
 function ContentCard({ item, buttonLabel, onToggle }) {
@@ -60,7 +119,7 @@ function ContentCard({ item, buttonLabel, onToggle }) {
     <div className="uape-learn-content-card">
       <div className="uape-learn-thumb-wrap">
         <div className="relative uape-learn-thumb-frame">
-          <img
+          <LazyImage
             src={item.image}
             alt={item.title}
             className="uape-learn-thumb-image"
@@ -238,6 +297,7 @@ function ChannelsSection({ title, items, onToggle }) {
 
 export default function WhatToLearnNextSection() {
   const [sections, setSections] = useState([])
+  const [loading, setLoading] = useState(true)
   const isAuth = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
@@ -250,7 +310,7 @@ export default function WhatToLearnNextSection() {
       } else {
         setSections(sections)
       }
-    }).catch(() => {})
+    }).catch(() => {}).finally(() => setLoading(false))
   }, [])
 
   function toggleFavorite(sectionId, contentType, itemId) {
@@ -278,6 +338,19 @@ export default function WhatToLearnNextSection() {
     } else {
       addBookmark(contentType, itemId).catch(() => {})
     }
+  }
+
+  if (loading) {
+    return (
+      <section className="uape-learn-root">
+        <div className="uape-learn-root-inner mx-auto max-w-6xl">
+          <h1 className="uape-learn-page-title">What to learn next</h1>
+          <SkeletonSection />
+          <SkeletonSection />
+          <SkeletonSection />
+        </div>
+      </section>
+    )
   }
 
   if (sections.length === 0) return null
