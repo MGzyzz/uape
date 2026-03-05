@@ -73,3 +73,6 @@ desktop.ini
 *.bak
 *.tmp
 CLAUDE.md
+
+# Claude Code
+.claude/settings.local.json
