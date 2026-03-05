@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import arrowUpIcon from '../../../../shared/assets/icons/ArrowUp.svg'
 
 const faqItems = [
@@ -32,6 +33,10 @@ const faqItems = [
 ]
 
 function FaqSection() {
+  const [openIndex, setOpenIndex] = useState(null)
+
+  const toggle = (index) => setOpenIndex(openIndex === index ? null : index)
+
   return (
     <section id="faq" className="bg-uape-bg">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
@@ -47,20 +52,34 @@ function FaqSection() {
         </div>
 
         {/* FAQ list */}
-        <div className="flex flex-col gap-24">
-          {faqItems.map((item) => (
-            <div key={item.q} className="border-b border-white/10 pb-6">
-              <div className="flex items-start justify-between gap-6">
-                <h3 className="uape-faq-question font-semibold text-white">
-                  {item.q}
-                </h3>
-                <img src={arrowUpIcon} alt="" aria-hidden="true" className="mt-1 h-8 w-8 shrink-0" />
+        <div className="mx-auto flex flex-col" style={{ maxWidth: '792px', gap: '60px' }}>
+          {faqItems.map((item, index) => {
+            const isOpen = openIndex === index
+            return (
+              <div key={item.q} className="border-b border-white/10 pb-6">
+                <button
+                  onClick={() => toggle(index)}
+                  className="uape-icon-button-reset flex w-full items-start justify-between gap-6 text-left"
+                >
+                  <h3 className="uape-faq-question font-semibold text-white">
+                    {item.q}
+                  </h3>
+                  <img
+                    src={arrowUpIcon}
+                    alt=""
+                    aria-hidden="true"
+                    className="mt-1 h-8 w-8 shrink-0 transition-transform duration-300"
+                    style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}
+                  />
+                </button>
+                {isOpen && (
+                  <p className="uape-faq-answer mt-4 text-uape-muted">
+                    {item.a}
+                  </p>
+                )}
               </div>
-              <p className="uape-faq-answer mt-4 text-uape-muted">
-                {item.a}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
       </div>
