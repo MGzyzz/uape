@@ -1,0 +1,2566 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "profile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "courses",
+    "model": "section"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "courses",
+    "model": "tag"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "courses",
+    "model": "video"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "courses",
+    "model": "playlist"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "courses",
+    "model": "channel"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "courses",
+    "model": "bookmark"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "useronboarding"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dnakw7hn162gfdfze6wgkgvjwx5qn0yo",
+  "fields": {
+    "session_data": ".eJxVjEsOAiEQBe_C2pBufoJL956BdAPKqIFkmFkZ766TzEK3r6reS0RalxrXUeY4ZXESKA6_G1N6lLaBfKd26zL1tswTy02ROx3y0nN5nnf376DSqN8a0HpPmgpnsGhtCIoSG0XKuQKekVwyCrLCcCTjNFgfGPjK1oFBpcX7A8WDNr4:1vxUny:v52yLTqELz3VQx5mDN5WmLqw5OSx3NCD-lrnI1V6WLk",
+    "expire_date": "2026-03-17T18:49:14.957Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dyaj6h6s90p13ur5otfg59rgyosgjm5m",
+  "fields": {
+    "session_data": ".eJxVjEsOAiEQBe_C2pBufoJL956BdAPKqIFkmFkZ766TzEK3r6reS0RalxrXUeY4ZXESKA6_G1N6lLaBfKd26zL1tswTy02ROx3y0nN5nnf376DSqN8a0HpPmgpnsGhtCIoSG0XKuQKekVwyCrLCcCTjNFgfGPjK1oFBpcX7A8WDNr4:1vxjGG:DWoIIdHU44vnteh6LKopJ6TQsYBYnmhFNJP_hPT--x0",
+    "expire_date": "2026-03-18T10:15:24.880Z"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 1,
+  "fields": {
+    "name": "python",
+    "color": "#30A14E"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 2,
+  "fields": {
+    "name": "javascript",
+    "color": "#FEBE02"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 3,
+  "fields": {
+    "name": "java",
+    "color": "#EB4823"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 4,
+  "fields": {
+    "name": "c++",
+    "color": "#4183C4"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 5,
+  "fields": {
+    "name": "c#",
+    "color": "#B05BFF"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 6,
+  "fields": {
+    "name": "back_end",
+    "color": "#030bfc"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 7,
+  "fields": {
+    "name": "front_end",
+    "color": "#fcdb03"
+  }
+},
+{
+  "model": "courses.tag",
+  "pk": 8,
+  "fields": {
+    "name": "algorithms",
+    "color": "#10B981"
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 1,
+  "fields": {
+    "youtube_id": "UC8_RSKwbU1OmZWNEoLV1tQg",
+    "name": "Data with Baraa",
+    "subscribers": "313.0K",
+    "avatar_url": "https://yt3.ggpht.com/dqs3pZO_8d4K2zp2ebhb2klV_zOqfNrNTViTHggfJPrvMVCRvypJW8BGksEdQqYTPWdai3wUDg=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Hey, I'm Baraa, a Data Engineer with over 17 years experience, Ex-Mercedes Benz, where I led and built one of the biggest data platforms for analytics and AI.\n\nNow I’m here to share it all through visually explained courses, real-world projects, and the skills that will get you hired. I’ve helped millions of students transform their careers.\n\nIf that sounds interesting, consider subscribing! See you in the next video\n",
+    "url": "https://www.youtube.com/channel/UC8_RSKwbU1OmZWNEoLV1tQg",
+    "created_at": "2026-03-04T20:20:04.815Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 2,
+  "fields": {
+    "youtube_id": "UCWv7vMbMWH4-V0ZXdmDpPBA",
+    "name": "Programming with Mosh",
+    "subscribers": "5.0M",
+    "avatar_url": "https://yt3.ggpht.com/HCv0fXFEEcD0HRyF0_qR1K7b7qO3KCzmIoyH1DEJYB94CIUFhIE5i2t2IDIPX97W1-DK4hegww=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Hi! I'm Mosh 👋, a software engineer with over 20 years of experience.  I'm all about clear, concise, practical coding tutorials – no fluff, just the good stuff! My courses focus on real-world projects and the skills that will get you hired. I've helped millions of students transform their careers. \n\nWant to level up your skills? Subscribe and hit the bell to get notified when I upload new videos!\n\nFor sponsorships: partners@codewithmosh.com\n",
+    "url": "https://www.youtube.com/channel/UCWv7vMbMWH4-V0ZXdmDpPBA",
+    "created_at": "2026-03-04T20:21:24.201Z",
+    "tags": [
+      1,
+      2,
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 3,
+  "fields": {
+    "youtube_id": "UC1XBh-m27kkgwLAwu_SRJBg",
+    "name": "Shradha Khapra",
+    "subscribers": "793.0K",
+    "avatar_url": "https://yt3.ggpht.com/vLLYSMUqgq8v8lNVFodiBTrvDZJvTPYkDATk0LxPcYQcZVCqHvca499gj2ZkdroX3LfJtWg5=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Hi, let's Learn, Grow & Explore together. \n\nGoal : To teach millions of students in India❤️\n\nCredentials :\n- Founder of Apna College\n- Microsoft - Ex Full Time Software Engineer \n- 2x Microsoft Intern\n- Google SPS \n- DRDO Internship\n\n\n\n\n",
+    "url": "https://www.youtube.com/channel/UC1XBh-m27kkgwLAwu_SRJBg",
+    "created_at": "2026-03-04T20:21:45.986Z",
+    "tags": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 4,
+  "fields": {
+    "youtube_id": "UC59K-uG2A5ogwIrHw4bmlEg",
+    "name": "Telusko",
+    "subscribers": "2.7M",
+    "avatar_url": "https://yt3.ggpht.com/0nsZM3NF0C9bFr2IFXicMJ1w82ldRaZvGKFnezBe2lpW7F9gI92FaLubcTghnNNt4Ld8DfRvEMo=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Hey Aliens \n\nWelcome to Telusko! We create technical tutorials that take you from beginner to advanced level.\n\nYou’ll find content on:\nCore Programming: Java (Beginner to Advanced), Python,  JavaScript\nFrameworks & Tools: Spring Framework, Hibernate, Blockchain, Spring AI, AI Engineering\nComputer Science Essentials: Data Structures, Networking, System Design, and more\nTrending Tech: Cloud, Microservices, and beyond\n\nAlongside technical tutorials, we also share motivational videos and host sessions with leading industry experts.\n\nWe don’t just stop at free tutorials—we also provide paid courses (live and recorded) and corporate training to help professionals and organizations upskill.\n\nSo, whether you’re just starting out or sharpening your professional skills, there’s always something here for you.\n\n📩 Business Inquiries: connect@telusko.com\n🎓 Explore Live & Recorded Courses: https://telusko.com/\n",
+    "url": "https://www.youtube.com/channel/UC59K-uG2A5ogwIrHw4bmlEg",
+    "created_at": "2026-03-04T20:34:05.465Z",
+    "tags": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 5,
+  "fields": {
+    "youtube_id": "UCaYr5yxgOyk599Mnb3TGh-g",
+    "name": "tapaScript by Tapas Adhikary",
+    "subscribers": "37.6K",
+    "avatar_url": "https://yt3.ggpht.com/KQf6tTyo_XyrmfOsmE1rl06qtMaF-zjD7EdrxNHyDv78LnIRbJ_kUvH0qb1gXDLUrIO8AoAR1w=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Learn Programming fundamentals, Full-stack concepts, and Web Development using JavaScript, ReactJS, Next.js, and its ecosystems.\n\nHello Developers, Welcome to tapaScript 👋. SUBSCRIBE to the channel so that you do not miss the in-depth learning experience.\n\nI am your teacher Tapas Adhikary, a developer passionate about UI, UX, Web Development, JavaScript, React, Next.js, Nodejs, Open Source, and FullStack engineering. I have dealt with code and computers since 2000, when I got into Computer Science and Engineering. Since 2004, the last 19 years have been an outstanding journey for me, learning and building production-ready software. I am on YouTube to teach you all I have gathered over these years.\n\nMy passion for teaching, content creation, and building Open Source communities taught me about building and learning in public. I have been creating written content on my blog \"GreenRoots Blog', FreeCodeCamp, CSS-Tricks, and other publications. Let's GO.\n\nSUBSCRIBE and JOIN.\n",
+    "url": "https://www.youtube.com/channel/UCaYr5yxgOyk599Mnb3TGh-g",
+    "created_at": "2026-03-04T21:25:41.049Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 6,
+  "fields": {
+    "youtube_id": "UCvT21bzLRHrnAc-F1SRqRSw",
+    "name": "TAP ACADEMY",
+    "subscribers": "106.0K",
+    "avatar_url": "https://yt3.ggpht.com/04F2w7EJARCVkThsC-cyLHK-rF3kT-fR5mdmL5Rd-XJ_Mucmukw4nwx3S62VdIEubxdhCKcGkg=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Learn coding using the power of animations and visualisation. Worlds first coding school using augmented reality to deliver concepts . ",
+    "url": "https://www.youtube.com/channel/UCvT21bzLRHrnAc-F1SRqRSw",
+    "created_at": "2026-03-04T21:25:51.716Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 7,
+  "fields": {
+    "youtube_id": "UC4SVo0Ue36XCfOyb5Lh1viQ",
+    "name": "Bro Code",
+    "subscribers": "3.1M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_mPFVsxROj1dOtTWc9iNBwDYV4z42Q8LPokBSewiW9pCSg=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Coding bootcamps HATE HIM! 🗿\n",
+    "url": "https://www.youtube.com/channel/UC4SVo0Ue36XCfOyb5Lh1viQ",
+    "created_at": "2026-03-04T21:26:46.766Z",
+    "tags": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 8,
+  "fields": {
+    "youtube_id": "UCBwmMxybNva6P_5VmxjzwqA",
+    "name": "Apna College",
+    "subscribers": "7.4M",
+    "avatar_url": "https://yt3.ggpht.com/FEcjRtez5od8UowDo6tTt9WlE-MrIFEmcwPMTORmK9Swk6KCklOmA3xfIG9WuLWfNYfNThQE=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Started with a vision to provide learning that helps students get placed in Tech companies. Syllabus needs to be updated as per industry standards and college old curriculum should not be a barrier for any student.\n\nSigning off, your mentor - Shradha Khapra, Founder Apna College, Ex-Microsoft Software Engineer, Google SPS, DRDO. \n\nFor College Seminars or invitation you can contact at : shradhakhapra1899@gmail.com\n\n\n",
+    "url": "https://www.youtube.com/channel/UCBwmMxybNva6P_5VmxjzwqA",
+    "created_at": "2026-03-04T21:27:07.095Z",
+    "tags": [
+      1,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 9,
+  "fields": {
+    "youtube_id": "UCQ-W1KE9EYfdxhL6S4twUNw",
+    "name": "The Cherno",
+    "subscribers": "742.0K",
+    "avatar_url": "https://yt3.ggpht.com/EmbIHnpmF1J0LgyUbCMK7QmfDZZm7u_GQd5eVx4XG06wIvgbagCY6WYpf2fvSdPoL1LMLkw8Iw=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Yan Chernikov - I'm making a game engine called Hazel! Here you'll find videos about that and C++/programming.\n\nFor professional inquiries, please send an email to business@thecherno.com\n",
+    "url": "https://www.youtube.com/channel/UCQ-W1KE9EYfdxhL6S4twUNw",
+    "created_at": "2026-03-04T21:27:22.943Z",
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 10,
+  "fields": {
+    "youtube_id": "UCZUyPT9DkJWmS_DzdOi7RIA",
+    "name": "Caleb Curry",
+    "subscribers": "723.0K",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_ndg1Q0vocIKu0U3Ks9SLkSCjZbGiZ2W1rhSsJoqZTgFK4=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Programming Made Fun and Simple  \n\nHigh quality tutorials that are fun, educational, and easy to follow.  Teaching programming is my passion!  I find joy in making complex material easy to understand.\n\nI've decided that it is only right to upload videos of great quality and value.  Here you will find videos on C++, JavaScript, C, database design, SQL, and more!  As a side note, many videos contain cringey and random stories...you've been warned.\n\nAs an Amazon Associate I earn from qualifying purchases.\n\nBusiness inquiries: hello@calebcurry.com \n",
+    "url": "https://www.youtube.com/channel/UCZUyPT9DkJWmS_DzdOi7RIA",
+    "created_at": "2026-03-04T21:27:37.803Z",
+    "tags": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 11,
+  "fields": {
+    "youtube_id": "UCJihyK0A38SZ6SdJirEdIOw",
+    "name": "Gate Smashers",
+    "subscribers": "2.6M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_mZfqpNqtGLksLQfMbW7UVFgub_poGNE-YU_RAoV_NdUII=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Welcome to Gate Smashers, one of the fastest-growing EdTech communities with 2.6 M+ learners. 🎓 We provide complete lectures for B.Tech CSE, GATE CSE, UGC NET CS, IT Officer, and PGT/TGT CS exams. On this channel, you will learn step-by-step with real life examples related to DSA, OS, DBMS, CN, TOC, Compiler, Software Engineering, Programming, Placement Prep, AI, ML, Cybersecurity, Cloud, Big Data & Emerging Tech.  \n\nWhy Gate Smashers?\n1. Complete syllabus (B.Tech, GATE, NET, IT Officer, PGT/TGT)\n2. Core + Advanced (AI, ML, Cloud, Cybersecurity)\n3. Simplified explanations to save time\n4. Placement & Govt. exam guidance\n5. Trusted by millions of learners\n\nOur Mission is to empower learners to master Computer Science & succeed in:\n1. GATE CSE & NET CS\n2. Govt. & IT Officer Exams\n3. Teaching (PGT/TGT CS)\n4. Careers in AI, ML, Cloud & Cybersecurity\n5. Strong CS fundamentals for placements\n\n 📌 Gate Smashers – Learn. Practice. Smash Your Goals.\n\n",
+    "url": "https://www.youtube.com/channel/UCJihyK0A38SZ6SdJirEdIOw",
+    "created_at": "2026-03-04T21:27:56.497Z",
+    "tags": [
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 12,
+  "fields": {
+    "youtube_id": "UCTyA9nEnigI0bzckvdZqS4w",
+    "name": "Learn with W3Schools",
+    "subscribers": "17.0K",
+    "avatar_url": "https://yt3.ggpht.com/nmDWlvN7tJiZmqZ5uoaSfRTsveM1aI_KaNuga9kaFR_DX-q0EVU-0zo8xROfcYax4chJrGn3=s800-c-k-c0x00ffffff-no-rj",
+    "description": "🚀 Welcome to Learn with w3Schools - Your Ultimate Coding Companion! 🚀\n\n🌐 In this channel I will be teaching you web development, Flutter, Android and programming with our step-by-step tutorials brought to you by the Learn with w3Schools channel! Whether you're a beginner or an experienced coder, we've got you covered with in-depth lessons on HTML, CSS, JavaScript, Bootstrap, jQuery, Node.js, React, Python, Java, and more.📚 \n\n✨Key Focus Areas:🚀\n💻HTML & CSS: \n💻JavaScript: \n💻Bootstrap: \n💻jQuery: \n💻Node.js & React: \n💻Python & Java: \n\n🎓 Why Learn with Us?\nBest Coding Tutorials Using W3Schools as Reference notes Website\nHands-On Learning: Practical examples and real-world projects.\n\nWebsite: codewithdrzeeshanbhatti.com\n\n🔗 Connect with Us:\n👉 Subscribe: https://www.youtube.com/@LearnwithW3Schools\n👉TikTok : https://www.tiktok.com/@learnwithw3schools\n👉Instagram: https://www.instagram.com/@learnwithw3schools/\n\n#w3schools #LearnWithw3Schools #CodingTutorials #WebDevelopment #Programming101\n",
+    "url": "https://www.youtube.com/channel/UCTyA9nEnigI0bzckvdZqS4w",
+    "created_at": "2026-03-04T21:28:39.278Z",
+    "tags": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 13,
+  "fields": {
+    "youtube_id": "UCsvqVGtbbyHaMoevxPAq9Fg",
+    "name": "Simplilearn",
+    "subscribers": "6.1M",
+    "avatar_url": "https://yt3.ggpht.com/r6M4Ex4bNj3_UuUpCRtEm8B_qAvl_n31BlNzj5Z1pxOlcE-JQFSddJltwLT6M7Qp7ROUEXCYeQ=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Simplilearn is the world’s leading online training provider and has helped over 8 million professionals, and corporations acquire the skills they need to succeed in the digital economy. From artificial intelligence to cyber security, and from product management to software development, we work with the world’s leading universities, technology companies, and certification bodies to bring you the latest skills tied to the most rewarding careers. Whether you’re a recent graduate, seasoned professional, senior executive or manager looking to upskill your organization, we have the program for you. \n",
+    "url": "https://www.youtube.com/channel/UCsvqVGtbbyHaMoevxPAq9Fg",
+    "created_at": "2026-03-04T21:28:53.417Z",
+    "tags": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 14,
+  "fields": {
+    "youtube_id": "UC29ju8bIPH5as8OGnQzwJyA",
+    "name": "Traversy Media",
+    "subscribers": "2.4M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_mLysKc36lc_FVk2j777olWvLOjgDz6NCNGdiQBnAKRENM=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Traversy Media features the best online web development and programming tutorials for all of the latest web technologies from the building blocks of HTML, CSS & JavaScript to frontend frameworks like React and Vue to backend technologies like Node.js, Python and PHP",
+    "url": "https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA",
+    "created_at": "2026-03-04T21:29:17.951Z",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 15,
+  "fields": {
+    "youtube_id": "UCW5YeuERMmlnqo4oq8vwUpg",
+    "name": "Net Ninja",
+    "subscribers": "1.8M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_mk2Ex-8sW03SBlBX7D1EC5skH0kv9rS3rU9IXq2I-q2Zg=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Black-belt your web development skills. Over 2000 free programming tutorial videos about:\n\n- Modern JavaScript (beginner to advanced)\n- Node.js\n- React\n- Vue.js\n- Firebase\n- MongoDB\n- HTML & CSS\n- PHP & MySQL\n- Laravel\n- React Native\n- Flutter\n- Open AI\n- SolidJS\n\n...And many more topics as well :)\n",
+    "url": "https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg",
+    "created_at": "2026-03-04T21:29:18.474Z",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 16,
+  "fields": {
+    "youtube_id": "UCsBjURrPoezykLs9EqgamOA",
+    "name": "Fireship",
+    "subscribers": "4.1M",
+    "avatar_url": "https://yt3.ggpht.com/3fPNbkf_xPyCleq77ZhcxyeorY97NtMHVNUbaAON_RBDH9ydL4hJkjxC8x_4mpuopkB8oI7Ct6Y=s800-c-k-c0x00ffffff-no-rj",
+    "description": "High-intensity ⚡ code tutorials and tech news to help you ship your app faster. New videos every week covering the topics every programmer should know. \n\nThe original home of #100SecondsOfCode #TheCodeReport and #CodeThisNotThat. Created by Jeff Delaney. \n\nWant more Fireship?\n\n🗞️ Newsletter – https://bytes.dev\n🧠 Courses – https://fireship.dev\n",
+    "url": "https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA",
+    "created_at": "2026-03-04T21:29:19.525Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 17,
+  "fields": {
+    "youtube_id": "UC8butISFwT-Wl7EV0hUK0BQ",
+    "name": "freeCodeCamp.org",
+    "subscribers": "11.5M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_lGRc-05M2OoE1ejQdxeFhyP7OkJg9h4Y-7CK_5je3QqFI=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Learn math, programming, and computer science for free. A 501(c)(3) tax-exempt charity. We also run a free learning interactive platform at freecodecamp.org",
+    "url": "https://www.youtube.com/channel/UC8butISFwT-Wl7EV0hUK0BQ",
+    "created_at": "2026-03-04T21:29:20.048Z",
+    "tags": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 18,
+  "fields": {
+    "youtube_id": "UC4JX40jDee_tINbkjycV4Sg",
+    "name": "Tech With Tim",
+    "subscribers": "2.0M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_k15oXl74WcnpdL-uVBv6IHBgAfXEEnpUiS-IoEyV1auyY=s800-c-k-c0x00ffffff-no-rj",
+    "description": "I'm Tim, a self-taught developer & entrepreneur who brings you educational tech content without the fluff and noise. I went from a broke dropout working at McDonalds to making $100k+/month as a developer, travelling the world and moving to Dubai all before the age of 22. I've since helped thousands of aspiring developers land their first software engineering role and assisted mid-level devs land jobs at companies like google.\n",
+    "url": "https://www.youtube.com/channel/UC4JX40jDee_tINbkjycV4Sg",
+    "created_at": "2026-03-04T21:29:21.623Z",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 19,
+  "fields": {
+    "youtube_id": "UCqJ-Xo29CKyLTjn6z2XwYAw",
+    "name": "Game Maker's Toolkit",
+    "subscribers": "1.7M",
+    "avatar_url": "https://yt3.ggpht.com/XS_gpXd-f-bUwW5dr0kyw8btfpj6DZLPaXAUIi9ukwHMJJPwBloGjF-AWZ4QAcIv572FEHGG=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Game Maker's Toolkit is a deep dive into game design, level design, and game production, hosted by Mark Brown.\n\nWant to contact Mark? Visit the GMTK website below to find the contact form.\n",
+    "url": "https://www.youtube.com/channel/UCqJ-Xo29CKyLTjn6z2XwYAw",
+    "created_at": "2026-03-04T21:29:24.579Z",
+    "tags": []
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 20,
+  "fields": {
+    "youtube_id": "UC9x0AN7BWHpCDHSm9NiJFJQ",
+    "name": "NetworkChuck",
+    "subscribers": "5.2M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_k01-_GpvVZW8w4ULtaQaa55ls8aMf2a5dXhIe56pjMvG0=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Welcome to NetworkChuck!\n\nI LOVE Information Technology!! My goal is to help as MANY PEOPLE AS POSSIBLE jump into a career in the IT field through obtaining IT Certifications. I talk about Cisco Certifications, CompTIA, AWS, Microsoft...pretty much EVERYTHING in IT. As a CBT Nuggets Trainer, it's also my passion to TEACH information technology and to make it FUN. \n\nIf your goals are to obtain your CCNA, CompTIA A+, CompTIA Network+...I'm here to help you with that goal in any way I can!\n\n*****Interested in Sponsoring NetworkChuck? Email chuck@networkchuck.com",
+    "url": "https://www.youtube.com/channel/UC9x0AN7BWHpCDHSm9NiJFJQ",
+    "created_at": "2026-03-04T21:29:25.628Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 21,
+  "fields": {
+    "youtube_id": "UCVeW9qkBjo3zosnqUbG7CFw",
+    "name": "John Hammond",
+    "subscribers": "2.1M",
+    "avatar_url": "https://yt3.ggpht.com/z4IRMWHxCA23E2Xb9z5-Aob4Wt1I6StDTUFUoGADbedjRWT3ycbdWJBI2uRFwVEyzgcftrF7eFk=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Free Cybersecurity Education and Ethical Hacking.",
+    "url": "https://www.youtube.com/channel/UCVeW9qkBjo3zosnqUbG7CFw",
+    "created_at": "2026-03-04T21:29:26.148Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 22,
+  "fields": {
+    "youtube_id": "UCdngmbVKX1Tgre699-XLlUA",
+    "name": "TechWorld with Nana",
+    "subscribers": "1.4M",
+    "avatar_url": "https://yt3.ggpht.com/ZAuMKdMcyV3mhX857oCGWzQAQ4AqZhiDIO76MTC_DqckrujSNg5Mh2AQh6ngWYv7bzfu7TBoj24=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Helping millions of engineers to advance their careers with DevOps & Cloud education 💙\n\nI create new videos every month, topics include mainly DevOps and Cloud tutorials. Subscribe and activate bell notification so you don't miss new videos :)\n\nI'm a Docker Captain, AWS Container Hero 🤓  💪\n\n►  https://www.techworld-with-nana.com/\n\nSome topics covered:\n - Docker\n - Kubernetes\n - CI/CD - GitLab CI, GitHub Actions, Jenkins\n - Python\n - Ansible\n - Prometheus Monitoring\n - Terraform\n - YAML\n - & more!\n\nHave fun watching my videos! 🙂",
+    "url": "https://www.youtube.com/channel/UCdngmbVKX1Tgre699-XLlUA",
+    "created_at": "2026-03-04T21:29:26.676Z",
+    "tags": []
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 23,
+  "fields": {
+    "youtube_id": "UCxX9wt5FWQUAAz4UrysqK9A",
+    "name": "CS Dojo",
+    "subscribers": "1.9M",
+    "avatar_url": "https://yt3.ggpht.com/ytc/AIdro_mxJvgrBjcgK94ZJQwDphl0UFkCKRL8AOa7UvmR__MIyg=s800-c-k-c0x00ffffff-no-rj",
+    "description": "Hello! My name is YK, and I usually make videos about programming and computer science here :)\n\nBusiness email: https://www.csdojo.io/contact/\nThe logo was made by: my friend Youdong Zhang\n",
+    "url": "https://www.youtube.com/channel/UCxX9wt5FWQUAAz4UrysqK9A",
+    "created_at": "2026-03-04T21:29:27.735Z",
+    "tags": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "courses.channel",
+  "pk": 24,
+  "fields": {
+    "youtube_id": "UCGmr6QjXP0g9BR8T18mS_fw",
+    "name": "evlearn",
+    "subscribers": "13.8K",
+    "avatar_url": "https://yt3.ggpht.com/YGxCmMVTw8sP4iPBcccCjm7WhUryado3RfTBcMHbdWkwdE-Sx4EsbfnHqVKLFs5NWoj8zZ5VBA=s800-c-k-c0x00ffffff-no-rj",
+    "description": "A Collection of Things I Find Interesting",
+    "url": "https://www.youtube.com/channel/UCGmr6QjXP0g9BR8T18mS_fw",
+    "created_at": "2026-03-04T22:00:17.163Z",
+    "tags": []
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 1,
+  "fields": {
+    "youtube_id": "PLNcg_FV9n7qZGfFl2ANI_zISzNp257Lwn",
+    "title": "Python Ultimate Course",
+    "thumbnail_url": "https://i.ytimg.com/vi/Rq5gJVxz55Q/maxresdefault.jpg",
+    "video_count": 47,
+    "channel": 1,
+    "created_at": "2026-03-04T20:20:04.818Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 2,
+  "fields": {
+    "youtube_id": "PLTjRvDozrdlxj5wgH4qkvwSOdHLOCx10f",
+    "title": "Python Tutorials",
+    "thumbnail_url": "https://i.ytimg.com/vi/_uQrJ0TkZlc/maxresdefault.jpg",
+    "video_count": 23,
+    "channel": 2,
+    "created_at": "2026-03-04T20:21:24.203Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 3,
+  "fields": {
+    "youtube_id": "PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0",
+    "title": "Python Language Full Course (2026)",
+    "thumbnail_url": "https://i.ytimg.com/vi/t2_Q2BRzeEE/maxresdefault.jpg",
+    "video_count": 9,
+    "channel": 3,
+    "created_at": "2026-03-04T20:21:45.988Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 4,
+  "fields": {
+    "youtube_id": "PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3",
+    "title": "Python for Beginners (Full Course) | Programming Tutorial",
+    "thumbnail_url": "https://i.ytimg.com/vi/QXeEoD0pB3E/maxresdefault.jpg",
+    "video_count": 125,
+    "channel": 4,
+    "created_at": "2026-03-04T20:34:05.468Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 5,
+  "fields": {
+    "youtube_id": "PLIJrr73KDmRw2Fwwjt6cPC_tk5vcSICCu",
+    "title": "40 Days of JavaScript - A Complete JavaScript Course to Level Up",
+    "thumbnail_url": "https://i.ytimg.com/vi/t8QXF85YovE/maxresdefault.jpg",
+    "video_count": 41,
+    "channel": 5,
+    "created_at": "2026-03-04T21:25:41.054Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 6,
+  "fields": {
+    "youtube_id": "PLU83Ru7iGtAtTlQ8MRGHCBu4tzATiRfmY",
+    "title": "Complete JavaScript Course | 2025",
+    "thumbnail_url": "https://i.ytimg.com/vi/jSeI6OfifCI/maxresdefault.jpg",
+    "video_count": 40,
+    "channel": 6,
+    "created_at": "2026-03-04T21:25:51.718Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 7,
+  "fields": {
+    "youtube_id": "PLTjRvDozrdlxEIuOBZkMAK5uiqp8rHUax",
+    "title": "JavaScript Tutorials",
+    "thumbnail_url": "https://i.ytimg.com/vi/upDLs1sn7g4/maxresdefault.jpg",
+    "video_count": 25,
+    "channel": 2,
+    "created_at": "2026-03-04T21:26:00.632Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 8,
+  "fields": {
+    "youtube_id": "PLZPZq0r_RZOOj_NOZYq_R2PECIMglLemc",
+    "title": "Java tutorial for beginners ☕",
+    "thumbnail_url": "https://i.ytimg.com/vi/23HFxAPyJ9U/maxresdefault.jpg",
+    "video_count": 71,
+    "channel": 7,
+    "created_at": "2026-03-04T21:26:46.769Z",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 9,
+  "fields": {
+    "youtube_id": "PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5",
+    "title": "Java Tutorial For beginners",
+    "thumbnail_url": "https://i.ytimg.com/vi/bm0OyhwFDuY/maxresdefault.jpg",
+    "video_count": 107,
+    "channel": 4,
+    "created_at": "2026-03-04T21:27:00.568Z",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 10,
+  "fields": {
+    "youtube_id": "PLfqMhTWNBTe3LtFWcvwpqTkUSlB32kJop",
+    "title": "Java & DSA in 30 days : Course for Placement",
+    "thumbnail_url": "https://i.ytimg.com/vi/yRpLlJmRo2w/maxresdefault.jpg",
+    "video_count": 39,
+    "channel": 8,
+    "created_at": "2026-03-04T21:27:07.096Z",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 11,
+  "fields": {
+    "youtube_id": "PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb",
+    "title": "C++",
+    "thumbnail_url": "https://i.ytimg.com/vi/18c3MTX0PK0/maxresdefault.jpg",
+    "video_count": 115,
+    "channel": 9,
+    "created_at": "2026-03-04T21:27:22.944Z",
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 12,
+  "fields": {
+    "youtube_id": "PL_c9BZzLwBRJVJsIfe97ey45V4LP_HXiG",
+    "title": "C++ Tutorials",
+    "thumbnail_url": "https://i.ytimg.com/vi/_bYFu9mBnr4/maxresdefault.jpg",
+    "video_count": 102,
+    "channel": 10,
+    "created_at": "2026-03-04T21:27:37.805Z",
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 13,
+  "fields": {
+    "youtube_id": "PLxCzCOWd7aiF6yRNI5OHQsnUJQfl7Geqj",
+    "title": "C++ Programming (Complete Course)",
+    "thumbnail_url": "https://i.ytimg.com/vi/05LLyH15ZWU/maxresdefault.jpg",
+    "video_count": 59,
+    "channel": 11,
+    "created_at": "2026-03-04T21:27:56.499Z",
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 14,
+  "fields": {
+    "youtube_id": "PLImps_mlpW34-weJockr3FSw7UM5dStfg",
+    "title": "W3Schools C# Full Course",
+    "thumbnail_url": "https://i.ytimg.com/vi/9hJPzq4ntAE/maxresdefault.jpg",
+    "video_count": 14,
+    "channel": 12,
+    "created_at": "2026-03-04T21:28:39.279Z",
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 15,
+  "fields": {
+    "youtube_id": "PLZPZq0r_RZOPNy28FDBys3GVP2LiaIyP_",
+    "title": "C# tutorial for beginners 🎵",
+    "thumbnail_url": "https://i.ytimg.com/vi/r3CExhZgZV8/maxresdefault.jpg",
+    "video_count": 50,
+    "channel": 7,
+    "created_at": "2026-03-04T21:28:47.154Z",
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 16,
+  "fields": {
+    "youtube_id": "PLEiEAq2VkUULDJ9tZd3lc0rcH4W5SNSoW",
+    "title": "C# Training 🔥[2026 Updated]",
+    "thumbnail_url": "https://i.ytimg.com/vi/Z3EpnGi52tE/maxresdefault.jpg",
+    "video_count": 34,
+    "channel": 13,
+    "created_at": "2026-03-04T21:28:53.420Z",
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 17,
+  "fields": {
+    "youtube_id": "PLRgY67cHsSST_qjyG8lEClx18kbGmDBV6",
+    "title": "🔥 Master Django: From Beginner to Advanced | Full-Stack Web Development Series",
+    "thumbnail_url": "https://i.ytimg.com/vi/gWq1RbrLff4/maxresdefault.jpg",
+    "video_count": 3,
+    "channel": 24,
+    "created_at": "2026-03-04T22:00:17.164Z",
+    "tags": [
+      1,
+      6
+    ]
+  }
+},
+{
+  "model": "courses.playlist",
+  "pk": 18,
+  "fields": {
+    "youtube_id": "PLWKjhJtqVAbmMuZ3saqRIBimAKIMYkt0E",
+    "title": "Front End Developer Learning Path",
+    "thumbnail_url": "https://i.ytimg.com/vi/9He4UBLyk8Y/maxresdefault.jpg",
+    "video_count": 22,
+    "channel": 17,
+    "created_at": "2026-03-04T22:01:17.935Z",
+    "tags": [
+      2,
+      7
+    ]
+  }
+},
+{
+  "model": "courses.video",
+  "pk": 1,
+  "fields": {
+    "youtube_id": "Tef1e9FiSR0",
+    "title": "The Complete Frontend Developer Roadmap",
+    "thumbnail_url": "https://i.ytimg.com/vi/Tef1e9FiSR0/maxresdefault.jpg",
+    "duration": "8:54",
+    "channel": 2,
+    "created_at": "2026-03-04T22:23:44.712Z",
+    "tags": [
+      2,
+      7
+    ]
+  }
+},
+{
+  "model": "courses.video",
+  "pk": 2,
+  "fields": {
+    "youtube_id": "8hly31xKli0",
+    "title": "Algorithms and Data Structures Tutorial - Full Course for Beginners",
+    "thumbnail_url": "https://i.ytimg.com/vi/8hly31xKli0/maxresdefault.jpg",
+    "duration": "5:22:09",
+    "channel": 17,
+    "created_at": "2026-03-05T09:18:42.275Z",
+    "tags": [
+      8
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 1,
+  "fields": {
+    "title": "Recommended playlists for you",
+    "subtitle": "",
+    "content_type": "playlist",
+    "order": 1,
+    "field": "",
+    "playlists": [],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 2,
+  "fields": {
+    "title": "Popular channels for Web Development",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 20,
+    "field": "Building Websites",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      14,
+      15
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 3,
+  "fields": {
+    "title": "Popular channels for Mobile Development",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 21,
+    "field": "Creating Mobile Apps",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      16,
+      17
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 4,
+  "fields": {
+    "title": "Popular channels for Data Analysis",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 22,
+    "field": "Data Analysis",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      17,
+      18
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 5,
+  "fields": {
+    "title": "Popular channels for AI & Machine Learning",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 23,
+    "field": "Artificial Intelligence",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      17
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 6,
+  "fields": {
+    "title": "Popular channels for Backend Development",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 24,
+    "field": "Server-Side Development",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      14,
+      16
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 7,
+  "fields": {
+    "title": "Popular channels for UI Development",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 25,
+    "field": "UI Development",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      14,
+      15
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 8,
+  "fields": {
+    "title": "Popular channels for Game Development",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 26,
+    "field": "Game Creation",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      17,
+      19
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 9,
+  "fields": {
+    "title": "Popular channels for Cybersecurity",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 27,
+    "field": "Cybersecurity",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      17,
+      20,
+      21
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 10,
+  "fields": {
+    "title": "Popular channels for Cloud & DevOps",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 28,
+    "field": "Cloud & Infrastructure",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      16,
+      17,
+      22
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 11,
+  "fields": {
+    "title": "Popular channels for Task Automation",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 29,
+    "field": "Task Automation",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      17,
+      18
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 12,
+  "fields": {
+    "title": "Popular channels for Programming",
+    "subtitle": "",
+    "content_type": "channel",
+    "order": 30,
+    "field": "General Programming",
+    "playlists": [],
+    "videos": [],
+    "channels": [
+      2,
+      17,
+      23
+    ]
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 13,
+  "fields": {
+    "title": "Python",
+    "subtitle": "",
+    "content_type": "playlist",
+    "order": 2,
+    "field": "",
+    "playlists": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 14,
+  "fields": {
+    "title": "JavaScript",
+    "subtitle": "",
+    "content_type": "playlist",
+    "order": 3,
+    "field": "",
+    "playlists": [
+      5,
+      6,
+      7
+    ],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 15,
+  "fields": {
+    "title": "Java",
+    "subtitle": "",
+    "content_type": "playlist",
+    "order": 4,
+    "field": "",
+    "playlists": [
+      8,
+      9,
+      10
+    ],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 16,
+  "fields": {
+    "title": "C++",
+    "subtitle": "",
+    "content_type": "playlist",
+    "order": 5,
+    "field": "",
+    "playlists": [
+      11,
+      12,
+      13
+    ],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 17,
+  "fields": {
+    "title": "C#",
+    "subtitle": "",
+    "content_type": "playlist",
+    "order": 6,
+    "field": "",
+    "playlists": [
+      14,
+      15,
+      16
+    ],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 18,
+  "fields": {
+    "title": "Popular playlists for Python developers",
+    "subtitle": "Curated tutorials and tracks to boost your Python skills",
+    "content_type": "playlist",
+    "order": 0,
+    "field": "",
+    "playlists": [
+      17
+    ],
+    "videos": [],
+    "channels": []
+  }
+},
+{
+  "model": "courses.section",
+  "pk": 19,
+  "fields": {
+    "title": "Popular Algorithm and Data Structures Videos",
+    "subtitle": "Top tutorials to master algorithms and data structures",
+    "content_type": "video",
+    "order": 0,
+    "field": "",
+    "playlists": [],
+    "videos": [
+      2
+    ],
+    "channels": []
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "add_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "change_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "delete_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "view_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add section",
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "codename": "add_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change section",
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "codename": "change_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete section",
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "codename": "delete_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view section",
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "codename": "view_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add tag",
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "codename": "add_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change tag",
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "codename": "change_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete tag",
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "codename": "delete_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view tag",
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "codename": "view_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add video",
+    "content_type": [
+      "courses",
+      "video"
+    ],
+    "codename": "add_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change video",
+    "content_type": [
+      "courses",
+      "video"
+    ],
+    "codename": "change_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete video",
+    "content_type": [
+      "courses",
+      "video"
+    ],
+    "codename": "delete_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view video",
+    "content_type": [
+      "courses",
+      "video"
+    ],
+    "codename": "view_video"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add playlist",
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "codename": "add_playlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change playlist",
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "codename": "change_playlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete playlist",
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "codename": "delete_playlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view playlist",
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "codename": "view_playlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add channel",
+    "content_type": [
+      "courses",
+      "channel"
+    ],
+    "codename": "add_channel"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change channel",
+    "content_type": [
+      "courses",
+      "channel"
+    ],
+    "codename": "change_channel"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete channel",
+    "content_type": [
+      "courses",
+      "channel"
+    ],
+    "codename": "delete_channel"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view channel",
+    "content_type": [
+      "courses",
+      "channel"
+    ],
+    "codename": "view_channel"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add bookmark",
+    "content_type": [
+      "courses",
+      "bookmark"
+    ],
+    "codename": "add_bookmark"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change bookmark",
+    "content_type": [
+      "courses",
+      "bookmark"
+    ],
+    "codename": "change_bookmark"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete bookmark",
+    "content_type": [
+      "courses",
+      "bookmark"
+    ],
+    "codename": "delete_bookmark"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view bookmark",
+    "content_type": [
+      "courses",
+      "bookmark"
+    ],
+    "codename": "view_bookmark"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Онбординг пользователя",
+    "content_type": [
+      "accounts",
+      "useronboarding"
+    ],
+    "codename": "add_useronboarding"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Онбординг пользователя",
+    "content_type": [
+      "accounts",
+      "useronboarding"
+    ],
+    "codename": "change_useronboarding"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Онбординг пользователя",
+    "content_type": [
+      "accounts",
+      "useronboarding"
+    ],
+    "codename": "delete_useronboarding"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Онбординг пользователя",
+    "content_type": [
+      "accounts",
+      "useronboarding"
+    ],
+    "codename": "view_useronboarding"
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$8SmlOPLH0bxZsytUOwtNfj$2ckeZbjNM7Ykr3mG61JY3EwgN9UwtDfxjUDFRnXrGjA=",
+    "last_login": "2026-03-04T10:15:24.877Z",
+    "is_superuser": true,
+    "first_name": "admin",
+    "last_name": "admin",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-03T18:48:57.820Z",
+    "email": "admin@mail.ru",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin@mail.ru"
+    ],
+    "avatar": "avatars/807fbcc5d3b4f52fd49460496941c7cb654fdf9b.jpg",
+    "bio": "",
+    "phone": ""
+  }
+},
+{
+  "model": "accounts.useronboarding",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin@mail.ru"
+    ],
+    "field": "Building Websites",
+    "occupation": "Frontend Developer",
+    "skills": [
+      "HTML5 & Semantic Markup",
+      "Design Systems",
+      "CSS3 & Modern Layouts",
+      "JavaScript Fundamentals"
+    ],
+    "current_step": 3,
+    "updated_at": "2026-03-04T21:54:53.981Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-03-04T10:18:50.709Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "1",
+    "object_repr": "admin@mail.ru",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"profile\", \"object\": \"Profile of admin@mail.ru\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-03-04T20:20:04.822Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "1",
+    "object_repr": "Python Ultimate Course",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-03-04T20:21:24.207Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "2",
+    "object_repr": "Python Tutorials",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-03-04T20:21:45.992Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "3",
+    "object_repr": "Python Language Full Course (2026)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-03-04T20:24:30.225Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "object_id": "1",
+    "object_repr": "Recommended playlists for you",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-03-04T20:34:05.472Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "4",
+    "object_repr": "Python for Beginners (Full Course) | Programming Tutorial",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-03-04T21:12:10.190Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "object_id": "1",
+    "object_repr": "Recommended playlists for you",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043b\\u0435\\u0439\\u043b\\u0438\\u0441\\u0442\\u044b\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-03-04T21:25:41.057Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "5",
+    "object_repr": "40 Days of JavaScript - A Complete JavaScript Course to Level Up",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-03-04T21:25:51.722Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "6",
+    "object_repr": "Complete JavaScript Course | 2025",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-03-04T21:26:00.635Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "7",
+    "object_repr": "JavaScript Tutorials",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-03-04T21:26:46.773Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "8",
+    "object_repr": "Java tutorial for beginners ☕",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-03-04T21:27:00.576Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "9",
+    "object_repr": "Java Tutorial For beginners",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-03-04T21:27:07.098Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "10",
+    "object_repr": "Java & DSA in 30 days : Course for Placement",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-03-04T21:27:22.948Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "11",
+    "object_repr": "C++",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-03-04T21:27:37.809Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "12",
+    "object_repr": "C++ Tutorials",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-03-04T21:27:56.502Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "13",
+    "object_repr": "C++ Programming (Complete Course)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-03-04T21:28:39.282Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "14",
+    "object_repr": "W3Schools C# Full Course",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-03-04T21:28:47.158Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "15",
+    "object_repr": "C# tutorial for beginners 🎵",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-03-04T21:28:53.423Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "16",
+    "object_repr": "C# Training 🔥[2026 Updated]",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-03-04T21:45:44.086Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "1",
+    "object_repr": "python",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-03-04T21:53:52.185Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "1",
+    "object_repr": "python",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0426\\u0432\\u0435\\u0442 (HEX)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-03-04T21:57:40.597Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "4",
+    "object_repr": "c++",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0426\\u0432\\u0435\\u0442 (HEX)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-03-04T21:57:43.498Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "4",
+    "object_repr": "c++",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-03-04T21:57:48.981Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "2",
+    "object_repr": "javascript",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0426\\u0432\\u0435\\u0442 (HEX)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-03-04T21:58:53.163Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "4",
+    "object_repr": "c++",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0426\\u0432\\u0435\\u0442 (HEX)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-03-04T21:59:00.719Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "3",
+    "object_repr": "java",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0426\\u0432\\u0435\\u0442 (HEX)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-03-04T21:59:08.291Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "5",
+    "object_repr": "c#",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0426\\u0432\\u0435\\u0442 (HEX)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-03-04T22:00:08.505Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "6",
+    "object_repr": "back_end",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-03-04T22:00:17.167Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "17",
+    "object_repr": "🔥 Master Django: From Beginner to Advanced | Full-Stack Web Development Series",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-03-04T22:01:12.674Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "7",
+    "object_repr": "front_end",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-03-04T22:01:17.941Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "playlist"
+    ],
+    "object_id": "18",
+    "object_repr": "Front End Developer Learning Path",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-03-04T22:05:55.704Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "object_id": "18",
+    "object_repr": "Popular playlists for Python developers",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-03-04T22:06:13.299Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "object_id": "18",
+    "object_repr": "Popular playlists for Python developers",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u0434\\u0437\\u0430\\u0433\\u043e\\u043b\\u043e\\u0432\\u043e\\u043a\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-03-04T22:23:44.720Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "video"
+    ],
+    "object_id": "1",
+    "object_repr": "The Complete Frontend Developer Roadmap",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-03-05T09:17:00.962Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "object_id": "19",
+    "object_repr": "Popular Algorithm and Data Structures Videos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-03-05T09:18:27.146Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "tag"
+    ],
+    "object_id": "8",
+    "object_repr": "algorithms",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-03-05T09:18:42.283Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "video"
+    ],
+    "object_id": "2",
+    "object_repr": "Algorithms and Data Structures Tutorial - Full Course for Beginners",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-03-05T09:18:45.590Z",
+    "user": [
+      "admin@mail.ru"
+    ],
+    "content_type": [
+      "courses",
+      "section"
+    ],
+    "object_id": "19",
+    "object_repr": "Popular Algorithm and Data Structures Videos",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0412\\u0438\\u0434\\u0435\\u043e\"]}}]"
+  }
+}
+]
