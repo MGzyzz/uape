@@ -207,12 +207,9 @@ function AuthPage({ mode }) {
           <div className="flex items-center justify-between">
             <span className="text-xl font-medium text-uape">Your password</span>
             {!isSignup && (
-              <Link
-                to="/forgot-password"
-                className="text-sm text-uape-muted transition hover:text-uape-white"
-              >
+              <span className="text-sm text-uape-muted opacity-50 cursor-not-allowed select-none">
                 Forgot password?
-              </Link>
+              </span>
             )}
           </div>
           <div className="relative h-12">

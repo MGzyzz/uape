@@ -305,13 +305,13 @@ export default function WhatToLearnNextSection() {
     if (isAuth) fetches.push(getRecommended().catch(() => null))
 
     Promise.all(fetches).then(([sections, recommended]) => {
-      if (recommended?.playlists?.length > 0) {
+      if (recommended && (recommended.playlists?.length > 0 || recommended.videos?.length > 0 || recommended.channels?.length > 0)) {
         setSections([recommended, ...sections])
       } else {
         setSections(sections)
       }
     }).catch(() => {}).finally(() => setLoading(false))
-  }, [])
+  }, [isAuth])
 
   function toggleFavorite(sectionId, contentType, itemId) {
     setSections((prev) =>

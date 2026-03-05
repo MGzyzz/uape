@@ -54,14 +54,12 @@ function UserDropdown({ user, onLogout }) {
 
       {open && (
         <div className="absolute right-0 top-[calc(100%+8px)] z-50 w-44 overflow-hidden rounded-xl border border-uape-border-soft bg-uape-form-bg shadow-lg">
-          <Link
-            to="/settings"
-            onClick={() => setOpen(false)}
-            className="flex items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-uape-white"
+          <span
+            className="flex items-center gap-3 px-4 py-3 text-sm text-uape-muted opacity-40 cursor-not-allowed select-none"
           >
             <FiSettings size={15} />
             Settings
-          </Link>
+          </span>
           <button
             onClick={onLogout}
             className="flex w-full items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-red-400"
@@ -103,22 +101,12 @@ function SiteHeader({ compact = false }) {
             >
               Home
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                `transition hover:text-uape-white${isActive ? ' font-semibold text-uape-white' : ''}`
-              }
-              to="/about"
-            >
+            <span className="opacity-40 cursor-not-allowed select-none">
               About Us
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                `transition hover:text-uape-white${isActive ? ' font-semibold text-uape-white' : ''}`
-              }
-              to="/my-learning"
-            >
+            </span>
+            <span className="opacity-40 cursor-not-allowed select-none">
               My Learning
-            </NavLink>
+            </span>
           </nav>
 
           <div className="flex items-center justify-end gap-3">

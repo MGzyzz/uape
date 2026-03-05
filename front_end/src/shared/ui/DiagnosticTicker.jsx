@@ -1,5 +1,8 @@
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+
+
+const MotionDiv = motion.div
 import {
   CompassIcon,
   MapIcon,
@@ -57,9 +60,11 @@ function MovingPill({ item, index, total, rowOffset, rowTop, speed, frameWidth }
   const x = useMotionValue(startProgress - entryOffset)
   const progressRef = useRef(startProgress)
   const pillPhaseRef = useRef('before') // 'before' | 'inside' | 'after'
-  const [pillStyle, setPillStyle] = useState(BASE_PILL_STYLE)
+  const bgColorMV = useMotionValue(BASE_PILL_STYLE.backgroundColor)
+  const borderColorMV = useMotionValue(BASE_PILL_STYLE.borderColor)
+  const textColorMV = useMotionValue(BASE_PILL_STYLE.textColor)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!frameWidth) {
       return
     }
@@ -72,15 +77,17 @@ function MovingPill({ item, index, total, rowOffset, rowTop, speed, frameWidth }
 
     if (rightEdgePassedCenterRight) {
       pillPhaseRef.current = 'after'
-      setPillStyle(pickRandomPillStyle())
-    } else if (rightEdgeEnteredCenter) {
-      pillPhaseRef.current = 'inside'
-      setPillStyle(BASE_PILL_STYLE)
+      const s = pickRandomPillStyle()
+      bgColorMV.set(s.backgroundColor)
+      borderColorMV.set(s.borderColor)
+      textColorMV.set(s.textColor)
     } else {
-      pillPhaseRef.current = 'before'
-      setPillStyle(BASE_PILL_STYLE)
+      pillPhaseRef.current = rightEdgeEnteredCenter ? 'inside' : 'before'
+      bgColorMV.set(BASE_PILL_STYLE.backgroundColor)
+      borderColorMV.set(BASE_PILL_STYLE.borderColor)
+      textColorMV.set(BASE_PILL_STYLE.textColor)
     }
-  }, [frameWidth])
+  }, [bgColorMV, borderColorMV, frameWidth, textColorMV, x])
 
   useAnimationFrame((_, delta) => {
     if (!frameWidth) {
@@ -104,7 +111,9 @@ function MovingPill({ item, index, total, rowOffset, rowTop, speed, frameWidth }
 
     if (wrapped) {
       pillPhaseRef.current = 'before'
-      setPillStyle(BASE_PILL_STYLE)
+      bgColorMV.set(BASE_PILL_STYLE.backgroundColor)
+      borderColorMV.set(BASE_PILL_STYLE.borderColor)
+      textColorMV.set(BASE_PILL_STYLE.textColor)
     }
 
     if (!wrapped) {
@@ -113,7 +122,10 @@ function MovingPill({ item, index, total, rowOffset, rowTop, speed, frameWidth }
       }
       if (pillPhaseRef.current === 'inside' && rightEdgePassedCenterRight) {
         pillPhaseRef.current = 'after'
-        setPillStyle(pickRandomPillStyle())
+        const s = pickRandomPillStyle()
+        bgColorMV.set(s.backgroundColor)
+        borderColorMV.set(s.borderColor)
+        textColorMV.set(s.textColor)
       }
     }
 
@@ -125,14 +137,14 @@ function MovingPill({ item, index, total, rowOffset, rowTop, speed, frameWidth }
   const Icon = item.icon
 
   return (
-    <motion.div
+    <MotionDiv
       className="absolute left-0 flex h-17 w-64 items-center gap-2.5 overflow-hidden rounded-xl border px-4 text-left text-[20px] font-bold leading-7"
       style={{
         top: rowTop,
         x,
-        backgroundColor: pillStyle.backgroundColor,
-        borderColor: pillStyle.borderColor,
-        color: pillStyle.textColor,
+        backgroundColor: bgColorMV,
+        borderColor: borderColorMV,
+        color: textColorMV,
       }}
     >
       {Icon ? <Icon className="size-[18px] shrink-0" /> : null}
@@ -140,7 +152,7 @@ function MovingPill({ item, index, total, rowOffset, rowTop, speed, frameWidth }
         {firstLine}
         <span className="block">{secondLine}</span>
       </span>
-    </motion.div>
+    </MotionDiv>
   )
 }
 

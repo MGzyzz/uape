@@ -22,7 +22,7 @@ function LandingPage() {
     if (isAuth) {
       navigate('/profile', { replace: true })
     }
-  }, [])
+  }, [isAuth, navigate])
 
   if (isAuth) return null
 

@@ -9,12 +9,14 @@ import WhatToLearnNextSection from './WhatToLearnNextSection.jsx'
 function ProfilePage() {
   const navigate = useNavigate()
   const [user, setUser] = useState(getStoredUser)
+  const hasAccessToken = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
-    if (!localStorage.getItem('access') || !user) {
+    if (!hasAccessToken || !user) {
       navigate('/login')
       return
     }
+
     getProfile().then(profile => {
       const updated = {
         first_name: profile.first_name,
@@ -24,7 +26,7 @@ function ProfilePage() {
       saveUser(updated)
       setUser(updated)
     }).catch(() => {})
-  }, [])
+  }, [hasAccessToken, navigate, user])
 
   if (!user) return null
 

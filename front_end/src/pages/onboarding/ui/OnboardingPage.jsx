@@ -181,7 +181,7 @@ export default function OnboardingPage() {
       const resumeStep = Math.min(data.current_step + 1, TOTAL_STEPS)
       setStep(resumeStep || 1)
     }).catch(() => {})
-  }, [])
+  }, [navigate])
 
   async function handleSaveExit() {
     setSaving(true)
