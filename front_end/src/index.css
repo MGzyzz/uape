@@ -250,12 +250,17 @@ body {
   padding: 10px 20px;
   font-family: 'Figtree', sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   color: #fff;
   border: none;
   cursor: pointer;
   line-height: 24px;
   white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.uape-learn-primary-btn:hover {
+  background-color: #B13E24;
 }
 
 .uape-learn-link-btn {
@@ -603,3 +608,36 @@ body {
   font-weight: 400;
   letter-spacing: 0;
 }
+
+/* ─── Footer social icon hover effects ───────────────────────────────────── */
+
+.uape-social-icon {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.uape-social-telegram:hover {
+  background-color: #1D80A98F;
+  border-color: #1D80A9;
+  box-shadow: 0px 0px 8px 0px #1D80A9C2 inset;
+}
+
+.uape-social-whatsapp:hover {
+  background-color: #21A8398F;
+  border-color: #21A839;
+  box-shadow: 0px 0px 8px 0px #21A839C2 inset;
+}
+
+.uape-social-youtube:hover {
+  background-color: #D801018F;
+  border-color: #D80101;
+  box-shadow: 0px 0px 8px 0px #D80101C2 inset;
+}
+
+.uape-social-instagram:hover {
+  background-color: #E4405F8F;
+  border-color: #E4405F;
+  box-shadow: 0px 0px 8px 0px #E4405FC2 inset;
+}
+
+/* ─── End Footer social icon hover effects ───────────────────────────────── */

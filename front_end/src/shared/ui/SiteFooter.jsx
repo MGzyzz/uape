@@ -2,10 +2,10 @@ import { FaTelegramPlane, FaWhatsapp, FaYoutube, FaInstagram, FaEnvelope, FaPhon
 import footerTitleIcon from '../assets/icons/footer-title.svg'
 
 const SOCIAL_LINKS = [
-  { Icon: FaTelegramPlane, href: '#', label: 'Telegram' },
-  { Icon: FaWhatsapp,      href: '#', label: 'WhatsApp' },
-  { Icon: FaYoutube,       href: '#', label: 'YouTube' },
-  { Icon: FaInstagram,     href: '#', label: 'Instagram' },
+  { Icon: FaTelegramPlane, href: '#', label: 'Telegram',  hoverClass: 'uape-social-telegram' },
+  { Icon: FaWhatsapp,      href: '#', label: 'WhatsApp',  hoverClass: 'uape-social-whatsapp' },
+  { Icon: FaYoutube,       href: '#', label: 'YouTube',   hoverClass: 'uape-social-youtube' },
+  { Icon: FaInstagram,     href: '#', label: 'Instagram', hoverClass: 'uape-social-instagram' },
 ]
 
 function SiteFooter() {
@@ -16,7 +16,7 @@ function SiteFooter() {
         <img
           src={footerTitleIcon}
           alt="You're adaptive programming education"
-          className="h-7 w-auto max-w-full md:h-8"
+          className="w-full"
         />
 
         <div className="mt-8 flex flex-col justify-between gap-6 border-t border-uape-border-soft pt-6 md:flex-row md:items-center">
@@ -32,12 +32,12 @@ function SiteFooter() {
 
             {/* Social icon buttons */}
             <div className="flex gap-2">
-              {SOCIAL_LINKS.map(({ Icon, href, label }) => (
+              {SOCIAL_LINKS.map(({ Icon, href, label, hoverClass }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-uape-form-bg text-white transition hover:opacity-75"
+                  className={`uape-social-icon flex h-10 w-10 items-center justify-center rounded-lg bg-uape-form-bg text-white ${hoverClass}`}
                 >
                   <Icon size={18} />
                 </a>

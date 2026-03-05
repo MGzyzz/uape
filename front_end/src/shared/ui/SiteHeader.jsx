@@ -1,4 +1,6 @@
+import { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { FiSettings, FiLogOut } from 'react-icons/fi'
 import BrandLogo from './BrandLogo.jsx'
 import { getStoredUser, clearTokens } from '../../api/auth.js'
 
@@ -24,18 +26,66 @@ function UserAvatar({ firstName, lastName, photo }) {
   )
 }
 
+function UserDropdown({ user, onLogout }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="uape-icon-button-reset flex items-center"
+        aria-label="User menu"
+      >
+        <UserAvatar
+          firstName={user.first_name}
+          lastName={user.last_name}
+          photo={user.photo ?? null}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-[calc(100%+8px)] z-50 w-44 overflow-hidden rounded-xl border border-uape-border-soft bg-uape-form-bg shadow-lg">
+          <Link
+            to="/settings"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-uape-white"
+          >
+            <FiSettings size={15} />
+            Settings
+          </Link>
+          <button
+            onClick={onLogout}
+            className="flex w-full items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-red-400"
+          >
+            <FiLogOut size={15} />
+            Log out
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function SiteHeader({ compact = false }) {
   const user = getStoredUser()
   const isAuth = Boolean(localStorage.getItem('access')) && Boolean(user)
   const navigate = useNavigate()
 
-  if (isAuth) {
-    // TODO: убрать кнопку выхода после проверки
-    const handleLogout = () => {
-      clearTokens()
-      navigate('/login')
-    }
+  const handleLogout = () => {
+    clearTokens()
+    navigate('/login')
+  }
 
+  if (isAuth) {
     return (
       <header
         className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]"
@@ -72,21 +122,10 @@ function SiteHeader({ compact = false }) {
           </nav>
 
           <div className="flex items-center justify-end gap-3">
-            {/* TODO: убрать кнопку выхода после проверки */}
-            <button
-              onClick={handleLogout}
-              className="text-sm text-uape-muted transition hover:text-uape-white"
-            >
-              Выйти
-            </button>
             <span className="uape-header-user-name text-uape-white">
               {user.last_name} {user.first_name}
             </span>
-            <UserAvatar
-              firstName={user.first_name}
-              lastName={user.last_name}
-              photo={user.photo ?? null}
-            />
+            <UserDropdown user={user} onLogout={handleLogout} />
           </div>
         </div>
       </header>
