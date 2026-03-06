@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { getStoredUser, getProfile, saveUser } from '../../../api/auth.js'
+import { getOnboarding } from '../../../api/onboarding.js'
 import authPageBg from '../../../shared/assets/solution/auth-page.png'
 import WhatToLearnNextSection from './WhatToLearnNextSection.jsx'
 
 function ProfilePage() {
   const navigate = useNavigate()
   const [user, setUser] = useState(getStoredUser)
+  const [occupation, setOccupation] = useState(null)
   const hasAccessToken = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
@@ -43,6 +45,13 @@ function ProfilePage() {
       })
       .catch(() => {})
 
+    getOnboarding()
+      .then(data => {
+        if (ignore) return
+        setOccupation(data.occupation ?? null)
+      })
+      .catch(() => {})
+
     return () => {
       ignore = true
     }
@@ -54,7 +63,7 @@ function ProfilePage() {
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader />
       <main className="flex-1">
-        <HeroSection user={user} />
+        <HeroSection user={user} occupation={occupation} />
         <WhatToLearnNextSection />
       </main>
       <SiteFooter />
@@ -62,7 +71,7 @@ function ProfilePage() {
   )
 }
 
-function HeroSection({ user }) {
+function HeroSection({ user, occupation }) {
   const navigate = useNavigate()
   const initials = `${user.first_name?.[0] ?? ''}${user.last_name?.[0] ?? ''}`.toUpperCase()
 
@@ -91,9 +100,24 @@ function HeroSection({ user }) {
             <h1 className="uape-profile-hero-title">
               Welcome back, {user.first_name} {user.last_name}
             </h1>
-            <a href="#" className="uape-profile-hero-link">
-              Add occupation and interests
-            </a>
+            {occupation ? (
+              <div className="uape-profile-occupation-btn">
+                <span className="uape-profile-occupation-label">{occupation}</span>
+                <button
+                  className="uape-profile-hero-link uape-profile-edit-link"
+                  onClick={() => navigate('/onboarding')}
+                >
+                  Edit occupation and interests
+                </button>
+              </div>
+            ) : (
+              <button
+                className="uape-profile-hero-link uape-profile-occupation-btn"
+                onClick={() => navigate('/onboarding')}
+              >
+                Add occupation and interests
+              </button>
+            )}
           </div>
         </div>
       </div>

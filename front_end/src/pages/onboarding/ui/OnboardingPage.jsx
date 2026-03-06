@@ -69,11 +69,7 @@ function CheckboxOption({ label, selected, onToggle }) {
           background: selected ? '#eb4823' : '#ffffff',
         }}
       >
-        {selected && (
-          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
-            <path d="M1 4L4.5 7.5L11 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        )}
+        {selected && <div className="h-2.5 w-2.5 bg-white" />}
       </div>
       <span className="uape-onboarding-option-label">{label}</span>
     </button>
@@ -282,7 +278,7 @@ export default function OnboardingPage() {
         {/* Next button — fixed bottom-right */}
         <div className="fixed bottom-8 right-8 z-30">
           <button
-            className="uape-onboarding-next-btn"
+            className="uape-orange-btn uape-onboarding-next-btn"
             onClick={handleNext}
             disabled={saving}
           >
