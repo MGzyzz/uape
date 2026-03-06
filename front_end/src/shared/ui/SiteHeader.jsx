@@ -88,7 +88,7 @@ function SiteHeader({ compact = false }) {
       <header
         className="uape-header-auth-bg sticky top-0 z-50 border-b border-uape-border-soft backdrop-blur-[80px]"
       >
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-3 items-center px-4 py-3 sm:px-6 lg:px-8">
+        <div className="uape-full-bleed-shell uape-navbar-shell grid grid-cols-3 items-center">
           <BrandLogo />
 
           <nav className="hidden items-center justify-center gap-7 text-base font-normal leading-6 text-uape-muted lg:flex">
@@ -124,7 +124,7 @@ function SiteHeader({ compact = false }) {
     <header
       className="uape-header-guest-bg sticky top-0 z-50 backdrop-blur-[80px]"
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <div className="uape-full-bleed-shell uape-navbar-shell flex items-center justify-between">
         <div className="flex items-center gap-8">
           <BrandLogo />
           {!compact ? (

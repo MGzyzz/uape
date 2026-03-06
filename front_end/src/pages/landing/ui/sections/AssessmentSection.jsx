@@ -27,7 +27,7 @@ function AssessmentSection() {
   const [firstStep, ...remainingSteps] = steps
 
   return (
-    <section id="assessment" className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+    <section id="assessment" className="uape-page-container uape-page-gutter py-6">
       <div className="overflow-hidden rounded-3xl border-2 border-[#FFFFFF1F] bg-[#27292A]">
         <div className="grid lg:grid-cols-2">
           <div className="px-4 pb-4 pt-6 sm:px-5 sm:pb-5 sm:pt-7">

@@ -78,7 +78,7 @@ function HeroSection({ user, occupation }) {
   return (
     <section>
       {/* Welcome area — above background image */}
-      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-8 sm:px-6 lg:px-8">
+      <div className="uape-page-container flex items-center px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           {/* Avatar */}
           <div className="uape-profile-avatar-shell shrink-0 overflow-hidden">
@@ -131,7 +131,7 @@ function HeroSection({ user, occupation }) {
           className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"
         />
         <div className="uape-profile-hero-overlay absolute inset-0" />
-        <div className="uape-profile-hero-content relative mx-auto flex w-full max-w-6xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="uape-profile-hero-content uape-page-container relative flex items-center px-4 sm:px-6 lg:px-8">
           <DiagnosticCard navigate={navigate} />
         </div>
       </div>

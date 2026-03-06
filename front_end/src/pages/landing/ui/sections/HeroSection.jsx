@@ -3,7 +3,7 @@ import DiagnosticTicker from '../../../../shared/ui/DiagnosticTicker.jsx'
 
 function HeroSection() {
   return (
-    <section className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-20 pt-8 text-center sm:px-6 lg:px-8">
+    <section className="uape-page-container uape-page-gutter flex flex-col items-center pb-20 pt-8 text-center">
       <h1
         className="uape-hero-title max-w-5xl font-bold text-white"
       >
@@ -12,13 +12,13 @@ function HeroSection() {
         on your real skill level
       </h1>
       <p
-        className="uape-hero-subtitle mt-6 max-w-3xl font-normal text-uape-muted"
+        className="uape-hero-subtitle mt-6 font-normal text-uape-muted"
       >
         Most platforms guess what you need. <br /> UAPE measures your actual knowledge and builds a learning <br /> path
         that fits you &mdash; no more, no less.
       </p>
 
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
         <Link
           to="/signup"
           className="uape-orange-btn rounded-[10px] px-7 py-3 text-base font-normal leading-6"

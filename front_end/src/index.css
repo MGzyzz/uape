@@ -88,7 +88,7 @@ body {
 .uape-section-shell {
   margin: 0 auto;
   width: 100%;
-  max-width: 72rem;
+  max-width: 1200px;
   padding: 4rem 1rem;
 }
 
@@ -104,6 +104,39 @@ body {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+.uape-page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.uape-page-gutter {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .uape-page-gutter {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .uape-page-gutter {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.uape-full-bleed-shell {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 120px;
+  padding-right: 120px;
 }
 
 .uape-surface-card-strong {
@@ -146,7 +179,7 @@ body {
 
 .uape-profile-hero-image-area {
   height: 492px;
-  max-width: 72rem;
+  max-width: 1200px;
   margin: 0 auto;
   border-radius: 24px;
 }
@@ -315,7 +348,8 @@ body {
   background-color: #181a1b;
   border-radius: 16px;
   overflow: hidden;
-  flex: 0 0 calc(33.333% - 16px);
+  width: 381px;
+  min-height: 389px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -328,11 +362,13 @@ body {
 .uape-learn-thumb-frame {
   border-radius: 8px;
   overflow: hidden;
+  width: 357px;
+  height: 201px;
 }
 
 .uape-learn-thumb-image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -353,14 +389,15 @@ body {
 }
 
 .uape-learn-card-body {
-  padding: 20px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  gap: 12px;
 }
 
 .uape-learn-title-row {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .uape-learn-card-title {
@@ -382,12 +419,12 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #ffffff8f;
-  margin: 0 0 12px;
+  margin: 0;
 }
 
 .uape-learn-actions {
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 8px;
 }
 
 .uape-learn-primary-btn {
@@ -509,7 +546,14 @@ body {
 
 .uape-learn-cards-row {
   display: flex;
-  gap: 24px;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 28.5px;
+}
+
+.uape-learn-cards-row-full {
+  justify-content: space-between;
+  gap: 0;
 }
 
 .uape-learn-channels-grid {
@@ -536,8 +580,8 @@ body {
 }
 
 .uape-learn-root-inner {
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .uape-learn-page-title {
@@ -678,6 +722,17 @@ body {
   letter-spacing: 0;
 }
 
+.uape-navbar-shell {
+  min-height: 64px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.uape-footer-shell {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
 .uape-diagnostic-center-glow {
   box-shadow: 0 0 250px 0 #eaf27c1f;
 }
@@ -722,12 +777,14 @@ body {
 }
 
 .uape-hero-title {
+  max-width: 1000px;
   font-size: 76px;
   line-height: 80px;
   letter-spacing: 0;
 }
 
 .uape-hero-subtitle {
+  max-width: 440px;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;

@@ -5,7 +5,7 @@ function CtaSection() {
   return (
     <section className="relative">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-[#181A1B]" aria-hidden="true" />
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-4 px-4 pb-20 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <div className="uape-page-container uape-page-gutter relative z-10 grid gap-4 pb-20 lg:grid-cols-2">
         <article
           className="uape-shadow-soft-32 rounded-[24px] bg-[#27292A] p-8 md:p-10"
         >

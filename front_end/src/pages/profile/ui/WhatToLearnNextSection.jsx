@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import arrowLeftIcon from '../../../shared/assets/icons/arrow-left.svg'
 import arrowRightIcon from '../../../shared/assets/icons/arrow-right.svg'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
@@ -96,14 +96,15 @@ function SkeletonContentCard() {
 }
 
 function SkeletonSection() {
+  const skeletonItems = [0, 1, 2]
   return (
     <div className="uape-learn-section">
       <div className="uape-learn-section-header">
         <div className="uape-skeleton" style={{ height: 32, width: 240 }} />
       </div>
-      <div style={{ display: 'flex', gap: 24 }}>
-        {[0, 1, 2].map((i) => (
-          <div key={i} style={{ flex: '0 0 calc((100% - 48px) / 3)', minWidth: 0 }}>
+      <div className={`uape-learn-cards-row${skeletonItems.length === 3 ? ' uape-learn-cards-row-full' : ''}`}>
+        {skeletonItems.map((i) => (
+          <div key={i} style={{ flex: '0 0 auto', minWidth: 0 }}>
             <SkeletonContentCard />
           </div>
         ))}
@@ -212,23 +213,11 @@ function ChannelCard({ item, onToggle }) {
 
 function CarouselSection({ title, subtitle, items, renderCard }) {
   const [idx, setIdx] = useState(0)
-  const [cardWidth, setCardWidth] = useState(0)
-  const trackRef = useRef(null)
-  const gap = 24
   const perPage = 3
   const canPrev = idx > 0
   const canNext = idx + perPage < items.length
-
-  useEffect(() => {
-    const update = () => {
-      if (trackRef.current) {
-        setCardWidth((trackRef.current.offsetWidth - gap * (perPage - 1)) / perPage)
-      }
-    }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
+  const visible = items.slice(idx, idx + perPage)
+  const rowClassName = `uape-learn-cards-row${visible.length === perPage ? ' uape-learn-cards-row-full' : ''}`
 
   return (
     <div className="uape-learn-section">
@@ -244,21 +233,12 @@ function CarouselSection({ title, subtitle, items, renderCard }) {
           canNext={canNext}
         />
       </div>
-      <div ref={trackRef} style={{ overflow: 'hidden' }}>
-        <div
-          style={{
-            display: 'flex',
-            gap: `${gap}px`,
-            transform: `translateX(-${idx * (cardWidth + gap)}px)`,
-            transition: 'transform 0.35s ease',
-          }}
-        >
-          {items.map((item) => (
-            <div key={item.id} style={{ flex: `0 0 ${cardWidth}px`, minWidth: 0 }}>
-              {renderCard(item)}
-            </div>
-          ))}
-        </div>
+      <div className={rowClassName}>
+        {visible.map((item) => (
+          <div key={item.id} style={{ flex: '0 0 auto', minWidth: 0 }}>
+            {renderCard(item)}
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -343,7 +323,7 @@ export default function WhatToLearnNextSection() {
   if (loading) {
     return (
       <section className="uape-learn-root">
-        <div className="uape-learn-root-inner mx-auto max-w-6xl">
+        <div className="uape-learn-root-inner uape-page-container">
           <h1 className="uape-learn-page-title">What to learn next</h1>
           <SkeletonSection />
           <SkeletonSection />
@@ -357,7 +337,7 @@ export default function WhatToLearnNextSection() {
 
   return (
     <section className="uape-learn-root">
-      <div className="uape-learn-root-inner mx-auto max-w-6xl">
+      <div className="uape-learn-root-inner uape-page-container">
         <h1 className="uape-learn-page-title">What to learn next</h1>
 
         {sections.map((section) => {

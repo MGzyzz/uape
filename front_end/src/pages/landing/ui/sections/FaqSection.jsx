@@ -38,7 +38,7 @@ function FaqSection() {
 
   return (
     <section id="faq" className="bg-uape-bg">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="uape-page-container uape-page-gutter py-16">
 
         {/* Heading */}
         <div className="mb-16 text-center">

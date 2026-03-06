@@ -63,26 +63,28 @@ function TechnologyIcon({ item }) {
 function TechnologySection() {
   return (
     <section id="technology" className="bg-uape-bg">
-      <div className="uape-section-shell flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-        <div className="max-w-[360px]">
+      <div className="uape-section-shell flex flex-col gap-[104px] lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex w-[409px] flex-col gap-7">
+          <div className="flex w-[409px] flex-col gap-4">
           <h2 className="uape-card-title-lg">
             Programming languages we support
           </h2>
-          <p className="uape-card-text mt-4">
+          <p className="uape-card-text">
             We conduct diagnostics and provide personalized courses in these programming languages.
           </p>
+          </div>
           <Link
             to="/signup"
-            className="uape-orange-btn font-figtree mt-7 inline-flex rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
+            className="uape-orange-btn font-figtree inline-flex h-12 w-[163px] items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
           >
             Start diagnostic
           </Link>
         </div>
 
-        <div className="grid w-full max-w-[620px] grid-cols-1 gap-x-9 gap-y-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid h-[276px] w-[687px] grid-cols-3 gap-x-[54px] gap-y-12">
           {technologyItems.map((item) => (
-            <div key={item.name} className="flex items-center gap-3">
-              <span className={`flex h-14 w-14 items-center justify-center rounded-[18px] ${item.iconBg}`}>
+            <div key={item.name} className="flex h-[60px] w-[193px] items-center gap-4">
+              <span className={`flex h-[60px] w-[60px] items-center justify-center rounded-[18px] ${item.iconBg}`}>
                 <TechnologyIcon item={item} />
               </span>
               <span className="font-figtree text-[24px] font-semibold leading-7 text-white">{item.name}</span>
