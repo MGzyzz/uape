@@ -32,7 +32,7 @@ const struggleCards = [
 function ProblemsSection() {
   return (
     <section id="problems" className="bg-uape-bg">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="uape-section-shell">
         <h2 className="font-figtree text-center text-[44px] font-semibold leading-13">Why is learning programming hard?</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {struggleCards.map((card) => (
@@ -49,8 +49,8 @@ function ProblemsSection() {
                   <path d={card.iconPath} fill="white" />
                 </svg>
               </div>
-              <h3 className="font-figtree text-[24px] font-semibold leading-7">{card.title}</h3>
-              <p className="font-figtree mt-3 text-[16px] font-normal leading-6 text-uape-muted">{card.text}</p>
+              <h3 className="uape-card-title-md">{card.title}</h3>
+              <p className="uape-card-text mt-3">{card.text}</p>
             </article>
           ))}
         </div>

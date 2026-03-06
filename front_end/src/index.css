@@ -85,6 +85,56 @@ body {
   box-shadow: 0 0 32px 0 #0000001f;
 }
 
+.uape-section-shell {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 72rem;
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .uape-section-shell {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .uape-section-shell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.uape-surface-card-strong {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid #ffffff1f;
+  background: #292e31;
+}
+
+.uape-card-title-lg {
+  font-family: 'Figtree', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.uape-card-title-md {
+  font-family: 'Figtree', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.uape-card-text {
+  font-family: 'Figtree', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ffffffc2;
+}
+
 .uape-icon-button-reset {
   background: none;
   border: none;
@@ -154,6 +204,28 @@ body {
   height: 48px;
   padding: 12px 24px;
   align-self: flex-start;
+}
+
+.uape-orange-btn {
+  background-color: #eb4823;
+  border-radius: 8px;
+  font-family: 'Figtree', sans-serif;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.uape-orange-btn:hover {
+  background-color: #b13e24;
+}
+
+.uape-orange-btn:disabled {
+  cursor: not-allowed;
+}
+
+.uape-orange-btn:disabled:hover {
+  background-color: #eb4823;
 }
 
 .uape-diagnostic-card {
@@ -291,22 +363,11 @@ body {
 }
 
 .uape-learn-primary-btn {
-  background-color: #eb4823;
-  border-radius: 8px;
   padding: 10px 20px;
-  font-family: 'Figtree', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #fff;
-  border: none;
-  cursor: pointer;
   line-height: 24px;
   white-space: nowrap;
-  transition: background-color 0.2s ease;
-}
-
-.uape-learn-primary-btn:hover {
-  background-color: #B13E24;
 }
 
 .uape-learn-link-btn {
@@ -320,6 +381,12 @@ body {
   line-height: 24px;
   padding: 0;
   white-space: nowrap;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.uape-learn-link-btn:hover {
+  border-bottom-color: #ffffff;
 }
 
 .uape-learn-channel-card {
@@ -539,16 +606,10 @@ body {
 }
 
 .uape-onboarding-next-btn {
-  background-color: #eb4823;
-  border-radius: 8px;
   padding: 12px 28px;
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
 }
 
 .uape-onboarding-back-btn {
@@ -665,6 +726,16 @@ body {
   line-height: 24px;
   font-weight: 400;
   letter-spacing: 0;
+}
+
+.uape-faq-toggle-icon {
+  display: inline-flex;
+  color: #ffffff;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.uape-faq-toggle-icon-open {
+  color: #eaf27c;
 }
 
 /* ─── Footer social icon hover effects ───────────────────────────────────── */

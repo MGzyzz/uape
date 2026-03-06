@@ -17,16 +17,36 @@ function ProfilePage() {
       return
     }
 
-    getProfile().then(profile => {
-      const updated = {
-        first_name: profile.first_name,
-        last_name: profile.last_name,
-        photo: profile.avatar ?? null,
-      }
-      saveUser(updated)
-      setUser(updated)
-    }).catch(() => {})
-  }, [hasAccessToken, navigate, user])
+    let ignore = false
+
+    getProfile()
+      .then(profile => {
+        if (ignore) return
+
+        const updated = {
+          first_name: profile.first_name,
+          last_name: profile.last_name,
+          photo: profile.avatar ?? null,
+        }
+
+        saveUser(updated)
+        setUser(prev => {
+          if (
+            prev?.first_name === updated.first_name &&
+            prev?.last_name === updated.last_name &&
+            prev?.photo === updated.photo
+          ) {
+            return prev
+          }
+          return updated
+        })
+      })
+      .catch(() => {})
+
+    return () => {
+      ignore = true
+    }
+  }, [hasAccessToken, navigate])
 
   if (!user) return null
 
@@ -103,7 +123,7 @@ function DiagnosticCard({ navigate }) {
         Take a quick assessment and get courses that match your real skill level.
       </p>
       <button
-        className="uape-learn-primary-btn uape-diagnostic-start-btn"
+        className="uape-orange-btn uape-learn-primary-btn uape-diagnostic-start-btn"
         onClick={() => navigate('/onboarding')}
       >
         Start diagnostic

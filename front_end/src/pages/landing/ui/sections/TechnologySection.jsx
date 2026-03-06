@@ -63,17 +63,17 @@ function TechnologyIcon({ item }) {
 function TechnologySection() {
   return (
     <section id="technology" className="bg-uape-bg">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-8">
+      <div className="uape-section-shell flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
         <div className="max-w-[360px]">
-          <h2 className="font-figtree text-[32px] font-semibold leading-9">
+          <h2 className="uape-card-title-lg">
             Programming languages we support
           </h2>
-          <p className="font-figtree mt-4 text-[16px] font-normal leading-6 text-[#f0f3f7c2]">
+          <p className="uape-card-text mt-4">
             We conduct diagnostics and provide personalized courses in these programming languages.
           </p>
           <Link
             to="/signup"
-            className="font-figtree mt-7 inline-flex rounded-lg bg-uape-accent px-6 py-3 text-[16px] font-normal leading-6 text-uape-white transition hover:brightness-110"
+            className="uape-orange-btn font-figtree mt-7 inline-flex rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
           >
             Start diagnostic
           </Link>

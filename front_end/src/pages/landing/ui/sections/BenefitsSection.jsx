@@ -12,7 +12,7 @@ const features = [
 function BenefitsSection() {
   return (
     <section id="benefits" className="bg-uape-bg">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="uape-section-shell">
         <h2 className="text-2xl font-bold sm:text-3xl">Why UAPE is not just another course</h2>
 
         <div className="mt-8 grid gap-4 md:grid-cols-[3fr_2fr]">

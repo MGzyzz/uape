@@ -149,7 +149,7 @@ function ContentCard({ item, buttonLabel, onToggle }) {
         <Tags tags={item.tags} />
 
         <div className="uape-learn-actions flex items-center gap-4">
-          <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-learn-primary-btn">
+          <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
             {buttonLabel}
           </a>
           <a href={item.channelUrl} target="_blank" rel="noopener noreferrer" className="uape-learn-link-btn">
@@ -200,7 +200,7 @@ function ChannelCard({ item, onToggle }) {
       <Tags tags={item.tags} />
 
       <div className="uape-learn-channel-footer">
-        <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-learn-primary-btn">
+        <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
           Visit channel
         </a>
       </div>

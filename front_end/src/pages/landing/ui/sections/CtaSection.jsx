@@ -18,7 +18,7 @@ function CtaSection() {
           </p>
           <Link
             to="/signup"
-            className="font-figtree mt-8 inline-flex rounded-[8px] bg-[#EB4823] px-6 py-3 text-[16px] font-normal leading-6 tracking-[0%] text-white transition hover:brightness-110"
+            className="uape-orange-btn font-figtree mt-8 inline-flex rounded-[8px] px-6 py-3 text-[16px] font-normal leading-6 tracking-[0%]"
           >
             Start diagnostic
           </Link>

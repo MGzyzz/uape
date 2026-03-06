@@ -33,18 +33,20 @@ const audienceCards = [
 
 function AudienceSection() {
   return (
-    <section id="for-whom" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-      <h2 className="text-center text-2xl font-bold sm:text-3xl">Who the platform is for</h2>
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {audienceCards.map((card) => (
-          <article key={card.title} className={`rounded-3xl p-6 ${card.bgColor}`}>
-            <div className="mb-5 inline-flex rounded-2xl bg-white p-3">
-              <card.Icon className={card.iconClass} />
-            </div>
-            <h3 className="text-lg font-bold text-white">{card.title}</h3>
-            <p className="mt-2 text-sm text-white/80">{card.text}</p>
-          </article>
-        ))}
+    <section id="for-whom">
+      <div className="uape-section-shell">
+        <h2 className="text-center text-2xl font-bold sm:text-3xl">Who the platform is for</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {audienceCards.map((card) => (
+            <article key={card.title} className={`rounded-3xl p-6 ${card.bgColor}`}>
+              <div className="mb-5 inline-flex rounded-2xl bg-white p-3">
+                <card.Icon className={card.iconClass} />
+              </div>
+              <h3 className="text-lg font-bold text-white">{card.title}</h3>
+              <p className="mt-2 text-sm text-white/80">{card.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )

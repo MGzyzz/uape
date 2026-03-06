@@ -140,7 +140,7 @@ function AuthPage({ mode }) {
         }
       />
       <div className={`relative flex h-full items-end p-8 sm:p-10 ${isSignup ? 'min-h-130' : 'min-h-190'}`}>
-        <h2 className="text-3xl font-bold leading-tight sm:text-4xl [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
+        <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
           {isSignup ? (
             <>Start with clarity.<br />Learn with confidence.</>
           ) : (
@@ -241,7 +241,7 @@ function AuthPage({ mode }) {
         <button
           type="submit"
           disabled={loading}
-          className="mt-10! h-12 w-full rounded-lg bg-uape-accent text-base font-semibold text-uape-white transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="uape-orange-btn mt-10! h-12 w-full text-base font-semibold disabled:opacity-60"
         >
           {loading ? (isSignup ? 'Signing up…' : 'Logging in…') : (isSignup ? 'Sign up' : 'Log in')}
         </button>
@@ -269,8 +269,8 @@ function AuthPage({ mode }) {
           type="button"
           className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
         >
-          <FacebookIcon />
-          Facebook
+          <GitHubIcon />
+          GitHub
         </button>
       </div>
 
@@ -335,11 +335,13 @@ function GoogleIcon() {
   )
 }
 
-function FacebookIcon() {
+function GitHubIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path d="M18 9a9 9 0 1 0-10.406 8.891v-6.29H5.313V9h2.281V7.019c0-2.252 1.341-3.497 3.396-3.497.984 0 2.013.176 2.013.176v2.213H11.93c-1.117 0-1.465.693-1.465 1.404V9h2.492l-.398 2.601H10.47v6.29A9.003 9.003 0 0 0 18 9z" fill="#1877F2" />
-      <path d="M12.559 11.601L12.957 9H10.47V7.315c0-.711.348-1.404 1.464-1.404h1.074V1.698S11.98 1.522 10.996 1.522c-2.055 0-3.397 1.245-3.397 3.497V9H5.318v2.601h2.281v6.29a9.074 9.074 0 0 0 2.875 0v-6.29h2.085z" fill="white" />
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12c0 4.64 3.01 8.577 7.186 9.966.525.096.714-.228.714-.507 0-.252-.009-.918-.015-1.8-2.922.636-3.54-1.408-3.54-1.408-.477-1.212-1.165-1.536-1.165-1.536-.954-.651.072-.639.072-.639 1.055.074 1.611 1.083 1.611 1.083.937 1.605 2.46 1.141 3.06.873.095-.678.367-1.141.668-1.403-2.332-.266-4.785-1.166-4.785-5.19 0-1.146.41-2.083 1.082-2.817-.108-.266-.469-1.337.102-2.787 0 0 .882-.282 2.889 1.077A9.992 9.992 0 0 1 12 6.588c.891.004 1.79.12 2.631.351 2.006-1.359 2.887-1.077 2.887-1.077.572 1.45.211 2.521.103 2.787.674.734 1.08 1.671 1.08 2.817 0 4.035-2.457 4.921-4.797 5.182.378.324.714.963.714 1.941 0 1.402-.013 2.533-.013 2.877 0 .282.188.608.72.505A10.503 10.503 0 0 0 22.5 12C22.5 6.201 17.799 1.5 12 1.5Z"
+        fill="currentColor"
+      />
     </svg>
   )
 }

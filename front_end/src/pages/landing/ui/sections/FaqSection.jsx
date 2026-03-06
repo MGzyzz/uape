@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import arrowUpIcon from '../../../../shared/assets/icons/ArrowUp.svg'
 
 const faqItems = [
   {
@@ -64,13 +63,13 @@ function FaqSection() {
                   <h3 className="uape-faq-question font-semibold text-white">
                     {item.q}
                   </h3>
-                  <img
-                    src={arrowUpIcon}
-                    alt=""
+                  <span
+                    className={`uape-faq-toggle-icon mt-1 shrink-0${isOpen ? ' uape-faq-toggle-icon-open' : ''}`}
                     aria-hidden="true"
-                    className="mt-1 h-8 w-8 shrink-0 transition-transform duration-300"
                     style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}
-                  />
+                  >
+                    <ArrowIcon />
+                  </span>
                 </button>
                 {isOpen && (
                   <p className="uape-faq-answer mt-4 text-uape-muted">
@@ -84,6 +83,17 @@ function FaqSection() {
 
       </div>
     </section>
+  )
+}
+
+function ArrowIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="h-8 w-8">
+      <path
+        d="M17.3336 10.4381V26.6668H14.667V10.4381L7.51502 17.59L5.62939 15.7044L16.0003 5.3335L26.3712 15.7044L24.4856 17.59L17.3336 10.4381Z"
+        fill="currentColor"
+      />
+    </svg>
   )
 }
 

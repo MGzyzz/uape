@@ -86,7 +86,7 @@ function SiteHeader({ compact = false }) {
   if (isAuth) {
     return (
       <header
-        className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]"
+        className="uape-header-auth-bg sticky top-0 z-50 border-b border-uape-border-soft backdrop-blur-[80px]"
       >
         <div className="mx-auto grid w-full max-w-6xl grid-cols-3 items-center px-4 py-3 sm:px-6 lg:px-8">
           <BrandLogo />
@@ -122,7 +122,7 @@ function SiteHeader({ compact = false }) {
 
   return (
     <header
-      className="uape-header-guest-bg sticky top-0 z-20 backdrop-blur-[80px]"
+      className="uape-header-guest-bg sticky top-0 z-50 backdrop-blur-[80px]"
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
@@ -156,7 +156,7 @@ function SiteHeader({ compact = false }) {
             Log in
           </Link>
           <Link
-            className="rounded-lg bg-uape-accent px-4 py-2 text-base font-normal leading-6 text-uape-white transition hover:brightness-110"
+            className="uape-orange-btn rounded-lg px-4 py-2 text-base font-normal leading-6"
             to="/signup"
           >
             Sign up

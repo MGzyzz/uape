@@ -68,7 +68,7 @@ function AssessmentSection() {
               <button
                 type="button"
                 disabled
-                className="inline-flex w-fit shrink-0 items-center justify-center rounded-xl bg-uape-accent px-6 py-3 font-semibold opacity-50 cursor-not-allowed sm:justify-self-end"
+                className="uape-orange-btn inline-flex w-fit shrink-0 items-center justify-center rounded-xl px-6 py-3 font-semibold opacity-50 sm:justify-self-end"
               >
                 Start diagnostic
               </button>

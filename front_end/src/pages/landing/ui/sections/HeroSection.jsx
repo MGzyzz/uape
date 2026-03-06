@@ -21,7 +21,7 @@ function HeroSection() {
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link
           to="/signup"
-          className="rounded-[10px] bg-uape-accent px-7 py-3 text-base font-normal leading-6 text-uape-white transition hover:brightness-110"
+          className="uape-orange-btn rounded-[10px] px-7 py-3 text-base font-normal leading-6"
         >
           Start diagnostic
         </Link>
