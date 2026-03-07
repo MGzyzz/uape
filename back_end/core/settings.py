@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_ckeditor_5',
     # local
     'accounts',
     'api',
@@ -171,6 +172,18 @@ else:
     _extra_cors = os.getenv('CORS_EXTRA_ORIGINS', '')
     if _extra_cors:
         CORS_ALLOWED_ORIGINS += [o.strip() for o in _extra_cors.split(',') if o.strip()]
+
+# CKEditor 5
+CKEDITOR_5_CONFIGS = {
+    'detail': {
+        'toolbar': [
+            'bold', 'italic', '|',
+            'bulletedList', 'numberedList', '|',
+            'undo', 'redo',
+        ],
+        'height': '220px',
+    },
+}
 
 from corsheaders.defaults import default_headers
 CORS_ALLOW_HEADERS = list(default_headers) + ['ngrok-skip-browser-warning']

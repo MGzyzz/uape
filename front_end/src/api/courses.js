@@ -18,13 +18,24 @@ function normalizePlaylist(p) {
     id: p.id,
     title: p.title,
     author: p.channel?.name ?? '',
+    authorAvatar: p.channel?.avatar_url ?? '',
+    authorChannelUrl: p.channel?.url ?? '',
     followers: p.channel?.subscribers ? `${formatCount(p.channel.subscribers)} Followers` : '',
+    followersRaw: p.channel?.subscribers ?? '',
     tags: (p.tags ?? []).map((t) => ({ id: t.id, name: `#${t.name}`, color: t.color })),
     badge: `${p.video_count} Videos`,
+    videoCount: p.video_count,
     image: p.thumbnail_url,
     url: p.url,
     channelUrl: p.channel?.url ?? '',
     favorited: false,
+    // detail page fields
+    description: p.description ?? '',
+    language: p.language ?? '',
+    lang: p.lang ?? '',
+    duration: p.duration ?? '',
+    whyThisCourse: p.why_this_course ?? '',
+    whatYouWillLearn: p.what_you_will_learn ?? '',
   }
 }
 
@@ -96,6 +107,11 @@ export async function getVideos() {
 export async function getRecommended() {
   const res = await client.get('/courses/recommended/')
 return normalizeSection(res.data)
+}
+
+export async function getPlaylist(id) {
+  const res = await client.get(`/courses/playlists/${id}/`)
+  return normalizePlaylist(res.data)
 }
 
 export async function addBookmark(contentType, objectId) {

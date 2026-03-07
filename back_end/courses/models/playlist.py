@@ -15,6 +15,12 @@ class Playlist(models.Model):
         verbose_name='Канал',
     )
     tags = models.ManyToManyField('courses.Tag', blank=True, related_name='playlists', verbose_name='Теги')
+    description = models.TextField(blank=True, verbose_name='Краткое описание')
+    language = models.CharField(max_length=100, blank=True, verbose_name='Язык программирования (напр. Python)')
+    lang = models.CharField(max_length=50, blank=True, verbose_name='Язык курса (напр. En/Англ)')
+    duration = models.CharField(max_length=50, blank=True, verbose_name='Продолжительность (напр. 5h 35m)')
+    why_this_course = models.TextField(blank=True, verbose_name='Почему этот курс? (каждая строка — пункт)')
+    what_you_will_learn = models.TextField(blank=True, verbose_name='Что вы узнаете? (каждая строка — пункт)')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
 
     class Meta:

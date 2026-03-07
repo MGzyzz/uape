@@ -5,6 +5,7 @@ import AuthPage from '../pages/auth/ui/AuthPage.jsx'
 import ProfilePage from '../pages/profile/ui/ProfilePage.jsx'
 import OnboardingPage from '../pages/onboarding/ui/OnboardingPage.jsx'
 import NotFoundPage from '../pages/not-found/ui/NotFoundPage.jsx'
+import CourseDetailPage from '../pages/course-detail/ui/CourseDetailPage.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<AuthPage mode="login" />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/playlist/:id" element={<CourseDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

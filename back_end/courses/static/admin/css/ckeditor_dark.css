@@ -1,0 +1,67 @@
+/* CKEditor5 dark theme for Django admin */
+
+/* CSS переменные — меняют цвета всего редактора */
+.ck.ck-editor {
+  --ck-color-base-background: #1e2124;
+  --ck-color-base-foreground: #27292a;
+  --ck-color-base-border: #3a3d40;
+  --ck-color-toolbar-background: #27292a;
+  --ck-color-toolbar-border-color: #3a3d40;
+  --ck-color-button-default-background: transparent;
+  --ck-color-button-default-hover-background: #3a3d40;
+  --ck-color-button-default-active-background: #3a3d40;
+  --ck-color-button-on-background: #3a3d40;
+  --ck-color-button-on-hover-background: #44474a;
+  --ck-color-focus-border: #eb4823;
+  --ck-color-focus-outer-shadow: rgba(235, 72, 35, 0.15);
+  --ck-color-text: #f0f0f0;
+  --ck-color-shadow-drop: rgba(0, 0, 0, 0.5);
+  --ck-color-engine-placeholder-text: rgba(255, 255, 255, 0.35);
+  --ck-icon-opacity: 0.75;
+}
+
+/* Область редактирования */
+.ck.ck-editor__main .ck-editor__editable {
+  background: #1e2124 !important;
+  color: #ececec !important;
+  border-color: #3a3d40 !important;
+}
+
+.ck.ck-editor__main .ck-editor__editable.ck-focused {
+  border-color: #eb4823 !important;
+  box-shadow: 0 0 0 3px rgba(235, 72, 35, 0.15) !important;
+}
+
+/* Тулбар */
+.ck.ck-toolbar {
+  background: #27292a !important;
+  border-color: #3a3d40 !important;
+}
+
+/* Кнопки тулбара */
+.ck.ck-button,
+a.ck.ck-button {
+  color: #d0d0d0 !important;
+}
+
+.ck.ck-button:hover,
+a.ck.ck-button:hover {
+  background: #3a3d40 !important;
+  color: #fff !important;
+}
+
+.ck.ck-button.ck-on {
+  background: #3a3d40 !important;
+  color: #fff !important;
+}
+
+/* Разделитель в тулбаре */
+.ck.ck-toolbar__separator {
+  background: #3a3d40 !important;
+}
+
+/* Счётчик слов */
+.ck-word-count {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 12px;
+}

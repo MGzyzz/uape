@@ -11,4 +11,9 @@ class PlaylistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Playlist
-        fields = ('id', 'youtube_id', 'title', 'thumbnail_url', 'video_count', 'channel', 'tags', 'url')
+        fields = (
+            'id', 'youtube_id', 'title', 'thumbnail_url', 'video_count',
+            'channel', 'tags', 'url',
+            'description', 'language', 'lang', 'duration',
+            'why_this_course', 'what_you_will_learn',
+        )

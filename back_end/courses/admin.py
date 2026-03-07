@@ -1,4 +1,6 @@
+from django import forms
 from django.contrib import admin, messages
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 from .models import Bookmark, Channel, Playlist, Section, Tag, Video
 from .services.youtube import (
@@ -44,12 +46,62 @@ class ChannelAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
+class PlaylistAdminForm(forms.ModelForm):
+    why_this_course = forms.CharField(
+        required=False,
+        widget=CKEditor5Widget(config_name='detail'),
+        label='Почему этот курс?',
+    )
+    what_you_will_learn = forms.CharField(
+        required=False,
+        widget=CKEditor5Widget(config_name='detail'),
+        label='Что вы узнаете?',
+    )
+
+    class Meta:
+        model = Playlist
+        fields = '__all__'
+
+
 @admin.register(Playlist)
 class PlaylistAdmin(admin.ModelAdmin):
+    form = PlaylistAdminForm
     list_display = ('title', 'youtube_id', 'video_count', 'channel')
     search_fields = ('title', 'youtube_id')
     filter_horizontal = ('tags',)
     readonly_fields = ('title', 'thumbnail_url', 'video_count', 'channel')
+    fieldsets = (
+        (None, {
+            'fields': ('youtube_id', 'title', 'thumbnail_url', 'video_count', 'channel', 'tags'),
+        }),
+        ('Детальная страница', {
+            'fields': ('description', 'language', 'lang', 'duration', 'why_this_course', 'what_you_will_learn'),
+            'description': '''
+                <table style="border-collapse:collapse;margin:8px 0 4px;font-size:13px;line-height:1.6;color:inherit">
+                  <thead>
+                    <tr>
+                      <th style="text-align:left;padding:4px 24px 4px 0;font-weight:600;border-bottom:1px solid var(--border-color, #ccc);opacity:0.7">Поле</th>
+                      <th style="text-align:left;padding:4px 0;font-weight:600;border-bottom:1px solid var(--border-color, #ccc);opacity:0.7">Как заполнять</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="padding:6px 24px 6px 0;font-family:monospace;opacity:0.85">language</td>
+                      <td style="padding:6px 0;opacity:0.85">Название языка программирования: <b>Python</b>, <b>JavaScript</b>, <b>Java</b>… Подставляется в шаблон «About This Course».</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 24px 6px 0;font-family:monospace;opacity:0.85">why_this_course</td>
+                      <td style="padding:6px 0;opacity:0.85">Используйте редактор: маркированный список, <b>жирный</b> для выделения ключевых слов.</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 24px 6px 0;font-family:monospace;opacity:0.85">what_you_will_learn</td>
+                      <td style="padding:6px 0;opacity:0.85">Используйте нумерованный список в редакторе.</td>
+                    </tr>
+                  </tbody>
+                </table>
+            ''',
+        }),
+    )
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -90,6 +142,10 @@ class PlaylistAdmin(admin.ModelAdmin):
         except Exception as e:
             messages.warning(request, f'Could not fetch channel data: {e}')
             return {'name': channel_id}
+
+    class Media:
+        css = {'all': ('admin/css/ckeditor_dark.css',)}
+        js = ('admin/js/section_inline_toggle.js',)
 
 
 @admin.register(Video)
