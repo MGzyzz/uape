@@ -165,6 +165,11 @@ body {
   background: rgb(14 16 17 / 52%);
 }
 
+.uape-profile-welcome-gutter {
+  padding-left: 160px;
+  padding-right: 120px;
+}
+
 .uape-profile-hero-content {
   min-height: 500px;
 }

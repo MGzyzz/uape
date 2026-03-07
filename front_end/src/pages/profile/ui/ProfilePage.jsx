@@ -78,7 +78,7 @@ function HeroSection({ user, occupation }) {
   return (
     <section>
       {/* Welcome area — above background image */}
-      <div className="uape-page-container uape-page-gutter flex items-center py-8">
+      <div className="uape-page-container uape-profile-welcome-gutter flex items-center py-8">
         <div className="flex items-center gap-6">
           {/* Avatar */}
           <div className="uape-profile-avatar-shell shrink-0 overflow-hidden">
