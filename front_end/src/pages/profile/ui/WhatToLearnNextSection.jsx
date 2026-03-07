@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import arrowLeftIcon from '../../../shared/assets/icons/arrow-left.svg'
 import arrowRightIcon from '../../../shared/assets/icons/arrow-right.svg'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
@@ -115,9 +116,20 @@ function SkeletonSection() {
 
 // ─── Playlist / Video card ────────────────────────────────────────────────────
 
-function ContentCard({ item, buttonLabel, onToggle }) {
+function ContentCard({ item, buttonLabel, onToggle, contentType }) {
+  const navigate = useNavigate()
+
+  function handleCardClick() {
+    if (contentType === 'playlist') {
+      navigate(`/playlist/${item.id}`)
+    }
+  }
+
   return (
-    <div className="uape-learn-content-card">
+    <div
+      className={`uape-learn-content-card${contentType === 'playlist' ? ' uape-learn-content-card-clickable' : ''}`}
+      onClick={handleCardClick}
+    >
       <div className="uape-learn-thumb-wrap">
         <div className="relative uape-learn-thumb-frame">
           <LazyImage
@@ -135,7 +147,7 @@ function ContentCard({ item, buttonLabel, onToggle }) {
         <div className="uape-learn-title-row flex items-start gap-3">
           <h3 className="uape-learn-card-title">{item.title}</h3>
           <button
-            onClick={() => onToggle(item.id)}
+            onClick={(e) => { e.stopPropagation(); onToggle(item.id) }}
             className="uape-icon-button-reset"
             aria-label="Favourite"
           >
@@ -149,7 +161,7 @@ function ContentCard({ item, buttonLabel, onToggle }) {
 
         <Tags tags={item.tags} />
 
-        <div className="uape-learn-actions flex items-center gap-4">
+        <div className="uape-learn-actions flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
             {buttonLabel}
           </a>
@@ -313,7 +325,7 @@ export default function WhatToLearnNextSection() {
   if (loading) {
     return (
       <section className="uape-learn-root">
-        <div className="uape-learn-root-inner uape-page-container">
+        <div className="uape-page-gutter uape-page-container">
           <h1 className="uape-learn-page-title">What to learn next</h1>
           <SkeletonSection />
           <SkeletonSection />
@@ -327,7 +339,7 @@ export default function WhatToLearnNextSection() {
 
   return (
     <section className="uape-learn-root">
-      <div className="uape-learn-root-inner uape-page-container">
+      <div className="uape-page-gutter uape-page-container">
         <h1 className="uape-learn-page-title">What to learn next</h1>
 
         {sections.map((section) => {
@@ -343,6 +355,7 @@ export default function WhatToLearnNextSection() {
                     key={item.id}
                     item={item}
                     buttonLabel="View playlist"
+                    contentType="playlist"
                     onToggle={(id) => toggleFavorite(section.id, 'playlist', id)}
                   />
                 )}
@@ -362,6 +375,7 @@ export default function WhatToLearnNextSection() {
                     key={item.id}
                     item={item}
                     buttonLabel="View video"
+                    contentType="video"
                     onToggle={(id) => toggleFavorite(section.id, 'video', id)}
                   />
                 )}

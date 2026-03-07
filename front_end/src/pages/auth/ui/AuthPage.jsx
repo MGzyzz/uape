@@ -290,7 +290,7 @@ function AuthPage({ mode }) {
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader compact />
 
-      <main className={`uape-full-bleed-shell flex-1 ${isSignup ? 'py-25' : 'pt-9 pb-25'}`}>
+      <main className={`uape-section-shell flex-1 ${isSignup ? 'py-25' : 'pt-9 pb-25'}`}>
         <div className={`${isSignup ? 'grid gap-[130px] lg:grid-cols-[484px_586px]' : 'grid items-center gap-20 lg:grid-cols-[586px_484px]'}`}>
           {isSignup ? (
             <>

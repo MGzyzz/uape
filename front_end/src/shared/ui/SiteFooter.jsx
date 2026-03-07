@@ -11,7 +11,7 @@ const SOCIAL_LINKS = [
 function SiteFooter() {
   return (
     <footer className=" bg-uape-header">
-      <div className="uape-full-bleed-shell uape-footer-shell">
+      <div className="uape-section-shell uape-footer-shell">
 
         <img
           src={footerTitleIcon}

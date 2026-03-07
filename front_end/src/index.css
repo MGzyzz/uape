@@ -20,6 +20,8 @@
   --color-uape-muted-soft: #ffffff8f;
   --color-uape-header: #181A1B;
   --color-uape-header-auth: #141719c2;
+  --color-uape-header-guest: #181a1bc2;
+  --color-uape-accent-hover: #b13e24;
 }
 
 :root {
@@ -40,15 +42,7 @@ body,
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
-  /* scroll-snap-type: y proximity; SCROLL-SNAP: убрать чтобы отключить притяжение */
 }
-
-/* SCROLL-SNAP: убрать весь блок чтобы отключить полноэкранные секции */
-/* main > section {
-  scroll-snap-align: start;
-  min-height: 100svh;
-} */
-/* END SCROLL-SNAP */
 
 main > section + section {
   margin-top: clamp(24px, 4vw, 56px);
@@ -56,18 +50,13 @@ main > section + section {
 
 body {
   margin: 0;
-  background: #0e1011;
-  color: #ffffff;
+  background: var(--color-uape-bg);
+  color: var(--color-uape-white);
 }
 
 @keyframes uape-orbit-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 .uape-orbit-spin {
@@ -75,7 +64,7 @@ body {
   transform-origin: center;
 }
 
-/* Extracted component styles (replacing inline style props) */
+/* ─── Layout utilities ──────────────────────────────────────────────────── */
 
 .uape-radius-1000 {
   border-radius: 1000px;
@@ -85,6 +74,7 @@ body {
   box-shadow: 0 0 32px 0 #0000001f;
 }
 
+/* Container: max-width 1440px + horizontal gutter 120px */
 .uape-section-shell {
   margin: 0 auto;
   width: 100%;
@@ -93,62 +83,67 @@ body {
   padding-right: 120px;
 }
 
+/* Max-width + centering only (pair with uape-page-gutter for padding) */
 .uape-page-container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
 }
 
+/* Horizontal gutter 120px (standalone or with uape-page-container) */
 .uape-page-gutter {
   padding-left: 120px;
   padding-right: 120px;
 }
 
-.uape-full-bleed-shell {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-left: 120px;
-  padding-right: 120px;
-}
+/* ─── Shared components ─────────────────────────────────────────────────── */
 
 .uape-surface-card-strong {
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid #ffffff1f;
-  background: #292e31;
+  border: 1px solid var(--color-uape-border-soft);
+  background: var(--color-uape-surface-strong);
 }
 
 .uape-card-title-lg {
-  font-family: 'Figtree', sans-serif;
   font-size: 32px;
   font-weight: 600;
   line-height: 36px;
 }
 
 .uape-card-title-md {
-  font-family: 'Figtree', sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 28px;
 }
 
 .uape-card-text {
-  font-family: 'Figtree', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #ffffffc2;
+  color: var(--color-uape-muted);
 }
 
-.uape-icon-button-reset {
+/* Base reset shared by all unstyled buttons */
+.uape-icon-button-reset,
+.uape-learn-nav-arrow-btn,
+.uape-learn-link-btn,
+.uape-profile-occupation-btn,
+.uape-profile-edit-link,
+.uape-onboarding-back-btn,
+.uape-onboarding-save-exit {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.uape-icon-button-reset {
   padding: 0;
   line-height: 0;
   flex-shrink: 0;
 }
+
+/* ─── Profile Page ──────────────────────────────────────────────────────── */
 
 .uape-profile-hero-image-area {
   height: 492px;
@@ -178,65 +173,57 @@ body {
   width: 72px;
   height: 72px;
   border-radius: 1000px;
-  transform: translateY(0px);
 }
 
 .uape-profile-hero-title {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 40px;
   line-height: 44px;
   letter-spacing: 0;
-  color: #fff;
+  color: var(--color-uape-white);
 }
 
 .uape-profile-hero-link {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #eb4823;
+  color: var(--color-uape-accent);
   text-decoration: underline;
   text-decoration-style: solid;
 }
 
 .uape-profile-occupation-btn {
-  background: none;
-  border: none;
-  outline: none;
   padding: 0;
+  outline: none;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .uape-profile-occupation-label {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--color-uape-white);
   text-decoration: none;
 }
 
 .uape-profile-edit-link {
-  background: none;
-  border: none;
-  outline: none;
   padding: 0;
-  cursor: pointer;
+  outline: none;
   text-decoration: underline;
 }
 
 .uape-profile-profession {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #fff;
+  color: var(--color-uape-white);
 }
+
+/* ─── Diagnostic ────────────────────────────────────────────────────────── */
 
 .uape-diagnostic-start-btn {
   width: 163px;
@@ -246,17 +233,16 @@ body {
 }
 
 .uape-orange-btn {
-  background-color: #eb4823;
+  background-color: var(--color-uape-accent);
   border-radius: 8px;
-  font-family: 'Figtree', sans-serif;
-  color: #fff;
+  color: var(--color-uape-white);
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .uape-orange-btn:hover {
-  background-color: #b13e24;
+  background-color: var(--color-uape-accent-hover);
 }
 
 .uape-orange-btn:disabled {
@@ -264,7 +250,7 @@ body {
 }
 
 .uape-orange-btn:disabled:hover {
-  background-color: #eb4823;
+  background-color: var(--color-uape-accent);
 }
 
 .uape-diagnostic-card {
@@ -272,7 +258,7 @@ body {
   height: 332px;
   padding: 48px 32px;
   border-radius: 16px;
-  border: 1px solid #FFFFFF1F;
+  border: 1px solid var(--color-uape-border-soft);
   background: #181A1B8F;
   backdrop-filter: blur(80px);
   display: flex;
@@ -282,35 +268,31 @@ body {
 }
 
 .uape-diagnostic-card-title {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 44px;
   line-height: 52px;
   letter-spacing: 0;
-  color: #fff;
+  color: var(--color-uape-white);
 }
 
 .uape-diagnostic-card-text {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #fff;
+  color: var(--color-uape-white);
 }
 
+/* ─── What to Learn Next — carousel ────────────────────────────────────── */
+
 .uape-learn-tag {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #febe02;
+  color: var(--color-uape-amber);
 }
 
 .uape-learn-nav-arrow-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
   opacity: 1;
   padding: 4px;
   line-height: 0;
@@ -323,7 +305,7 @@ body {
 }
 
 .uape-learn-content-card {
-  background-color: #181a1b;
+  background-color: var(--color-uape-header);
   border-radius: 16px;
   overflow: hidden;
   width: 381px;
@@ -331,6 +313,15 @@ body {
   min-width: 0;
   display: flex;
   flex-direction: column;
+}
+
+.uape-learn-content-card-clickable {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.uape-learn-content-card-clickable:hover {
+  opacity: 0.85;
 }
 
 .uape-learn-thumb-wrap {
@@ -360,9 +351,8 @@ body {
   border-radius: 4px;
   padding: 4px 8px;
   font-size: 14px;
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
-  color: #fff;
+  color: var(--color-uape-white);
   line-height: 20px;
 }
 
@@ -379,11 +369,10 @@ body {
 }
 
 .uape-learn-card-title {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
-  color: #fff;
+  color: var(--color-uape-white);
   margin: 0;
   flex: 1;
   white-space: nowrap;
@@ -392,11 +381,10 @@ body {
 }
 
 .uape-learn-meta {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #ffffff8f;
+  color: var(--color-uape-muted-soft);
   margin: 0;
 }
 
@@ -414,26 +402,22 @@ body {
 }
 
 .uape-learn-link-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Figtree', sans-serif;
+  padding: 0;
   font-size: 16px;
   font-weight: 400;
-  color: #fff;
+  color: var(--color-uape-white);
   line-height: 24px;
-  padding: 0;
   white-space: nowrap;
   border-bottom: 1px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .uape-learn-link-btn:hover {
-  border-bottom-color: #ffffff;
+  border-bottom-color: var(--color-uape-white);
 }
 
 .uape-learn-channel-card {
-  background-color: #181a1b;
+  background-color: var(--color-uape-header);
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -444,15 +428,14 @@ body {
 .uape-learn-channel-avatar {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background-color: #eb4823;
+  border-radius: 1000px;
+  background-color: var(--color-uape-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Figtree', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-uape-white);
   flex-shrink: 0;
 }
 
@@ -462,32 +445,23 @@ body {
 }
 
 .uape-learn-channel-name {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
-  color: #fff;
+  color: var(--color-uape-white);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.uape-learn-channel-followers {
-  font-family: 'Figtree', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #ffffff8f;
-  margin: 0;
-}
-
+/* Both share identical styles — merged into one rule */
+.uape-learn-channel-followers,
 .uape-learn-channel-description {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #ffffff8f;
+  color: var(--color-uape-muted-soft);
   margin: 0;
 }
 
@@ -505,20 +479,18 @@ body {
 }
 
 .uape-learn-section-title {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 28px;
   line-height: 32px;
-  color: #fff;
+  color: var(--color-uape-white);
   margin: 0;
 }
 
 .uape-learn-section-subtitle {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #fff;
+  color: var(--color-uape-white);
   margin: 6px 0 0;
 }
 
@@ -540,6 +512,8 @@ body {
   gap: 24px;
 }
 
+/* ─── Skeleton loader ───────────────────────────────────────────────────── */
+
 @keyframes uape-shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
@@ -552,26 +526,267 @@ body {
   border-radius: 8px;
 }
 
+/* ─── Course Detail Page ────────────────────────────────────────────────── */
+
+.uape-detail-outer {
+  padding-top: 56px;
+  padding-bottom: 120px;
+  padding-left: 120px;
+  padding-right: 120px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.uape-detail-layout {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+/* Left column — sticky thumbnail */
+.uape-detail-left {
+  width: 652px;
+  flex-shrink: 0;
+  padding-top: 80px;
+  position: sticky;
+  top: 64px; /* header height */
+  align-self: flex-start;
+}
+
+.uape-detail-thumb-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.uape-detail-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Right column */
+.uape-detail-right {
+  width: 512px;
+  flex-shrink: 0;
+  padding-top: 89px;
+  display: flex;
+  flex-direction: column;
+  gap: 140px;
+}
+
+/* Frame 399 — header block */
+.uape-detail-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Frame 396 — channel info + title + description */
+.uape-detail-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Frame 393 — channel avatar row */
+.uape-detail-channel-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.uape-detail-channel-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 1000px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.uape-detail-channel-avatar-fallback {
+  background-color: var(--color-uape-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-uape-white);
+}
+
+.uape-detail-channel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uape-detail-channel-name {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+}
+
+.uape-detail-channel-followers {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-uape-muted);
+}
+
+/* Frame 395 — title + description */
+.uape-detail-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uape-detail-course-title {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-detail-description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+/* Frame 367 — tags row */
+.uape-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Frame 398 — metadata + buttons */
+.uape-detail-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.uape-detail-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.uape-detail-meta {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-uape-white);
+}
+
+.uape-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Frame 404 — text content block */
+.uape-detail-content-block {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.uape-detail-content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-detail-section-title {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-detail-body-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+/* Rich-text (CKEditor5 HTML output) */
+.uape-detail-rich-text {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-uape-muted);
+}
+
+.uape-detail-rich-text p {
+  margin: 0 0 8px 0;
+}
+
+.uape-detail-rich-text p:last-child {
+  margin-bottom: 0;
+}
+
+.uape-detail-rich-text strong,
+.uape-detail-rich-text b {
+  font-weight: 600;
+  color: var(--color-uape-white);
+}
+
+.uape-detail-rich-text ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.uape-detail-rich-text ol {
+  list-style: decimal;
+  padding-left: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uape-detail-rich-text li {
+  color: var(--color-uape-muted);
+}
+
+/* Recommended section spacing */
+.uape-detail-recommended {
+  margin-top: 140px;
+  padding-bottom: 80px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 .uape-learn-root {
   padding-top: 64px;
   padding-bottom: 80px;
 }
 
-.uape-learn-root-inner {
-  padding-left: 120px;
-  padding-right: 120px;
-}
-
 .uape-learn-page-title {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 44px;
   line-height: 52px;
-  color: #fff;
+  color: var(--color-uape-white);
   margin: 0 0 48px;
 }
 
-/* ─── Onboarding ──────────────────────────────────────────────────────────── */
+/* ─── Onboarding ────────────────────────────────────────────────────────── */
 
 .uape-onboarding-progress-segment {
   flex: 1;
@@ -580,7 +795,7 @@ body {
 }
 
 .uape-onboarding-progress-segment-active {
-  background-color: #eb4823;
+  background-color: var(--color-uape-accent);
 }
 
 .uape-onboarding-info-block {
@@ -589,34 +804,31 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-  background-color: #181a1b;
-  border: 1px solid #ffffff1f;
+  background-color: var(--color-uape-header);
+  border: 1px solid var(--color-uape-border-soft);
 }
 
 .uape-onboarding-info-text {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--color-uape-white);
   margin: 0;
 }
 
 .uape-onboarding-title {
-  font-family: 'Figtree', sans-serif;
   font-weight: 600;
   font-size: 32px;
   line-height: 36px;
-  color: #ffffff;
+  color: var(--color-uape-white);
   margin: 0;
 }
 
 .uape-onboarding-option-label {
-  font-family: 'Figtree', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--color-uape-white);
   cursor: pointer;
   user-select: none;
 }
@@ -624,9 +836,9 @@ body {
 .uape-onboarding-radio-outer {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 1000px;
   background: transparent;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--color-uape-white);
   position: relative;
   flex-shrink: 0;
   cursor: pointer;
@@ -635,8 +847,8 @@ body {
 .uape-onboarding-radio-inner {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  background-color: #eb4823;
+  border-radius: 1000px;
+  background-color: var(--color-uape-accent);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -644,15 +856,11 @@ body {
 }
 
 .uape-onboarding-save-exit {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Figtree', sans-serif;
+  padding: 0;
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
-  color: #ffffff;
-  padding: 0;
+  color: var(--color-uape-white);
 }
 
 .uape-onboarding-next-btn {
@@ -663,18 +871,14 @@ body {
 }
 
 .uape-onboarding-back-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Figtree', sans-serif;
+  padding: 0;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
-  padding: 0;
+  color: var(--color-uape-white);
 }
 
-/* ─── End Onboarding ──────────────────────────────────────────────────────── */
+/* ─── End Onboarding ────────────────────────────────────────────────────── */
 
 .uape-tech-python-top {
   clip-path: polygon(0 0, 100% 0, 100% 52%, 0 52%);
@@ -685,15 +889,14 @@ body {
 }
 
 .uape-header-auth-bg {
-  background: #141719c2;
+  background: var(--color-uape-header-auth);
 }
 
 .uape-header-guest-bg {
-  background: #181a1bc2;
+  background: var(--color-uape-header-guest);
 }
 
 .uape-header-user-name {
-  font-family: 'Figtree', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
@@ -754,6 +957,7 @@ body {
   background: linear-gradient(to bottom, rgb(var(--dash-rgb)), rgb(var(--dash-rgb) / 0));
 }
 
+/* Absolute-positioned glow ellipse for Step 4 — coordinates are layout-specific */
 .uape-how-ellipse-step4 {
   position: absolute;
   pointer-events: none;
@@ -788,7 +992,7 @@ body {
 }
 
 .uape-faq-heading-muted {
-  color: #ffffff8f;
+  color: var(--color-uape-muted-soft);
 }
 
 .uape-faq-question {
@@ -806,15 +1010,15 @@ body {
 
 .uape-faq-toggle-icon {
   display: inline-flex;
-  color: #ffffff;
+  color: var(--color-uape-white);
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .uape-faq-toggle-icon-open {
-  color: #eaf27c;
+  color: var(--color-uape-lime);
 }
 
-/* ─── Footer social icon hover effects ───────────────────────────────────── */
+/* ─── Footer social icon hover effects ─────────────────────────────────── */
 
 .uape-social-icon {
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -845,4 +1049,4 @@ body {
   box-shadow: 0px 0px 8px 0px #E4405FC2 inset;
 }
 
-/* ─── End Footer social icon hover effects ───────────────────────────────── */
+/* ─── End Footer social icon hover effects ──────────────────────────────── */
