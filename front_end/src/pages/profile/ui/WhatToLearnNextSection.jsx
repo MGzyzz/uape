@@ -247,22 +247,12 @@ function CarouselSection({ title, subtitle, items, renderCard }) {
 // ─── Channels section ─────────────────────────────────────────────────────────
 
 function ChannelsSection({ title, items, onToggle }) {
-  const [idx, setIdx] = useState(0)
-  const perPage = 6
-  const canPrev = idx > 0
-  const canNext = idx + perPage < items.length
-  const visible = items.slice(idx, idx + perPage)
+  const visible = items
 
   return (
     <div>
-      <div className="uape-learn-section-header flex items-start justify-between">
+      <div className="uape-learn-section-header">
         <h2 className="uape-learn-section-title">{title}</h2>
-        <NavArrows
-          onPrev={() => setIdx((i) => Math.max(0, i - perPage))}
-          onNext={() => setIdx((i) => Math.min(items.length - perPage, i + perPage))}
-          canPrev={canPrev}
-          canNext={canNext}
-        />
       </div>
       <div className="uape-learn-channels-grid">
         {visible.map((channel) => (
