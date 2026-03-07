@@ -4,6 +4,8 @@ import BrandLogo from '../../../shared/ui/BrandLogo.jsx'
 import { getOnboarding, saveOnboarding } from '../../../api/onboarding.js'
 import { FIELDS, OCCUPATIONS, SKILLS } from '../data/quizData.js'
 import paperIcon from '../../../shared/assets/icons/paper-icon.svg'
+import checkIcon from '../../../shared/assets/icons/arrow-correct-right.svg'
+import checkboxIcon from '../../../shared/assets/icons/checkbox-icon.svg'
 
 const TOTAL_STEPS = 3
 
@@ -63,14 +65,10 @@ function CheckboxOption({ label, selected, onToggle }) {
       className="flex items-center gap-3 text-left"
       onClick={onToggle}
     >
-      <div
-        className="flex h-5 w-5 shrink-0 items-center justify-center rounded"
-        style={{
-          background: selected ? '#eb4823' : '#ffffff',
-        }}
-      >
-        {selected && <div className="h-2.5 w-2.5 bg-white" />}
-      </div>
+      {selected
+        ? <img src={checkIcon} alt="" width={20} height={20} />
+        : <img src={checkboxIcon} alt="" width={20} height={20} />
+      }
       <span className="uape-onboarding-option-label">{label}</span>
     </button>
   )

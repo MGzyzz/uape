@@ -833,6 +833,17 @@ body {
   user-select: none;
 }
 
+.uape-onboarding-checkbox-outer {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--color-uape-white);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .uape-onboarding-radio-outer {
   width: 20px;
   height: 20px;
