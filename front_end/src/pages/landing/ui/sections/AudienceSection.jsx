@@ -34,16 +34,25 @@ const audienceCards = [
 function AudienceSection() {
   return (
     <section id="for-whom">
-      <div className="uape-section-shell">
-        <h2 className="text-center text-2xl font-bold sm:text-3xl">Who the platform is for</h2>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="uape-section-shell flex flex-col gap-[60px]">
+        <h2 className="text-center font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
+          Who the platform is for
+        </h2>
+        <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-4">
           {audienceCards.map((card) => (
-            <article key={card.title} className={`rounded-3xl p-6 ${card.bgColor}`}>
-              <div className="mb-5 inline-flex rounded-2xl bg-white p-3">
+            <article
+              key={card.title}
+              className={`flex min-h-[244px] flex-col gap-6 rounded-[24px] border border-uape-border-soft px-6 pb-8 pt-6 ${card.bgColor}`}
+            >
+              <div className="inline-flex h-[60px] w-[60px] items-center justify-center rounded-[12px] border border-uape-border-soft bg-white p-3">
                 <card.Icon className={card.iconClass} />
               </div>
-              <h3 className="text-lg font-bold text-white">{card.title}</h3>
-              <p className="mt-2 text-sm text-white/80">{card.text}</p>
+              <h3 className="w-[231px] font-figtree text-[24px] font-semibold leading-7 tracking-[0%] text-white">
+                {card.title}
+              </h3>
+              <p className="w-[231px] font-figtree text-[16px] font-normal leading-6 tracking-[0%] text-[#FFFFFFC2]">
+                {card.text}
+              </p>
             </article>
           ))}
         </div>

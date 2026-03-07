@@ -24,51 +24,49 @@ const steps = [
 ]
 
 function AssessmentSection() {
-  const [firstStep, ...remainingSteps] = steps
-
   return (
-    <section id="assessment" className="uape-page-container uape-page-gutter py-6">
-      <div className="overflow-hidden rounded-3xl border-2 border-[#FFFFFF1F] bg-[#27292A]">
-        <div className="grid lg:grid-cols-2">
-          <div className="px-4 pb-4 pt-6 sm:px-5 sm:pb-5 sm:pt-7">
-            <img src={workplaceImg} alt="Workplace" className="block h-auto w-full rounded-[2rem]" />
+    <section id="assessment" className="bg-uape-bg">
+      <div className="uape-section-shell flex flex-col gap-[60px]">
+        <h2 className="text-center font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
+          How we determine your level
+        </h2>
+
+        <div className="flex h-[744px] gap-14 overflow-hidden rounded-[24px] border-2 border-[#FFFFFF1F] bg-[#27292A] p-10">
+          <div className="h-[656px] w-[369px] shrink-0 overflow-hidden rounded-[16px]">
+            <img src={workplaceImg} alt="Workplace" className="block h-full w-full object-cover" />
           </div>
 
-          <div className="flex h-full flex-col px-6 pb-4 pt-6 sm:px-8 sm:pb-5 sm:pt-7 lg:px-10 lg:pb-5 lg:pt-7">
-            <div
-              key={firstStep.number}
-              className="grid grid-cols-[4.5rem_1fr_1fr] items-start gap-x-6 border-b-2 border-[#FFFFFF1F] pb-6"
-            >
-              <span className="text-5xl font-bold leading-none">{firstStep.number}</span>
-              <h3 className="pt-2 text-lg font-bold">{firstStep.title}</h3>
-              <p className="pt-2 text-xs text-uape-muted">{firstStep.description}</p>
-            </div>
-
-            <div className="flex flex-1 flex-col">
-              {remainingSteps.map((step, i) => (
+          <div className="flex h-[664px] w-[674px] flex-col justify-between gap-20">
+            <div className="flex h-[528px] flex-col gap-10">
+              {steps.map((step, i) => (
                 <div
                   key={step.number}
-                  className={`grid flex-1 grid-cols-[4.5rem_1fr_1fr] items-center gap-x-6 py-4 ${
-                    i < remainingSteps.length - 1 ? 'border-b-2 border-[#FFFFFF1F]' : ''
+                  className={`grid h-[112px] grid-cols-[88px_220px_262px] items-start gap-x-10 pb-10 ${
+                    i === steps.length - 1 ? 'border-b-0' : ''
                   }`}
+                  style={i === steps.length - 1 ? undefined : { borderBottom: '2px solid #FFFFFF1F' }}
                 >
-                  <span className="text-5xl font-bold leading-none">{step.number}</span>
-                  <h3 className="text-lg font-bold">{step.title}</h3>
-                  <p className="text-xs text-uape-muted">{step.description}</p>
+                  <span className="h-[72px] w-[88px] pt-[2px] font-figtree text-[68px] font-semibold leading-[72px] tracking-[0%] text-white">
+                    {step.number}
+                  </span>
+                  <h3 className={`font-figtree text-[32px] font-semibold tracking-[0%] text-white ${i < 2 ? 'pt-[18px] leading-[36px]' : 'leading-[36px]'}`}>
+                    {step.title}
+                  </h3>
+                  <p className={`font-figtree text-[16px] font-normal tracking-[0%] text-[#FFFFFFC2] ${i < 2 ? 'pt-[18px] leading-6' : 'leading-6'}`}>
+                    {step.description}
+                  </p>
                 </div>
               ))}
             </div>
 
-            <div className="grid gap-5 pt-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-6">
-              <p className="max-w-[20ch] text-lg leading-snug">
-                Accurate assessment
-                <br />
-                leads to smarter learning.
+            <div className="flex h-14 items-center justify-between">
+              <p className="w-[244px] font-figtree text-[20px] font-medium leading-7 tracking-[0%] text-white">
+                Accurate assessment leads to smarter learning.
               </p>
               <button
                 type="button"
                 disabled
-                className="uape-orange-btn inline-flex w-fit shrink-0 items-center justify-center rounded-xl px-6 py-3 font-semibold opacity-50 sm:justify-self-end"
+                className="uape-orange-btn inline-flex h-12 w-[163px] shrink-0 items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6 opacity-50"
               >
                 Start diagnostic
               </button>

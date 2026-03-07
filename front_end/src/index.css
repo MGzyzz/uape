@@ -88,47 +88,20 @@ body {
 .uape-section-shell {
   margin: 0 auto;
   width: 100%;
-  max-width: 1200px;
-  padding: 4rem 1rem;
-}
-
-@media (min-width: 640px) {
-  .uape-section-shell {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .uape-section-shell {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+  max-width: 1440px;
+  padding-left: 120px;
+  padding-right: 120px;
 }
 
 .uape-page-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .uape-page-gutter {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .uape-page-gutter {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .uape-page-gutter {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+  padding-left: 120px;
+  padding-right: 120px;
 }
 
 .uape-full-bleed-shell {
@@ -774,6 +747,19 @@ body {
 
 .uape-how-step-connector {
   background: linear-gradient(to bottom, rgb(var(--dash-rgb)), rgb(var(--dash-rgb) / 0));
+}
+
+.uape-how-ellipse-step4 {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  width: 672px;
+  height: 672px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(234, 242, 124, 0.22) 0%, rgba(234, 242, 124, 0.1) 40%, rgba(234, 242, 124, 0.02) 55%, rgba(234, 242, 124, 0) 62%);
+  left: 1060px;
+  top: 344px;
+  transform: translate(-50%, -50%);
 }
 
 .uape-hero-title {

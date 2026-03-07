@@ -32,16 +32,16 @@ const faqItems = [
 ]
 
 function FaqSection() {
-  const [openIndex, setOpenIndex] = useState(null)
+  const [openIndex, setOpenIndex] = useState(0)
 
   const toggle = (index) => setOpenIndex(openIndex === index ? null : index)
 
   return (
     <section id="faq" className="bg-uape-bg">
-      <div className="uape-page-container uape-page-gutter py-16">
+      <div className="uape-page-container uape-page-gutter flex flex-col items-center gap-25 py-16">
 
         {/* Heading */}
-        <div className="mb-16 text-center">
+        <div className="h-[104px] w-[386px] text-center">
           <h2 className="uape-faq-heading font-semibold text-white">
             Got any questions?
           </h2>
@@ -51,16 +51,16 @@ function FaqSection() {
         </div>
 
         {/* FAQ list */}
-        <div className="mx-auto flex flex-col" style={{ maxWidth: '792px', gap: '60px' }}>
+        <div className="flex w-[792px] flex-col gap-[60px]">
           {faqItems.map((item, index) => {
             const isOpen = openIndex === index
             return (
               <div key={item.q} className="border-b border-white/10 pb-6">
                 <button
                   onClick={() => toggle(index)}
-                  className="uape-icon-button-reset flex w-full items-start justify-between gap-6 text-left"
+                  className="uape-icon-button-reset flex h-8 w-[790px] items-start justify-between gap-10 text-left"
                 >
-                  <h3 className="uape-faq-question font-semibold text-white">
+                  <h3 className="uape-faq-question w-[718px] font-semibold text-white">
                     {item.q}
                   </h3>
                   <span
@@ -72,7 +72,7 @@ function FaqSection() {
                   </span>
                 </button>
                 {isOpen && (
-                  <p className="uape-faq-answer mt-4 text-uape-muted">
+                  <p className="uape-faq-answer mt-5 w-[688px] text-uape-muted">
                     {item.a}
                   </p>
                 )}

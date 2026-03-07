@@ -12,12 +12,14 @@ const features = [
 function BenefitsSection() {
   return (
     <section id="benefits" className="bg-uape-bg">
-      <div className="uape-section-shell">
-        <h2 className="text-2xl font-bold sm:text-3xl">Why UAPE is not just another course</h2>
+      <div className="uape-section-shell flex flex-col gap-[60px]">
+        <h2 className="font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
+          Why UAPE is not just another course
+        </h2>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-[3fr_2fr]">
+        <div className="grid gap-7 md:grid-cols-[791px_382px]">
           {/* Left: image */}
-          <div className="overflow-hidden rounded-3xl">
+          <div className="h-[524px] w-[791px] overflow-hidden rounded-[24px]">
             <img
               src={teamWorkImg}
               alt="Team working together"
@@ -26,14 +28,21 @@ function BenefitsSection() {
           </div>
 
           {/* Right: feature cards */}
-          <div className="flex flex-col gap-6">
+          <div className="flex h-[524px] w-[382px] flex-col gap-7">
             {features.map((item) => (
               <div
                 key={item.text}
-                className="flex flex-1 flex-col justify-between rounded-3xl bg-uape-form-bg px-6 pb-6 pt-4"
+                className="flex h-[156px] flex-col rounded-[24px] bg-uape-form-bg px-6 pb-6 pt-6"
               >
-                <img src={item.icon} alt="" aria-hidden="true" className="h-11 w-11" />
-                <p className="mt-4 text-xl font-medium leading-7 text-white">{item.text}</p>
+                <img
+                  src={item.icon}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-11 w-11"
+                />
+                <p className="mt-auto w-[333px] font-figtree text-[20px] font-medium leading-7 tracking-[0%] text-white">
+                  {item.text}
+                </p>
               </div>
             ))}
           </div>

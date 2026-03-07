@@ -129,7 +129,7 @@ function AuthPage({ mode }) {
   }
 
   const imageSection = (
-    <section className="relative overflow-hidden rounded-3xl">
+    <section className="relative h-[856px] w-[586px] overflow-hidden rounded-3xl">
       <img
         src={isSignup ? authImage : welcomeBackImage}
         alt=""
@@ -139,8 +139,8 @@ function AuthPage({ mode }) {
           : undefined
         }
       />
-      <div className={`relative flex h-full items-end p-8 sm:p-10 ${isSignup ? 'min-h-130' : 'min-h-190'}`}>
-        <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
+      <div className="relative flex h-full items-end p-[52px]">
+        <h2 className="w-[424px] font-figtree text-[40px] font-semibold leading-[44px]">
           {isSignup ? (
             <>Start with clarity.<br />Learn with confidence.</>
           ) : (
@@ -152,16 +152,16 @@ function AuthPage({ mode }) {
   )
 
   const formSection = (
-    <section className="rounded-lg p-6 sm:p-10">
-      <h1 className="text-3xl font-bold sm:text-4xl">
-        {isSignup ? 'Registration by email' : 'Log in by email'}
+    <section className={`w-121${isSignup ? ' h-190' : ''}`}>
+      <h1 className="font-figtree text-[44px] font-semibold leading-13 tracking-[0%]">
+        {isSignup ? 'Registration by email' : 'Log in to your account'}
       </h1>
 
-      <form className="mt-8 space-y-5" autoComplete="off" noValidate onSubmit={handleSubmit}>
+      <form className={`mt-10 ${isSignup ? 'space-y-7' : 'space-y-8'}`} autoComplete="off" noValidate onSubmit={handleSubmit}>
         {isSignup ? (
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-7 sm:grid-cols-2">
             <div className="space-y-2">
-              <span className="block text-xl font-medium text-uape">First name</span>
+              <span className="block font-figtree text-[24px] font-semibold leading-7 tracking-[0%] text-uape-white">First name</span>
               <input
                 type="text"
                 name="firstName"
@@ -169,12 +169,12 @@ function AuthPage({ mode }) {
                 value={fields.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.firstName ? 'border-red-500' : 'border-uape-border-soft'}`}
+                className={`h-14 w-[228px] rounded-lg border bg-uape-form-bg px-5 py-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.firstName ? 'border-red-500' : 'border-uape-border-soft'}`}
               />
               {fieldErrors.firstName && <FieldError msg={fieldErrors.firstName} />}
             </div>
             <div className="space-y-2">
-              <span className="block text-xl font-medium text-uape">Last name</span>
+              <span className="block font-figtree text-[24px] font-semibold leading-7 tracking-[0%] text-uape-white">Last name</span>
               <input
                 type="text"
                 name="lastName"
@@ -182,15 +182,15 @@ function AuthPage({ mode }) {
                 value={fields.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.lastName ? 'border-red-500' : 'border-uape-border-soft'}`}
+                className={`h-14 w-[228px] rounded-lg border bg-uape-form-bg px-5 py-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.lastName ? 'border-red-500' : 'border-uape-border-soft'}`}
               />
               {fieldErrors.lastName && <FieldError msg={fieldErrors.lastName} />}
             </div>
           </div>
         ) : null}
 
-        <div className="space-y-2">
-          <span className="block text-xl font-medium text-uape">Your email</span>
+        <div className="space-y-3">
+          <span className="block font-figtree text-[24px] font-semibold leading-7 tracking-[0%] text-uape-white">Your email</span>
           <input
             type="email"
             name="email"
@@ -198,21 +198,21 @@ function AuthPage({ mode }) {
             value={fields.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.email ? 'border-red-500' : 'border-uape-border-soft'}`}
+            className={`h-14 w-121 rounded-lg border bg-uape-form-bg px-5 py-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.email ? 'border-red-500' : 'border-uape-border-soft'}`}
           />
           {fieldErrors.email && <FieldError msg={fieldErrors.email} />}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xl font-medium text-uape">Your password</span>
+            <span className="font-figtree text-[24px] font-semibold leading-7 tracking-[0%] text-uape-white">Your password</span>
             {!isSignup && (
-              <span className="text-sm text-uape-muted opacity-50 cursor-not-allowed select-none">
+              <span className="cursor-not-allowed select-none text-sm text-uape-muted opacity-50">
                 Forgot password?
               </span>
             )}
           </div>
-          <div className="relative h-12">
+          <div className="relative h-14">
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -220,7 +220,7 @@ function AuthPage({ mode }) {
               value={fields.password}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`h-12 w-full rounded-lg border bg-uape-form-bg px-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.password ? 'border-red-500' : 'border-uape-border-soft'}`}
+              className={`h-14 w-121 rounded-lg border bg-uape-form-bg px-5 py-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.password ? 'border-red-500' : 'border-uape-border-soft'}`}
             />
             <button
               type="button"
@@ -241,41 +241,41 @@ function AuthPage({ mode }) {
         <button
           type="submit"
           disabled={loading}
-          className="uape-orange-btn mt-10! h-12 w-full text-base font-semibold disabled:opacity-60"
+          className="uape-orange-btn mt-10! h-14 w-121 text-base font-semibold disabled:opacity-60"
         >
           {loading ? (isSignup ? 'Signing up…' : 'Logging in…') : (isSignup ? 'Sign up' : 'Log in')}
         </button>
       </form>
 
-      <div className="my-7 flex items-center gap-4 text-sm text-uape-muted">
-        <span className="h-px flex-1 bg-uape-border-soft" />
-        <span>Other {isSignup ? 'sign up' : 'log in'} options</span>
-        <span className="h-px flex-1 bg-uape-border-soft" />
-      </div>
+      <div className="mt-10 flex flex-col gap-8">
+        <div className="flex items-center gap-3 font-figtree text-base text-uape-muted">
+          <span className="h-px flex-1 bg-uape-border-soft" />
+          <span>Other {isSignup ? 'sign up' : 'log in'} options</span>
+          <span className="h-px flex-1 bg-uape-border-soft" />
+        </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <div>
+        <div className="flex justify-center gap-6">
           <button
             type="button"
             disabled={googleLoading}
             onClick={() => loginWithGoogle()}
-            className="flex w-full items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="flex h-13 w-40.5 items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-3 py-2.5 pr-4.5 font-figtree text-[20px] font-medium leading-7 text-uape-white transition hover:border-uape-white/40 disabled:cursor-not-allowed disabled:opacity-60"
           >
             <GoogleIcon />
             {googleLoading ? 'Signing in…' : 'Google'}
           </button>
+          <button
+            type="button"
+            className="flex h-13 w-40.5 items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-3 py-2.5 pr-4.5 font-figtree text-[20px] font-medium leading-7 text-uape-white transition hover:border-uape-white/40"
+          >
+            <GitHubIcon />
+            GitHub
+          </button>
         </div>
-        <button
-          type="button"
-          className="flex items-center justify-center gap-3 rounded-lg border border-uape-border-soft bg-uape-surface px-5 py-3.5 text-sm font-medium text-uape-white transition hover:border-uape-white/40"
-        >
-          <GitHubIcon />
-          GitHub
-        </button>
       </div>
 
-      <p className="mt-7 text-center text-sm text-uape-muted">
-        {isSignup ? 'Already have an account? ' : 'No account yet? '}
+      <p className="mt-10 text-center font-figtree text-base text-uape-muted">
+        {isSignup ? 'Already have an account? ' : "Don't have an account? "}
         <Link
           className="font-semibold text-uape-white underline underline-offset-4"
           to={isSignup ? '/login' : '/signup'}
@@ -290,8 +290,8 @@ function AuthPage({ mode }) {
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader compact />
 
-      <main className="mx-auto w-full flex-1 max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-        <div className={`grid gap-6 ${isSignup ? 'lg:grid-cols-[1fr_1.2fr]' : 'lg:grid-cols-[1.2fr_1fr]'}`}>
+      <main className={`uape-full-bleed-shell flex-1 ${isSignup ? 'py-25' : 'pt-9 pb-25'}`}>
+        <div className={`${isSignup ? 'grid gap-[130px] lg:grid-cols-[484px_586px]' : 'grid items-center gap-20 lg:grid-cols-[586px_484px]'}`}>
           {isSignup ? (
             <>
               {formSection}
@@ -326,7 +326,7 @@ function FieldError({ msg }) {
 
 function GoogleIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <svg width="25" height="25" viewBox="0 0 18 18" fill="none" aria-hidden="true">
       <path d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.566 2.684-3.874 2.684-6.615z" fill="#4285F4" />
       <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853" />
       <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05" />
@@ -337,7 +337,7 @@ function GoogleIcon() {
 
 function GitHubIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12c0 4.64 3.01 8.577 7.186 9.966.525.096.714-.228.714-.507 0-.252-.009-.918-.015-1.8-2.922.636-3.54-1.408-3.54-1.408-.477-1.212-1.165-1.536-1.165-1.536-.954-.651.072-.639.072-.639 1.055.074 1.611 1.083 1.611 1.083.937 1.605 2.46 1.141 3.06.873.095-.678.367-1.141.668-1.403-2.332-.266-4.785-1.166-4.785-5.19 0-1.146.41-2.083 1.082-2.817-.108-.266-.469-1.337.102-2.787 0 0 .882-.282 2.889 1.077A9.992 9.992 0 0 1 12 6.588c.891.004 1.79.12 2.631.351 2.006-1.359 2.887-1.077 2.887-1.077.572 1.45.211 2.521.103 2.787.674.734 1.08 1.671 1.08 2.817 0 4.035-2.457 4.921-4.797 5.182.378.324.714.963.714 1.941 0 1.402-.013 2.533-.013 2.877 0 .282.188.608.72.505A10.503 10.503 0 0 0 22.5 12C22.5 6.201 17.799 1.5 12 1.5Z"
         fill="currentColor"

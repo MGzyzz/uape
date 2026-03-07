@@ -64,11 +64,14 @@ function HowItWorksSection() {
         </div>
 
         <div className="relative hidden h-[592px] flex-col gap-[60px] lg:flex">
+          <div aria-hidden="true" className="uape-how-ellipse-step4" />
+
           <h2 className="relative z-10 h-[52px] text-center font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
             How it works
           </h2>
 
           <div className="relative z-10 h-[480px] w-[1200px]">
+
             <div aria-hidden="true" className="absolute left-0 top-[436px] h-6 w-[1200px]">
               <div className="absolute inset-0 flex items-center justify-between">
                 {bottomMarkers.map((marker) => (
