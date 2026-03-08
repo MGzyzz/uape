@@ -14,8 +14,10 @@ const TOTAL_STEPS = 3
 function OnboardingHeader({ onSaveExit }) {
   return (
     <header className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <BrandLogo />
+      <div className="uape-section-shell uape-onboarding-navbar-shell">
+        <div className="uape-onboarding-logo">
+          <BrandLogo />
+        </div>
         <button className="uape-onboarding-save-exit" onClick={onSaveExit}>
           Save & exit
         </button>
@@ -254,27 +256,18 @@ export default function OnboardingPage() {
           )}
         </div>
 
-        {/* Back button — fixed bottom-left */}
-        {step > 1 && (
-          <div className="fixed bottom-8 left-8 z-30">
+        {/* Bottom navigation row */}
+        <div className="uape-onboarding-nav-row">
+          {step > 1 ? (
             <button
               className="uape-onboarding-back-btn"
               onClick={() => { setShowError(false); setStep((s) => s - 1) }}
             >
               Back
             </button>
-          </div>
-        )}
-
-        {/* Error message */}
-        {showError && (
-          <div className="fixed bottom-24 right-8 z-30 rounded-lg bg-red-600/90 px-4 py-2 text-sm text-white">
-            Please select at least one option
-          </div>
-        )}
-
-        {/* Next button — fixed bottom-right */}
-        <div className="fixed bottom-8 right-8 z-30">
+          ) : (
+            <span />
+          )}
           <button
             className="uape-orange-btn uape-onboarding-next-btn"
             onClick={handleNext}
@@ -283,6 +276,13 @@ export default function OnboardingPage() {
             {step === TOTAL_STEPS ? 'Submit' : 'Next'}
           </button>
         </div>
+
+        {/* Error message */}
+        {showError && (
+          <div className="fixed bottom-24 right-8 z-30 rounded-lg bg-red-600/90 px-4 py-2 text-sm text-white">
+            Please select at least one option
+          </div>
+        )}
       </main>
     </div>
   )

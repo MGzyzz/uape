@@ -51,6 +51,11 @@ class GoogleAuthView(APIView):
 
         # Validate token was issued for this application
         google_client_id = getattr(settings, 'GOOGLE_CLIENT_ID', '')
+        if not google_client_id:
+            return Response(
+                {'detail': 'Google OAuth is not configured on this server'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
         if google_client_id:
             try:
                 tokeninfo_resp = http_requests.get(

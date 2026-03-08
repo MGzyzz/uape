@@ -786,6 +786,12 @@ body {
   margin: 0 0 48px;
 }
 
+.uape-learn-error {
+  font-size: 16px;
+  color: var(--color-uape-secondary-text);
+  margin: 0;
+}
+
 /* ─── Onboarding ────────────────────────────────────────────────────────── */
 
 .uape-onboarding-progress-segment {
@@ -918,6 +924,31 @@ body {
   min-height: 64px;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.uape-onboarding-navbar-shell {
+  height: 87px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uape-onboarding-logo img {
+  width: 120px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.uape-onboarding-nav-row {
+  position: fixed;
+  bottom: 40px;
+  left: 60px;
+  right: 60px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 30;
 }
 
 .uape-footer-shell {

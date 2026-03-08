@@ -5,6 +5,7 @@ import arrowRightIcon from '../../../shared/assets/icons/arrow-right.svg'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
 import favoriteInactiveIcon from '../../../shared/assets/icons/nonactive-favorite-icon.svg'
 import { getSections, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
+import LazyImage from '../../../shared/ui/LazyImage.jsx'
 
 // ─── Small UI pieces ──────────────────────────────────────────────────────────
 
@@ -51,25 +52,6 @@ function NavArrows({ onPrev, onNext, canPrev, canNext }) {
         <img src={arrowRightIcon} alt="" width={11} height={17} />
       </button>
     </div>
-  )
-}
-
-// ─── Lazy image with shimmer placeholder ──────────────────────────────────────
-
-function LazyImage({ src, alt, className }) {
-  const [loaded, setLoaded] = useState(false)
-  return (
-    <>
-      {!loaded && <div className="uape-skeleton absolute inset-0" />}
-      <img
-        src={src}
-        alt={alt}
-        className={className}
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(true)}
-        style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
-      />
-    </>
   )
 }
 
@@ -280,6 +262,7 @@ function ChannelsSection({ title, items, onToggle }) {
 export default function WhatToLearnNextSection() {
   const [sections, setSections] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
   const isAuth = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
@@ -292,7 +275,7 @@ export default function WhatToLearnNextSection() {
       } else {
         setSections(sections)
       }
-    }).catch(() => {}).finally(() => setLoading(false))
+    }).catch(() => setError(true)).finally(() => setLoading(false))
   }, [isAuth])
 
   function toggleFavorite(sectionId, contentType, itemId) {
@@ -330,6 +313,17 @@ export default function WhatToLearnNextSection() {
           <SkeletonSection />
           <SkeletonSection />
           <SkeletonSection />
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="uape-learn-root">
+        <div className="uape-page-gutter uape-page-container">
+          <h1 className="uape-learn-page-title">What to learn next</h1>
+          <p className="uape-learn-error">Failed to load content. Please try refreshing the page.</p>
         </div>
       </section>
     )

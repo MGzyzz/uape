@@ -3,11 +3,13 @@ from rest_framework.permissions import AllowAny
 
 from courses.models import Video
 from courses.serializers import VideoSerializer
+from courses.views.playlist import StandardPagination
 
 
 class VideoListView(ListAPIView):
     serializer_class = VideoSerializer
     permission_classes = (AllowAny,)
+    pagination_class = StandardPagination
     queryset = Video.objects.select_related('channel').prefetch_related('tags').all()
 
 

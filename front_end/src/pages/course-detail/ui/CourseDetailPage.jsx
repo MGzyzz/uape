@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import DOMPurify from 'dompurify'
+import LazyImage from '../../../shared/ui/LazyImage.jsx'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { getPlaylist, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
@@ -19,23 +21,6 @@ function buildAbout(language) {
 }
 
 // ─── Small helpers ─────────────────────────────────────────────────────────────
-
-function LazyImage({ src, alt, className }) {
-  const [loaded, setLoaded] = useState(false)
-  return (
-    <>
-      {!loaded && <div className="uape-skeleton absolute inset-0" />}
-      <img
-        src={src}
-        alt={alt}
-        className={className}
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(true)}
-        style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
-      />
-    </>
-  )
-}
 
 function Tags({ tags }) {
   return (
@@ -58,7 +43,7 @@ function RichTextSection({ title, html }) {
       <h2 className="uape-detail-section-title">{title}</h2>
       <div
         className="uape-detail-rich-text"
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
       />
     </div>
   )
@@ -166,11 +151,13 @@ export default function CourseDetailPage() {
   const { id } = useParams()
   const [playlist, setPlaylist] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
   const [recommended, setRecommended] = useState([])
   const isAuth = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
     setLoading(true)
+    setError(false)
     const fetches = [getPlaylist(id)]
     if (isAuth) fetches.push(getRecommended().catch(() => null))
 
@@ -181,7 +168,7 @@ export default function CourseDetailPage() {
           setRecommended(rec.playlists.filter((p) => p.id !== Number(id)))
         }
       })
-      .catch(() => {})
+      .catch(() => setError(true))
       .finally(() => setLoading(false))
   }, [id, isAuth])
 
@@ -207,6 +194,10 @@ export default function CourseDetailPage() {
       <main className="flex-1">
         {loading ? (
           <DetailSkeleton />
+        ) : error ? (
+          <div className="uape-detail-outer">
+            <p className="uape-detail-description">Failed to load course. Please try refreshing the page.</p>
+          </div>
         ) : playlist ? (
           <DetailContent
             playlist={playlist}

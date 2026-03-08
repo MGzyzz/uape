@@ -23,7 +23,12 @@ class BookmarkView(APIView):
 
     def post(self, request):
         content_type_name = request.data.get('content_type')
-        object_id = request.data.get('object_id')
+        try:
+            object_id = int(request.data.get('object_id'))
+            if object_id < 1:
+                raise ValueError
+        except (TypeError, ValueError):
+            return Response({'detail': 'object_id must be a positive integer.'}, status=status.HTTP_400_BAD_REQUEST)
 
         model = ALLOWED_MODELS.get(content_type_name)
         if not model:
@@ -41,7 +46,12 @@ class BookmarkView(APIView):
 
     def delete(self, request):
         content_type_name = request.data.get('content_type')
-        object_id = request.data.get('object_id')
+        try:
+            object_id = int(request.data.get('object_id'))
+            if object_id < 1:
+                raise ValueError
+        except (TypeError, ValueError):
+            return Response({'detail': 'object_id must be a positive integer.'}, status=status.HTTP_400_BAD_REQUEST)
 
         model = ALLOWED_MODELS.get(content_type_name)
         if not model:
