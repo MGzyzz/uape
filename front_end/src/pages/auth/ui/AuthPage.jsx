@@ -260,8 +260,9 @@ function AuthPage({ mode }) {
                   try {
                     await resendVerification(fields.email)
                     setResendSent(true)
-                  } catch {
-                    setError('Failed to resend. Please try again.')
+                  } catch (err) {
+                    const detail = err?.response?.data?.detail
+                    setError(typeof detail === 'string' ? detail : 'Failed to resend. Please try again.')
                     setUnverified(false)
                   } finally {
                     setResendLoading(false)
