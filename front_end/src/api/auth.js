@@ -5,7 +5,7 @@ const MEDIA_BASE = (import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api')
 /**
  * Register a new user.
  * @param {{ first_name: string, last_name: string, email: string, password: string }} data
- * @returns {{ access: string, refresh: string }}
+ * @returns {{ detail: string }}
  */
 export async function register(data) {
   const response = await client.post('/auth/register/', data)
@@ -81,4 +81,24 @@ export function clearTokens() {
   localStorage.removeItem('access')
   localStorage.removeItem('refresh')
   localStorage.removeItem('user')
+}
+
+/**
+ * Verify email with the token from the confirmation link.
+ * @param {string} token UUID token from email link
+ * @returns {{ access: string, refresh: string, first_name: string, last_name: string }}
+ */
+export async function verifyEmail(token) {
+  const response = await client.post('/auth/verify-email/', { token })
+  return response.data
+}
+
+/**
+ * Resend verification email.
+ * @param {string} email
+ * @returns {{ detail: string }}
+ */
+export async function resendVerification(email) {
+  const response = await client.post('/auth/resend-verification/', { email })
+  return response.data
 }

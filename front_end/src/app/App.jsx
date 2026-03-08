@@ -7,6 +7,8 @@ import OnboardingPage from '../pages/onboarding/ui/OnboardingPage.jsx'
 import NotFoundPage from '../pages/not-found/ui/NotFoundPage.jsx'
 import CourseDetailPage from '../pages/course-detail/ui/CourseDetailPage.jsx'
 import ProtectedRoute from './ProtectedRoute.jsx'
+import VerifyEmailSentPage from '../pages/auth/ui/VerifyEmailSentPage.jsx'
+import VerifyEmailPage from '../pages/auth/ui/VerifyEmailPage.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -22,6 +24,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<AuthPage mode="signup" />} />
         <Route path="/login" element={<AuthPage mode="login" />} />
+        <Route path="/verify-email-sent" element={<VerifyEmailSentPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
         <Route path="/playlist/:id" element={<CourseDetailPage />} />

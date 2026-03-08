@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm your email — UAPE</title>
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-wrapper { padding: 20px 0 !important; }
+      .email-card { border-radius: 12px !important; }
+      .email-header { padding: 24px 20px 16px !important; }
+      .email-body { padding: 28px 20px 24px !important; }
+      .email-footer { padding: 16px 20px 24px !important; }
+      .email-title { font-size: 22px !important; }
+      .email-btn a { padding: 14px 28px !important; font-size: 15px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#0D0D0D;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" class="email-wrapper" style="background:#0D0D0D;padding:40px 0;">
+    <tr>
+      <td align="center" style="padding:0 12px;">
+        <table width="100%" cellpadding="0" cellspacing="0" class="email-card" style="background:#1A1A1A;border-radius:16px;overflow:hidden;max-width:560px;">
+
+          <!-- Header -->
+          <tr>
+            <td class="email-header" style="padding:36px 40px 24px;border-bottom:1px solid #2A2A2A;">
+              <span style="font-size:22px;font-weight:700;color:#FFFFFF;letter-spacing:-0.5px;">UAPE</span>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td class="email-body" style="padding:40px 40px 32px;">
+              <h1 class="email-title" style="margin:0 0 12px;font-size:28px;font-weight:700;color:#FFFFFF;line-height:1.2;">
+                Confirm your email
+              </h1>
+              <p style="margin:0 0 8px;font-size:16px;color:#A0A0A0;line-height:1.6;">
+                Hi {{ first_name }},
+              </p>
+              <p style="margin:0 0 32px;font-size:16px;color:#A0A0A0;line-height:1.6;">
+                You're almost done! Click the button below to verify your email address and activate your UAPE account.
+              </p>
+
+              <!-- CTA Button -->
+              <table cellpadding="0" cellspacing="0" class="email-btn">
+                <tr>
+                  <td style="border-radius:10px;background:#FF6B35;">
+                    <a href="{{ verify_url }}"
+                       style="display:inline-block;padding:16px 36px;font-size:16px;font-weight:600;color:#FFFFFF;text-decoration:none;border-radius:10px;background:#FF6B35;">
+                      Confirm Email
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:28px 0 0;font-size:13px;color:#666666;line-height:1.5;">
+                Or copy and paste this link into your browser:<br />
+                <a href="{{ verify_url }}" style="color:#FF6B35;word-break:break-all;">{{ verify_url }}</a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="email-footer" style="padding:20px 40px 32px;border-top:1px solid #2A2A2A;">
+              <p style="margin:0;font-size:13px;color:#555555;line-height:1.6;">
+                This link is valid for <strong style="color:#888888;">24 hours</strong>.<br />
+                If you didn't create a UAPE account, you can safely ignore this email.
+              </p>
+              <p style="margin:16px 0 0;font-size:12px;color:#444444;">
+                &copy; 2026 UAPE
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

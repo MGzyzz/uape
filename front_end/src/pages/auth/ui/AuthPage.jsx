@@ -96,17 +96,17 @@ function AuthPage({ mode }) {
     setLoading(true)
     setError('')
     try {
-      let tokens
       if (isSignup) {
-        tokens = await register({
+        await register({
           first_name: fields.firstName,
           last_name: fields.lastName,
           email: fields.email,
           password: fields.password,
         })
-      } else {
-        tokens = await login({ email: fields.email, password: fields.password })
+        navigate('/verify-email-sent', { state: { email: fields.email } })
+        return
       }
+      const tokens = await login({ email: fields.email, password: fields.password })
       saveTokens(tokens)
       try {
         const profile = await getProfile()
@@ -114,7 +114,7 @@ function AuthPage({ mode }) {
       } catch {
         saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
       }
-      navigate(isSignup ? '/onboarding' : '/profile')
+      navigate('/profile')
     } catch (err) {
       const data = err?.response?.data
       if (data && typeof data === 'object') {

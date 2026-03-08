@@ -77,3 +77,4 @@ CLAUDE.md
 # Claude Code
 .claude/settings.local.json
 front_end/.claude/
+docs
