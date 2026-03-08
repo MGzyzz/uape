@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third-party
+    'anymail',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -201,12 +202,19 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-# Email (Gmail SMTP)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-EMAIL_FROM = os.getenv('EMAIL_FROM', EMAIL_HOST_USER)
+# Email — Resend via django-anymail (HTTP API, works on Render free tier)
+EMAIL_BACKEND = 'anymail.backends.resend.EmailBackend'
+ANYMAIL = {
+    'RESEND_API_KEY': os.getenv('RESEND_API_KEY', ''),
+}
+EMAIL_FROM = os.getenv('EMAIL_FROM', 'onboarding@resend.dev')
 FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+
+# Email (Gmail SMTP) — не работает на Render free tier (блокирует порт 587)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+# EMAIL_FROM = os.getenv('EMAIL_FROM', EMAIL_HOST_USER)
