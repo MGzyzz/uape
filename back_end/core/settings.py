@@ -178,6 +178,15 @@ else:
     if _extra_cors:
         CORS_ALLOWED_ORIGINS += [o.strip() for o in _extra_cors.split(',') if o.strip()]
 
+# CSRF trusted origins (needed for ngrok and production)
+_csrf_extra = os.getenv('CSRF_EXTRA_ORIGINS', '')
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+if _csrf_extra:
+    CSRF_TRUSTED_ORIGINS += [o.strip() for o in _csrf_extra.split(',') if o.strip()]
+
 # CKEditor 5
 CKEDITOR_5_CONFIGS = {
     'detail': {
