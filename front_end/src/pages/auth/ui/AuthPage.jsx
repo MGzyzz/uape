@@ -6,7 +6,7 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import authImage from '../../../shared/assets/solution/auth.jpg'
 import welcomeBackImage from '../../../shared/assets/solution/welcome-back.png'
 import eyeIcon from '../../../shared/assets/icons/Eye.svg'
-import { register, login, googleAuth, saveTokens, saveUser, getProfile } from '../../../api/auth.js'
+import { register, login, googleAuth, saveTokens, saveUser, getProfile, resendVerification } from '../../../api/auth.js'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
@@ -16,6 +16,9 @@ function AuthPage({ mode }) {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState('')
+  const [unverified, setUnverified] = useState(false)
+  const [resendLoading, setResendLoading] = useState(false)
+  const [resendSent, setResendSent] = useState(false)
   const [fields, setFields] = useState({
     firstName: '', lastName: '', email: '', password: '',
   })
@@ -95,6 +98,8 @@ function AuthPage({ mode }) {
     if (!validateAll()) return
     setLoading(true)
     setError('')
+    setUnverified(false)
+    setResendSent(false)
     try {
       if (isSignup) {
         await register({
@@ -116,6 +121,10 @@ function AuthPage({ mode }) {
       }
       navigate('/profile')
     } catch (err) {
+      if (err?.response?.status === 403) {
+        setUnverified(true)
+        return
+      }
       const data = err?.response?.data
       if (data && typeof data === 'object') {
         const first = Object.values(data).flat()[0]
@@ -236,6 +245,34 @@ function AuthPage({ mode }) {
 
         {error && (
           <p className="text-sm text-red-400">{error}</p>
+        )}
+        {unverified && (
+          <div className="rounded-lg border border-uape-border-soft bg-uape-surface px-4 py-3 text-sm text-uape-muted">
+            <p>Please verify your email before logging in.</p>
+            {resendSent ? (
+              <p className="mt-1 text-green-400">Verification email sent!</p>
+            ) : (
+              <button
+                type="button"
+                disabled={resendLoading}
+                onClick={async () => {
+                  setResendLoading(true)
+                  try {
+                    await resendVerification(fields.email)
+                    setResendSent(true)
+                  } catch {
+                    setError('Failed to resend. Please try again.')
+                    setUnverified(false)
+                  } finally {
+                    setResendLoading(false)
+                  }
+                }}
+                className="mt-1 text-uape-accent underline underline-offset-2 hover:opacity-80 disabled:opacity-50"
+              >
+                {resendLoading ? 'Sending…' : 'Resend verification email'}
+              </button>
+            )}
+          </div>
         )}
 
         <button

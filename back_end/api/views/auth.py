@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from accounts.models import EmailVerification
+from accounts.models import EmailVerification, User
 from accounts.serializers import LoginSerializer, RegisterSerializer
 
 
@@ -58,9 +58,20 @@ class LoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
+            email = serializer.validated_data['email']
+            try:
+                user_obj = User.objects.get(email=email)
+                if not user_obj.is_active:
+                    return Response(
+                        {'detail': 'Please verify your email before logging in.'},
+                        status=status.HTTP_403_FORBIDDEN,
+                    )
+            except User.DoesNotExist:
+                pass
+
             user = authenticate(
                 request,
-                username=serializer.validated_data['email'],
+                username=email,
                 password=serializer.validated_data['password'],
             )
             if user:
