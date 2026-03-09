@@ -1110,3 +1110,190 @@ body {
 }
 
 /* ─── End Footer social icon hover effects ──────────────────────────────── */
+
+/* ─── Assessment Result Section ────────────────────────────────────────── */
+
+.uape-assessment-result-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.uape-assessment-result-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 176px;
+}
+
+/* Left column */
+
+.uape-assessment-result-left {
+  width: 512px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.uape-assessment-result-title {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+}
+
+.uape-assessment-result-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-assessment-result-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+}
+
+.uape-assessment-result-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-assessment-result-block-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+}
+
+.uape-assessment-result-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.uape-assessment-result-list li {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+}
+
+/* Right column — result card */
+
+.uape-assessment-result-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.uape-assessment-result-card {
+  width: 512px;
+  height: 560px;
+  border-radius: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 40px;
+}
+
+.uape-assessment-result-card-label {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--color-uape-white);
+}
+
+/* Nested level badge — three rectangles + inner frame */
+
+.uape-assessment-result-level-outer {
+  width: 340px;
+  height: 144px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff40;
+}
+
+.uape-assessment-result-level-mid {
+  width: 324px;
+  height: 128px;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff59;
+}
+
+.uape-assessment-result-level-inner {
+  width: 308px;
+  height: 112px;
+  border-radius: 24px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-uape-white);
+}
+
+.uape-assessment-result-level-text {
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 64px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.uape-assessment-result-tagline {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--color-uape-white);
+}
+
+.uape-assessment-result-desc {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--color-uape-muted);
+}
+
+/* Assessment result card level variants */
+.uape-assessment-result-card--beginner {
+  background: linear-gradient(180deg, #0BC279 0%, #30A14E 100%);
+}
+
+.uape-assessment-result-card--intermediate {
+  background: linear-gradient(180deg, #5444CF 0%, #0078D7 100%);
+}
+
+.uape-assessment-result-card--advanced {
+  background: linear-gradient(180deg, #886CE4 0%, #A31E89 100%);
+}
+
+/* Assessment result level text color variants */
+.uape-assessment-result-level-text--beginner {
+  color: #30A14E;
+}
+
+.uape-assessment-result-level-text--intermediate {
+  color: #0078D7;
+}
+
+.uape-assessment-result-level-text--advanced {
+  color: #A31E89;
+}
