@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
@@ -189,9 +189,6 @@ function FavoritesEmptyState() {
         >
           Explore courses
         </button>
-        <Link to="/onboarding" className="uape-favorites-secondary-link">
-          Update interests
-        </Link>
       </div>
     </section>
   )
