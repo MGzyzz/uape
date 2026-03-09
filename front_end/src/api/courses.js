@@ -28,7 +28,7 @@ function normalizePlaylist(p) {
     image: p.thumbnail_url,
     url: p.url,
     channelUrl: p.channel?.url ?? '',
-    favorited: false,
+    favorited: Boolean(p.favorited),
     // detail page fields
     description: p.description ?? '',
     language: p.language ?? '',
@@ -53,7 +53,7 @@ function normalizeVideo(v) {
     image: v.thumbnail_url,
     url: v.url,
     channelUrl: v.channel?.url ?? '',
-    favorited: false,
+    favorited: Boolean(v.favorited),
   }
 }
 
@@ -69,7 +69,7 @@ function normalizeChannel(c) {
     tags: (c.tags ?? []).map((t) => ({ id: t.id, name: `#${t.name}`, color: t.color })),
     avatar_url: c.avatar_url,
     url: c.url,
-    favorited: false,
+    favorited: Boolean(c.favorited),
   }
 }
 
@@ -106,7 +106,12 @@ export async function getVideos() {
 
 export async function getRecommended() {
   const res = await client.get('/courses/recommended/')
-return normalizeSection(res.data)
+  return normalizeSection(res.data)
+}
+
+export async function getFavorites() {
+  const res = await client.get('/courses/favorites/')
+  return res.data.map(normalizeSection)
 }
 
 export async function getPlaylist(id) {

@@ -93,9 +93,7 @@ function SiteHeader({ compact = false }) {
 
           <nav className="hidden items-center justify-center gap-7 text-base font-normal leading-6 text-uape-muted lg:flex">
             <NavLink
-              className={({ isActive }) =>
-                `transition hover:text-uape-white${isActive ? ' font-semibold text-uape-white' : ''}`
-              }
+              className="transition hover:text-uape-white"
               to="/"
               end
             >
@@ -104,9 +102,12 @@ function SiteHeader({ compact = false }) {
             <span className="opacity-40 cursor-not-allowed select-none">
               About Us
             </span>
-            <span className="opacity-40 cursor-not-allowed select-none">
+            <NavLink
+              className="transition hover:text-uape-white"
+              to="/favorites"
+            >
               My Learning
-            </span>
+            </NavLink>
             <span className="opacity-40 cursor-not-allowed select-none">
               Diagnostic
             </span>

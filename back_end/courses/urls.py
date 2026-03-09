@@ -8,6 +8,7 @@ from .views import (
     SectionListView,
     BookmarkView,
     RecommendedPlaylistsView,
+    FavoriteContentView,
 )
 
 urlpatterns = [
@@ -18,5 +19,6 @@ urlpatterns = [
     path('channels/<int:pk>/', ChannelDetailView.as_view(), name='channel-detail'),
     path('sections/', SectionListView.as_view(), name='section-list'),
     path('bookmarks/', BookmarkView.as_view(), name='bookmarks'),
+    path('favorites/', FavoriteContentView.as_view(), name='favorites'),
     path('recommended/', RecommendedPlaylistsView.as_view(), name='recommended'),
 ]

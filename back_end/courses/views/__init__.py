@@ -4,3 +4,4 @@ from .channel import ChannelDetailView
 from .section import SectionListView
 from .bookmark import BookmarkView
 from .recommended import RecommendedPlaylistsView
+from .favorite import FavoriteContentView

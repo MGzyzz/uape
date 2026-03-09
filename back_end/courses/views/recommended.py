@@ -45,7 +45,7 @@ class RecommendedPlaylistsView(APIView):
             'subtitle': 'Based on your skills and interests',
             'content_type': 'playlist',
             'order': 0,
-            'playlists': PlaylistSerializer(playlists, many=True).data,
+            'playlists': PlaylistSerializer(playlists, many=True, context={'request': request}).data,
             'videos': [],
             'channels': [],
         })
