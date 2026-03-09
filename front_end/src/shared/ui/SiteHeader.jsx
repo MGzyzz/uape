@@ -107,6 +107,9 @@ function SiteHeader({ compact = false }) {
             <span className="opacity-40 cursor-not-allowed select-none">
               My Learning
             </span>
+            <span className="opacity-40 cursor-not-allowed select-none">
+              Diagnostic
+            </span>
           </nav>
 
           <div className="flex items-center justify-end gap-3">
@@ -122,7 +125,7 @@ function SiteHeader({ compact = false }) {
 
   return (
     <header
-      className="uape-header-guest-bg sticky top-0 z-50 backdrop-blur-[80px]"
+      className="uape-header-guest-bg sticky top-0 z-50 border-b border-uape-border-soft backdrop-blur-[80px]"
     >
       <div className="uape-section-shell uape-navbar-shell flex items-center justify-between">
         <div className="flex items-center gap-8">
