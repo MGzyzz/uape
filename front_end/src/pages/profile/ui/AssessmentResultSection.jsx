@@ -1,6 +1,11 @@
+import { useState } from 'react'
+import bumerangIcon from '../../../shared/assets/icons/bumerang-icon.svg'
+
 // TODO: replace MOCK_LEVEL with real data from assessment API when test backend is ready
 // TODO: consider moving to /assessment-result page if UX requires dedicated route
 const MOCK_LEVEL = 'beginner'
+
+const LEVELS = ['beginner', 'intermediate', 'advanced']
 
 const LEVEL_CONFIG = {
   beginner: {
@@ -63,11 +68,24 @@ const LEVEL_CONFIG = {
 }
 
 function AssessmentResultSection({ level = MOCK_LEVEL }) {
-  const config = LEVEL_CONFIG[level] ?? LEVEL_CONFIG.beginner
+  const [activeLevel, setActiveLevel] = useState(level)
+  const config = LEVEL_CONFIG[activeLevel] ?? LEVEL_CONFIG.beginner
 
   return (
     <section className="uape-assessment-result-section">
       <div className="uape-section-shell">
+        {/* TODO: remove level switcher buttons when real assessment API is connected — level should come from backend */}
+        <div className="uape-assessment-result-level-switcher">
+          {LEVELS.map(l => (
+            <button
+              key={l}
+              className={`uape-assessment-result-level-btn uape-assessment-result-level-btn--${l}${activeLevel === l ? ' uape-assessment-result-level-btn--active' : ''}`}
+              onClick={() => setActiveLevel(l)}
+            >
+              {LEVEL_CONFIG[l].levelLabel}
+            </button>
+          ))}
+        </div>
         <div className="uape-assessment-result-inner">
 
           {/* Left column */}
@@ -99,12 +117,13 @@ function AssessmentResultSection({ level = MOCK_LEVEL }) {
 
           {/* Right column — result card */}
           <div className="uape-assessment-result-right">
-            <div className={`uape-assessment-result-card uape-assessment-result-card--${level}`}>
+            <div className={`uape-assessment-result-card uape-assessment-result-card--${activeLevel}`}>
+              <img src={bumerangIcon} alt="" aria-hidden="true" className="uape-assessment-result-card-bg" />
               <p className="uape-assessment-result-card-label">Your Result</p>
-              <div className="uape-assessment-result-level-outer">
-                <div className="uape-assessment-result-level-mid">
-                  <div className="uape-assessment-result-level-inner">
-                    <span className={`uape-assessment-result-level-text uape-assessment-result-level-text--${level}`}>
+              <div className={`uape-assessment-result-level-outer uape-assessment-result-level-outer--${activeLevel}`}>
+                <div className={`uape-assessment-result-level-mid uape-assessment-result-level-mid--${activeLevel}`}>
+                  <div className={`uape-assessment-result-level-inner uape-assessment-result-level-inner--${activeLevel}`}>
+                    <span className={`uape-assessment-result-level-text uape-assessment-result-level-text--${activeLevel}`}>
                       {config.levelLabel}
                     </span>
                   </div>

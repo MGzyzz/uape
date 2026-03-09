@@ -1202,6 +1202,20 @@ body {
   justify-content: center;
   gap: 32px;
   padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.uape-assessment-result-card-bg {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.uape-assessment-result-card > *:not(.uape-assessment-result-card-bg) {
+  position: relative;
+  z-index: 1;
 }
 
 .uape-assessment-result-card-label {
@@ -1216,7 +1230,6 @@ body {
 /* Nested level badge — three rectangles + inner frame */
 
 .uape-assessment-result-level-outer {
-  width: 340px;
   height: 144px;
   border-radius: 40px;
   display: flex;
@@ -1225,8 +1238,11 @@ body {
   background: #ffffff40;
 }
 
+.uape-assessment-result-level-outer--beginner { width: 340px; }
+.uape-assessment-result-level-outer--intermediate { width: 448px; }
+.uape-assessment-result-level-outer--advanced { width: 372px; }
+
 .uape-assessment-result-level-mid {
-  width: 324px;
   height: 128px;
   border-radius: 32px;
   display: flex;
@@ -1235,8 +1251,11 @@ body {
   background: #ffffff59;
 }
 
+.uape-assessment-result-level-mid--beginner { width: 324px; }
+.uape-assessment-result-level-mid--intermediate { width: 432px; }
+.uape-assessment-result-level-mid--advanced { width: 356px; }
+
 .uape-assessment-result-level-inner {
-  width: 308px;
   height: 112px;
   border-radius: 24px;
   padding: 24px 32px;
@@ -1245,6 +1264,10 @@ body {
   justify-content: center;
   background: var(--color-uape-white);
 }
+
+.uape-assessment-result-level-inner--beginner { width: 308px; }
+.uape-assessment-result-level-inner--intermediate { width: 416px; }
+.uape-assessment-result-level-inner--advanced { width: 340px; }
 
 .uape-assessment-result-level-text {
   font-size: 60px;
@@ -1296,4 +1319,41 @@ body {
 
 .uape-assessment-result-level-text--advanced {
   color: #A31E89;
+}
+
+/* Assessment result level switcher buttons */
+.uape-assessment-result-level-switcher {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.uape-assessment-result-level-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: #888;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.uape-assessment-result-level-btn--beginner.uape-assessment-result-level-btn--active {
+  border-color: #30A14E;
+  color: #30A14E;
+  background: rgba(48, 161, 78, 0.08);
+}
+
+.uape-assessment-result-level-btn--intermediate.uape-assessment-result-level-btn--active {
+  border-color: #0078D7;
+  color: #0078D7;
+  background: rgba(0, 120, 215, 0.08);
+}
+
+.uape-assessment-result-level-btn--advanced.uape-assessment-result-level-btn--active {
+  border-color: #A31E89;
+  color: #A31E89;
+  background: rgba(163, 30, 137, 0.08);
 }
