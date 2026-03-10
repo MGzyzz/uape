@@ -910,7 +910,7 @@ body {
 }
 
 .uape-favorites-empty-link {
-  color: var(--color-uape-white);
+  color: var(--color-uape-accent);
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -1109,6 +1109,14 @@ body {
   min-height: 64px;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.uape-nav-link-active {
+  color: var(--color-uape-white);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
 
 .uape-onboarding-navbar-shell {

@@ -187,7 +187,7 @@ function FavoritesEmptyState() {
         <span className="uape-favorites-empty-text">
           After saving, the course will be displayed here.{' '}
           <Link to="/profile" className="uape-favorites-empty-link">
-            Save now.
+            Explore courses.
           </Link>
         </span>
       </div>
