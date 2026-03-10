@@ -573,6 +573,32 @@ body {
   display: block;
 }
 
+.uape-detail-fav-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 1000px;
+  padding: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-uape-header-guest);
+  backdrop-filter: blur(20px);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.uape-detail-fav-icon {
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  display: block;
+}
+
 /* Right column */
 .uape-detail-right {
   width: 512px;

@@ -150,6 +150,7 @@ function RecommendedSection({ items, onToggle }) {
 export default function CourseDetailPage() {
   const { id } = useParams()
   const [playlist, setPlaylist] = useState(null)
+  const [favorited, setFavorited] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [recommended, setRecommended] = useState([])
@@ -164,6 +165,7 @@ export default function CourseDetailPage() {
     Promise.all(fetches)
       .then(([pl, rec]) => {
         setPlaylist(pl)
+        setFavorited(pl.favorited)
         if (rec?.playlists?.length) {
           setRecommended(rec.playlists.filter((p) => p.id !== Number(id)))
         }
@@ -171,6 +173,18 @@ export default function CourseDetailPage() {
       .catch(() => setError(true))
       .finally(() => setLoading(false))
   }, [id, isAuth])
+
+  function toggleMain() {
+    if (!isAuth) return
+    setFavorited((prev) => {
+      if (prev) {
+        removeBookmark('playlist', Number(id)).catch(() => {})
+      } else {
+        addBookmark('playlist', Number(id)).catch(() => {})
+      }
+      return !prev
+    })
+  }
 
   function toggleRecommended(itemId) {
     setRecommended((prev) =>
@@ -201,6 +215,8 @@ export default function CourseDetailPage() {
         ) : playlist ? (
           <DetailContent
             playlist={playlist}
+            favorited={favorited}
+            onToggleMain={isAuth ? toggleMain : null}
             recommended={recommended}
             onToggleRecommended={toggleRecommended}
           />
@@ -217,7 +233,7 @@ export default function CourseDetailPage() {
 
 // ─── Detail content ───────────────────────────────────────────────────────────
 
-function DetailContent({ playlist, recommended, onToggleRecommended }) {
+function DetailContent({ playlist, favorited, onToggleMain, recommended, onToggleRecommended }) {
   const metaParts = []
   if (playlist.videoCount) metaParts.push(`${playlist.videoCount} Videos`)
   if (playlist.duration) metaParts.push(playlist.duration)
@@ -231,12 +247,25 @@ function DetailContent({ playlist, recommended, onToggleRecommended }) {
 
           {/* Left — sticky thumbnail */}
           <div className="uape-detail-left">
-            <div className="uape-detail-thumb-wrapper relative">
+            <div className="uape-detail-thumb-wrapper">
               <LazyImage
                 src={playlist.image}
                 alt={playlist.title}
                 className="uape-detail-thumb-img"
               />
+              {onToggleMain && (
+                <button
+                  onClick={onToggleMain}
+                  className="uape-detail-fav-btn"
+                  aria-label="Favourite"
+                >
+                  <img
+                    src={favorited ? favoriteActiveIcon : favoriteInactiveIcon}
+                    className="uape-detail-fav-icon"
+                    alt=""
+                  />
+                </button>
+              )}
             </div>
           </div>
 
