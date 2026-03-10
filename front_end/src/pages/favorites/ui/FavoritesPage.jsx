@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
@@ -173,8 +173,6 @@ function ChannelCard({ item, onToggle }) {
 }
 
 function FavoritesEmptyState() {
-  const navigate = useNavigate()
-
   return (
     <section className="uape-favorites-empty">
       <img
@@ -185,16 +183,12 @@ function FavoritesEmptyState() {
       />
       <div className="uape-favorites-empty-text-group">
         <h2 className="uape-favorites-empty-title">Start learning today.</h2>
-        <p className="uape-favorites-empty-text">
+        <span className="uape-favorites-empty-text">
           After saving, the course will be displayed here.{' '}
-          <button
-            type="button"
-            className="uape-favorites-empty-link"
-            onClick={() => navigate('/profile')}
-          >
+          <Link to="/profile" className="uape-favorites-empty-link">
             Save now.
-          </button>
-        </p>
+          </Link>
+        </span>
       </div>
     </section>
   )
