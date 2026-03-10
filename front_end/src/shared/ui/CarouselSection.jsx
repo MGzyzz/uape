@@ -1,5 +1,5 @@
 // src/shared/ui/CarouselSection.jsx
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import arrowLeftIcon from '../assets/icons/arrow-left.svg'
 import arrowRightIcon from '../assets/icons/arrow-right.svg'
 
@@ -30,12 +30,10 @@ function NavArrows({ onPrev, onNext, canPrev, canNext }) {
 
 export default function CarouselSection({ title, subtitle, items, renderCard, perPage = 3 }) {
   const [idx, setIdx] = useState(0)
-  useEffect(() => {
-    setIdx((i) => Math.min(i, Math.max(0, items.length - perPage)))
-  }, [items.length, perPage])
-  const canPrev = idx > 0
-  const canNext = idx + perPage < items.length
-  const visible = items.slice(idx, idx + perPage)
+  const safeIdx = Math.min(idx, Math.max(0, items.length - perPage))
+  const canPrev = safeIdx > 0
+  const canNext = safeIdx + perPage < items.length
+  const visible = items.slice(safeIdx, safeIdx + perPage)
   const rowClassName = `uape-learn-cards-row${visible.length === perPage ? ' uape-learn-cards-row-full' : ''}`
 
   return (
@@ -46,8 +44,8 @@ export default function CarouselSection({ title, subtitle, items, renderCard, pe
           {subtitle && <p className="uape-learn-section-subtitle">{subtitle}</p>}
         </div>
         <NavArrows
-          onPrev={() => setIdx((i) => Math.max(0, i - 1))}
-          onNext={() => setIdx((i) => Math.min(items.length - perPage, i + 1))}
+          onPrev={() => setIdx(Math.max(0, safeIdx - 1))}
+          onNext={() => setIdx(Math.min(items.length - perPage, safeIdx + 1))}
           canPrev={canPrev}
           canNext={canNext}
         />
