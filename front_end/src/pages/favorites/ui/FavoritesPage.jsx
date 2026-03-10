@@ -203,7 +203,7 @@ function RecommendedPlaceholder() {
       </div>
       <div className="uape-learn-cards-row uape-learn-cards-row-full">
         {[0, 1, 2].map((i) => (
-          <div key={i} style={{ flex: '0 0 auto', minWidth: 0 }}>
+          <div key={i} className="uape-carousel-card-wrapper">
             <SkeletonCard />
           </div>
         ))}

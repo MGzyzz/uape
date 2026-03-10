@@ -54,7 +54,7 @@ export default function CarouselSection({ title, subtitle, items, renderCard, pe
       </div>
       <div className={rowClassName}>
         {visible.map((item) => (
-          <div key={item.id} style={{ flex: '0 0 auto', minWidth: 0 }}>
+          <div key={item.id} className="uape-carousel-card-wrapper">
             {renderCard(item)}
           </div>
         ))}

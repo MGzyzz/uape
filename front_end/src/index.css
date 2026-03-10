@@ -506,6 +506,11 @@ body {
   gap: 0;
 }
 
+.uape-carousel-card-wrapper {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
 .uape-learn-channels-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -918,6 +923,10 @@ body {
 
 .uape-favorites-empty-link:hover {
   opacity: 0.8;
+}
+
+.uape-favorites-empty-icon {
+  display: block;
 }
 
 @media (max-width: 1279px) {
