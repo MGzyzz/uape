@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import arrowLeftIcon from '../../../shared/assets/icons/arrow-left.svg'
-import arrowRightIcon from '../../../shared/assets/icons/arrow-right.svg'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
 import favoriteInactiveIcon from '../../../shared/assets/icons/nonactive-favorite-icon.svg'
 import { getSections, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
+import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 
 // ─── Small UI pieces ──────────────────────────────────────────────────────────
 
@@ -28,29 +27,6 @@ function Tags({ tags }) {
           {tag.name}
         </span>
       ))}
-    </div>
-  )
-}
-
-function NavArrows({ onPrev, onNext, canPrev, canNext }) {
-  return (
-    <div className="flex items-center gap-2 shrink-0">
-      <button
-        onClick={canPrev ? onPrev : undefined}
-        aria-disabled={!canPrev}
-        className={`uape-learn-nav-arrow-btn${canPrev ? '' : ' uape-learn-nav-arrow-btn-disabled'}`}
-        aria-label="Previous"
-      >
-        <img src={arrowLeftIcon} alt="" width={11} height={17} />
-      </button>
-      <button
-        onClick={canNext ? onNext : undefined}
-        aria-disabled={!canNext}
-        className={`uape-learn-nav-arrow-btn${canNext ? '' : ' uape-learn-nav-arrow-btn-disabled'}`}
-        aria-label="Next"
-      >
-        <img src={arrowRightIcon} alt="" width={11} height={17} />
-      </button>
     </div>
   )
 }
@@ -198,41 +174,6 @@ function ChannelCard({ item, onToggle }) {
         <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
           Visit channel
         </a>
-      </div>
-    </div>
-  )
-}
-
-// ─── Carousel section ─────────────────────────────────────────────────────────
-
-function CarouselSection({ title, subtitle, items, renderCard }) {
-  const [idx, setIdx] = useState(0)
-  const perPage = 3
-  const canPrev = idx > 0
-  const canNext = idx + perPage < items.length
-  const visible = items.slice(idx, idx + perPage)
-  const rowClassName = `uape-learn-cards-row${visible.length === perPage ? ' uape-learn-cards-row-full' : ''}`
-
-  return (
-    <div className="uape-learn-section">
-      <div className="uape-learn-section-header flex items-start justify-between">
-        <div>
-          <h2 className="uape-learn-section-title">{title}</h2>
-          {subtitle && <p className="uape-learn-section-subtitle">{subtitle}</p>}
-        </div>
-        <NavArrows
-          onPrev={() => setIdx((i) => Math.max(0, i - 1))}
-          onNext={() => setIdx((i) => Math.min(items.length - perPage, i + 1))}
-          canPrev={canPrev}
-          canNext={canNext}
-        />
-      </div>
-      <div className={rowClassName}>
-        {visible.map((item) => (
-          <div key={item.id} style={{ flex: '0 0 auto', minWidth: 0 }}>
-            {renderCard(item)}
-          </div>
-        ))}
       </div>
     </div>
   )
