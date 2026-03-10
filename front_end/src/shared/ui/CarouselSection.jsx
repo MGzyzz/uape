@@ -1,5 +1,5 @@
 // src/shared/ui/CarouselSection.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import arrowLeftIcon from '../assets/icons/arrow-left.svg'
 import arrowRightIcon from '../assets/icons/arrow-right.svg'
 
@@ -7,6 +7,7 @@ function NavArrows({ onPrev, onNext, canPrev, canNext }) {
   return (
     <div className="flex items-center gap-2 shrink-0">
       <button
+        type="button"
         onClick={canPrev ? onPrev : undefined}
         aria-disabled={!canPrev}
         className={`uape-learn-nav-arrow-btn${canPrev ? '' : ' uape-learn-nav-arrow-btn-disabled'}`}
@@ -15,6 +16,7 @@ function NavArrows({ onPrev, onNext, canPrev, canNext }) {
         <img src={arrowLeftIcon} alt="" width={11} height={17} />
       </button>
       <button
+        type="button"
         onClick={canNext ? onNext : undefined}
         aria-disabled={!canNext}
         className={`uape-learn-nav-arrow-btn${canNext ? '' : ' uape-learn-nav-arrow-btn-disabled'}`}
@@ -28,6 +30,9 @@ function NavArrows({ onPrev, onNext, canPrev, canNext }) {
 
 export default function CarouselSection({ title, subtitle, items, renderCard, perPage = 3 }) {
   const [idx, setIdx] = useState(0)
+  useEffect(() => {
+    setIdx((i) => Math.min(i, Math.max(0, items.length - perPage)))
+  }, [items.length, perPage])
   const canPrev = idx > 0
   const canNext = idx + perPage < items.length
   const visible = items.slice(idx, idx + perPage)
