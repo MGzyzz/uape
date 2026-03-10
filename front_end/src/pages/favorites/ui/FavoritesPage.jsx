@@ -5,6 +5,7 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
 import { getFavorites, removeBookmark } from '../../../api/courses.js'
+import noFavoriteIllustration from '../../../shared/assets/icons/No Favorite illustration.svg'
 
 function FavoriteIcon() {
   return <img src={favoriteActiveIcon} width={22} height={28} alt="" />
@@ -176,19 +177,24 @@ function FavoritesEmptyState() {
 
   return (
     <section className="uape-favorites-empty">
-      <h2 className="uape-favorites-empty-title">Start learning today.</h2>
-      <p className="uape-favorites-empty-text">
-        Saved courses will appear here. Browse recommendations and add the playlists
-        you want to return to.
-      </p>
-      <div className="uape-favorites-empty-actions">
-        <button
-          type="button"
-          className="uape-orange-btn uape-learn-primary-btn"
-          onClick={() => navigate('/profile')}
-        >
-          Explore courses
-        </button>
+      <img
+        src={noFavoriteIllustration}
+        alt=""
+        width={408}
+        className="uape-favorites-empty-icon"
+      />
+      <div className="uape-favorites-empty-text-group">
+        <h2 className="uape-favorites-empty-title">Start learning today.</h2>
+        <p className="uape-favorites-empty-text">
+          After saving, the course will be displayed here.{' '}
+          <button
+            type="button"
+            className="uape-favorites-empty-link"
+            onClick={() => navigate('/profile')}
+          >
+            Save now.
+          </button>
+        </p>
       </div>
     </section>
   )
