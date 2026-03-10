@@ -6,6 +6,7 @@ import LazyImage from '../../../shared/ui/LazyImage.jsx'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
 import { getFavorites, removeBookmark } from '../../../api/courses.js'
 import noFavoriteIllustration from '../../../shared/assets/icons/No Favorite illustration.svg'
+import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 
 function FavoriteIcon() {
   return <img src={favoriteActiveIcon} width={22} height={28} alt="" />
@@ -194,57 +195,70 @@ function FavoritesEmptyState() {
   )
 }
 
+function RecommendedPlaceholder() {
+  return (
+    <div className="uape-learn-section">
+      <div className="uape-learn-section-header flex items-start justify-between">
+        <h2 className="uape-learn-section-title">Courses that may be of interest</h2>
+      </div>
+      <div className="uape-learn-cards-row uape-learn-cards-row-full">
+        {[0, 1, 2].map((i) => (
+          <div key={i} style={{ flex: '0 0 auto', minWidth: 0 }}>
+            <SkeletonCard />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function FavoritesContent({ sections, onRemove }) {
   return (
     <div className="uape-favorites-sections">
       {sections.map((section) => {
         if (section.content_type === 'playlist' && section.playlists.length > 0) {
           return (
-            <section key={section.id} className="uape-favorites-section">
-              <div className="uape-learn-section-header">
-                <h2 className="uape-learn-section-title">{section.title}</h2>
-                {section.subtitle ? <p className="uape-learn-section-subtitle">{section.subtitle}</p> : null}
-              </div>
-              <div className="uape-favorites-grid">
-                {section.playlists.map((item) => (
-                  <ContentCard
-                    key={item.id}
-                    item={item}
-                    buttonLabel="View playlist"
-                    contentType="playlist"
-                    onToggle={(id) => onRemove('playlist', id)}
-                  />
-                ))}
-              </div>
-            </section>
+            <CarouselSection
+              key={section.id}
+              title={section.title}
+              subtitle={section.subtitle}
+              items={section.playlists}
+              renderCard={(item) => (
+                <ContentCard
+                  key={item.id}
+                  item={item}
+                  buttonLabel="View playlist"
+                  contentType="playlist"
+                  onToggle={(id) => onRemove('playlist', id)}
+                />
+              )}
+            />
           )
         }
 
         if (section.content_type === 'video' && section.videos.length > 0) {
           return (
-            <section key={section.id} className="uape-favorites-section">
-              <div className="uape-learn-section-header">
-                <h2 className="uape-learn-section-title">{section.title}</h2>
-                {section.subtitle ? <p className="uape-learn-section-subtitle">{section.subtitle}</p> : null}
-              </div>
-              <div className="uape-favorites-grid">
-                {section.videos.map((item) => (
-                  <ContentCard
-                    key={item.id}
-                    item={item}
-                    buttonLabel="View video"
-                    contentType="video"
-                    onToggle={(id) => onRemove('video', id)}
-                  />
-                ))}
-              </div>
-            </section>
+            <CarouselSection
+              key={section.id}
+              title={section.title}
+              subtitle={section.subtitle}
+              items={section.videos}
+              renderCard={(item) => (
+                <ContentCard
+                  key={item.id}
+                  item={item}
+                  buttonLabel="View video"
+                  contentType="video"
+                  onToggle={(id) => onRemove('video', id)}
+                />
+              )}
+            />
           )
         }
 
         if (section.content_type === 'channel' && section.channels.length > 0) {
           return (
-            <section key={section.id} className="uape-favorites-section">
+            <div key={section.id} className="uape-learn-section">
               <div className="uape-learn-section-header">
                 <h2 className="uape-learn-section-title">{section.title}</h2>
                 {section.subtitle ? <p className="uape-learn-section-subtitle">{section.subtitle}</p> : null}
@@ -254,12 +268,14 @@ function FavoritesContent({ sections, onRemove }) {
                   <ChannelCard key={item.id} item={item} onToggle={(id) => onRemove('channel', id)} />
                 ))}
               </div>
-            </section>
+            </div>
           )
         }
 
         return null
       })}
+
+      <RecommendedPlaceholder />
     </div>
   )
 }
