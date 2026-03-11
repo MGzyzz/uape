@@ -856,7 +856,7 @@ body {
 }
 
 .uape-favorites-card-title {
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .uape-favorites-card-bookmark {

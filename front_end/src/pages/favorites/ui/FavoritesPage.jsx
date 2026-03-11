@@ -4,12 +4,13 @@ import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
 import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
-import { getFavorites, removeBookmark } from '../../../api/courses.js'
+import favoriteInactiveIcon from '../../../shared/assets/icons/nonactive-favorite-icon.svg'
+import { getFavorites, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
 import noFavoriteIllustration from '../../../shared/assets/icons/No Favorite illustration.svg'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 
-function FavoriteIcon() {
-  return <img src={favoriteActiveIcon} width={22} height={28} alt="" />
+function FavoriteIcon({ active }) {
+  return <img src={active ? favoriteActiveIcon : favoriteInactiveIcon} width={22} height={28} alt="" />
 }
 
 function Tags({ tags }) {
@@ -101,9 +102,9 @@ function ContentCard({ item, buttonLabel, contentType, onToggle }) {
               event.stopPropagation()
               onToggle(item.id)
             }}
-            aria-label="Remove from favorites"
+            aria-label="Toggle favorite"
           >
-            <FavoriteIcon />
+            <FavoriteIcon active={item.favorited} />
           </button>
         </div>
 
@@ -195,24 +196,7 @@ function FavoritesEmptyState() {
   )
 }
 
-function RecommendedPlaceholder() {
-  return (
-    <div className="uape-learn-section">
-      <div className="uape-learn-section-header flex items-start justify-between">
-        <h2 className="uape-learn-section-title">Courses that may be of interest</h2>
-      </div>
-      <div className="uape-learn-cards-row uape-learn-cards-row-full">
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="uape-carousel-card-wrapper">
-            <SkeletonCard />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function FavoritesContent({ sections, onRemove }) {
+function FavoritesContent({ sections, onRemove, recommended, onRecommendedToggle }) {
   return (
     <div className="uape-favorites-sections">
       {sections.map((section) => {
@@ -275,23 +259,52 @@ function FavoritesContent({ sections, onRemove }) {
         return null
       })}
 
-      <RecommendedPlaceholder />
+      {(() => {
+        const favoritedIds = new Set(
+          sections
+            .filter((s) => s.content_type === 'playlist')
+            .flatMap((s) => s.playlists.map((p) => p.id))
+        )
+        const filtered = recommended?.playlists?.filter((p) => !favoritedIds.has(p.id)) ?? []
+        if (filtered.length === 0) return null
+        return (
+          <CarouselSection
+            title="Courses that may be of interest"
+            items={filtered}
+            renderCard={(item) => (
+              <ContentCard
+                key={item.id}
+                item={item}
+                buttonLabel="View playlist"
+                contentType="playlist"
+                onToggle={onRecommendedToggle}
+              />
+            )}
+          />
+        )
+      })()}
     </div>
   )
 }
 
 export default function FavoritesPage() {
   const [sections, setSections] = useState([])
+  const [recommended, setRecommended] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const isAuth = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
     let ignore = false
 
-    getFavorites()
-      .then((data) => {
+    const fetches = [getFavorites()]
+    if (isAuth) fetches.push(getRecommended().catch(() => null))
+
+    Promise.all(fetches)
+      .then(([favData, rec]) => {
         if (!ignore) {
-          setSections(data)
+          setSections(favData)
+          setRecommended(rec ?? null)
           setError(false)
         }
       })
@@ -305,7 +318,28 @@ export default function FavoritesPage() {
     return () => {
       ignore = true
     }
-  }, [])
+  }, [isAuth])
+
+  function handleRecommendedToggle(itemId) {
+    const item = recommended?.playlists?.find((p) => p.id === itemId)
+    if (!item) return
+
+    // Optimistically remove from recommended immediately
+    setRecommended((prev) => ({
+      ...prev,
+      playlists: prev.playlists.filter((p) => p.id !== itemId),
+    }))
+
+    addBookmark('playlist', itemId)
+      .then(() => getFavorites().then(setSections))
+      .catch(() => {
+        // Rollback on error
+        setRecommended((prev) => ({
+          ...prev,
+          playlists: [...(prev?.playlists ?? []), item],
+        }))
+      })
+  }
 
   function handleRemove(contentType, itemId) {
     setSections((prev) => (
@@ -345,7 +379,7 @@ export default function FavoritesPage() {
             ) : null}
             {!loading && !error && sections.length === 0 ? <FavoritesEmptyState /> : null}
             {!loading && !error && sections.length > 0 ? (
-              <FavoritesContent sections={sections} onRemove={handleRemove} />
+              <FavoritesContent sections={sections} onRemove={handleRemove} recommended={recommended} onRecommendedToggle={handleRecommendedToggle} />
             ) : null}
           </div>
         </section>
