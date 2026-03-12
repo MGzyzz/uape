@@ -92,7 +92,7 @@ body {
 
 /* Horizontal gutter 120px (standalone or with uape-page-container) */
 .uape-page-gutter {
-  padding-left: 120px;
+  padding-left: 60px;
   padding-right: 120px;
 }
 
