@@ -42,9 +42,12 @@ function UserDropdown({ user, onLogout }) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="uape-icon-button-reset flex items-center"
+        className="uape-icon-button-reset flex items-center gap-3"
         aria-label="User menu"
       >
+        <span className="uape-header-user-name text-uape-white">
+          {user.last_name} {user.first_name}
+        </span>
         <UserAvatar
           firstName={user.first_name}
           lastName={user.last_name}
@@ -116,10 +119,7 @@ function SiteHeader({ compact = false }) {
             </span>
           </nav>
 
-          <div className="flex items-center justify-end gap-3">
-            <span className="uape-header-user-name text-uape-white">
-              {user.last_name} {user.first_name}
-            </span>
+          <div className="flex items-center justify-end">
             <UserDropdown user={user} onLogout={handleLogout} />
           </div>
         </div>

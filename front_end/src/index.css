@@ -319,11 +319,6 @@ body {
 
 .uape-learn-content-card-clickable {
   cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.uape-learn-content-card-clickable:hover {
-  opacity: 0.85;
 }
 
 .uape-learn-thumb-wrap {
