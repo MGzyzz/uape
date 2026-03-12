@@ -83,7 +83,7 @@ function SiteHeader({ compact = false }) {
 
   const handleLogout = () => {
     clearTokens()
-    navigate('/login')
+    navigate('/')
   }
 
   if (isAuth) {
