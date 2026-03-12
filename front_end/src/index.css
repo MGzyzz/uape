@@ -1578,3 +1578,433 @@ body {
   color: #A31E89;
   background: rgba(163, 30, 137, 0.08);
 }
+
+/* ─── About Us Page ─────────────────────────────────────────────────────── */
+
+.uape-about-hero {
+  padding-top: 60px;
+}
+
+.uape-about-hero-image {
+  position: relative;
+  width: 100%;
+  height: 492px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.uape-about-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uape-about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 16, 17, 0.45);
+}
+
+.uape-about-hero-text-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.uape-about-hero-title {
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 68px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+/* About description block */
+
+main > .uape-about-desc-section {
+  margin-top: 60px;
+}
+
+.uape-about-desc-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 60px;
+}
+
+.uape-about-desc-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-desc-columns {
+  display: flex;
+  gap: 28px;
+}
+
+.uape-about-desc-text {
+  flex: 1;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+/* Uape in Numbers */
+
+.uape-about-numbers-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+
+.uape-about-numbers-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-numbers-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.uape-about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 260px;
+}
+
+.uape-about-stat-value {
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 76px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+}
+
+.uape-about-stat-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+}
+
+.uape-about-numbers-divider {
+  width: 1px;
+  height: 164px;
+  background: var(--color-uape-border-soft);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* Our Story */
+
+main > .uape-about-story-section {
+  margin-top: 160px;
+}
+
+.uape-about-story-inner {
+  display: flex;
+  gap: 52px;
+  align-items: center;
+  padding-bottom: 60px;
+}
+
+.uape-about-story-left {
+  width: 643px;
+  height: 440px;
+  flex-shrink: 0;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.uape-about-story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uape-about-story-right {
+  width: 505px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.uape-about-story-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-story-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-about-story-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+/* What We Believe */
+
+main > .uape-about-believe-section {
+  margin-top: 100px;
+}
+
+.uape-about-believe-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+
+.uape-about-believe-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.uape-about-believe-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-believe-subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+.uape-about-believe-cards {
+  display: flex;
+  gap: 28px;
+}
+
+.uape-about-believe-card {
+  flex: 1;
+  height: 280px;
+  border-radius: 16px;
+  border: 1px solid var(--color-uape-border-soft);
+  background: #181A1B;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.uape-about-believe-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.uape-about-believe-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.uape-about-believe-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-about-believe-card-title {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-believe-card-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+/* What Makes Uape Different */
+
+main > .uape-about-different-section {
+  margin-top: 100px;
+}
+
+.uape-about-different-inner {
+  display: flex;
+  gap: 81px;
+  align-items: flex-start;
+  padding-bottom: 60px;
+}
+
+.uape-about-different-left {
+  width: 505px;
+  flex-shrink: 0;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.uape-about-different-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-different-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.uape-about-different-item {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+}
+
+.uape-about-different-right {
+  width: 614px;
+  height: 440px;
+  flex-shrink: 0;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.uape-about-different-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Start Learning Smarter CTA */
+
+main > .uape-about-cta-section {
+  margin-top: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.uape-about-cta-section .uape-section-shell {
+  background: linear-gradient(to bottom, transparent 50%, #181A1B 50%);
+}
+
+.uape-about-us-page .uape-footer-shell {
+  padding-top: 212px;
+}
+
+
+.uape-about-cta-card {
+  position: relative;
+  height: 412px;
+  border-radius: 24px;
+  background: var(--color-uape-form-bg);
+  overflow: hidden;
+}
+
+.uape-about-cta-content {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  width: 506px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.uape-about-cta-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-about-cta-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-about-cta-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 440px;
+}
+
+.uape-about-cta-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+.uape-about-cta-icon {
+  position: absolute;
+  top: -70px;
+  left: 670px;
+  width: 508px;
+  height: 508px;
+  pointer-events: none;
+  user-select: none;
+}

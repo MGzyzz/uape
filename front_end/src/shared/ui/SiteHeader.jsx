@@ -99,9 +99,12 @@ function SiteHeader({ compact = false }) {
             >
               Home
             </NavLink>
-            <span className="opacity-40 cursor-not-allowed select-none">
+            <NavLink
+              className={({ isActive }) => isActive ? 'uape-nav-link-active' : 'transition hover:text-uape-white'}
+              to="/about-us"
+            >
               About Us
-            </span>
+            </NavLink>
             <NavLink
               className={({ isActive }) => isActive ? 'uape-nav-link-active' : 'transition hover:text-uape-white'}
               to="/favorites"
