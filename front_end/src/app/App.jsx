@@ -11,6 +11,7 @@ import VerifyEmailSentPage from '../pages/auth/ui/VerifyEmailSentPage.jsx'
 import VerifyEmailPage from '../pages/auth/ui/VerifyEmailPage.jsx'
 import FavoritesPage from '../pages/favorites/ui/FavoritesPage.jsx'
 import AboutUsPage from '../pages/about-us/ui/AboutUsPage.jsx'
+import DiagnosticPage from '../pages/diagnostic/ui/DiagnosticPage.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -32,6 +33,7 @@ function App() {
         <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
         <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
         <Route path="/about-us" element={<AboutUsPage />} />
+        <Route path="/diagnostic" element={<DiagnosticPage />} />
         <Route path="/playlist/:id" element={<CourseDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import workplaceImg from '../../../../shared/assets/solution/workplace.jpg'
 
 const steps = [
@@ -63,13 +64,12 @@ function AssessmentSection() {
               <p className="w-[244px] font-figtree text-[20px] font-medium leading-7 tracking-[0%] text-white">
                 Accurate assessment leads to smarter learning.
               </p>
-              <button
-                type="button"
-                disabled
-                className="uape-orange-btn inline-flex h-12 w-[163px] shrink-0 items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6 opacity-50"
+              <Link
+                to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+                className="uape-orange-btn inline-flex h-12 w-[163px] shrink-0 items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
               >
                 Start diagnostic
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ function CtaSection() {
             confidence.
           </p>
           <Link
-            to="/signup"
+            to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
             className="uape-orange-btn font-figtree inline-flex h-12 w-[163px] items-center justify-center rounded-[8px] px-6 py-3 text-[16px] font-normal leading-6 tracking-[0%]"
           >
             Start diagnostic

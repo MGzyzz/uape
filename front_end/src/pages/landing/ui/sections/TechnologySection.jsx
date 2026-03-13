@@ -74,7 +74,7 @@ function TechnologySection() {
           </p>
           </div>
           <Link
-            to="/signup"
+            to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
             className="uape-orange-btn font-figtree inline-flex h-12 w-[163px] items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
           >
             Start diagnostic

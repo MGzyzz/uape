@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import heroImg from '../../../shared/assets/solution/Frame 440.png'
@@ -131,9 +132,12 @@ function StartLearningSmarterSection() {
                 </p>
               </div>
             </div>
-            <button className="uape-orange-btn uape-diagnostic-start-btn">
+            <Link
+              to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+              className="uape-orange-btn uape-diagnostic-start-btn"
+            >
               Start diagnostic
-            </button>
+            </Link>
           </div>
           <img src={rideIcon} alt="" aria-hidden="true" className="uape-about-cta-icon" />
         </div>

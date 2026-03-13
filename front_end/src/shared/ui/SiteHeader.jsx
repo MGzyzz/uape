@@ -114,9 +114,12 @@ function SiteHeader({ compact = false }) {
             >
               My Learning
             </NavLink>
-            <span className="opacity-40 cursor-not-allowed select-none">
+            <NavLink
+              className={({ isActive }) => isActive ? 'uape-nav-link-active' : 'transition hover:text-uape-white'}
+              to="/diagnostic"
+            >
               Diagnostic
-            </span>
+            </NavLink>
           </nav>
 
           <div className="flex items-center justify-end">

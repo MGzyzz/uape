@@ -2001,3 +2001,82 @@ main > .uape-about-cta-section {
   pointer-events: none;
   user-select: none;
 }
+
+/* ─── Diagnostic Page ───────────────────────────────────────────────────── */
+
+.uape-diagnostic-section {
+  margin-top: 164px;
+  margin-bottom: 164px;
+}
+
+.uape-diagnostic-inner {
+  display: flex;
+  gap: 102px;
+  align-items: flex-start;
+}
+
+.uape-diagnostic-left {
+  width: 512px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.uape-diagnostic-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.uape-diagnostic-heading {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-diagnostic-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uape-diagnostic-paragraph {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-diagnostic-paragraph-medium {
+  font-weight: 500;
+}
+
+.uape-diagnostic-right {
+  width: 586px;
+  height: 586px;
+  flex-shrink: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.uape-diagnostic-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.uape-diagnostic-icon {
+  position: absolute;
+  top: -215.51px;
+  left: -53.01px;
+  width: 602px;
+  pointer-events: none;
+  user-select: none;
+  backdrop-filter: blur(8px);
+}
