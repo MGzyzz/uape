@@ -1934,9 +1934,6 @@ main > .uape-about-cta-section {
   margin-top: 100px;
   position: relative;
   z-index: 1;
-}
-
-.uape-about-cta-section .uape-section-shell {
   background: linear-gradient(to bottom, transparent 50%, #181A1B 50%);
 }
 
