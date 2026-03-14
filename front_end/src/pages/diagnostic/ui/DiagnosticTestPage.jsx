@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BrandLogo from '../../../shared/ui/BrandLogo.jsx'
 import { LANGUAGES, DIAGNOSTIC_DATA, TYPE_LABELS } from '../data/diagnosticData.js'
@@ -237,6 +237,28 @@ export default function DiagnosticTestPage() {
       return next
     })
   }
+
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
+
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        handleNext()
+        return
+      }
+
+      if (step >= 1 && !isMiniTask && currentQuestion) {
+        const num = parseInt(e.key, 10)
+        if (num >= 1 && num <= (currentQuestion.options?.length ?? 0)) {
+          selectAnswer(num - 1)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [step, isMiniTask, currentQuestion, answers, textAnswers, language, submitting])
 
   async function handleSubmit() {
     setSubmitting(true)
