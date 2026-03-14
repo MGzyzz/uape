@@ -1,8 +1,36 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import bgImg from '../../../shared/assets/solution/Frame 503.png'
+import AssessmentResultSection from '../../profile/ui/AssessmentResultSection.jsx'
+import { getCachedResults, getAssessmentResults, setCachedResult } from '../../../api/assessment.js'
 
 function DiagnosticPage() {
+  const navigate = useNavigate()
+  const [assessmentResult, setAssessmentResult] = useState(null)
+
+  useEffect(() => {
+    const cached = getCachedResults()
+    const keys = Object.keys(cached)
+    if (keys.length > 0) {
+      const firstKey = keys[0]
+      setAssessmentResult({ level: cached[firstKey].level, language: firstKey })
+      return
+    }
+    if (localStorage.getItem('access')) {
+      getAssessmentResults()
+        .then((list) => {
+          if (list.length > 0) {
+            const first = list[0]
+            setCachedResult(first.language, first.level, first.score)
+            setAssessmentResult({ level: first.level, language: first.language })
+          }
+        })
+        .catch(() => {})
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-uape-bg text-uape-white">
       <SiteHeader />
@@ -18,7 +46,7 @@ function DiagnosticPage() {
                 <div className="uape-diagnostic-body">
                   <p className="uape-diagnostic-paragraph">
                     Before we build your personalized learning path, we need to understand your
-                    current knowledge. This short diagnostic will help us evaluate your Python
+                    current knowledge. This short diagnostic will help us evaluate your programming
                     skills and identify areas where you can improve.
                   </p>
                   <p className="uape-diagnostic-paragraph">
@@ -38,7 +66,7 @@ function DiagnosticPage() {
                   </p>
                 </div>
               </div>
-              <button className="uape-orange-btn uape-diagnostic-start-btn">
+              <button className="uape-orange-btn uape-diagnostic-start-btn" onClick={() => navigate('/diagnostic/test')}>
                 Start diagnostic
               </button>
             </div>
@@ -49,6 +77,10 @@ function DiagnosticPage() {
 
           </div>
         </section>
+
+        {assessmentResult && (
+          <AssessmentResultSection level={assessmentResult.level} language={assessmentResult.language} />
+        )}
       </main>
       <SiteFooter />
     </div>

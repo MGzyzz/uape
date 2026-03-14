@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from accounts.models import User, Profile, UserOnboarding
+from accounts.models import User, Profile, UserOnboarding, AssessmentResult
 
 
 class ProfileInline(admin.StackedInline):
@@ -35,3 +35,9 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
     search_fields = ['email', 'first_name', 'last_name']
+
+
+@admin.register(AssessmentResult)
+class AssessmentResultAdmin(admin.ModelAdmin):
+    list_display = ('user', 'score', 'created_at')
+    readonly_fields = ('user', 'score', 'created_at')

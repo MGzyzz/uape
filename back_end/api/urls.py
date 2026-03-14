@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from api.views import LoginView, RegisterView, GoogleAuthView, ProfileView, OnboardingView, VerifyEmailView, ResendVerificationView
+from accounts.views.assessment import AssessmentSubmitView, AssessmentResultsView
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -14,4 +15,6 @@ urlpatterns = [
     path('auth/resend-verification/', ResendVerificationView.as_view(), name='resend_verification'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('onboarding/', OnboardingView.as_view(), name='onboarding'),
+    path('assessment/submit/', AssessmentSubmitView.as_view(), name='assessment_submit'),
+    path('assessment/results/', AssessmentResultsView.as_view(), name='assessment_results'),
 ]

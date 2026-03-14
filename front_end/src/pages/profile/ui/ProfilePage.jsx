@@ -6,7 +6,6 @@ import { getStoredUser, getProfile, saveUser } from '../../../api/auth.js'
 import { getOnboarding } from '../../../api/onboarding.js'
 import authPageBg from '../../../shared/assets/solution/auth-page.png'
 import WhatToLearnNextSection from './WhatToLearnNextSection.jsx'
-import AssessmentResultSection from './AssessmentResultSection.jsx'
 
 function ProfilePage() {
   const navigate = useNavigate()
@@ -65,7 +64,6 @@ function ProfilePage() {
       <SiteHeader />
       <main className="flex-1">
         <HeroSection user={user} occupation={occupation} />
-        <AssessmentResultSection />
         <WhatToLearnNextSection />
       </main>
       <SiteFooter />
@@ -150,7 +148,7 @@ function DiagnosticCard({ navigate }) {
       </p>
       <button
         className="uape-orange-btn uape-learn-primary-btn uape-diagnostic-start-btn"
-        onClick={() => navigate('/onboarding')}
+        onClick={() => navigate('/diagnostic')}
       >
         Start diagnostic
       </button>

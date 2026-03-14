@@ -5,7 +5,8 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from accounts.models import User, EmailVerification
+from accounts.models import User, EmailVerification, AssessmentResult
+from accounts.models.assessment_result import compute_level
 
 
 class EmailVerificationModelTest(TestCase):
@@ -115,3 +116,171 @@ class ResendVerificationViewTest(TestCase):
         response = self.client.post(reverse('resend_verification'), {'email': 'resend@example.com'},
                                     content_type='application/json')
         self.assertEqual(response.status_code, 429)
+
+
+class ComputeLevelTest(TestCase):
+    def test_score_0_is_beginner(self):
+        self.assertEqual(compute_level(0), 'beginner')
+
+    def test_score_5_is_beginner(self):
+        self.assertEqual(compute_level(5), 'beginner')
+
+    def test_score_6_is_intermediate(self):
+        self.assertEqual(compute_level(6), 'intermediate')
+
+    def test_score_10_is_intermediate(self):
+        self.assertEqual(compute_level(10), 'intermediate')
+
+    def test_score_11_is_advanced(self):
+        self.assertEqual(compute_level(11), 'advanced')
+
+    def test_score_15_is_advanced(self):
+        self.assertEqual(compute_level(15), 'advanced')
+
+class AssessmentResultModelTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email='assess@example.com',
+            password='password123',
+            first_name='Test',
+            last_name='User',
+            is_active=True,
+        )
+
+    def test_create_result(self):
+        result = AssessmentResult.objects.create(
+            user=self.user,
+            language='python',
+            score=9,
+            level='intermediate',
+        )
+        self.assertEqual(str(result), f'{self.user} — python — intermediate')
+
+    def test_unique_together_user_language(self):
+        AssessmentResult.objects.create(user=self.user, language='python', score=9, level='intermediate')
+        with self.assertRaises(Exception):
+            AssessmentResult.objects.create(user=self.user, language='python', score=5, level='beginner')
+
+
+class AssessmentAPITest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email='apitest@example.com',
+            password='password123',
+            first_name='Api',
+            last_name='User',
+            is_active=True,
+        )
+        login_res = self.client.post(
+            reverse('login'),
+            {'email': 'apitest@example.com', 'password': 'password123'},
+            content_type='application/json',
+        )
+        self.access = login_res.data['access']
+
+    def _auth(self):
+        return {'HTTP_AUTHORIZATION': f'Bearer {self.access}'}
+
+    def test_submit_creates_result_with_level(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 9},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.status_code, 201)
+        self.assertEqual(res.data['level'], 'intermediate')
+        self.assertEqual(res.data['score'], 9)
+        self.assertEqual(res.data['language'], 'python')
+
+    def test_submit_score_0_gives_beginner(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 0},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.data['level'], 'beginner')
+
+    def test_submit_score_15_gives_advanced(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 15},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.data['level'], 'advanced')
+
+    def test_submit_duplicate_returns_400_with_detail(self):
+        self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 9},
+            content_type='application/json',
+            **self._auth(),
+        )
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 5},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.data['detail'], 'already_exists')
+        self.assertIn('level', res.data)
+        self.assertIn('score', res.data)
+        self.assertIn('language', res.data)
+
+    def test_submit_score_above_max_returns_400(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 16},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.status_code, 400)
+
+    def test_submit_score_below_min_returns_400(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': -1},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.status_code, 400)
+
+    def test_submit_invalid_language_returns_400(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'ruby', 'score': 9},
+            content_type='application/json',
+            **self._auth(),
+        )
+        self.assertEqual(res.status_code, 400)
+
+    def test_submit_unauthenticated_returns_401(self):
+        res = self.client.post(
+            reverse('assessment_submit'),
+            {'language': 'python', 'score': 9},
+            content_type='application/json',
+        )
+        self.assertEqual(res.status_code, 401)
+
+    def test_get_results_returns_list(self):
+        AssessmentResult.objects.create(
+            user=self.user, language='python', score=9, level='intermediate'
+        )
+        res = self.client.get(reverse('assessment_results'), **self._auth())
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data), 1)
+        self.assertEqual(res.data[0]['language'], 'python')
+        self.assertIn('level', res.data[0])
+        self.assertIn('score', res.data[0])
+
+    def test_get_results_empty_list(self):
+        res = self.client.get(reverse('assessment_results'), **self._auth())
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data, [])
+
+    def test_get_results_unauthenticated_returns_401(self):
+        res = self.client.get(reverse('assessment_results'))
+        self.assertEqual(res.status_code, 401)
