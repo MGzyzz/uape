@@ -5,20 +5,25 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import bgImg from '../../../shared/assets/solution/Frame 503.png'
 import AssessmentResultSection from '../../profile/ui/AssessmentResultSection.jsx'
 import { getCachedResults, getAssessmentResults, setCachedResult } from '../../../api/assessment.js'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 function DiagnosticPage() {
   const navigate = useNavigate()
-  const [assessmentResult, setAssessmentResult] = useState(null)
-
-  useEffect(() => {
+  const { isAuth } = useAuth()
+  const [assessmentResult, setAssessmentResult] = useState(() => {
     const cached = getCachedResults()
     const keys = Object.keys(cached)
     if (keys.length > 0) {
       const firstKey = keys[0]
-      setAssessmentResult({ level: cached[firstKey].level, language: firstKey })
-      return
+      return { level: cached[firstKey].level, language: firstKey }
     }
-    if (localStorage.getItem('access')) {
+    return null
+  })
+
+  useEffect(() => {
+    const cached = getCachedResults()
+    if (Object.keys(cached).length > 0) return
+    if (isAuth) {
       getAssessmentResults()
         .then((list) => {
           if (list.length > 0) {
@@ -29,7 +34,7 @@ function DiagnosticPage() {
         })
         .catch(() => {})
     }
-  }, [])
+  }, [isAuth])
 
   return (
     <div className="min-h-screen bg-uape-bg text-uape-white">

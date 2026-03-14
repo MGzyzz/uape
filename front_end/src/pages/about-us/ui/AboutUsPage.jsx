@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../../app/AuthContext.jsx'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import heroImg from '../../../shared/assets/solution/Frame 440.png'
@@ -114,6 +115,7 @@ function WhatMakesDifferentSection() {
 }
 
 function StartLearningSmarterSection() {
+  const { isAuth } = useAuth()
   return (
     <section className="uape-about-cta-section">
       <div className="uape-section-shell uape-about-cta-wrapper">
@@ -133,7 +135,7 @@ function StartLearningSmarterSection() {
               </div>
             </div>
             <Link
-              to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+              to={isAuth ? '/diagnostic' : '/login'}
               className="uape-orange-btn uape-diagnostic-start-btn"
             >
               Start diagnostic

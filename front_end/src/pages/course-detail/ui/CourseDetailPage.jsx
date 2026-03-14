@@ -7,8 +7,9 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { getPlaylist, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
 import arrowLeftIcon from '../../../shared/assets/icons/arrow-left.svg'
 import arrowRightIcon from '../../../shared/assets/icons/arrow-right.svg'
-import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
-import favoriteInactiveIcon from '../../../shared/assets/icons/nonactive-favorite-icon.svg'
+import FavoriteIcon from '../../../shared/ui/FavoriteIcon.jsx'
+import ContentTags from '../../../shared/ui/ContentTags.jsx'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 // ─── "About This Course" template ─────────────────────────────────────────────
 
@@ -23,15 +24,7 @@ function buildAbout(language) {
 // ─── Small helpers ─────────────────────────────────────────────────────────────
 
 function Tags({ tags }) {
-  return (
-    <div className="uape-detail-tags">
-      {tags.map((tag) => (
-        <span key={tag.id ?? tag.name} className="uape-learn-tag" style={{ color: tag.color }}>
-          {tag.name}
-        </span>
-      ))}
-    </div>
-  )
+  return <ContentTags tags={tags} />
 }
 
 // ─── Rich-text блоки (HTML из CKEditor5) ──────────────────────────────────────
@@ -53,7 +46,7 @@ function RichTextSection({ title, html }) {
 
 function RecommendedCard({ item, onToggle }) {
   const navigate = useNavigate()
-  const isAuth = Boolean(localStorage.getItem('access'))
+  const { isAuth } = useAuth()
 
   return (
     <div
@@ -76,12 +69,7 @@ function RecommendedCard({ item, onToggle }) {
               className="uape-icon-button-reset"
               aria-label="Favourite"
             >
-              <img
-                src={item.favorited ? favoriteActiveIcon : favoriteInactiveIcon}
-                width={22}
-                height={28}
-                alt=""
-              />
+              <FavoriteIcon active={item.favorited} />
             </button>
           )}
         </div>
@@ -154,9 +142,10 @@ export default function CourseDetailPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [recommended, setRecommended] = useState([])
-  const isAuth = Boolean(localStorage.getItem('access'))
+  const { isAuth } = useAuth()
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
     setError(false)
     const fetches = [getPlaylist(id)]
@@ -259,11 +248,7 @@ function DetailContent({ playlist, favorited, onToggleMain, recommended, onToggl
                   className="uape-detail-fav-btn"
                   aria-label="Favourite"
                 >
-                  <img
-                    src={favorited ? favoriteActiveIcon : favoriteInactiveIcon}
-                    className="uape-detail-fav-icon"
-                    alt=""
-                  />
+                  <FavoriteIcon active={favorited} />
                 </button>
               )}
             </div>

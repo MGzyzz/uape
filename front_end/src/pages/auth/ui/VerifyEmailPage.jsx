@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { verifyEmail, saveTokens, saveUser, getProfile, resendVerification } from '../../../api/auth.js'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 function ResendForm() {
   const [email, setEmail] = useState('')
@@ -48,26 +49,27 @@ function ResendForm() {
 function VerifyEmailPage() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const { setUser } = useAuth()
   const token = searchParams.get('token')
 
-  const [verifyStatus, setVerifyStatus] = useState('loading')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [verifyStatus, setVerifyStatus] = useState(() => token ? 'loading' : 'error')
+  const [errorMsg, setErrorMsg] = useState(() => token ? '' : 'No verification token found.')
 
   useEffect(() => {
-    if (!token) {
-      setVerifyStatus('error')
-      setErrorMsg('No verification token found.')
-      return
-    }
+    if (!token) return
 
     verifyEmail(token)
       .then(async (data) => {
         saveTokens(data)
         try {
           const profile = await getProfile()
-          saveUser({ first_name: data.first_name, last_name: data.last_name, photo: profile.avatar ?? null })
+          const u = { first_name: data.first_name, last_name: data.last_name, photo: profile.avatar ?? null }
+          saveUser(u)
+          setUser(u)
         } catch {
-          saveUser({ first_name: data.first_name, last_name: data.last_name })
+          const u = { first_name: data.first_name, last_name: data.last_name }
+          saveUser(u)
+          setUser(u)
         }
         setVerifyStatus('success')
         setTimeout(() => navigate('/onboarding', { replace: true }), 1500)
@@ -77,7 +79,7 @@ function VerifyEmailPage() {
         setErrorMsg(detail)
         setVerifyStatus('error')
       })
-  }, [token])
+  }, [token, navigate, setUser])
 
   return (
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">

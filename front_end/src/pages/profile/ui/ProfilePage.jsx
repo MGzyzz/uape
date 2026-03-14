@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
-import { getStoredUser, getProfile, saveUser } from '../../../api/auth.js'
+import { getProfile, saveUser } from '../../../api/auth.js'
 import { getOnboarding } from '../../../api/onboarding.js'
-import authPageBg from '../../../shared/assets/solution/auth-page.png'
+import profileWelcomeBg from '../../../shared/assets/solution/profile-welcome.png'
 import WhatToLearnNextSection from './WhatToLearnNextSection.jsx'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 function ProfilePage() {
   const navigate = useNavigate()
-  const [user, setUser] = useState(getStoredUser)
+  const { user, isAuth, setUser } = useAuth()
   const [occupation, setOccupation] = useState(null)
-  const hasAccessToken = Boolean(localStorage.getItem('access'))
 
   useEffect(() => {
-    if (!hasAccessToken || !user) {
+    if (!isAuth) {
       navigate('/login')
       return
     }
@@ -37,9 +37,7 @@ function ProfilePage() {
             prev?.first_name === updated.first_name &&
             prev?.last_name === updated.last_name &&
             prev?.photo === updated.photo
-          ) {
-            return prev
-          }
+          ) return prev
           return updated
         })
       })
@@ -55,7 +53,8 @@ function ProfilePage() {
     return () => {
       ignore = true
     }
-  }, [hasAccessToken, navigate])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuth, navigate])
 
   if (!user) return null
 
@@ -125,7 +124,7 @@ function HeroSection({ user, occupation }) {
       {/* Background image area — diagnostic card inside */}
       <div className="uape-profile-hero-image-area relative overflow-hidden">
         <img
-          src={authPageBg}
+          src={profileWelcomeBg}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover pointer-events-none select-none"

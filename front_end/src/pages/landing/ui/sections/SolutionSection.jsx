@@ -1,3 +1,6 @@
+import skillLevelImg from '../../../../shared/assets/solution/skill-level.png'
+import saveTimeImg from '../../../../shared/assets/solution/save-time.png'
+
 const solutionIcons = [
   { id: 'vector', src: '/assets/solution/icons/vector.svg' },
   { id: 'vector-1', src: '/assets/solution/icons/vector-1.svg' },
@@ -16,12 +19,12 @@ function SolutionSection() {
           <div className="grid gap-7 md:grid-cols-[614px_558px]">
             <article className="uape-surface-card-strong relative h-[512px] w-[614px]">
               <img
-                src="/assets/solution/skill-level.jpg"
+                src={skillLevelImg}
                 alt=""
                 aria-hidden="true"
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/25" />
+              <div className="absolute inset-0" />
               <CardTextContent
                 title="We identify your real skill level"
                 description="Not by guesses, but by actual tasks and code analysis."
@@ -80,12 +83,12 @@ function SolutionSection() {
 
             <article className="uape-surface-card-strong relative h-[512px] w-[614px]">
               <img
-                src="/assets/solution/save-time.jpg"
+                src={saveTimeImg}
                 alt=""
                 aria-hidden="true"
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0" />
               <CardTextContent
                 title="We save your time"
                 description="You focus only on what you really need to learn."

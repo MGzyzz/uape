@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
-import ctaImage from '../../../../shared/assets/solution/working-process.jpg'
+import ctaImage from '../../../../shared/assets/solution/working-process.png'
+import { useAuth } from '../../../../app/AuthContext.jsx'
 
 function CtaSection() {
+  const { isAuth } = useAuth()
   return (
     <section className="relative">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-[#181A1B]" aria-hidden="true" />
@@ -17,7 +19,7 @@ function CtaSection() {
             confidence.
           </p>
           <Link
-            to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+            to={isAuth ? '/diagnostic' : '/login'}
             className="uape-orange-btn font-figtree inline-flex h-12 w-[163px] items-center justify-center rounded-[8px] px-6 py-3 text-[16px] font-normal leading-6 tracking-[0%]"
           >
             Start diagnostic

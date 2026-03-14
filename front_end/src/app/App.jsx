@@ -1,19 +1,28 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import LandingPage from '../pages/landing/ui/LandingPage.jsx'
-import AuthPage from '../pages/auth/ui/AuthPage.jsx'
-import ProfilePage from '../pages/profile/ui/ProfilePage.jsx'
-import OnboardingPage from '../pages/onboarding/ui/OnboardingPage.jsx'
-import NotFoundPage from '../pages/not-found/ui/NotFoundPage.jsx'
-import CourseDetailPage from '../pages/course-detail/ui/CourseDetailPage.jsx'
+import { useEffect, lazy, Suspense } from 'react'
 import ProtectedRoute from './ProtectedRoute.jsx'
-import VerifyEmailSentPage from '../pages/auth/ui/VerifyEmailSentPage.jsx'
-import VerifyEmailPage from '../pages/auth/ui/VerifyEmailPage.jsx'
-import FavoritesPage from '../pages/favorites/ui/FavoritesPage.jsx'
-import AboutUsPage from '../pages/about-us/ui/AboutUsPage.jsx'
-import DiagnosticPage from '../pages/diagnostic/ui/DiagnosticPage.jsx'
-import DiagnosticTestPage from '../pages/diagnostic/ui/DiagnosticTestPage.jsx'
-import DiagnosticResultPage from '../pages/diagnostic/ui/DiagnosticResultPage.jsx'
+
+const LandingPage        = lazy(() => import('../pages/landing/ui/LandingPage.jsx'))
+const AuthPage           = lazy(() => import('../pages/auth/ui/AuthPage.jsx'))
+const ProfilePage        = lazy(() => import('../pages/profile/ui/ProfilePage.jsx'))
+const OnboardingPage     = lazy(() => import('../pages/onboarding/ui/OnboardingPage.jsx'))
+const NotFoundPage       = lazy(() => import('../pages/not-found/ui/NotFoundPage.jsx'))
+const CourseDetailPage   = lazy(() => import('../pages/course-detail/ui/CourseDetailPage.jsx'))
+const VerifyEmailSentPage = lazy(() => import('../pages/auth/ui/VerifyEmailSentPage.jsx'))
+const VerifyEmailPage    = lazy(() => import('../pages/auth/ui/VerifyEmailPage.jsx'))
+const FavoritesPage      = lazy(() => import('../pages/favorites/ui/FavoritesPage.jsx'))
+const AboutUsPage        = lazy(() => import('../pages/about-us/ui/AboutUsPage.jsx'))
+const DiagnosticPage     = lazy(() => import('../pages/diagnostic/ui/DiagnosticPage.jsx'))
+const DiagnosticTestPage = lazy(() => import('../pages/diagnostic/ui/DiagnosticTestPage.jsx'))
+const DiagnosticResultPage = lazy(() => import('../pages/diagnostic/ui/DiagnosticResultPage.jsx'))
+
+function PageLoader() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-uape-bg">
+      <div className="uape-spinner" />
+    </div>
+  )
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -25,6 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<AuthPage mode="signup" />} />
@@ -41,6 +51,7 @@ function App() {
         <Route path="/playlist/:id" element={<CourseDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }

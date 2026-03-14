@@ -17,16 +17,11 @@ export default function DiagnosticResultPage() {
   const lang = searchParams.get('lang') ?? 'python'
   const langMeta = LANGUAGES.find((l) => l.key === lang)
 
-  const [result, setResult] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [result, setResult] = useState(() => getCachedResult(lang) ?? null)
+  const [loading, setLoading] = useState(() => !getCachedResult(lang))
 
   useEffect(() => {
-    const cached = getCachedResult(lang)
-    if (cached) {
-      setResult(cached)
-      setLoading(false)
-      return
-    }
+    if (getCachedResult(lang)) return
     getAssessmentResults()
       .then((list) => {
         const found = list.find((r) => r.language === lang)

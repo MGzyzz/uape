@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import workplaceImg from '../../../../shared/assets/solution/workplace.jpg'
+import workplaceImg from '../../../../shared/assets/solution/workplace.png'
+import { useAuth } from '../../../../app/AuthContext.jsx'
 
 const steps = [
   {
@@ -25,6 +26,7 @@ const steps = [
 ]
 
 function AssessmentSection() {
+  const { isAuth } = useAuth()
   return (
     <section id="assessment" className="bg-uape-bg">
       <div className="uape-section-shell flex flex-col gap-[60px]">
@@ -65,7 +67,7 @@ function AssessmentSection() {
                 Accurate assessment leads to smarter learning.
               </p>
               <Link
-                to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+                to={isAuth ? '/diagnostic' : '/login'}
                 className="uape-orange-btn inline-flex h-12 w-[163px] shrink-0 items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
               >
                 Start diagnostic

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FiSettings, FiLogOut } from 'react-icons/fi'
 import BrandLogo from './BrandLogo.jsx'
-import { getStoredUser, clearTokens } from '../../api/auth.js'
+import { useAuth } from '../../app/AuthContext.jsx'
 
 function UserAvatar({ firstName, lastName, photo }) {
   const initials = `${firstName?.[0] ?? ''}${lastName?.[0] ?? ''}`.toUpperCase()
@@ -77,12 +77,11 @@ function UserDropdown({ user, onLogout }) {
 }
 
 function SiteHeader({ compact = false }) {
-  const user = getStoredUser()
-  const isAuth = Boolean(localStorage.getItem('access')) && Boolean(user)
+  const { user, isAuth, logout } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    clearTokens()
+    logout()
     navigate('/')
   }
 

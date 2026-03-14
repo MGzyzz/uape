@@ -3,14 +3,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useGoogleLogin } from '@react-oauth/google'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
-import authImage from '../../../shared/assets/solution/auth.jpg'
-import welcomeBackImage from '../../../shared/assets/solution/welcome-back.png'
+import signUpImage from '../../../shared/assets/solution/sign-up.png'
+import logInImage from '../../../shared/assets/solution/log-in.png'
 import eyeIcon from '../../../shared/assets/icons/Eye.svg'
 import { register, login, googleAuth, saveTokens, saveUser, getProfile, resendVerification } from '../../../api/auth.js'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 function AuthPage({ mode }) {
   const isSignup = mode === 'signup'
   const navigate = useNavigate()
+  const { setUser } = useAuth()
 
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -79,9 +81,13 @@ function AuthPage({ mode }) {
         saveTokens(tokens)
         try {
           const profile = await getProfile()
-          saveUser({ first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null })
+          const u = { first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null }
+          saveUser(u)
+          setUser(u)
         } catch {
-          saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
+          const u = { first_name: tokens.first_name, last_name: tokens.last_name }
+          saveUser(u)
+          setUser(u)
         }
         navigate(tokens.is_new ? '/onboarding' : '/profile')
       } catch {
@@ -115,9 +121,13 @@ function AuthPage({ mode }) {
       saveTokens(tokens)
       try {
         const profile = await getProfile()
-        saveUser({ first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null })
+        const u = { first_name: tokens.first_name, last_name: tokens.last_name, photo: profile.avatar ?? null }
+        saveUser(u)
+        setUser(u)
       } catch {
-        saveUser({ first_name: tokens.first_name, last_name: tokens.last_name })
+        const u = { first_name: tokens.first_name, last_name: tokens.last_name }
+        saveUser(u)
+        setUser(u)
       }
       navigate('/profile')
     } catch (err) {
@@ -140,13 +150,9 @@ function AuthPage({ mode }) {
   const imageSection = (
     <section className="relative h-[856px] w-[586px] overflow-hidden rounded-3xl">
       <img
-        src={isSignup ? authImage : welcomeBackImage}
+        src={isSignup ? signUpImage : logInImage}
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
-        style={isSignup
-          ? { transform: 'translateX(-35%) rotate(270deg) scale(1.5)', transformOrigin: 'center' }
-          : undefined
-        }
       />
       <div className="relative flex h-full items-end p-[52px]">
         <h2 className="w-[424px] font-figtree text-[40px] font-semibold leading-[44px]">

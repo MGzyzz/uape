@@ -1,35 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
-import favoriteInactiveIcon from '../../../shared/assets/icons/nonactive-favorite-icon.svg'
 import { getSections, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
-
-// ─── Small UI pieces ──────────────────────────────────────────────────────────
-
-function FavoriteIcon({ active }) {
-  return (
-    <img
-      src={active ? favoriteActiveIcon : favoriteInactiveIcon}
-      width={22}
-      height={28}
-      alt=""
-    />
-  )
-}
-
-function Tags({ tags }) {
-  return (
-    <div className="flex flex-wrap gap-3">
-      {tags.map((tag) => (
-        <span key={tag.id ?? tag.name} className="uape-learn-tag" style={{ color: tag.color }}>
-          {tag.name}
-        </span>
-      ))}
-    </div>
-  )
-}
+import FavoriteIcon from '../../../shared/ui/FavoriteIcon.jsx'
+import ContentTags from '../../../shared/ui/ContentTags.jsx'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 // ─── Skeleton cards ────────────────────────────────────────────────────────────
 
@@ -117,7 +93,7 @@ function ContentCard({ item, buttonLabel, onToggle, contentType }) {
           {item.author} • {item.followers}
         </p>
 
-        <Tags tags={item.tags} />
+        <ContentTags tags={item.tags} />
 
         <div className="uape-learn-actions flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
@@ -168,7 +144,7 @@ function ChannelCard({ item, onToggle }) {
 
       <p className="uape-learn-channel-description">{item.description}</p>
 
-      <Tags tags={item.tags} />
+      <ContentTags tags={item.tags} />
 
       <div className="uape-learn-channel-footer">
         <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
@@ -204,7 +180,7 @@ export default function WhatToLearnNextSection() {
   const [sections, setSections] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const isAuth = Boolean(localStorage.getItem('access'))
+  const { isAuth } = useAuth()
 
   useEffect(() => {
     const fetches = [getSections()]

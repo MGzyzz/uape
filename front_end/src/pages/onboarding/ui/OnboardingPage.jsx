@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../app/AuthContext.jsx'
 import BrandLogo from '../../../shared/ui/BrandLogo.jsx'
 import { getOnboarding, saveOnboarding } from '../../../api/onboarding.js'
 import { FIELDS, OCCUPATIONS, SKILLS } from '../data/quizData.js'
@@ -157,6 +158,7 @@ function Step3({ field, value, onChange }) {
 
 export default function OnboardingPage() {
   const navigate = useNavigate()
+  const { isAuth } = useAuth()
   const [step, setStep] = useState(1)
   const [field, setField] = useState('')
   const [occupation, setOccupation] = useState('')
@@ -165,7 +167,7 @@ export default function OnboardingPage() {
   const [showError, setShowError] = useState(false)
 
   useEffect(() => {
-    if (!localStorage.getItem('access')) {
+    if (!isAuth) {
       navigate('/login')
       return
     }
@@ -177,7 +179,7 @@ export default function OnboardingPage() {
       const resumeStep = Math.min(data.current_step + 1, TOTAL_STEPS)
       setStep(resumeStep || 1)
     }).catch(() => {})
-  }, [navigate])
+  }, [navigate, isAuth])
 
   async function handleSaveExit() {
     setSaving(true)

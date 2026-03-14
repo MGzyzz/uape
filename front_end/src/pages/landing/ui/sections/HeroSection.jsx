@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import DiagnosticTicker from '../../../../shared/ui/DiagnosticTicker.jsx'
+import { useAuth } from '../../../../app/AuthContext.jsx'
 
 function HeroSection() {
+  const { isAuth } = useAuth()
   return (
     <section className="uape-page-container uape-page-gutter flex flex-col items-center pb-20 pt-30 text-center">
       <h1
@@ -20,7 +22,7 @@ function HeroSection() {
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4 ml-5">
         <Link
-          to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+          to={isAuth ? '/diagnostic' : '/login'}
           className="uape-orange-btn px-6 py-3 text-base font-normal leading-6"
         >
           Start diagnostic

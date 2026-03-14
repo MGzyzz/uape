@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom'
+import { useAuth } from './AuthContext.jsx'
 
 export default function ProtectedRoute({ children }) {
-  if (!localStorage.getItem('access')) {
-    return <Navigate to="/login" replace />
-  }
+  const { isAuth } = useAuth()
+  if (!isAuth) return <Navigate to="/login" replace />
   return children
 }

@@ -152,13 +152,9 @@ body {
   border-radius: 24px;
 }
 
-.uape-profile-hero-image-area > img {
-  transform: scale(1.02);
-}
-
-.uape-profile-hero-overlay {
+/* .uape-profile-hero-overlay {
   background: rgb(14 16 17 / 52%);
-}
+} */
 
 .uape-profile-welcome-gutter {
   padding-left: 160px;

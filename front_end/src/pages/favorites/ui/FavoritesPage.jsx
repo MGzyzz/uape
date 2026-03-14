@@ -3,27 +3,12 @@ import { useNavigate, Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import LazyImage from '../../../shared/ui/LazyImage.jsx'
-import favoriteActiveIcon from '../../../shared/assets/icons/favorite-icon.svg'
-import favoriteInactiveIcon from '../../../shared/assets/icons/nonactive-favorite-icon.svg'
+import FavoriteIcon from '../../../shared/ui/FavoriteIcon.jsx'
+import ContentTags from '../../../shared/ui/ContentTags.jsx'
 import { getFavorites, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
 import noFavoriteIllustration from '../../../shared/assets/icons/No Favorite illustration.svg'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
-
-function FavoriteIcon({ active }) {
-  return <img src={active ? favoriteActiveIcon : favoriteInactiveIcon} width={22} height={28} alt="" />
-}
-
-function Tags({ tags }) {
-  return (
-    <div className="flex flex-wrap gap-3">
-      {tags.map((tag) => (
-        <span key={tag.id ?? tag.name} className="uape-learn-tag" style={{ color: tag.color }}>
-          {tag.name}
-        </span>
-      ))}
-    </div>
-  )
-}
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 function SkeletonCard() {
   return (
@@ -112,7 +97,7 @@ function ContentCard({ item, buttonLabel, contentType, onToggle }) {
           <p className="uape-favorites-card-description">{item.description}</p>
         ) : null}
 
-        <Tags tags={item.tags} />
+        <ContentTags tags={item.tags} />
 
         <div className="uape-favorites-card-actions" onClick={(event) => event.stopPropagation()}>
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
@@ -163,7 +148,7 @@ function ChannelCard({ item, onToggle }) {
 
       {item.description ? <p className="uape-learn-channel-description">{item.description}</p> : null}
 
-      <Tags tags={item.tags} />
+      <ContentTags tags={item.tags} />
 
       <div className="uape-learn-channel-footer">
         <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
@@ -292,7 +277,7 @@ export default function FavoritesPage() {
   const [recommended, setRecommended] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const isAuth = Boolean(localStorage.getItem('access'))
+  const { isAuth } = useAuth()
 
   useEffect(() => {
     let ignore = false

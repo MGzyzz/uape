@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BrandLogo from '../../../shared/ui/BrandLogo.jsx'
 import { LANGUAGES, DIAGNOSTIC_DATA, TYPE_LABELS } from '../data/diagnosticData.js'
@@ -192,6 +192,30 @@ export default function DiagnosticTestPage() {
     return currentAnswer !== null
   }
 
+  async function handleSubmit() {
+    setSubmitting(true)
+    // mini_task is not auto-scored
+    const score = answers.reduce((acc, ans, i) => {
+      if (questions[i].type === 'mini_task') return acc
+      return acc + (ans === questions[i].answer ? 1 : 0)
+    }, 0)
+
+    try {
+      const data = await submitAssessment(language, score)
+      setCachedResult(language, data.level, data.score)
+      navigate(`/diagnostic/result?lang=${language}`)
+    } catch (err) {
+      const data = err.response?.data
+      if (data?.detail === 'already_exists') {
+        setCachedResult(language, data.level, data.score)
+        navigate(`/diagnostic/result?lang=${language}`)
+      } else {
+        setShowError(true)
+        setSubmitting(false)
+      }
+    }
+  }
+
   async function handleNext() {
     if (!canProceed()) {
       setShowError(true)
@@ -238,51 +262,35 @@ export default function DiagnosticTestPage() {
     })
   }
 
+  const handleNextRef = useRef(handleNext)
+  const selectAnswerRef = useRef(selectAnswer)
+
+  useLayoutEffect(() => {
+    handleNextRef.current = handleNext
+    selectAnswerRef.current = selectAnswer
+  })
+
   useEffect(() => {
     function onKeyDown(e) {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
 
       if (e.key === 'Enter') {
         e.preventDefault()
-        handleNext()
+        handleNextRef.current()
         return
       }
 
       if (step >= 1 && !isMiniTask && currentQuestion) {
         const num = parseInt(e.key, 10)
         if (num >= 1 && num <= (currentQuestion.options?.length ?? 0)) {
-          selectAnswer(num - 1)
+          selectAnswerRef.current(num - 1)
         }
       }
     }
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [step, isMiniTask, currentQuestion, answers, textAnswers, language, submitting])
-
-  async function handleSubmit() {
-    setSubmitting(true)
-    // mini_task is not auto-scored
-    const score = answers.reduce((acc, ans, i) => {
-      if (questions[i].type === 'mini_task') return acc
-      return acc + (ans === questions[i].answer ? 1 : 0)
-    }, 0)
-
-    try {
-      const data = await submitAssessment(language, score)
-      setCachedResult(language, data.level, data.score)
-      navigate(`/diagnostic/result?lang=${language}`)
-    } catch (err) {
-      const data = err.response?.data
-      if (data?.detail === 'already_exists') {
-        setCachedResult(language, data.level, data.score)
-        navigate(`/diagnostic/result?lang=${language}`)
-      } else {
-        setShowError(true)
-        setSubmitting(false)
-      }
-    }
-  }
+  }, [step, isMiniTask, currentQuestion])
 
   return (
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">

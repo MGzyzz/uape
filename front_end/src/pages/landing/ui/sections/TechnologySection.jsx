@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FaJava } from 'react-icons/fa'
+import { useAuth } from '../../../../app/AuthContext.jsx'
 import { SiCplusplus, SiCss3, SiGo, SiHtml5, SiPython, SiReact } from 'react-icons/si'
 import csharpIcon from '../../../../shared/assets/tech-icons/csharp.svg'
 
@@ -61,6 +62,7 @@ function TechnologyIcon({ item }) {
 }
 
 function TechnologySection() {
+  const { isAuth } = useAuth()
   return (
     <section id="technology" className="bg-uape-bg">
       <div className="uape-section-shell flex flex-col gap-[104px] lg:flex-row lg:items-start lg:justify-between">
@@ -74,7 +76,7 @@ function TechnologySection() {
           </p>
           </div>
           <Link
-            to={localStorage.getItem('access') ? '/diagnostic' : '/login'}
+            to={isAuth ? '/diagnostic' : '/login'}
             className="uape-orange-btn font-figtree inline-flex h-12 w-[163px] items-center justify-center rounded-lg px-6 py-3 text-[16px] font-normal leading-6"
           >
             Start diagnostic

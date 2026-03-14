@@ -12,11 +12,11 @@ import AssessmentSection from './sections/AssessmentSection.jsx'
 import BenefitsSection from './sections/BenefitsSection.jsx'
 import FaqSection from './sections/FaqSection.jsx'
 import CtaSection from './sections/CtaSection.jsx'
-import { getStoredUser } from '../../../api/auth.js'
+import { useAuth } from '../../../app/AuthContext.jsx'
 
 function LandingPage() {
   const navigate = useNavigate()
-  const isAuth = Boolean(localStorage.getItem('access') && getStoredUser())
+  const { isAuth } = useAuth()
 
   useEffect(() => {
     if (isAuth) {
