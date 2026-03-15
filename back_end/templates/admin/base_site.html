@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
+
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}">{% trans 'Django administration' %}</a></div>
+{% if user.is_active and user.is_staff %}
+<div class="theme-toggle"></div>
+{% endif %}
+{% endblock %}
+
+{% block userlinks %}
+{% if user.is_superuser %}<a href="/admin/backup/">Backup &amp; Restore</a> / {% endif %}{{ block.super }}
+{% endblock %}

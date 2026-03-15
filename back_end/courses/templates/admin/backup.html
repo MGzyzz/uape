@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}Backup & Restore{% endblock %}
+
+{% block content_title %}<h1>Backup &amp; Restore</h1>{% endblock %}
+
+{% block content %}
+{% if messages %}
+<ul class="messagelist">
+  {% for message in messages %}
+  <li class="{{ message.tags }}">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;">
+
+  <!-- Export -->
+  <div style="flex:1;min-width:280px;background:var(--darkened-bg,#f8f8f8);border:1px solid var(--border-color,#ddd);border-radius:6px;padding:24px;">
+    <h2 style="margin-top:0;font-size:18px;">Экспорт базы данных</h2>
+    <p style="color:var(--body-quiet-color,#666);margin-bottom:20px;line-height:1.5;">
+      Скачивает дамп всех данных (курсы, теги, каналы, плейлисты, видео,
+      секции, пользователи, онбординг) в формате <code>.json</code>.
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="export">
+      <button type="submit"
+        style="background:#417690;color:#fff;border:none;padding:10px 20px;border-radius:4px;font-size:14px;cursor:pointer;">
+        Скачать backup.json
+      </button>
+    </form>
+  </div>
+
+  <!-- Import -->
+  <div style="flex:1;min-width:280px;background:var(--darkened-bg,#f8f8f8);border:1px solid var(--border-color,#ddd);border-radius:6px;padding:24px;">
+    <h2 style="margin-top:0;font-size:18px;">Импорт базы данных</h2>
+    <p style="color:var(--body-quiet-color,#666);margin-bottom:8px;line-height:1.5;">
+      Загружает данные из ранее сохранённого <code>.json</code> файла.
+    </p>
+    <p style="color:#c0392b;font-weight:600;margin-bottom:20px;line-height:1.5;">
+      ⚠️ Внимание: существующие записи с совпадающими ID будут перезаписаны.
+    </p>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="import">
+      <div style="margin-bottom:14px;">
+        <input type="file" name="backup_file" accept=".json" required
+          style="font-size:14px;">
+      </div>
+      <button type="submit"
+        style="background:#ba2121;color:#fff;border:none;padding:10px 20px;border-radius:4px;font-size:14px;cursor:pointer;">
+        Загрузить из файла
+      </button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

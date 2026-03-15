@@ -19,7 +19,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from core.backup import backup_view
+
 urlpatterns = [
+    path('admin/backup/', admin.site.admin_view(backup_view), name='admin_backup'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('api/courses/', include('courses.urls')),
