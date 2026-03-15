@@ -144,14 +144,14 @@ function SiteHeader({ compact = false }) {
               <a className="transition hover:text-uape-white" href="#solution">
                 Solution
               </a>
-              <a className="transition hover:text-uape-white" href="#assessment">
-                Assessment
+              <a className="transition hover:text-uape-white" href="#technology">
+                Technology
               </a>
               <a className="transition hover:text-uape-white" href="#for-whom">
                 For whom
               </a>
-              <a className="transition hover:text-uape-white" href="#technology">
-                Technology
+              <a className="transition hover:text-uape-white" href="#assessment">
+                Assessment
               </a>
             </nav>
           ) : null}
