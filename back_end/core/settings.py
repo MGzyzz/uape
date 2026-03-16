@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'api',
     'uape',
     'courses',
+    'ai',
 ]
 
 REST_FRAMEWORK = {
@@ -220,3 +221,6 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 EMAIL_FROM = os.getenv('EMAIL_FROM', EMAIL_HOST_USER)
 FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+
+# AI module token (stored in .env, used for AI endpoint authentication)
+AI_TOKEN = os.getenv('AI_TOKEN', '')
