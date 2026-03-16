@@ -82,7 +82,7 @@ function LanguageStep({ selected, onSelect }) {
 
 // ─── Code editor with one editable blank line (mini_task) ─────────────────────
 
-function CodeEditor({ codeLines, blankPlaceholder, value, onChange }) {
+function CodeEditor({ codeLines, blankPlaceholder, blankIndent, value, onChange }) {
   return (
     <div className="uape-diagnostic-code-editor">
       {codeLines.map((line, i) =>
@@ -90,6 +90,9 @@ function CodeEditor({ codeLines, blankPlaceholder, value, onChange }) {
           <div key={i} className="uape-diagnostic-code-editor-line uape-diagnostic-code-editor-line--blank">
             <span className="uape-diagnostic-code-editor-linenum">{i + 1}</span>
             <div className="uape-diagnostic-code-editor-blank-wrap">
+              {blankIndent && (
+                <span className="uape-diagnostic-code-editor-indent">{blankIndent}</span>
+              )}
               <input
                 className="uape-diagnostic-code-editor-input"
                 placeholder={blankPlaceholder}
@@ -134,6 +137,7 @@ function QuestionStep({ question, selectedAnswer, textAnswer, onSelect, onTextCh
         <CodeEditor
           codeLines={question.codeLines}
           blankPlaceholder={question.blankPlaceholder}
+          blankIndent={question.blankIndent}
           value={textAnswer}
           onChange={onTextChange}
         />

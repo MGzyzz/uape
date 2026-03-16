@@ -2352,6 +2352,13 @@ main > .uape-about-cta-section {
   display: flex;
   align-items: stretch;
 }
+.uape-diagnostic-code-editor-indent {
+  padding: 3px 0 3px 16px;
+  color: #e5e5e5;
+  white-space: pre;
+  user-select: none;
+  flex-shrink: 0;
+}
 .uape-diagnostic-code-editor-input {
   flex: 1;
   padding: 3px 16px;

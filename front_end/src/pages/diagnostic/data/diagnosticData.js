@@ -45,7 +45,7 @@ const PYTHON = [
   {
     id: 3,
     type: 'mini_task',
-    question: 'Заполните пропуск в коде',
+    question: 'Fill in the blank',
     codeLines: [
       'import banana',
       '',
@@ -60,7 +60,8 @@ const PYTHON = [
       '        return "Yum yum"',
       '',
     ],
-    blankPlaceholder: '        # Сюда пишите код',
+    blankIndent: '        ',
+    blankPlaceholder: '# type your code here',
   },
   // ── Theory 1-12 ───────────────────────────────────────────────────────────
   {
@@ -196,7 +197,7 @@ const JAVASCRIPT = [
   {
     id: 3,
     type: 'mini_task',
-    question: 'Заполните пропуск в коде',
+    question: 'Fill in the blank',
     codeLines: [
       'class Counter {',
       '    constructor() {',
@@ -210,7 +211,8 @@ const JAVASCRIPT = [
       '    }',
       '}',
     ],
-    blankPlaceholder: '        // Сюда пишите код',
+    blankIndent: '        ',
+    blankPlaceholder: '// type your code here',
   },
   // ── Theory 1-12 ───────────────────────────────────────────────────────────
   {
@@ -361,7 +363,7 @@ const JAVA = [
   {
     id: 3,
     type: 'mini_task',
-    question: 'Заполните пропуск в коде',
+    question: 'Fill in the blank',
     codeLines: [
       'public class Calculator {',
       '    public int add(int a, int b) {',
@@ -374,7 +376,8 @@ const JAVA = [
       '    }',
       '}',
     ],
-    blankPlaceholder: '        // Сюда пишите код',
+    blankIndent: '        ',
+    blankPlaceholder: '// type your code here',
   },
   // ── Theory 1-12 ───────────────────────────────────────────────────────────
   {
@@ -530,7 +533,7 @@ const CSHARP = [
   {
     id: 3,
     type: 'mini_task',
-    question: 'Заполните пропуск в коде',
+    question: 'Fill in the blank',
     codeLines: [
       'public class Greeter {',
       '    private string name;',
@@ -544,7 +547,8 @@ const CSHARP = [
       '    }',
       '}',
     ],
-    blankPlaceholder: '        // Сюда пишите код',
+    blankIndent: '        ',
+    blankPlaceholder: '// type your code here',
   },
   // ── Theory 1-12 ───────────────────────────────────────────────────────────
   {
@@ -700,7 +704,7 @@ const CPP = [
   {
     id: 3,
     type: 'mini_task',
-    question: 'Заполните пропуск в коде',
+    question: 'Fill in the blank',
     codeLines: [
       '#include <iostream>',
       'using namespace std;',
@@ -714,7 +718,8 @@ const CPP = [
       '    return 0;',
       '}',
     ],
-    blankPlaceholder: '    // Сюда пишите код',
+    blankIndent: '    ',
+    blankPlaceholder: '// type your code here',
   },
   // ── Theory 1-12 ───────────────────────────────────────────────────────────
   {
@@ -872,8 +877,8 @@ export const DIAGNOSTIC_DATA = {
 }
 
 export const TYPE_LABELS = {
-  find_error:  'Найти ошибку',
-  what_output: 'Что выдает код',
-  mini_task:   'Мини задача',
-  theory:      'Теория',
+  find_error:  'Find the Error',
+  what_output: 'What Does This Output?',
+  mini_task:   'Mini Task',
+  theory:      'Theory',
 }
