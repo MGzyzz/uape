@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import workplaceImg from '../../../../shared/assets/solution/workplace.png'
+import workplaceImg from '../../assets/workplace.png'
 import { useAuth } from '../../../../app/AuthContext.jsx'
 
 const steps = [

@@ -4,7 +4,7 @@ import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { getProfile, saveUser } from '../../../api/auth.js'
 import { getOnboarding } from '../../../api/onboarding.js'
-import profileWelcomeBg from '../../../shared/assets/solution/profile-welcome.png'
+import profileWelcomeBg from '../assets/profile-welcome.png'
 import WhatToLearnNextSection from './WhatToLearnNextSection.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 

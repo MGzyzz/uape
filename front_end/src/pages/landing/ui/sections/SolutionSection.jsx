@@ -1,12 +1,20 @@
-import skillLevelImg from '../../../../shared/assets/solution/skill-level.png'
-import saveTimeImg from '../../../../shared/assets/solution/save-time.png'
+import skillLevelImg from '../../assets/solution/skill-level.png'
+import saveTimeImg from '../../assets/solution/save-time.png'
+import frame157Img from '../../assets/solution/adaptive-learning-card-front.png'
+import frame158Img from '../../assets/solution/adaptive-learning-card-back.png'
+import frame231Img from '../../assets/solution/progress-ring.png'
+import bugIcon from '../../assets/solution/bug.svg'
+import crownIcon from '../../assets/solution/crown.svg'
+import settingsIcon from '../../assets/solution/settings.svg'
+import vectorIcon from '../../assets/solution/vector.svg'
+import vectorAltIcon from '../../assets/solution/vector-alt.svg'
 
 const solutionIcons = [
-  { id: 'vector', src: '/assets/solution/icons/vector.svg' },
-  { id: 'vector-1', src: '/assets/solution/icons/vector-1.svg' },
-  { id: 'bug', src: '/assets/solution/icons/bug.svg' },
-  { id: 'settings', src: '/assets/solution/icons/settings.svg' },
-  { id: 'crown', src: '/assets/solution/icons/crown.svg' },
+  { id: 'vector', src: vectorIcon },
+  { id: 'vector-1', src: vectorAltIcon },
+  { id: 'bug', src: bugIcon },
+  { id: 'settings', src: settingsIcon },
+  { id: 'crown', src: crownIcon },
 ]
 
 function SolutionSection() {
@@ -50,13 +58,13 @@ function SolutionSection() {
               />
               <div className="absolute inset-0 z-10 overflow-hidden rounded-3xl">
                 <img
-                  src="/assets/solution/frame-157.png"
+                  src={frame157Img}
                   alt=""
                   aria-hidden="true"
                   className="absolute left-[99px] top-[252px] z-20 h-[220px] w-[220px] rounded-[12px] object-cover"
                 />
                 <img
-                  src="/assets/solution/frame-158.png"
+                  src={frame158Img}
                   alt=""
                   aria-hidden="true"
                   className="absolute left-[239px] top-[152px] z-10 h-[220px] w-[220px] rounded-[12px] object-cover"
@@ -74,7 +82,7 @@ function SolutionSection() {
               />
               <div className="absolute left-[139px] top-[170px]">
                 <img
-                  src="/assets/solution/frame-231.png"
+                  src={frame231Img}
                   alt="67 percent progress ring"
                   className="h-[280px] w-[280px]"
                 />

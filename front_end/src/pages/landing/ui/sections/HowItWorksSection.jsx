@@ -1,4 +1,4 @@
-import stepArrowIcon from '../../../../shared/assets/how-it-works/vector.svg'
+import stepArrowIcon from '../../assets/how-it-works-arrow.svg'
 
 const howItWorksSteps = [
   {

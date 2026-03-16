@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import ctaImage from '../../../../shared/assets/solution/working-process.png'
+import ctaImage from '../../assets/working-process.png'
 import { useAuth } from '../../../../app/AuthContext.jsx'
 
 function CtaSection() {

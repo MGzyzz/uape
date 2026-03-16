@@ -6,7 +6,7 @@ import LazyImage from '../../../shared/ui/LazyImage.jsx'
 import FavoriteIcon from '../../../shared/ui/FavoriteIcon.jsx'
 import ContentTags from '../../../shared/ui/ContentTags.jsx'
 import { getFavorites, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
-import noFavoriteIllustration from '../../../shared/assets/icons/No Favorite illustration.svg'
+import noFavoriteIllustration from '../../../shared/assets/icons/no-favorite-illustration.svg'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 

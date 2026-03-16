@@ -1,7 +1,7 @@
-import teamWorkImg from '../../../../shared/assets/solution/team-work.png'
-import carouselIcon from '../../../../shared/assets/icons/Carousel.svg'
-import roadIcon from '../../../../shared/assets/icons/Road.svg'
-import listCheckIcon from '../../../../shared/assets/icons/ListCheck.svg'
+import teamWorkImg from '../../assets/team-work.png'
+import carouselIcon from '../../../../shared/assets/icons/carousel.svg'
+import roadIcon from '../../../../shared/assets/icons/road.svg'
+import listCheckIcon from '../../../../shared/assets/icons/list-check.svg'
 
 const features = [
   { icon: carouselIcon, text: 'Personalized learning for each user' },

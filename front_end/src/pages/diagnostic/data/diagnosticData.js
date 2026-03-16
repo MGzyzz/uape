@@ -4,11 +4,11 @@
 //   mini_task   (1) — code editor with one blank line to fill in
 //   theory      (12)— MCQ, no code block
 
-import pythonIcon  from '../../../shared/assets/tech-icons/Python.svg'
-import jsIcon      from '../../../shared/assets/tech-icons/JavaScript.svg'
-import cppIcon     from '../../../shared/assets/tech-icons/C++.svg'
+import pythonIcon  from '../../../shared/assets/tech-icons/python.svg'
+import jsIcon      from '../../../shared/assets/tech-icons/javascript.svg'
+import cppIcon     from '../../../shared/assets/tech-icons/cplusplus.svg'
 import csharpIcon  from '../../../shared/assets/tech-icons/csharp.svg'
-import javaIcon    from '../../../shared/assets/tech-icons/Java.svg'
+import javaIcon    from '../../../shared/assets/tech-icons/java.svg'
 
 export const LANGUAGES = [
   { key: 'python',     label: 'Python',     iconSrc: pythonIcon,  color: '#3776AB' },
