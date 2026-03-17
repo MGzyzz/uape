@@ -1,3 +1,4 @@
+import './SiteHeader.css'
 import { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FiSettings, FiLogOut } from 'react-icons/fi'

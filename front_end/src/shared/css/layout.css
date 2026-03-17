@@ -1,0 +1,31 @@
+/* ─── Layout utilities ──────────────────────────────────────────────────── */
+
+.uape-radius-1000 {
+  border-radius: 1000px;
+}
+
+.uape-shadow-soft-32 {
+  box-shadow: 0 0 32px 0 #0000001f;
+}
+
+/* Container: max-width 1440px + horizontal gutter 120px */
+.uape-section-shell {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+/* Max-width + centering only (pair with uape-page-gutter for padding) */
+.uape-page-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Horizontal gutter 120px (standalone or with uape-page-container) */
+.uape-page-gutter {
+  padding-left: 120px;
+  padding-right: 120px;
+}

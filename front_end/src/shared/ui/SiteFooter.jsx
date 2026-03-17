@@ -1,3 +1,4 @@
+import './SiteFooter.css'
 import { FaTelegramPlane, FaWhatsapp, FaYoutube, FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa'
 import footerTitleIcon from '../assets/icons/footer-title.svg'
 
@@ -8,10 +9,12 @@ const SOCIAL_LINKS = [
   { Icon: FaInstagram,     href: '#', label: 'Instagram', hoverClass: 'uape-social-instagram' },
 ]
 
-function SiteFooter() {
+function SiteFooter({ variant = 'default' }) {
+  const shellClassName = `uape-section-shell uape-footer-shell${variant === 'about' ? ' uape-footer-shell--about' : ''}`
+
   return (
     <footer className=" bg-uape-header">
-      <div className="uape-section-shell uape-footer-shell">
+      <div className={shellClassName}>
 
         <img
           src={footerTitleIcon}

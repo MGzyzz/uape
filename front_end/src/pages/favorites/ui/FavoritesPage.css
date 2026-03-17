@@ -1,0 +1,179 @@
+/* ─── Favorites Page ───────────────────────────────────────────────────── */
+
+.uape-favorites-page-title {
+  margin: 0 0 64px;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 68px;
+  color: var(--color-uape-white);
+}
+
+.uape-favorites-content {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.uape-favorites-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.uape-favorites-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.uape-favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28.5px 24px;
+}
+
+.uape-favorites-card-title {
+  white-space: nowrap;
+}
+
+.uape-favorites-card-bookmark {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uape-favorites-card-description {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-uape-muted);
+}
+
+.uape-favorites-card-actions {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.uape-favorites-secondary-link {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-uape-white);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.uape-favorites-secondary-link:hover {
+  border-bottom-color: var(--color-uape-white);
+}
+
+.uape-favorites-empty {
+  padding-top: 40px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.uape-favorites-empty-title {
+  margin: 0;
+  padding: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-uape-white);
+  text-align: center;
+}
+
+.uape-favorites-empty-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-uape-muted);
+  text-align: center;
+}
+
+.uape-favorites-empty-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.uape-favorites-empty-link {
+  color: var(--color-uape-accent);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.uape-favorites-empty-link:hover {
+  opacity: 0.8;
+}
+
+.uape-favorites-empty-icon {
+  display: block;
+}
+
+@media (max-width: 1279px) {
+  .uape-favorites-content .uape-page-gutter {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .uape-favorites-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .uape-favorites-content .uape-page-gutter {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .uape-favorites-page-title {
+    font-size: 44px;
+    line-height: 52px;
+  }
+
+  .uape-favorites-empty-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .uape-favorites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .uape-favorites-card-title {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .uape-favorites-card-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .uape-favorites-card-actions > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

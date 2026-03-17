@@ -1,0 +1,90 @@
+/* ─── Profile Page ──────────────────────────────────────────────────────── */
+
+.uape-profile-hero-image-area {
+  height: 492px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 24px;
+}
+
+/* .uape-profile-hero-overlay {
+  background: rgb(14 16 17 / 52%);
+} */
+
+.uape-profile-welcome-gutter {
+  padding-left: 160px;
+  padding-right: 120px;
+}
+
+.uape-profile-hero-content {
+  min-height: 500px;
+  padding-left: 60px;
+}
+
+.uape-profile-avatar-shell {
+  width: 72px;
+  height: 72px;
+  border-radius: 1000px;
+}
+
+.uape-profile-hero-title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+}
+
+.uape-profile-hero-link {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-accent);
+  text-decoration: underline;
+  text-decoration-style: solid;
+}
+
+.uape-profile-occupation-btn {
+  padding: 0;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.uape-profile-occupation-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+  text-decoration: none;
+}
+
+.uape-profile-edit-link {
+  padding: 0;
+  outline: none;
+  text-decoration: underline;
+}
+
+.uape-profile-profession {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+}
+
+/* ─── Profile page diagnostic CTA ────────────────────────────────────── */
+
+.uape-diagnostic-cta-section {
+  padding: 48px 0;
+}
+
+.uape-diagnostic-cta-inner {
+  text-align: center;
+}
+
+.uape-diagnostic-cta-text {
+  margin-bottom: 16px;
+}

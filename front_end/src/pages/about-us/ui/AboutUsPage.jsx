@@ -1,3 +1,4 @@
+import './AboutUsPage.css'
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../../app/AuthContext.jsx'
@@ -231,7 +232,7 @@ function AboutUsPage() {
         <WhatMakesDifferentSection />
         <StartLearningSmarterSection />
       </main>
-      <SiteFooter />
+      <SiteFooter variant="about" />
     </div>
   )
 }

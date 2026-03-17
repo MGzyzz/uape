@@ -1,0 +1,54 @@
+/* ─── Carousel Section ──────────────────────────────────────────────────── */
+
+.uape-learn-section {
+  margin-bottom: 56px;
+}
+
+.uape-learn-section-header {
+  margin-bottom: 24px;
+}
+
+.uape-learn-section-title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 32px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-learn-section-subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+  margin: 6px 0 0;
+}
+
+.uape-learn-nav-arrow-btn {
+  opacity: 1;
+  padding: 4px;
+  line-height: 0;
+}
+
+.uape-learn-nav-arrow-btn-disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.3;
+}
+
+.uape-learn-cards-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 28.5px;
+}
+
+.uape-learn-cards-row-full {
+  justify-content: space-between;
+  gap: 0;
+}
+
+.uape-carousel-card-wrapper {
+  flex: 0 0 auto;
+  min-width: 0;
+}

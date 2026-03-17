@@ -1,3 +1,4 @@
+import './AssessmentResultSection.css'
 import bumerangIcon from '../../../shared/assets/icons/bumerang-icon.svg'
 
 const LANGUAGE_LABELS = {

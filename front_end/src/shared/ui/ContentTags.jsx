@@ -1,3 +1,5 @@
+import './ContentTags.css'
+
 export default function ContentTags({ tags }) {
   return (
     <div className="flex flex-wrap gap-3">

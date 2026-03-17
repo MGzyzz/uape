@@ -1,0 +1,10 @@
+/* ─── Diagnostic Ticker ────────────────────────────────────────────────── */
+
+.uape-diagnostic-center-glow {
+  box-shadow: 0 0 250px 0 #eaf27c1f;
+}
+
+.uape-diagnostic-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}

@@ -1,0 +1,17 @@
+/* ─── What to Learn Next — page shell only ─────────────────────────────── */
+/* Shared cards/channels → shared/css/learning.css                          */
+/* Carousel shell → shared/ui/CarouselSection.css                           */
+/* Tags → shared/ui/ContentTags.css                                         */
+
+.uape-learn-root {
+  padding-top: 64px;
+  padding-bottom: 80px;
+}
+
+.uape-learn-page-title {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  color: var(--color-uape-white);
+  margin: 0 0 48px;
+}

@@ -1,41 +1,61 @@
+import './DiagnosticTestPage.css'
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import BrandLogo from '../../../shared/ui/BrandLogo.jsx'
-import { LANGUAGES, DIAGNOSTIC_DATA, TYPE_LABELS } from '../data/diagnosticData.js'
+import { LANGUAGES, DIAGNOSTIC_DATA } from '../data/diagnosticData.js'
 import { getCachedResult, setCachedResult, submitAssessment } from '../../../api/assessment.js'
 import paperIcon from '../../../shared/assets/icons/paper-icon.svg'
+import arrowLeftIcon from '../assets/Arrow left.png'
+import checkIcon from '../../../shared/assets/icons/arrow-correct-right.svg'
+import checkboxIcon from '../../../shared/assets/icons/checkbox-icon.svg'
 
 const TOTAL_QUESTIONS = 15
+const MCQ_PER_PAGE = 4
+
+// Split questions: MCQ first (4 per page), mini_task at the end (1 per page)
+function buildPages(questions) {
+  const mcq = questions.filter((q) => q.type !== 'mini_task')
+  const code = questions.filter((q) => q.type === 'mini_task')
+  const pages = []
+  for (let i = 0; i < mcq.length; i += MCQ_PER_PAGE) {
+    pages.push({ start: i, questions: mcq.slice(i, i + MCQ_PER_PAGE) })
+  }
+  let offset = mcq.length
+  code.forEach((q) => {
+    pages.push({ start: offset, questions: [q] })
+    offset++
+  })
+  return pages
+}
 
 // ─── Header ───────────────────────────────────────────────────────────────────
 
-function DiagnosticHeader({ onExit }) {
+function DiagnosticHeader({ onExit, onBack, step, totalPages }) {
+  const pct = totalPages > 0 ? Math.round((step / totalPages) * 100) : 0
   return (
     <header className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]">
-      <div className="uape-section-shell uape-onboarding-navbar-shell">
-        <div className="uape-onboarding-logo">
-          <BrandLogo />
+      <div className="uape-section-shell uape-diagnostic-navbar-shell">
+        <div className="uape-diagnostic-navbar-left-group">
+          {step >= 1 && (
+            <button className="uape-diagnostic-header-back-btn" onClick={onBack}>
+              <img src={arrowLeftIcon} alt="" className="uape-diagnostic-back-icon" />
+              <span>Back</span>
+            </button>
+          )}
+          <div className="uape-diagnostic-navbar-info">
+            <span className="uape-diagnostic-navbar-title">Test questions</span>
+            <span className="uape-diagnostic-navbar-count">{TOTAL_QUESTIONS} Questions</span>
+          </div>
         </div>
-        <button className="uape-onboarding-save-exit" onClick={onExit}>
+        <button className="uape-diagnostic-save-exit" onClick={onExit}>
           Save & exit
         </button>
       </div>
+      {step >= 1 && (
+        <div className="uape-diagnostic-progress-wrap">
+          <div className="uape-diagnostic-progress-fill" style={{ width: `${pct}%` }} />
+        </div>
+      )}
     </header>
-  )
-}
-
-// ─── Progress bar ─────────────────────────────────────────────────────────────
-
-function ProgressBar({ answered }) {
-  return (
-    <div className="flex w-full">
-      {Array.from({ length: TOTAL_QUESTIONS }).map((_, i) => (
-        <div
-          key={i}
-          className={`uape-onboarding-progress-segment${i < answered ? ' uape-onboarding-progress-segment-active' : ''}`}
-        />
-      ))}
-    </div>
   )
 }
 
@@ -52,7 +72,7 @@ function LanguageStep({ selected, onSelect }) {
         onClick={() => onSelect(lang.key)}
       >
         <img src={lang.iconSrc} alt="" aria-hidden="true" className="uape-diagnostic-lang-svg" />
-        <span className="uape-onboarding-option-label">{lang.label}</span>
+        <span className="uape-diagnostic-option-label">{lang.label}</span>
       </button>
     )
   }
@@ -114,57 +134,81 @@ function CodeEditor({ codeLines, blankPlaceholder, blankIndent, value, onChange 
   )
 }
 
-// ─── Question (steps 1–15) ────────────────────────────────────────────────────
+// ─── Radio option ─────────────────────────────────────────────────────────────
 
-function QuestionStep({ question, selectedAnswer, textAnswer, onSelect, onTextChange, questionNumber }) {
-  if (!question) return (
-    <p className="uape-assessment-result-subtitle">
-      Question not available. Please check the question bank.
-    </p>
+function RadioOption({ label, selected, onSelect }) {
+  return (
+    <button type="button" className="uape-diagnostic-q-option" onClick={onSelect}>
+      <div className="uape-diagnostic-radio-outer">
+        {selected && <div className="uape-diagnostic-radio-inner" />}
+      </div>
+      <span className="uape-diagnostic-option-label">{label}</span>
+    </button>
   )
+}
 
+// ─── Checkbox option ──────────────────────────────────────────────────────────
+
+function CheckboxOption({ label, selected, onToggle }) {
+  return (
+    <button type="button" className="uape-diagnostic-q-option" onClick={onToggle}>
+      {selected
+        ? <img src={checkIcon} alt="" width={20} height={20} />
+        : <img src={checkboxIcon} alt="" width={20} height={20} />
+      }
+      <span className="uape-diagnostic-option-label">{label}</span>
+    </button>
+  )
+}
+
+// ─── Single question block ─────────────────────────────────────────────────────
+
+function QuestionBlock({ question, globalIndex, selectedAnswer, textAnswer, onSelect, onToggle, onTextChange, isUnanswered }) {
   const isMiniTask = question.type === 'mini_task'
+  const isMulti = question.multi === true
+  const selectedArr = Array.isArray(selectedAnswer) ? selectedAnswer : []
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-3">
-        <span className="uape-diagnostic-type-badge">{TYPE_LABELS[question.type]}</span>
-        <span className="uape-diagnostic-question-num">Question {questionNumber} of {TOTAL_QUESTIONS}</span>
-      </div>
-      <h2 className="uape-onboarding-title">{question.question}</h2>
+    <div className="uape-diagnostic-q-row">
+      <span className={`uape-diagnostic-q-num${isUnanswered ? ' uape-diagnostic-q-num--error' : ''}`}>{globalIndex + 1}.</span>
+      <div className="uape-diagnostic-q-content">
+        <p className="uape-diagnostic-q-text">{question.question}</p>
 
-      {isMiniTask ? (
-        <CodeEditor
-          codeLines={question.codeLines}
-          blankPlaceholder={question.blankPlaceholder}
-          blankIndent={question.blankIndent}
-          value={textAnswer}
-          onChange={onTextChange}
-        />
-      ) : (
-        <>
-          {question.code && (
-            <pre className="uape-diagnostic-code-block">{question.code}</pre>
-          )}
-          <div className="flex flex-col gap-3">
-            {question.options.map((option, idx) => (
-              <button
-                key={idx}
-                type="button"
-                className={`uape-diagnostic-option-btn${selectedAnswer === idx ? ' uape-diagnostic-option-btn--selected' : ''}`}
-                onClick={() => onSelect(idx)}
-              >
-                <span className="uape-diagnostic-option-radio">
-                  {selectedAnswer === idx ? (
-                    <span className="uape-diagnostic-option-radio-dot" />
-                  ) : null}
-                </span>
-                {option}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
+        {isMiniTask ? (
+          <CodeEditor
+            codeLines={question.codeLines}
+            blankPlaceholder={question.blankPlaceholder}
+            blankIndent={question.blankIndent}
+            value={textAnswer}
+            onChange={onTextChange}
+          />
+        ) : (
+          <>
+            {question.code && (
+              <pre className="uape-diagnostic-code-block">{question.code}</pre>
+            )}
+            <div className="uape-diagnostic-q-options">
+              {question.options.map((option, idx) =>
+                isMulti ? (
+                  <CheckboxOption
+                    key={idx}
+                    label={option}
+                    selected={selectedArr.includes(idx)}
+                    onToggle={() => onToggle(idx)}
+                  />
+                ) : (
+                  <RadioOption
+                    key={idx}
+                    label={option}
+                    selected={selectedAnswer === idx}
+                    onSelect={() => onSelect(idx)}
+                  />
+                )
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }
@@ -178,30 +222,49 @@ export default function DiagnosticTestPage() {
   const [answers, setAnswers] = useState(Array(TOTAL_QUESTIONS).fill(null))
   const [textAnswers, setTextAnswers] = useState(Array(TOTAL_QUESTIONS).fill(''))
   const [showError, setShowError] = useState(false)
+  const [submitFailed, setSubmitFailed] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [unansweredSet, setUnansweredSet] = useState(new Set())
 
-  const questions = language ? DIAGNOSTIC_DATA[language] : []
-  const currentQuestion = step >= 1 ? questions[step - 1] : null
-  const currentAnswer = step >= 1 ? answers[step - 1] : null
-  const currentTextAnswer = step >= 1 ? textAnswers[step - 1] : ''
-  const isMiniTask = currentQuestion?.type === 'mini_task'
+  const sortedQuestions = language ? [
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type !== 'mini_task'),
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'mini_task'),
+  ] : []
+
+  const pages = sortedQuestions.length ? buildPages(sortedQuestions) : []
+  const totalPages = pages.length
+  const currentPage = step >= 1 ? pages[step - 1] : null
 
   function handleExit() {
     navigate('/profile')
   }
 
+  function isPageAnswered(page) {
+    return page.questions.every((q, i) => {
+      const idx = page.start + i
+      if (q.type === 'mini_task') return (textAnswers[idx] ?? '').trim() !== ''
+      if (q.multi) return Array.isArray(answers[idx]) && answers[idx].length > 0
+      return answers[idx] !== null
+    })
+  }
+
   function canProceed() {
     if (step === 0) return Boolean(language)
-    if (isMiniTask) return (currentTextAnswer ?? '').trim() !== ''
-    return currentAnswer !== null
+    if (!currentPage) return false
+    return isPageAnswered(currentPage)
   }
 
   async function handleSubmit() {
     setSubmitting(true)
-    // mini_task is not auto-scored
     const score = answers.reduce((acc, ans, i) => {
-      if (questions[i].type === 'mini_task') return acc
-      return acc + (ans === questions[i].answer ? 1 : 0)
+      const q = sortedQuestions[i]
+      if (!q || q.type === 'mini_task') return acc
+      if (q.multi) {
+        const correct = Array.isArray(q.answer) ? [...q.answer].sort() : [q.answer]
+        const selected = Array.isArray(ans) ? [...ans].sort() : []
+        return acc + (JSON.stringify(correct) === JSON.stringify(selected) ? 1 : 0)
+      }
+      return acc + (ans === q.answer ? 1 : 0)
     }, 0)
 
     try {
@@ -214,7 +277,7 @@ export default function DiagnosticTestPage() {
         setCachedResult(language, data.level, data.score)
         navigate(`/diagnostic/result?lang=${language}`)
       } else {
-        setShowError(true)
+        setSubmitFailed(true)
         setSubmitting(false)
       }
     }
@@ -223,9 +286,25 @@ export default function DiagnosticTestPage() {
   async function handleNext() {
     if (!canProceed()) {
       setShowError(true)
+      if (currentPage) {
+        const missed = new Set(
+          currentPage.questions
+            .map((_, i) => currentPage.start + i)
+            .filter((globalIdx) => {
+              const q = sortedQuestions[globalIdx]
+              if (!q) return false
+              if (q.type === 'mini_task') return (textAnswers[globalIdx] ?? '').trim() === ''
+              if (q.multi) return !(Array.isArray(answers[globalIdx]) && answers[globalIdx].length > 0)
+              return answers[globalIdx] === null
+            })
+        )
+        setUnansweredSet(missed)
+      }
       return
     }
     setShowError(false)
+    setSubmitFailed(false)
+    setUnansweredSet(new Set())
 
     if (step === 0) {
       const cached = getCachedResult(language)
@@ -237,114 +316,122 @@ export default function DiagnosticTestPage() {
       return
     }
 
-    if (step === TOTAL_QUESTIONS) {
+    if (step === totalPages) {
       await handleSubmit()
       return
     }
 
     setStep((s) => s + 1)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   function handleBack() {
     setShowError(false)
-    if (step > 0) setStep((s) => s - 1)
+    if (step > 0) {
+      setStep((s) => s - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
-  function selectAnswer(idx) {
+  function selectAnswer(globalIdx, answerIdx) {
     setAnswers((prev) => {
       const next = [...prev]
-      next[step - 1] = idx
+      next[globalIdx] = answerIdx
       return next
     })
   }
 
-  function setTextAnswer(text) {
+  function toggleMultiAnswer(globalIdx, answerIdx) {
+    setAnswers((prev) => {
+      const next = [...prev]
+      const current = Array.isArray(next[globalIdx]) ? next[globalIdx] : []
+      next[globalIdx] = current.includes(answerIdx)
+        ? current.filter((i) => i !== answerIdx)
+        : [...current, answerIdx]
+      return next
+    })
+  }
+
+  function setTextAnswer(globalIdx, text) {
     setTextAnswers((prev) => {
       const next = [...prev]
-      next[step - 1] = text
+      next[globalIdx] = text
       return next
     })
   }
 
   const handleNextRef = useRef(handleNext)
-  const selectAnswerRef = useRef(selectAnswer)
-
-  useLayoutEffect(() => {
-    handleNextRef.current = handleNext
-    selectAnswerRef.current = selectAnswer
-  })
+  useLayoutEffect(() => { handleNextRef.current = handleNext })
 
   useEffect(() => {
     function onKeyDown(e) {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
-
       if (e.key === 'Enter') {
         e.preventDefault()
         handleNextRef.current()
-        return
-      }
-
-      if (step >= 1 && !isMiniTask && currentQuestion) {
-        const num = parseInt(e.key, 10)
-        if (num >= 1 && num <= (currentQuestion.options?.length ?? 0)) {
-          selectAnswerRef.current(num - 1)
-        }
       }
     }
-
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [step, isMiniTask, currentQuestion])
+  }, [])
+
+  const isLastPage = step === totalPages
 
   return (
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
-      <DiagnosticHeader onExit={handleExit} />
-
-      {step >= 1 && <ProgressBar answered={step} />}
+      <DiagnosticHeader onExit={handleExit} onBack={handleBack} step={step} totalPages={totalPages} />
 
       <main className="flex flex-1 flex-col">
         <div className="mx-auto w-full max-w-2xl flex-1 px-4 pt-10 sm:px-6">
           {step === 0 && (
-            <LanguageStep selected={language} onSelect={(l) => { setLanguage(l); setShowError(false) }} />
-          )}
-          {step >= 1 && currentQuestion && (
-            <QuestionStep
-              question={currentQuestion}
-              selectedAnswer={currentAnswer}
-              textAnswer={currentTextAnswer}
-              onSelect={selectAnswer}
-              onTextChange={setTextAnswer}
-              questionNumber={step}
+            <LanguageStep
+              selected={language}
+              onSelect={(l) => { setLanguage(l); setShowError(false) }}
             />
           )}
-        </div>
 
-        <div className="uape-onboarding-nav-row">
-          {step > 0 ? (
-            <button className="uape-onboarding-back-btn" onClick={handleBack}>
-              Back
-            </button>
-          ) : (
-            <span />
+          {step >= 1 && currentPage && (
+            <div className="uape-diagnostic-questions-page">
+              {currentPage.questions.map((question, i) => {
+                const globalIdx = currentPage.start + i
+                return (
+                  <QuestionBlock
+                    key={question.id}
+                    question={question}
+                    globalIndex={globalIdx}
+                    selectedAnswer={answers[globalIdx]}
+                    textAnswer={textAnswers[globalIdx]}
+                    isUnanswered={unansweredSet.has(globalIdx)}
+                    onSelect={(idx) => selectAnswer(globalIdx, idx)}
+                    onToggle={(idx) => toggleMultiAnswer(globalIdx, idx)}
+                    onTextChange={(text) => setTextAnswer(globalIdx, text)}
+                  />
+                )
+              })}
+            </div>
           )}
-          <button
-            className="uape-orange-btn uape-onboarding-next-btn"
-            onClick={handleNext}
-            disabled={submitting}
-          >
-            {step === TOTAL_QUESTIONS ? 'Submit' : 'Next'}
-          </button>
+
+          <div className="uape-diagnostic-submit-row">
+            <button
+              className="uape-orange-btn uape-diagnostic-submit-btn"
+              onClick={handleNext}
+              disabled={submitting}
+            >
+              {isLastPage ? 'Submit' : 'Next'}
+            </button>
+          </div>
         </div>
 
         {showError && (
           <div className="uape-diagnostic-error-toast">
             {step === 0
               ? 'Please select a language'
-              : step === TOTAL_QUESTIONS
-              ? 'Failed to submit. Try again.'
-              : isMiniTask
-              ? 'Please type your answer'
-              : 'Please select an answer'}
+              : 'Please answer all questions on this page'}
+          </div>
+        )}
+        {submitFailed && (
+          <div className="uape-diagnostic-error-toast">
+            Failed to submit. Try again.
           </div>
         )}
       </main>

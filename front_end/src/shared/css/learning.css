@@ -1,0 +1,170 @@
+/* ─── Shared learning cards & channels ─────────────────────────────────── */
+
+.uape-learn-content-card {
+  background-color: var(--color-uape-header);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 381px;
+  min-height: 389px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-uape-border-soft);
+}
+
+.uape-learn-content-card-clickable {
+  cursor: pointer;
+}
+
+.uape-learn-thumb-wrap {
+  padding: 12px 12px 0;
+}
+
+.uape-learn-thumb-frame {
+  border-radius: 8px;
+  overflow: hidden;
+  width: 357px;
+  height: 201px;
+}
+
+.uape-learn-thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.uape-learn-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #0e1011c2;
+  backdrop-filter: blur(20px);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-uape-white);
+  line-height: 20px;
+}
+
+.uape-learn-card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+}
+
+.uape-learn-title-row {
+  margin-bottom: 0;
+}
+
+.uape-learn-card-title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-uape-white);
+  margin: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uape-learn-meta {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-uape-muted-soft);
+  margin: 0;
+}
+
+.uape-learn-actions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.uape-learn-primary-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.uape-learn-link-btn {
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-uape-white);
+  line-height: 24px;
+  white-space: nowrap;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.uape-learn-link-btn:hover {
+  border-bottom-color: var(--color-uape-white);
+}
+
+.uape-learn-channel-card {
+  background-color: var(--color-uape-header);
+  border-radius: 16px;
+  border: 1px solid var(--color-uape-border-soft);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uape-learn-channel-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 1000px;
+  background-color: var(--color-uape-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-uape-white);
+  flex-shrink: 0;
+}
+
+.uape-learn-channel-name {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-uape-white);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uape-learn-channel-followers,
+.uape-learn-channel-description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-uape-muted-soft);
+  margin: 0;
+}
+
+.uape-learn-channel-footer {
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.uape-learn-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.uape-learn-error {
+  font-size: 16px;
+  color: var(--color-uape-secondary-text);
+  margin: 0;
+}

@@ -1,3 +1,4 @@
+import './FavoritesPage.css'
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'

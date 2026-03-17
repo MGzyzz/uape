@@ -1,3 +1,4 @@
+import './ProfilePage.css'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'

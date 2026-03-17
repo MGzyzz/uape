@@ -390,14 +390,15 @@ const JAVA = [
   {
     id: 5,
     type: 'theory',
-    question: 'What is method overloading in Java?',
+    multi: true,
+    question: 'Which of the following are valid access modifiers in Java? (Select all that apply)',
     options: [
-      'A) Overriding a parent class method',
-      'B) Multiple methods with the same name but different parameters',
-      'C) Calling a parent class constructor',
-      'D) Defining an abstract method',
+      'A) public',
+      'B) protected',
+      'C) internal',
+      'D) private',
     ],
-    answer: 1,
+    answer: [0, 1, 3],
   },
   {
     id: 6,

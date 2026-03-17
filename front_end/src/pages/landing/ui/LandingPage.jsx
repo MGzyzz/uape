@@ -1,3 +1,4 @@
+import './LandingPage.css'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'

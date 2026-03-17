@@ -1,4 +1,5 @@
 // src/shared/ui/CarouselSection.jsx
+import './CarouselSection.css'
 import { useState } from 'react'
 import arrowLeftIcon from '../assets/icons/arrow-left.svg'
 import arrowRightIcon from '../assets/icons/arrow-right.svg'

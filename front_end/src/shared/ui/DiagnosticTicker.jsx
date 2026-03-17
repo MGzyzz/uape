@@ -1,3 +1,4 @@
+import './DiagnosticTicker.css'
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 

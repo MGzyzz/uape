@@ -1,0 +1,388 @@
+/* ─── Diagnostic Test Page ──────────────────────────────────────────────── */
+
+/* Language selection step */
+
+.uape-diagnostic-lang-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 240px;
+  height: 72px;
+  padding: 16px;
+  background: #181A1B;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.uape-diagnostic-lang-step {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.uape-diagnostic-lang-info-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  min-height: 96px;
+  padding: 24px;
+  background: #181A1B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+
+.uape-diagnostic-lang-info-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.uape-diagnostic-lang-info-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.uape-diagnostic-lang-lower {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.uape-diagnostic-lang-title {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 36px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.uape-diagnostic-lang-grid {
+  display: grid;
+  grid-template-columns: 240px 240px;
+  gap: 28px;
+  justify-content: start;
+}
+
+.uape-diagnostic-lang-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.uape-diagnostic-lang-svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Code block */
+
+.uape-diagnostic-code-block {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e5e5e5;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Error toast */
+
+.uape-diagnostic-error-toast {
+  position: fixed;
+  bottom: 96px;
+  right: 32px;
+  z-index: 30;
+  border-radius: 8px;
+  background: rgba(220, 38, 38, 0.9);
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Code editor (mini_task) */
+
+.uape-diagnostic-code-editor {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+.uape-diagnostic-code-editor-line {
+  display: flex;
+  align-items: stretch;
+  min-height: 22px;
+}
+
+.uape-diagnostic-code-editor-line--blank {
+  background: rgba(235, 72, 35, 0.06);
+  border-top: 1px solid rgba(235, 72, 35, 0.15);
+  border-bottom: 1px solid rgba(235, 72, 35, 0.15);
+}
+
+.uape-diagnostic-code-editor-linenum {
+  min-width: 44px;
+  padding: 3px 10px;
+  color: rgba(255, 255, 255, 0.22);
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid #2a2a2a;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.uape-diagnostic-code-editor-text {
+  padding: 3px 16px;
+  color: #e5e5e5;
+  white-space: pre;
+  word-break: keep-all;
+}
+
+.uape-diagnostic-code-editor-blank-wrap {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.uape-diagnostic-code-editor-indent {
+  padding: 3px 0 3px 16px;
+  color: #e5e5e5;
+  white-space: pre;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.uape-diagnostic-code-editor-input {
+  flex: 1;
+  padding: 3px 16px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  outline: none;
+  min-width: 0;
+}
+
+.uape-diagnostic-code-editor-input::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+  font-style: italic;
+}
+
+/* Navbar */
+
+.uape-diagnostic-navbar-shell {
+  height: 87px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uape-diagnostic-save-exit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-uape-white);
+}
+
+/* Options / radio */
+
+.uape-diagnostic-option-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+  cursor: pointer;
+  user-select: none;
+}
+
+.uape-diagnostic-radio-outer {
+  width: 20px;
+  height: 20px;
+  border-radius: 1000px;
+  background: transparent;
+  border: 2px solid var(--color-uape-white);
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.uape-diagnostic-radio-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 1000px;
+  background-color: var(--color-uape-accent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Submit button */
+
+.uape-diagnostic-submit-btn {
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Progress bar */
+
+.uape-diagnostic-progress-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(234, 242, 124, 0.15);
+  flex-shrink: 0;
+}
+
+.uape-diagnostic-progress-fill {
+  height: 4px;
+  background: #EAF27C;
+  transition: width 0.3s ease;
+}
+
+/* Back button */
+
+.uape-diagnostic-header-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #EB4823;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.uape-diagnostic-back-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  /* convert white SVG fill to #EB4823 */
+  filter: brightness(0) saturate(100%) invert(40%) sepia(100%) saturate(1200%) hue-rotate(338deg);
+}
+
+/* Question row */
+
+.uape-diagnostic-q-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  max-width: 790px;
+}
+
+.uape-diagnostic-q-num {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #ffffff;
+  min-width: 14px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.uape-diagnostic-q-num--error {
+  color: #EB4823;
+}
+
+.uape-diagnostic-q-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+.uape-diagnostic-q-text {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.uape-diagnostic-q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uape-diagnostic-q-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+/* Submit row */
+
+.uape-diagnostic-submit-row {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 40px;
+  padding-bottom: 120px;
+}
+
+/* Navbar left group */
+
+.uape-diagnostic-navbar-left-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.uape-diagnostic-navbar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uape-diagnostic-navbar-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #ffffff;
+}
+
+.uape-diagnostic-navbar-count {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #FFFFFFC2;
+}
+
+/* Multiple questions on one page */
+
+.uape-diagnostic-questions-page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}

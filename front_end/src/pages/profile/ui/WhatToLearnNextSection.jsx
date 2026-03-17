@@ -1,3 +1,4 @@
+import './WhatToLearnNextSection.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getSections, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'

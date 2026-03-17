@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import ProtectedRoute from './ProtectedRoute.jsx'
+import '../shared/css/animations.css'
+import '../shared/css/layout.css'
+import '../shared/css/components.css'
+import '../shared/css/learning.css'
 
 const LandingPage        = lazy(() => import('../pages/landing/ui/LandingPage.jsx'))
 const AuthPage           = lazy(() => import('../pages/auth/ui/AuthPage.jsx'))

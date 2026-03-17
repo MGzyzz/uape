@@ -1,0 +1,130 @@
+/* ─── Onboarding ────────────────────────────────────────────────────────── */
+
+.uape-onboarding-progress-segment {
+  flex: 1;
+  height: 4px;
+  background-color: #eb482333;
+}
+
+.uape-onboarding-progress-segment-active {
+  background-color: var(--color-uape-accent);
+}
+
+.uape-onboarding-info-block {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--color-uape-header);
+  border: 1px solid var(--color-uape-border-soft);
+}
+
+.uape-onboarding-info-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-onboarding-title {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 36px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-onboarding-option-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+  cursor: pointer;
+  user-select: none;
+}
+
+.uape-onboarding-checkbox-outer {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--color-uape-white);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uape-onboarding-radio-outer {
+  width: 20px;
+  height: 20px;
+  border-radius: 1000px;
+  background: transparent;
+  border: 2px solid var(--color-uape-white);
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.uape-onboarding-radio-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 1000px;
+  background-color: var(--color-uape-accent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.uape-onboarding-save-exit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-uape-white);
+}
+
+.uape-onboarding-next-btn {
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.uape-onboarding-back-btn {
+  padding: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-uape-white);
+}
+
+.uape-onboarding-navbar-shell {
+  height: 87px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uape-onboarding-logo img {
+  width: 120px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.uape-onboarding-nav-row {
+  position: fixed;
+  bottom: 40px;
+  left: 60px;
+  right: 60px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 30;
+}

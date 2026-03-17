@@ -32,7 +32,7 @@ const faqItems = [
 ]
 
 function FaqSection() {
-  const [openIndex, setOpenIndex] = useState(0)
+  const [openIndex, setOpenIndex] = useState(null)
 
   const toggle = (index) => setOpenIndex(openIndex === index ? null : index)
 

@@ -1,3 +1,4 @@
+import './VerifyEmailPage.css'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'

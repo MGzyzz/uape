@@ -1,0 +1,66 @@
+/* ─── Diagnostic Result Page ────────────────────────────────────────────── */
+
+.uape-diagnostic-result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 480px;
+  width: 100%;
+  background: var(--uape-card-bg, #1a1a1a);
+  border: 1px solid var(--uape-border-soft, #2a2a2a);
+  border-radius: 16px;
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.uape-diagnostic-result-lang {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.uape-diagnostic-result-lang-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.uape-diagnostic-result-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.uape-diagnostic-result-level {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.uape-diagnostic-result-level--beginner     { color: #22c55e; }
+.uape-diagnostic-result-level--intermediate { color: #3b82f6; }
+.uape-diagnostic-result-level--advanced     { color: #a855f7; }
+
+.uape-diagnostic-result-score {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.uape-diagnostic-result-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+}
+
+.uape-diagnostic-result-go-btn {
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
