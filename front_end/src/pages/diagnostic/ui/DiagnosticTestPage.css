@@ -187,6 +187,47 @@
   font-style: italic;
 }
 
+/* Full blank code editor (mini_task) */
+
+.uape-diagnostic-full-editor {
+  display: flex;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.uape-diagnostic-full-editor-gutter {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  border-right: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.uape-diagnostic-full-editor-textarea {
+  flex: 1;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  outline: none;
+  resize: none;
+  min-height: 220px;
+}
+
+.uape-diagnostic-full-editor-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+  font-style: italic;
+}
+
 /* Navbar */
 
 .uape-diagnostic-navbar-shell {

@@ -9,21 +9,17 @@ import checkIcon from '../../../shared/assets/icons/arrow-correct-right.svg'
 import checkboxIcon from '../../../shared/assets/icons/checkbox-icon.svg'
 
 const TOTAL_QUESTIONS = 15
-const MCQ_PER_PAGE = 4
 
-// Split questions: MCQ first (4 per page), mini_task at the end (1 per page)
+// Page 1: all theory, Page 2: find_error + what_output, Page 3: mini_task
 function buildPages(questions) {
-  const mcq = questions.filter((q) => q.type !== 'mini_task')
-  const code = questions.filter((q) => q.type === 'mini_task')
+  const theory  = questions.filter((q) => q.type === 'theory')
+  const codeMcq = questions.filter((q) => q.type === 'find_error')
+  const mini    = questions.filter((q) => q.type === 'mini_task')
+
   const pages = []
-  for (let i = 0; i < mcq.length; i += MCQ_PER_PAGE) {
-    pages.push({ start: i, questions: mcq.slice(i, i + MCQ_PER_PAGE) })
-  }
-  let offset = mcq.length
-  code.forEach((q) => {
-    pages.push({ start: offset, questions: [q] })
-    offset++
-  })
+  if (theory.length)  pages.push({ start: 0, questions: theory })
+  if (codeMcq.length) pages.push({ start: theory.length, questions: codeMcq })
+  mini.forEach((q, i) => pages.push({ start: theory.length + codeMcq.length + i, questions: [q] }))
   return pages
 }
 
@@ -100,36 +96,27 @@ function LanguageStep({ selected, onSelect }) {
   )
 }
 
-// ─── Code editor with one editable blank line (mini_task) ─────────────────────
+// ─── Full blank code editor (mini_task) ───────────────────────────────────────
 
-function CodeEditor({ codeLines, blankPlaceholder, blankIndent, value, onChange }) {
+function FullCodeEditor({ value, onChange }) {
+  const lineCount = Math.max((value || '').split('\n').length, 10)
   return (
-    <div className="uape-diagnostic-code-editor">
-      {codeLines.map((line, i) =>
-        line === null ? (
-          <div key={i} className="uape-diagnostic-code-editor-line uape-diagnostic-code-editor-line--blank">
-            <span className="uape-diagnostic-code-editor-linenum">{i + 1}</span>
-            <div className="uape-diagnostic-code-editor-blank-wrap">
-              {blankIndent && (
-                <span className="uape-diagnostic-code-editor-indent">{blankIndent}</span>
-              )}
-              <input
-                className="uape-diagnostic-code-editor-input"
-                placeholder={blankPlaceholder}
-                value={value ?? ''}
-                onChange={(e) => onChange(e.target.value)}
-                autoComplete="off"
-                spellCheck={false}
-              />
-            </div>
-          </div>
-        ) : (
-          <div key={i} className="uape-diagnostic-code-editor-line">
-            <span className="uape-diagnostic-code-editor-linenum">{i + 1}</span>
-            <span className="uape-diagnostic-code-editor-text">{line}</span>
-          </div>
-        )
-      )}
+    <div className="uape-diagnostic-full-editor">
+      <div className="uape-diagnostic-full-editor-gutter">
+        {Array.from({ length: lineCount }, (_, i) => (
+          <span key={i} className="uape-diagnostic-code-editor-linenum">{i + 1}</span>
+        ))}
+      </div>
+      <textarea
+        className="uape-diagnostic-full-editor-textarea"
+        value={value ?? ''}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="// write your code here"
+        spellCheck={false}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+      />
     </div>
   )
 }
@@ -175,10 +162,7 @@ function QuestionBlock({ question, globalIndex, selectedAnswer, textAnswer, onSe
         <p className="uape-diagnostic-q-text">{question.question}</p>
 
         {isMiniTask ? (
-          <CodeEditor
-            codeLines={question.codeLines}
-            blankPlaceholder={question.blankPlaceholder}
-            blankIndent={question.blankIndent}
+          <FullCodeEditor
             value={textAnswer}
             onChange={onTextChange}
           />
@@ -227,7 +211,8 @@ export default function DiagnosticTestPage() {
   const [unansweredSet, setUnansweredSet] = useState(new Set())
 
   const sortedQuestions = language ? [
-    ...DIAGNOSTIC_DATA[language].filter((q) => q.type !== 'mini_task'),
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'theory'),
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'find_error'),
     ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'mini_task'),
   ] : []
 
