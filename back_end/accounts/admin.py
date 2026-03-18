@@ -39,5 +39,7 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(AssessmentResult)
 class AssessmentResultAdmin(admin.ModelAdmin):
-    list_display = ('user', 'score', 'created_at')
-    readonly_fields = ('user', 'score', 'created_at')
+    list_display = ('user', 'language', 'level', 'score', 'created_at')
+    list_filter = ('language', 'level')
+    search_fields = ('user__email', 'user__first_name', 'user__last_name')
+    readonly_fields = ('user', 'language', 'score', 'created_at', 'updated_at')
