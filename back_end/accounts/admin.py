@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from accounts.models import User, Profile, UserOnboarding, AssessmentResult
+from accounts.models import User, Profile, UserOnboarding, AssessmentResult, EmailVerification, PasswordResetToken
 
 
 class ProfileInline(admin.StackedInline):
@@ -43,3 +43,19 @@ class AssessmentResultAdmin(admin.ModelAdmin):
     list_filter = ('language', 'level')
     search_fields = ('user__email', 'user__first_name', 'user__last_name')
     readonly_fields = ('user', 'language', 'score', 'created_at', 'updated_at')
+
+
+@admin.register(EmailVerification)
+class EmailVerificationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'token', 'is_used', 'created_at')
+    list_filter = ('is_used',)
+    search_fields = ('user__email',)
+    readonly_fields = ('user', 'token', 'created_at')
+
+
+@admin.register(PasswordResetToken)
+class PasswordResetTokenAdmin(admin.ModelAdmin):
+    list_display = ('user', 'token', 'is_used', 'created_at')
+    list_filter = ('is_used',)
+    search_fields = ('user__email',)
+    readonly_fields = ('user', 'token', 'created_at')

@@ -84,8 +84,8 @@ function ForgotPasswordPage() {
           ) : (
             <>
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                <rect width="64" height="64" rx="32" fill="#1A2A3A" />
-                <path d="M16 32l10 10 22-22" stroke="#4183C4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                <rect width="64" height="64" rx="32" fill="#2A1510" />
+                <path d="M16 32l10 10 22-22" stroke="#eb4823" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <div className="flex flex-col gap-2">
                 <h1 className="text-[36px] font-semibold">Check your email</h1>

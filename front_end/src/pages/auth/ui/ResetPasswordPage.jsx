@@ -3,7 +3,8 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
-import PasswordStrength, { PW_RULES } from '../../../shared/ui/PasswordStrength.jsx'
+import PasswordStrength from '../../../shared/ui/PasswordStrength.jsx'
+import { PW_RULES } from '../../../shared/ui/pwRules.js'
 import { resetPassword } from '../../../api/auth.js'
 
 function ResetPasswordPage() {
@@ -146,7 +147,7 @@ function ResetPasswordPage() {
             </div>
 
             {(status === 'error' || errorMsg) && (
-              <p className="text-[14px] text-[#eb4823]">{errorMsg}</p>
+              <p className="text-[14px] text-uape-accent">{errorMsg}</p>
             )}
 
             <button

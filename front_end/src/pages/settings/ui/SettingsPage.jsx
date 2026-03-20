@@ -6,7 +6,8 @@ import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 import { getProfile, updateProfile, saveUser, changePassword } from '../../../api/auth.js'
-import PasswordStrength, { PW_RULES } from '../../../shared/ui/PasswordStrength.jsx'
+import PasswordStrength from '../../../shared/ui/PasswordStrength.jsx'
+import { PW_RULES } from '../../../shared/ui/pwRules.js'
 
 const TABS = [
   { id: 'profile',  label: 'Profile',  icon: FiUser },
