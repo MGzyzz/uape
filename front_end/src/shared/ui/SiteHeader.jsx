@@ -61,14 +61,14 @@ function UserDropdown({ user, onLogout }) {
         <div className="absolute right-0 top-[calc(100%+8px)] z-50 w-44 overflow-hidden rounded-xl border border-uape-border-soft bg-uape-form-bg shadow-lg">
           <button
             onClick={() => { setOpen(false); navigate('/settings') }}
-            className="flex w-full items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-uape-white"
+            className="flex w-full cursor-pointer items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-uape-white"
           >
             <FiSettings size={15} />
             Settings
           </button>
           <button
             onClick={() => { setOpen(false); onLogout() }}
-            className="flex w-full items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-red-400"
+            className="flex w-full cursor-pointer items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-red-400"
           >
             <FiLogOut size={15} />
             Log out
