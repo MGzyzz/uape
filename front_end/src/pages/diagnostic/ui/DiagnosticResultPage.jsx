@@ -76,7 +76,7 @@ export default function DiagnosticResultPage() {
             {levelCfg.label}
           </p>
           <p className="uape-diagnostic-result-score">
-            {result.score} / 15 correct
+            {result.score} / 35 correct
           </p>
           <p className="uape-diagnostic-result-desc">
             Based on your answers, your current {langMeta?.label ?? lang} level is{' '}

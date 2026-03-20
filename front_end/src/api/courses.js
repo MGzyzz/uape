@@ -104,6 +104,11 @@ export async function getVideos() {
   return res.data.map(normalizeVideo)
 }
 
+export async function getSectionsByTag(tagName) {
+  const res = await client.get(`/courses/sections/?tag=${encodeURIComponent(tagName.toLowerCase())}`)
+  return res.data.map(normalizeSection)
+}
+
 export async function getRecommended() {
   const res = await client.get('/courses/recommended/')
   return normalizeSection(res.data)

@@ -210,6 +210,14 @@
   color: #A31E89;
 }
 
+.uape-assessment-result-new-btn {
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  align-self: flex-start;
+}
+
 /* Level switcher buttons */
 
 .uape-assessment-result-level-switcher {

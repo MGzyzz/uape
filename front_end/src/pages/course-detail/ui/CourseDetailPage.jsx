@@ -49,10 +49,18 @@ function RecommendedCard({ item, onToggle }) {
   const navigate = useNavigate()
   const { isAuth } = useAuth()
 
+  function handleClick() { navigate(`/playlist/${item.id}`) }
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick() }
+  }
+
   return (
     <div
       className="uape-learn-content-card uape-learn-content-card-clickable"
-      onClick={() => navigate(`/playlist/${item.id}`)}
+      onClick={handleClick}
+      tabIndex={0}
+      role="link"
+      onKeyDown={handleKeyDown}
     >
       <div className="uape-learn-thumb-wrap">
         <div className="relative uape-learn-thumb-frame">
@@ -79,11 +87,11 @@ function RecommendedCard({ item, onToggle }) {
 
         <Tags tags={item.tags} />
 
-        <div className="uape-learn-actions flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
-          <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
+        <div className="uape-learn-actions flex items-center gap-4">
+          <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn" onClick={(e) => e.stopPropagation()}>
             View playlist
           </a>
-          <a href={item.channelUrl} target="_blank" rel="noopener noreferrer" className="uape-learn-link-btn">
+          <a href={item.channelUrl} target="_blank" rel="noopener noreferrer" className="uape-learn-link-btn" onClick={(e) => e.stopPropagation()}>
             Visit channel
           </a>
         </div>
@@ -238,11 +246,13 @@ function DetailContent({ playlist, favorited, onToggleMain, recommended, onToggl
           {/* Left — sticky thumbnail */}
           <div className="uape-detail-left">
             <div className="uape-detail-thumb-wrapper">
-              <LazyImage
-                src={playlist.image}
-                alt={playlist.title}
-                className="uape-detail-thumb-img"
-              />
+              <a href={playlist.url} target="_blank" rel="noopener noreferrer" className="uape-detail-thumb-link">
+                <LazyImage
+                  src={playlist.image}
+                  alt={playlist.title}
+                  className="uape-detail-thumb-img"
+                />
+              </a>
               {onToggleMain && (
                 <button
                   onClick={onToggleMain}

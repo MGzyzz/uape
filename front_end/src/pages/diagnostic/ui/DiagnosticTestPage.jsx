@@ -1,19 +1,29 @@
 import './DiagnosticTestPage.css'
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Editor from '@monaco-editor/react'
 import { LANGUAGES, DIAGNOSTIC_DATA } from '../data/diagnosticData.js'
 import { getCachedResult, setCachedResult, submitAssessment } from '../../../api/assessment.js'
+import BrandLogo from '../../../shared/ui/BrandLogo.jsx'
 import paperIcon from '../../../shared/assets/icons/paper-icon.svg'
-import arrowLeftIcon from '../assets/Arrow left.png'
 import checkIcon from '../../../shared/assets/icons/arrow-correct-right.svg'
 import checkboxIcon from '../../../shared/assets/icons/checkbox-icon.svg'
+import arrowLeftIcon from '../assets/Arrow left.png'
 
-const TOTAL_QUESTIONS = 15
+const TOTAL_QUESTIONS = 36
+
+const MONACO_LANG = {
+  python: 'python',
+  javascript: 'javascript',
+  java: 'java',
+  csharp: 'csharp',
+  cpp: 'cpp',
+}
 
 // Page 1: all theory, Page 2: find_error + what_output, Page 3: mini_task
 function buildPages(questions) {
   const theory  = questions.filter((q) => q.type === 'theory')
-  const codeMcq = questions.filter((q) => q.type === 'find_error')
+  const codeMcq = questions.filter((q) => q.type === 'find_error' || q.type === 'what_output')
   const mini    = questions.filter((q) => q.type === 'mini_task')
 
   const pages = []
@@ -26,31 +36,34 @@ function buildPages(questions) {
 // ─── Header ───────────────────────────────────────────────────────────────────
 
 function DiagnosticHeader({ onExit, onBack, step, totalPages }) {
-  const pct = totalPages > 0 ? Math.round((step / totalPages) * 100) : 0
+  const totalSteps = (totalPages || 3) + 1
+  const pct = Math.round(((step + 1) / totalSteps) * 100)
   return (
     <header className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]">
       <div className="uape-section-shell uape-diagnostic-navbar-shell">
         <div className="uape-diagnostic-navbar-left-group">
-          {step >= 1 && (
-            <button className="uape-diagnostic-header-back-btn" onClick={onBack}>
-              <img src={arrowLeftIcon} alt="" className="uape-diagnostic-back-icon" />
-              <span>Back</span>
-            </button>
+          {step === 0 ? (
+            <BrandLogo />
+          ) : (
+            <>
+              <button className="uape-diagnostic-header-back-btn" onClick={onBack}>
+                <img src={arrowLeftIcon} alt="" className="uape-diagnostic-back-icon" />
+                <span>Back</span>
+              </button>
+              <div className="uape-diagnostic-navbar-info">
+                <span className="uape-diagnostic-navbar-title">Test questions</span>
+                <span className="uape-diagnostic-navbar-count">{TOTAL_QUESTIONS} Questions</span>
+              </div>
+            </>
           )}
-          <div className="uape-diagnostic-navbar-info">
-            <span className="uape-diagnostic-navbar-title">Test questions</span>
-            <span className="uape-diagnostic-navbar-count">{TOTAL_QUESTIONS} Questions</span>
-          </div>
         </div>
         <button className="uape-diagnostic-save-exit" onClick={onExit}>
           Save & exit
         </button>
       </div>
-      {step >= 1 && (
-        <div className="uape-diagnostic-progress-wrap">
-          <div className="uape-diagnostic-progress-fill" style={{ width: `${pct}%` }} />
-        </div>
-      )}
+      <div className="uape-diagnostic-progress-wrap">
+        <div className="uape-diagnostic-progress-fill" style={{ width: `${pct}%` }} />
+      </div>
     </header>
   )
 }
@@ -96,26 +109,60 @@ function LanguageStep({ selected, onSelect }) {
   )
 }
 
-// ─── Full blank code editor (mini_task) ───────────────────────────────────────
+// ─── Monaco read-only code block (find_error / what_output) ──────────────────
 
-function FullCodeEditor({ value, onChange }) {
-  const lineCount = Math.max((value || '').split('\n').length, 10)
+function MonacoCodeBlock({ code, language }) {
+  const lineCount = (code || '').split('\n').length
+  const height = lineCount * 21 + 28
   return (
-    <div className="uape-diagnostic-full-editor">
-      <div className="uape-diagnostic-full-editor-gutter">
-        {Array.from({ length: lineCount }, (_, i) => (
-          <span key={i} className="uape-diagnostic-code-editor-linenum">{i + 1}</span>
-        ))}
-      </div>
-      <textarea
-        className="uape-diagnostic-full-editor-textarea"
+    <div className="uape-diagnostic-monaco-block">
+      <Editor
+        height={height}
+        language={MONACO_LANG[language] || 'plaintext'}
+        value={code || ''}
+        theme="vs-dark"
+        options={{
+          readOnly: true,
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          fontSize: 14,
+          lineHeight: 21,
+          renderLineHighlight: 'none',
+          scrollbar: { vertical: 'hidden', horizontal: 'hidden', alwaysConsumeMouseWheel: false },
+          overviewRulerLanes: 0,
+          overviewRulerBorder: false,
+          contextmenu: false,
+          folding: false,
+          glyphMargin: false,
+          padding: { top: 12, bottom: 12 },
+        }}
+      />
+    </div>
+  )
+}
+
+// ─── Monaco full code editor (mini_task) ──────────────────────────────────────
+
+function MonacoCodeEditor({ value, onChange, language }) {
+  return (
+    <div className="uape-diagnostic-monaco-editor">
+      <Editor
+        height={300}
+        language={MONACO_LANG[language] || 'plaintext'}
         value={value ?? ''}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder="// write your code here"
-        spellCheck={false}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
+        theme="vs-dark"
+        onChange={(val) => onChange(val ?? '')}
+        options={{
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          fontSize: 14,
+          lineHeight: 21,
+          tabSize: 2,
+          automaticLayout: true,
+          overviewRulerLanes: 0,
+          overviewRulerBorder: false,
+          padding: { top: 12, bottom: 12 },
+        }}
       />
     </div>
   )
@@ -126,7 +173,7 @@ function FullCodeEditor({ value, onChange }) {
 function RadioOption({ label, selected, onSelect }) {
   return (
     <button type="button" className="uape-diagnostic-q-option" onClick={onSelect}>
-      <div className="uape-diagnostic-radio-outer">
+      <div className={`uape-diagnostic-radio-outer${selected ? ' uape-diagnostic-radio-outer--active' : ''}`}>
         {selected && <div className="uape-diagnostic-radio-inner" />}
       </div>
       <span className="uape-diagnostic-option-label">{label}</span>
@@ -141,7 +188,7 @@ function CheckboxOption({ label, selected, onToggle }) {
     <button type="button" className="uape-diagnostic-q-option" onClick={onToggle}>
       {selected
         ? <img src={checkIcon} alt="" width={20} height={20} />
-        : <img src={checkboxIcon} alt="" width={20} height={20} />
+        : <img src={checkboxIcon} alt="" width={20} height={20} className="uape-diagnostic-checkbox-inactive" />
       }
       <span className="uape-diagnostic-option-label">{label}</span>
     </button>
@@ -150,26 +197,30 @@ function CheckboxOption({ label, selected, onToggle }) {
 
 // ─── Single question block ─────────────────────────────────────────────────────
 
-function QuestionBlock({ question, globalIndex, selectedAnswer, textAnswer, onSelect, onToggle, onTextChange, isUnanswered }) {
+function QuestionBlock({ question, globalIndex, selectedAnswer, textAnswer, onSelect, onToggle, onTextChange, isUnanswered, isActive, language }) {
   const isMiniTask = question.type === 'mini_task'
   const isMulti = question.multi === true
   const selectedArr = Array.isArray(selectedAnswer) ? selectedAnswer : []
 
   return (
-    <div className="uape-diagnostic-q-row">
+    <div
+      className={`uape-diagnostic-q-row${isActive ? ' uape-diagnostic-q-row--active' : ''}`}
+      data-qidx={globalIndex}
+    >
       <span className={`uape-diagnostic-q-num${isUnanswered ? ' uape-diagnostic-q-num--error' : ''}`}>{globalIndex + 1}.</span>
       <div className="uape-diagnostic-q-content">
         <p className="uape-diagnostic-q-text">{question.question}</p>
 
         {isMiniTask ? (
-          <FullCodeEditor
+          <MonacoCodeEditor
             value={textAnswer}
             onChange={onTextChange}
+            language={language}
           />
         ) : (
           <>
             {question.code && (
-              <pre className="uape-diagnostic-code-block">{question.code}</pre>
+              <MonacoCodeBlock code={question.code} language={language} />
             )}
             <div className="uape-diagnostic-q-options">
               {question.options.map((option, idx) =>
@@ -209,10 +260,11 @@ export default function DiagnosticTestPage() {
   const [submitFailed, setSubmitFailed] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [unansweredSet, setUnansweredSet] = useState(new Set())
+  const [activeQuestionIdx, setActiveQuestionIdx] = useState(0)
 
   const sortedQuestions = language ? [
     ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'theory'),
-    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'find_error'),
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'find_error' || q.type === 'what_output'),
     ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'mini_task'),
   ] : []
 
@@ -255,16 +307,10 @@ export default function DiagnosticTestPage() {
     try {
       const data = await submitAssessment(language, score)
       setCachedResult(language, data.level, data.score)
-      navigate(`/diagnostic/result?lang=${language}`)
-    } catch (err) {
-      const data = err.response?.data
-      if (data?.detail === 'already_exists') {
-        setCachedResult(language, data.level, data.score)
-        navigate(`/diagnostic/result?lang=${language}`)
-      } else {
-        setSubmitFailed(true)
-        setSubmitting(false)
-      }
+      navigate('/diagnostic', { state: { scrollToResult: true } })
+    } catch {
+      setSubmitFailed(true)
+      setSubmitting(false)
     }
   }
 
@@ -294,10 +340,11 @@ export default function DiagnosticTestPage() {
     if (step === 0) {
       const cached = getCachedResult(language)
       if (cached) {
-        navigate(`/diagnostic/result?lang=${language}`)
+        navigate('/diagnostic', { state: { scrollToResult: true } })
         return
       }
       setStep(1)
+      setActiveQuestionIdx(pages[0]?.start ?? 0)
       return
     }
 
@@ -307,6 +354,7 @@ export default function DiagnosticTestPage() {
     }
 
     setStep((s) => s + 1)
+    setActiveQuestionIdx(pages[step]?.start ?? 0)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -314,6 +362,7 @@ export default function DiagnosticTestPage() {
     setShowError(false)
     if (step > 0) {
       setStep((s) => s - 1)
+      setActiveQuestionIdx(pages[step - 2]?.start ?? 0)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
@@ -348,12 +397,47 @@ export default function DiagnosticTestPage() {
   const handleNextRef = useRef(handleNext)
   useLayoutEffect(() => { handleNextRef.current = handleNext })
 
+  const kbStateRef = useRef({ currentPage, activeQuestionIdx, answers, selectAnswer })
+  useLayoutEffect(() => {
+    kbStateRef.current = { currentPage, activeQuestionIdx, answers, selectAnswer }
+  })
+
   useEffect(() => {
     function onKeyDown(e) {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
+      // Never intercept events from inside Monaco editor or native inputs
+      if (e.target.tagName === 'INPUT') return
+      if (e.target.tagName === 'TEXTAREA') return
+      if (e.target.closest?.('.monaco-editor')) return
+
       if (e.key === 'Enter') {
         e.preventDefault()
         handleNextRef.current()
+        return
+      }
+
+      if (e.key === 'Tab') {
+        e.preventDefault()
+        const { currentPage: page, activeQuestionIdx: activeIdx, answers: ans, selectAnswer: select } = kbStateRef.current
+        if (!page) return
+
+        const localIdx = activeIdx - page.start
+        const q = page.questions[localIdx]
+
+        // Auto-select first answer for current question if it's a single-select MCQ and unanswered
+        if (q && q.type !== 'mini_task' && !q.multi && ans[activeIdx] === null) {
+          select(activeIdx, 0)
+        }
+
+        // Advance to next question on this page
+        const nextLocalIdx = localIdx + 1
+        if (nextLocalIdx < page.questions.length) {
+          const nextGlobalIdx = page.start + nextLocalIdx
+          setActiveQuestionIdx(nextGlobalIdx)
+          setTimeout(() => {
+            document.querySelector(`[data-qidx="${nextGlobalIdx}"]`)
+              ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }, 30)
+        }
       }
     }
     window.addEventListener('keydown', onKeyDown)
@@ -387,9 +471,11 @@ export default function DiagnosticTestPage() {
                     selectedAnswer={answers[globalIdx]}
                     textAnswer={textAnswers[globalIdx]}
                     isUnanswered={unansweredSet.has(globalIdx)}
+                    isActive={globalIdx === activeQuestionIdx}
                     onSelect={(idx) => selectAnswer(globalIdx, idx)}
                     onToggle={(idx) => toggleMultiAnswer(globalIdx, idx)}
                     onTextChange={(text) => setTextAnswer(globalIdx, text)}
+                    language={language}
                   />
                 )
               })}
@@ -400,9 +486,9 @@ export default function DiagnosticTestPage() {
             <button
               className="uape-orange-btn uape-diagnostic-submit-btn"
               onClick={handleNext}
-              disabled={submitting}
+              disabled={submitting || (step === 0 && !language)}
             >
-              {isLastPage ? 'Submit' : 'Next'}
+              {step > 0 && isLastPage ? 'Submit' : 'Next'}
             </button>
           </div>
         </div>

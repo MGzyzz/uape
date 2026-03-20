@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import { getStoredUser, clearTokens as _clearTokens } from '../api/auth.js'
+import { clearCachedResults } from '../api/assessment.js'
 
 const AuthContext = createContext(null)
 
@@ -9,6 +10,7 @@ export function AuthProvider({ children }) {
 
   function logout() {
     _clearTokens()
+    clearCachedResults()
     setUser(null)
   }
 

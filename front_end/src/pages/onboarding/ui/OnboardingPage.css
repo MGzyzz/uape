@@ -45,6 +45,10 @@
   user-select: none;
 }
 
+.uape-onboarding-checkbox-inactive {
+  opacity: 0.322;
+}
+
 .uape-onboarding-checkbox-outer {
   width: 20px;
   height: 20px;
@@ -61,10 +65,14 @@
   height: 20px;
   border-radius: 1000px;
   background: transparent;
-  border: 2px solid var(--color-uape-white);
+  border: 2px solid #FFFFFF52;
   position: relative;
   flex-shrink: 0;
   cursor: pointer;
+}
+
+.uape-onboarding-radio-outer--active {
+  border-color: #EB4823;
 }
 
 .uape-onboarding-radio-inner {

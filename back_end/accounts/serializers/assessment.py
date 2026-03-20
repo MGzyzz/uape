@@ -4,7 +4,7 @@ from accounts.models import AssessmentResult
 
 class AssessmentSubmitSerializer(serializers.Serializer):
     language = serializers.ChoiceField(choices=[c[0] for c in AssessmentResult.LANGUAGE_CHOICES])
-    score = serializers.IntegerField(min_value=0, max_value=15)
+    score = serializers.IntegerField(min_value=0, max_value=35)
 
 
 class AssessmentResultSerializer(serializers.ModelSerializer):

@@ -18,6 +18,14 @@ class SectionListView(ListAPIView):
             'channels__tags',
         )
 
+        tag = self.request.query_params.get('tag', '').strip().lower()
+        if tag:
+            return qs.filter(
+                models.Q(playlists__tags__name__iexact=tag) |
+                models.Q(videos__tags__name__iexact=tag) |
+                models.Q(channels__tags__name__iexact=tag)
+            ).distinct()
+
         user = self.request.user
         if user.is_authenticated:
             try:

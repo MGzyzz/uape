@@ -53,17 +53,26 @@ function FavoritesSkeleton() {
 
 function ContentCard({ item, buttonLabel, contentType, onToggle }) {
   const navigate = useNavigate()
+  const isClickable = contentType === 'playlist'
 
   function handleCardClick() {
-    if (contentType === 'playlist') {
-      navigate(`/playlist/${item.id}`)
+    if (isClickable) navigate(`/playlist/${item.id}`)
+  }
+
+  function handleKeyDown(e) {
+    if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault()
+      handleCardClick()
     }
   }
 
   return (
-    <article
-      className={`uape-learn-content-card${contentType === 'playlist' ? ' uape-learn-content-card-clickable' : ''}`}
+    <div
+      className={`uape-learn-content-card${isClickable ? ' uape-learn-content-card-clickable' : ''}`}
       onClick={handleCardClick}
+      tabIndex={isClickable ? 0 : undefined}
+      role={isClickable ? 'link' : undefined}
+      onKeyDown={handleKeyDown}
     >
       <div className="uape-learn-thumb-wrap">
         <div className="relative uape-learn-thumb-frame">
@@ -100,16 +109,16 @@ function ContentCard({ item, buttonLabel, contentType, onToggle }) {
 
         <ContentTags tags={item.tags} />
 
-        <div className="uape-favorites-card-actions" onClick={(event) => event.stopPropagation()}>
-          <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">
+        <div className="uape-favorites-card-actions">
+          <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn" onClick={(e) => e.stopPropagation()}>
             {buttonLabel}
           </a>
-          <a href={item.channelUrl} target="_blank" rel="noopener noreferrer" className="uape-favorites-secondary-link">
+          <a href={item.channelUrl} target="_blank" rel="noopener noreferrer" className="uape-favorites-secondary-link" onClick={(e) => e.stopPropagation()}>
             Visit channel
           </a>
         </div>
       </div>
-    </article>
+    </div>
   )
 }
 
@@ -122,7 +131,7 @@ function ChannelCard({ item, onToggle }) {
     .toUpperCase()
 
   return (
-    <article className="uape-learn-channel-card">
+    <div className="uape-learn-channel-card">
       <div className="flex items-start gap-3">
         <div className="uape-learn-channel-avatar">
           {item.avatar_url ? (
@@ -156,7 +165,7 @@ function ChannelCard({ item, onToggle }) {
           Visit channel
         </a>
       </div>
-    </article>
+    </div>
   )
 }
 

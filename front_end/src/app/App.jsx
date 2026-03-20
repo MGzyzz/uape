@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import ProtectedRoute from './ProtectedRoute.jsx'
 import '../shared/css/animations.css'
@@ -18,7 +18,6 @@ const FavoritesPage      = lazy(() => import('../pages/favorites/ui/FavoritesPag
 const AboutUsPage        = lazy(() => import('../pages/about-us/ui/AboutUsPage.jsx'))
 const DiagnosticPage     = lazy(() => import('../pages/diagnostic/ui/DiagnosticPage.jsx'))
 const DiagnosticTestPage = lazy(() => import('../pages/diagnostic/ui/DiagnosticTestPage.jsx'))
-const DiagnosticResultPage = lazy(() => import('../pages/diagnostic/ui/DiagnosticResultPage.jsx'))
 
 function PageLoader() {
   return (
@@ -51,7 +50,7 @@ function App() {
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/diagnostic" element={<DiagnosticPage />} />
         <Route path="/diagnostic/test" element={<ProtectedRoute><DiagnosticTestPage /></ProtectedRoute>} />
-        <Route path="/diagnostic/result" element={<ProtectedRoute><DiagnosticResultPage /></ProtectedRoute>} />
+        <Route path="/diagnostic/result" element={<Navigate to="/diagnostic" replace />} />
         <Route path="/playlist/:id" element={<CourseDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

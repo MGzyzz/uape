@@ -1,16 +1,19 @@
 import './DiagnosticPage.css'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import bgImg from '../assets/diagnostic-hero.png'
 import AssessmentResultSection from '../../profile/ui/AssessmentResultSection.jsx'
-import { getCachedResults, getAssessmentResults, setCachedResult } from '../../../api/assessment.js'
+import DiagnosticRecommendationsSection from './DiagnosticRecommendationsSection.jsx'
+import { getCachedResults, getAssessmentResults, setCachedResult, clearCachedResults } from '../../../api/assessment.js'
 import { useAuth } from '../../../app/AuthContext.jsx'
 
 function DiagnosticPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { isAuth } = useAuth()
+  const resultRef = useRef(null)
   const [assessmentResult, setAssessmentResult] = useState(() => {
     const cached = getCachedResults()
     const keys = Object.keys(cached)
@@ -20,6 +23,15 @@ function DiagnosticPage() {
     }
     return null
   })
+
+  const scrollToResult = useRef(location.state?.scrollToResult)
+  useEffect(() => {
+    if (scrollToResult.current && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [])
 
   useEffect(() => {
     const cached = getCachedResults()
@@ -36,6 +48,13 @@ function DiagnosticPage() {
         .catch(() => {})
     }
   }, [isAuth])
+
+  function handleStartNewDiagnostic() {
+    if (window.confirm('Are you sure you want to start a new attempt? Your old result will be erased.')) {
+      clearCachedResults()
+      navigate('/diagnostic/test')
+    }
+  }
 
   return (
     <div className="min-h-screen bg-uape-bg text-uape-white">
@@ -72,7 +91,16 @@ function DiagnosticPage() {
                   </p>
                 </div>
               </div>
-              <button className="uape-orange-btn uape-diagnostic-start-btn" onClick={() => navigate('/diagnostic/test')}>
+              <button
+                className="uape-orange-btn uape-diagnostic-start-btn"
+                onClick={() => {
+                  if (assessmentResult) {
+                    handleStartNewDiagnostic()
+                  } else {
+                    navigate('/diagnostic/test')
+                  }
+                }}
+              >
                 Start diagnostic
               </button>
             </div>
@@ -85,7 +113,16 @@ function DiagnosticPage() {
         </section>
 
         {assessmentResult && (
-          <AssessmentResultSection level={assessmentResult.level} language={assessmentResult.language} />
+          <>
+            <div ref={resultRef}>
+              <AssessmentResultSection
+                level={assessmentResult.level}
+                language={assessmentResult.language}
+                onStartNew={handleStartNewDiagnostic}
+              />
+            </div>
+            <DiagnosticRecommendationsSection language={assessmentResult.language} />
+          </>
         )}
       </main>
       <SiteFooter />

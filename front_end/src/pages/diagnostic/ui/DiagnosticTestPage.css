@@ -85,148 +85,38 @@
   display: block;
 }
 
-/* Code block */
+/* Monaco read-only code block */
 
-.uape-diagnostic-code-block {
-  background: #111;
-  border: 1px solid #2a2a2a;
+.uape-diagnostic-monaco-block {
   border-radius: 8px;
-  padding: 16px;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #e5e5e5;
-  overflow-x: auto;
-  white-space: pre;
+  overflow: hidden;
+  border: 1px solid #3c3c3c;
+}
+
+/* Monaco full editor (mini_task) */
+
+.uape-diagnostic-monaco-editor {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #3c3c3c;
 }
 
 /* Error toast */
 
 .uape-diagnostic-error-toast {
   position: fixed;
-  bottom: 96px;
-  right: 32px;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 30;
   border-radius: 8px;
   background: rgba(220, 38, 38, 0.9);
-  padding: 8px 16px;
+  padding: 8px 20px;
   font-size: 14px;
   color: #fff;
+  white-space: nowrap;
 }
 
-/* Code editor (mini_task) */
-
-.uape-diagnostic-code-editor {
-  background: #111;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  overflow: hidden;
-}
-
-.uape-diagnostic-code-editor-line {
-  display: flex;
-  align-items: stretch;
-  min-height: 22px;
-}
-
-.uape-diagnostic-code-editor-line--blank {
-  background: rgba(235, 72, 35, 0.06);
-  border-top: 1px solid rgba(235, 72, 35, 0.15);
-  border-bottom: 1px solid rgba(235, 72, 35, 0.15);
-}
-
-.uape-diagnostic-code-editor-linenum {
-  min-width: 44px;
-  padding: 3px 10px;
-  color: rgba(255, 255, 255, 0.22);
-  text-align: right;
-  user-select: none;
-  border-right: 1px solid #2a2a2a;
-  flex-shrink: 0;
-  font-size: 13px;
-}
-
-.uape-diagnostic-code-editor-text {
-  padding: 3px 16px;
-  color: #e5e5e5;
-  white-space: pre;
-  word-break: keep-all;
-}
-
-.uape-diagnostic-code-editor-blank-wrap {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
-}
-
-.uape-diagnostic-code-editor-indent {
-  padding: 3px 0 3px 16px;
-  color: #e5e5e5;
-  white-space: pre;
-  user-select: none;
-  flex-shrink: 0;
-}
-
-.uape-diagnostic-code-editor-input {
-  flex: 1;
-  padding: 3px 16px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  outline: none;
-  min-width: 0;
-}
-
-.uape-diagnostic-code-editor-input::placeholder {
-  color: rgba(255, 255, 255, 0.22);
-  font-style: italic;
-}
-
-/* Full blank code editor (mini_task) */
-
-.uape-diagnostic-full-editor {
-  display: flex;
-  background: #111;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  overflow: hidden;
-  min-height: 220px;
-}
-
-.uape-diagnostic-full-editor-gutter {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0;
-  border-right: 1px solid #2a2a2a;
-  flex-shrink: 0;
-}
-
-.uape-diagnostic-full-editor-textarea {
-  flex: 1;
-  padding: 8px 16px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  outline: none;
-  resize: none;
-  min-height: 220px;
-}
-
-.uape-diagnostic-full-editor-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.22);
-  font-style: italic;
-}
 
 /* Navbar */
 
@@ -259,20 +149,28 @@
   user-select: none;
 }
 
+.uape-diagnostic-checkbox-inactive {
+  opacity: 0.322;
+}
+
 .uape-diagnostic-radio-outer {
   width: 20px;
   height: 20px;
   border-radius: 1000px;
   background: transparent;
-  border: 2px solid var(--color-uape-white);
+  border: 2px solid #FFFFFF52;
   position: relative;
   flex-shrink: 0;
   cursor: pointer;
 }
 
+.uape-diagnostic-radio-outer--active {
+  border-color: #EB4823;
+}
+
 .uape-diagnostic-radio-inner {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 1000px;
   background-color: var(--color-uape-accent);
   position: absolute;
@@ -350,6 +248,16 @@
 .uape-diagnostic-q-num--error {
   color: #EB4823;
 }
+/* 
+.uape-diagnostic-q-row--active .uape-diagnostic-q-num {
+  color: #EB4823;
+}
+
+.uape-diagnostic-q-row--active {
+  border-left: 2px solid #EB4823;
+  padding-left: 12px;
+  margin-left: -14px;
+} */
 
 .uape-diagnostic-q-content {
   display: flex;

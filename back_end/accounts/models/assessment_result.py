@@ -3,9 +3,13 @@ from django.db import models
 
 
 def compute_level(score: int) -> str:
-    if score <= 5:
+    # 35 scoreable questions (36 total minus 1 mini_task)
+    # beginner  ≤31%:  0–11
+    # intermediate ≤65%: 12–23
+    # advanced  >65%:  24–35
+    if score <= 11:
         return 'beginner'
-    elif score <= 10:
+    elif score <= 23:
         return 'intermediate'
     return 'advanced'
 
@@ -32,7 +36,7 @@ class AssessmentResult(models.Model):
     )
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, verbose_name='Язык')
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES, verbose_name='Уровень')
-    score = models.IntegerField(verbose_name='Счёт')  # 0–15
+    score = models.IntegerField(verbose_name='Счёт')  # 0–35
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
 

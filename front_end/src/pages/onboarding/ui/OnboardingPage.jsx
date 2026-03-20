@@ -52,7 +52,7 @@ function RadioOption({ label, selected, onSelect }) {
       className="flex items-center gap-3 text-left"
       onClick={onSelect}
     >
-      <div className="uape-onboarding-radio-outer">
+      <div className={`uape-onboarding-radio-outer${selected ? ' uape-onboarding-radio-outer--active' : ''}`}>
         {selected && <div className="uape-onboarding-radio-inner" />}
       </div>
       <span className="uape-onboarding-option-label">{label}</span>
@@ -71,7 +71,7 @@ function CheckboxOption({ label, selected, onToggle }) {
     >
       {selected
         ? <img src={checkIcon} alt="" width={20} height={20} />
-        : <img src={checkboxIcon} alt="" width={20} height={20} />
+        : <img src={checkboxIcon} alt="" width={20} height={20} className="uape-onboarding-checkbox-inactive" />
       }
       <span className="uape-onboarding-option-label">{label}</span>
     </button>

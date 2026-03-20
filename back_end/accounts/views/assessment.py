@@ -20,18 +20,13 @@ class AssessmentSubmitView(APIView):
         score = serializer.validated_data['score']
         level = compute_level(score)
 
-        existing = AssessmentResult.objects.filter(user=request.user, language=language).first()
-        if existing:
-            serialized = AssessmentResultSerializer(existing).data
-            return Response({**serialized, 'detail': 'already_exists'}, status=status.HTTP_400_BAD_REQUEST)
-
-        result = AssessmentResult.objects.create(
+        result, created = AssessmentResult.objects.update_or_create(
             user=request.user,
             language=language,
-            score=score,
-            level=level,
+            defaults={'score': score, 'level': level},
         )
-        return Response(AssessmentResultSerializer(result).data, status=status.HTTP_201_CREATED)
+        status_code = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+        return Response(AssessmentResultSerializer(result).data, status=status_code)
 
 
 class AssessmentResultsView(APIView):

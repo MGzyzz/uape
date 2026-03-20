@@ -97,8 +97,7 @@ function SiteHeader({ compact = false }) {
           <nav className="hidden items-center justify-center gap-7 text-base font-normal leading-6 text-uape-muted lg:flex">
             <NavLink
               className={({ isActive }) => isActive ? 'uape-nav-link-active' : 'transition hover:text-uape-white'}
-              to="/"
-              end
+              to="/profile"
             >
               Home
             </NavLink>

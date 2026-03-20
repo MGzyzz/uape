@@ -69,7 +69,7 @@ function getLevelConfig(level, language) {
   }[level] ?? getLevelConfig('beginner', language)
 }
 
-function AssessmentResultSection({ level = 'beginner', language = 'python' }) {
+function AssessmentResultSection({ level = 'beginner', language = 'python', onStartNew }) {
   const config = getLevelConfig(level, language)
 
   return (
@@ -103,6 +103,11 @@ function AssessmentResultSection({ level = 'beginner', language = 'python' }) {
                 ))}
               </ul>
             </div>
+            {onStartNew && (
+              <button className="uape-orange-btn uape-assessment-result-new-btn" onClick={onStartNew}>
+                Start new diagnostic
+              </button>
+            )}
           </div>
 
           {/* Right column — result card */}

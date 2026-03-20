@@ -1,30 +1,32 @@
-import './WhatToLearnNextSection.css'
+import './DiagnosticRecommendationsSection.css'
 import { useState, useEffect } from 'react'
-import { getSections, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
+import { getSectionsByTag, addBookmark, removeBookmark } from '../../../api/courses.js'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 import { SkeletonSection, ContentCard, ChannelsSection } from '../../../shared/ui/CourseSectionCards.jsx'
-import { useAuth } from '../../../app/AuthContext.jsx'
 
 // ─── Root export ──────────────────────────────────────────────────────────────
 
-export default function WhatToLearnNextSection() {
+export default function DiagnosticRecommendationsSection({ language }) {
   const [sections, setSections] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-  const { isAuth } = useAuth()
 
   useEffect(() => {
-    const fetches = [getSections()]
-    if (isAuth) fetches.push(getRecommended().catch(() => null))
-
-    Promise.all(fetches).then(([sections, recommended]) => {
-      if (recommended && (recommended.playlists?.length > 0 || recommended.videos?.length > 0 || recommended.channels?.length > 0)) {
-        setSections([recommended, ...sections])
-      } else {
-        setSections(sections)
-      }
-    }).catch(() => setError(true)).finally(() => setLoading(false))
-  }, [isAuth])
+    const tagMatch = `#${language.toLowerCase()}`
+    getSectionsByTag(language)
+      .then((raw) => {
+        const filtered = raw
+          .map((section) => ({
+            ...section,
+            playlists: section.playlists.filter((p) => p.tags.some((t) => t.name.toLowerCase() === tagMatch)),
+            videos: section.videos.filter((v) => v.tags.some((t) => t.name.toLowerCase() === tagMatch)),
+            channels: section.channels.filter((c) => c.tags.some((t) => t.name.toLowerCase() === tagMatch)),
+          }))
+          .filter((s) => s.playlists.length > 0 || s.videos.length > 0 || s.channels.length > 0)
+        setSections(filtered)
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [language])
 
   function toggleFavorite(sectionId, contentType, itemId) {
     setSections((prev) =>
@@ -40,7 +42,6 @@ export default function WhatToLearnNextSection() {
       })
     )
 
-    if (!isAuth) return
     const section = sections.find((s) => s.id === sectionId)
     const key = contentType === 'playlist' ? 'playlists' : contentType === 'video' ? 'videos' : 'channels'
     const item = section?.[key]?.find((i) => i.id === itemId)
@@ -55,23 +56,11 @@ export default function WhatToLearnNextSection() {
 
   if (loading) {
     return (
-      <section className="uape-learn-root">
+      <section className="uape-diagnostic-rec-root">
         <div className="uape-page-gutter uape-page-container">
-          <h1 className="uape-learn-page-title">What to learn next</h1>
+          <h1 className="uape-learn-page-title">Recommended playlists and videos for you</h1>
           <SkeletonSection />
           <SkeletonSection />
-          <SkeletonSection />
-        </div>
-      </section>
-    )
-  }
-
-  if (error) {
-    return (
-      <section className="uape-learn-root">
-        <div className="uape-page-gutter uape-page-container">
-          <h1 className="uape-learn-page-title">What to learn next</h1>
-          <p className="uape-learn-error">Failed to load content. Please try refreshing the page.</p>
         </div>
       </section>
     )
@@ -80,9 +69,9 @@ export default function WhatToLearnNextSection() {
   if (sections.length === 0) return null
 
   return (
-    <section className="uape-learn-root">
+    <section className="uape-diagnostic-rec-root">
       <div className="uape-page-gutter uape-page-container">
-        <h1 className="uape-learn-page-title">What to learn next</h1>
+        <h1 className="uape-learn-page-title">Recommended playlists and videos for you</h1>
 
         {sections.map((section) => {
           if (section.content_type === 'playlist' && section.playlists.length > 0) {
