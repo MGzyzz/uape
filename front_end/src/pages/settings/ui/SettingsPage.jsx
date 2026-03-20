@@ -6,6 +6,7 @@ import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 import { getProfile, updateProfile, saveUser, changePassword } from '../../../api/auth.js'
+import PasswordStrength, { PW_RULES } from '../../../shared/ui/PasswordStrength.jsx'
 
 const TABS = [
   { id: 'profile',  label: 'Profile',  icon: FiUser },
@@ -189,50 +190,6 @@ function ProfileTab({ setUser, showToast }) {
         >
           {saving ? 'Saving...' : 'Save changes'}
         </button>
-      </div>
-    </div>
-  )
-}
-
-/* ─── Password strength helpers ──────────────────────────────────────────── */
-
-const PW_RULES = [
-  { id: 'len',     label: 'At least 8 characters',          test: p => p.length >= 8 },
-  { id: 'upper',   label: 'At least one uppercase letter',  test: p => /[A-Z]/.test(p) },
-  { id: 'digit',   label: 'At least one number',            test: p => /\d/.test(p) },
-  { id: 'special', label: 'At least one special character', test: p => /[^A-Za-z0-9]/.test(p) },
-]
-
-function getPwStrength(pw) {
-  if (!pw) return 0
-  return PW_RULES.filter(r => r.test(pw)).length
-}
-
-function PasswordStrength({ password }) {
-  if (!password) return null
-  const score = getPwStrength(password)
-  const level = score <= 1 ? 'weak' : score <= 3 ? 'medium' : 'strong'
-
-  return (
-    <div className="uape-settings-pw-strength">
-      <div className="uape-settings-pw-bars">
-        {[0, 1, 2, 3].map(i => (
-          <div
-            key={i}
-            className={`uape-settings-pw-bar${i < score ? ` uape-settings-pw-bar--${level}` : ''}`}
-          />
-        ))}
-      </div>
-      <div className="uape-settings-pw-rules">
-        {PW_RULES.map(rule => {
-          const ok = rule.test(password)
-          return (
-            <span key={rule.id} className={`uape-settings-pw-rule${ok ? ' uape-settings-pw-rule--ok' : ''}`}>
-              <FiCheck size={11} />
-              {rule.label}
-            </span>
-          )
-        })}
       </div>
     </div>
   )

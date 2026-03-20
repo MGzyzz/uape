@@ -4,6 +4,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from api.views import LoginView, RegisterView, GoogleAuthView, ProfileView, OnboardingView, VerifyEmailView, ResendVerificationView
 from accounts.views.assessment import AssessmentSubmitView, AssessmentResultsView
 from accounts.views.change_password import ChangePasswordView
+from accounts.views.forgot_password import ForgotPasswordView
+from accounts.views.reset_password import ResetPasswordView
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -19,4 +21,6 @@ urlpatterns = [
     path('assessment/submit/', AssessmentSubmitView.as_view(), name='assessment_submit'),
     path('assessment/results/', AssessmentResultsView.as_view(), name='assessment_results'),
     path('auth/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('auth/forgot-password/', ForgotPasswordView.as_view(), name='forgot_password'),
+    path('auth/reset-password/', ResetPasswordView.as_view(), name='reset_password'),
 ]

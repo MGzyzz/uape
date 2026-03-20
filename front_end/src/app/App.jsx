@@ -18,7 +18,9 @@ const FavoritesPage      = lazy(() => import('../pages/favorites/ui/FavoritesPag
 const AboutUsPage        = lazy(() => import('../pages/about-us/ui/AboutUsPage.jsx'))
 const DiagnosticPage     = lazy(() => import('../pages/diagnostic/ui/DiagnosticPage.jsx'))
 const DiagnosticTestPage = lazy(() => import('../pages/diagnostic/ui/DiagnosticTestPage.jsx'))
-const SettingsPage       = lazy(() => import('../pages/settings/ui/SettingsPage.jsx'))
+const SettingsPage          = lazy(() => import('../pages/settings/ui/SettingsPage.jsx'))
+const ForgotPasswordPage    = lazy(() => import('../pages/auth/ui/ForgotPasswordPage.jsx'))
+const ResetPasswordPage     = lazy(() => import('../pages/auth/ui/ResetPasswordPage.jsx'))
 
 function PageLoader() {
   return (
@@ -45,6 +47,8 @@ function App() {
         <Route path="/login" element={<AuthPage mode="login" />} />
         <Route path="/verify-email-sent" element={<VerifyEmailSentPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
         <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />

@@ -128,3 +128,23 @@ export async function changePassword(data) {
   const response = await client.post('/auth/change-password/', data)
   return response.data
 }
+
+/**
+ * Request a password reset email.
+ * @param {string} email
+ * @returns {{ detail: string }}
+ */
+export async function forgotPassword(email) {
+  const response = await client.post('/auth/forgot-password/', { email })
+  return response.data
+}
+
+/**
+ * Reset password using token from email.
+ * @param {{ token: string, new_password: string }} data
+ * @returns {{ detail: string }}
+ */
+export async function resetPassword(data) {
+  const response = await client.post('/auth/reset-password/', data)
+  return response.data
+}

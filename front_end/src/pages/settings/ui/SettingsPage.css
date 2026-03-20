@@ -440,50 +440,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* ─── Password strength indicator ───────────────────────────────────────── */
-
-.uape-settings-pw-strength {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: -4px;
-}
-
-.uape-settings-pw-bars {
-  display: flex;
-  gap: 4px;
-}
-
-.uape-settings-pw-bar {
-  flex: 1;
-  height: 3px;
-  border-radius: 100px;
-  background: var(--color-uape-border-soft);
-  transition: background 0.2s ease;
-}
-
-.uape-settings-pw-bar--weak     { background: #eb4823; }
-.uape-settings-pw-bar--medium   { background: #febe02; }
-.uape-settings-pw-bar--strong   { background: #30A14E; }
-
-.uape-settings-pw-rules {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.uape-settings-pw-rule {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--color-uape-muted);
-  transition: color 0.2s ease;
-}
-
-.uape-settings-pw-rule--ok {
-  color: #30A14E;
-}
 
 /* ─── Empty state ────────────────────────────────────────────────────────── */
 
