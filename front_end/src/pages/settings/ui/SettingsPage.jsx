@@ -1,5 +1,5 @@
 import './SettingsPage.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiUser, FiShield, FiCamera, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
@@ -12,18 +12,45 @@ const TABS = [
   { id: 'security', label: 'Security', icon: FiShield },
 ]
 
+/* ─── Toast ──────────────────────────────────────────────────────────────── */
+
+function useToast() {
+  const [toast, setToast] = useState(null)
+  const timerRef = useRef(null)
+
+  const showToast = useCallback((message) => {
+    clearTimeout(timerRef.current)
+    setToast({ message, visible: true })
+    timerRef.current = setTimeout(() => {
+      setToast(t => t ? { ...t, visible: false } : null)
+      timerRef.current = setTimeout(() => setToast(null), 300)
+    }, 2700)
+  }, [])
+
+  useEffect(() => () => clearTimeout(timerRef.current), [])
+
+  return { toast, showToast }
+}
+
+function Toast({ toast }) {
+  if (!toast) return null
+  return (
+    <div className={`uape-toast${toast.visible ? ' uape-toast--visible' : ''}`}>
+      <FiCheck size={15} />
+      {toast.message}
+    </div>
+  )
+}
+
 /* ─── Profile Tab ────────────────────────────────────────────────────────── */
 
-function ProfileTab({ setUser }) {
+function ProfileTab({ setUser, showToast }) {
   const [profile, setProfile] = useState(null)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [bio, setBio] = useState('')
-  const [phone, setPhone] = useState('')
   const [avatarPreview, setAvatarPreview] = useState(null)
   const [avatarFile, setAvatarFile] = useState(null)
   const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
   const [error, setError] = useState(null)
   const fileRef = useRef(null)
 
@@ -32,8 +59,6 @@ function ProfileTab({ setUser }) {
       setProfile(data)
       setFirstName(data.first_name ?? '')
       setLastName(data.last_name ?? '')
-      setBio(data.bio ?? '')
-      setPhone(data.phone ?? '')
     }).catch(() => {})
   }, [])
 
@@ -47,13 +72,10 @@ function ProfileTab({ setUser }) {
   const handleSave = async () => {
     setSaving(true)
     setError(null)
-    setSaved(false)
     try {
       const fd = new FormData()
       fd.append('first_name', firstName)
       fd.append('last_name', lastName)
-      fd.append('bio', bio)
-      fd.append('phone', phone)
       if (avatarFile) fd.append('avatar', avatarFile)
 
       const updated = await updateProfile(fd)
@@ -67,8 +89,7 @@ function ProfileTab({ setUser }) {
       saveUser(newUser)
       setUser(prev => ({ ...prev, ...newUser }))
       setAvatarFile(null)
-      setSaved(true)
-      setTimeout(() => setSaved(false), 3000)
+      showToast('Changes saved')
     } catch (err) {
       setError(err?.response?.data?.detail ?? 'Failed to save. Please try again.')
     } finally {
@@ -127,16 +148,18 @@ function ProfileTab({ setUser }) {
       <div className="uape-settings-fields">
         <div className="uape-settings-field-row">
           <div className="uape-settings-field">
-            <label className="uape-settings-label">First name</label>
+            <label htmlFor="sf-first-name" className="uape-settings-label">First name</label>
             <input
+              id="sf-first-name"
               className="uape-settings-input"
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
             />
           </div>
           <div className="uape-settings-field">
-            <label className="uape-settings-label">Last name</label>
+            <label htmlFor="sf-last-name" className="uape-settings-label">Last name</label>
             <input
+              id="sf-last-name"
               className="uape-settings-input"
               value={lastName}
               onChange={e => setLastName(e.target.value)}
@@ -145,45 +168,20 @@ function ProfileTab({ setUser }) {
         </div>
 
         <div className="uape-settings-field">
-          <label className="uape-settings-label">Email</label>
+          <label htmlFor="sf-email" className="uape-settings-label">Email</label>
           <input
+            id="sf-email"
             className="uape-settings-input uape-settings-input--readonly"
             value={profile.email}
             readOnly
           />
         </div>
 
-        <div className="uape-settings-field">
-          <label className="uape-settings-label">Phone</label>
-          <input
-            className="uape-settings-input"
-            type="tel"
-            value={phone}
-            placeholder="+7 (___) ___-__-__"
-            onChange={e => setPhone(e.target.value)}
-          />
-        </div>
-
-        <div className="uape-settings-field">
-          <label className="uape-settings-label">Bio</label>
-          <textarea
-            className="uape-settings-textarea"
-            value={bio}
-            placeholder="Tell us a little about yourself..."
-            rows={4}
-            onChange={e => setBio(e.target.value)}
-          />
-        </div>
       </div>
 
       {error && <p className="uape-settings-error">{error}</p>}
 
       <div className="uape-settings-actions">
-        {saved && (
-          <span className="uape-settings-saved-badge">
-            <FiCheck size={14} /> Saved
-          </span>
-        )}
         <button
           className="uape-orange-btn uape-settings-save-btn"
           onClick={handleSave}
@@ -196,24 +194,71 @@ function ProfileTab({ setUser }) {
   )
 }
 
+/* ─── Password strength helpers ──────────────────────────────────────────── */
+
+const PW_RULES = [
+  { id: 'len',     label: 'At least 8 characters',          test: p => p.length >= 8 },
+  { id: 'upper',   label: 'At least one uppercase letter',  test: p => /[A-Z]/.test(p) },
+  { id: 'digit',   label: 'At least one number',            test: p => /\d/.test(p) },
+  { id: 'special', label: 'At least one special character', test: p => /[^A-Za-z0-9]/.test(p) },
+]
+
+function getPwStrength(pw) {
+  if (!pw) return 0
+  return PW_RULES.filter(r => r.test(pw)).length
+}
+
+function PasswordStrength({ password }) {
+  if (!password) return null
+  const score = getPwStrength(password)
+  const level = score <= 1 ? 'weak' : score <= 3 ? 'medium' : 'strong'
+
+  return (
+    <div className="uape-settings-pw-strength">
+      <div className="uape-settings-pw-bars">
+        {[0, 1, 2, 3].map(i => (
+          <div
+            key={i}
+            className={`uape-settings-pw-bar${i < score ? ` uape-settings-pw-bar--${level}` : ''}`}
+          />
+        ))}
+      </div>
+      <div className="uape-settings-pw-rules">
+        {PW_RULES.map(rule => {
+          const ok = rule.test(password)
+          return (
+            <span key={rule.id} className={`uape-settings-pw-rule${ok ? ' uape-settings-pw-rule--ok' : ''}`}>
+              <FiCheck size={11} />
+              {rule.label}
+            </span>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 /* ─── Security Tab ───────────────────────────────────────────────────────── */
 
-function SecurityTab() {
+function SecurityTab({ showToast }) {
   const [current, setCurrent] = useState('')
   const [next, setNext] = useState('')
   const [confirm, setConfirm] = useState('')
   const [showCurrent, setShowCurrent] = useState(false)
   const [showNext, setShowNext] = useState(false)
   const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
   const [errors, setErrors] = useState({})
 
   const validate = () => {
     const e = {}
     if (!current) e.current = 'Required'
-    if (!next) e.next = 'Required'
-    else if (next.length < 8) e.next = 'At least 8 characters'
-    if (next !== confirm) e.confirm = 'Passwords do not match'
+    if (!next) {
+      e.next = 'Required'
+    } else {
+      const failed = PW_RULES.filter(r => !r.test(next))
+      if (failed.length) e.next = failed[0].label
+    }
+    if (next && confirm && next !== confirm) e.confirm = 'Passwords do not match'
     return e
   }
 
@@ -223,12 +268,10 @@ function SecurityTab() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setSaving(true)
     setErrors({})
-    setSaved(false)
     try {
-      changePassword({ current_password: current, new_password: next })
+      await changePassword({ current_password: current, new_password: next })
       setCurrent(''); setNext(''); setConfirm('')
-      setSaved(true)
-      setTimeout(() => setSaved(false), 3000)
+      showToast('Password updated')
     } catch (err) {
       const data = err?.response?.data ?? {}
       setErrors({
@@ -252,9 +295,10 @@ function SecurityTab() {
         {errors.form && <p className="uape-settings-error">{errors.form}</p>}
 
         <div className="uape-settings-field">
-          <label className="uape-settings-label">Current password</label>
+          <label htmlFor="ss-current-pw" className="uape-settings-label">Current password</label>
           <div className="uape-settings-pw-wrap">
             <input
+              id="ss-current-pw"
               className={`uape-settings-input${errors.current ? ' uape-settings-input--error' : ''}`}
               type={showCurrent ? 'text' : 'password'}
               value={current}
@@ -274,9 +318,10 @@ function SecurityTab() {
         </div>
 
         <div className="uape-settings-field">
-          <label className="uape-settings-label">New password</label>
+          <label htmlFor="ss-new-pw" className="uape-settings-label">New password</label>
           <div className="uape-settings-pw-wrap">
             <input
+              id="ss-new-pw"
               className={`uape-settings-input${errors.next ? ' uape-settings-input--error' : ''}`}
               type={showNext ? 'text' : 'password'}
               value={next}
@@ -292,12 +337,14 @@ function SecurityTab() {
               {showNext ? <FiEyeOff size={16} /> : <FiEye size={16} />}
             </button>
           </div>
+          <PasswordStrength password={next} />
           {errors.next && <p className="uape-settings-field-error">{errors.next}</p>}
         </div>
 
         <div className="uape-settings-field">
-          <label className="uape-settings-label">Confirm new password</label>
+          <label htmlFor="ss-confirm-pw" className="uape-settings-label">Confirm new password</label>
           <input
+            id="ss-confirm-pw"
             className={`uape-settings-input${errors.confirm ? ' uape-settings-input--error' : ''}`}
             type="password"
             value={confirm}
@@ -308,11 +355,6 @@ function SecurityTab() {
         </div>
 
         <div className="uape-settings-actions">
-          {saved && (
-            <span className="uape-settings-saved-badge">
-              <FiCheck size={14} /> Password updated
-            </span>
-          )}
           <button
             className="uape-orange-btn uape-settings-save-btn"
             type="submit"
@@ -332,6 +374,7 @@ function SettingsPage() {
   const navigate = useNavigate()
   const { user, isAuth, setUser } = useAuth()
   const [activeTab, setActiveTab] = useState('profile')
+  const { toast, showToast } = useToast()
 
   useEffect(() => {
     if (!isAuth) navigate('/login')
@@ -368,13 +411,14 @@ function SettingsPage() {
 
             {/* Content */}
             <div className="uape-settings-content">
-              {activeTab === 'profile'  && <ProfileTab setUser={setUser} />}
-              {activeTab === 'security' && <SecurityTab />}
+              {activeTab === 'profile'  && <ProfileTab setUser={setUser} showToast={showToast} />}
+              {activeTab === 'security' && <SecurityTab showToast={showToast} />}
             </div>
           </div>
         </div>
       </main>
       <SiteFooter />
+      <Toast toast={toast} />
     </div>
   )
 }

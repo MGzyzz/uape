@@ -2,6 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import ValidationError
+
+from accounts.utils.password import validate_password_strength
 
 
 class ChangePasswordView(APIView):
@@ -31,9 +34,11 @@ class ChangePasswordView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if len(new_password) < 8:
+        try:
+            validate_password_strength(new_password)
+        except ValidationError as e:
             return Response(
-                {'new_password': 'Password must be at least 8 characters.'},
+                {'new_password': e.detail[0]},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
