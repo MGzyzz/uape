@@ -441,6 +441,57 @@
 }
 
 
+/* ─── Profile skeleton ───────────────────────────────────────────────────── */
+
+.uape-settings-skeleton-title {
+  height: 28px;
+  width: 200px;
+  border-radius: 8px;
+}
+
+.uape-settings-skeleton-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 1000px;
+  flex-shrink: 0;
+}
+
+.uape-settings-skeleton-avatar-hint {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uape-settings-skeleton-hint-title {
+  height: 16px;
+  width: 100px;
+  border-radius: 6px;
+}
+
+.uape-settings-skeleton-hint-text {
+  height: 13px;
+  width: 260px;
+  border-radius: 6px;
+}
+
+.uape-settings-skeleton-label {
+  height: 13px;
+  width: 80px;
+  border-radius: 6px;
+}
+
+.uape-settings-skeleton-input {
+  height: 48px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.uape-settings-skeleton-btn {
+  height: 46px;
+  width: 140px;
+  border-radius: 12px;
+}
+
 /* ─── Empty state ────────────────────────────────────────────────────────── */
 
 .uape-settings-empty {

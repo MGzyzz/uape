@@ -104,8 +104,34 @@ function ProfileTab({ setUser, showToast }) {
 
   if (!profile) {
     return (
-      <div className="uape-settings-tab-loading">
-        <div className="uape-spinner" />
+      <div className="uape-settings-tab-content">
+        <div className="uape-skeleton uape-settings-skeleton-title" />
+        <div className="uape-settings-avatar-row">
+          <div className="uape-skeleton uape-settings-skeleton-avatar" />
+          <div className="uape-settings-skeleton-avatar-hint">
+            <div className="uape-skeleton uape-settings-skeleton-hint-title" />
+            <div className="uape-skeleton uape-settings-skeleton-hint-text" />
+          </div>
+        </div>
+        <div className="uape-settings-fields">
+          <div className="uape-settings-field-row">
+            <div className="uape-settings-field">
+              <div className="uape-skeleton uape-settings-skeleton-label" />
+              <div className="uape-skeleton uape-settings-skeleton-input" />
+            </div>
+            <div className="uape-settings-field">
+              <div className="uape-skeleton uape-settings-skeleton-label" />
+              <div className="uape-skeleton uape-settings-skeleton-input" />
+            </div>
+          </div>
+          <div className="uape-settings-field">
+            <div className="uape-skeleton uape-settings-skeleton-label" />
+            <div className="uape-skeleton uape-settings-skeleton-input" />
+          </div>
+        </div>
+        <div className="uape-settings-actions">
+          <div className="uape-skeleton uape-settings-skeleton-btn" />
+        </div>
       </div>
     )
   }
