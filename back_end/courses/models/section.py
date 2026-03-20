@@ -16,6 +16,7 @@ class Section(models.Model):
         verbose_name='Тип контента',
     )
     order = models.PositiveIntegerField(default=0, verbose_name='Порядок')
+    is_visible = models.BooleanField(default=True, verbose_name='Показывать')
     # Если указано — раздел показывается только пользователям с этим направлением
     field = models.CharField(
         max_length=100,

@@ -12,7 +12,7 @@ class SectionListView(ListAPIView):
     pagination_class = None
 
     def get_queryset(self):
-        qs = Section.objects.prefetch_related(
+        qs = Section.objects.filter(is_visible=True).prefetch_related(
             'playlists__channel', 'playlists__tags',
             'videos__channel', 'videos__tags',
             'channels__tags',
