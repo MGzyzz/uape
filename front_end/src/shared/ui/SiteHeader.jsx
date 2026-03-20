@@ -1,6 +1,6 @@
 import './SiteHeader.css'
 import { useState, useRef, useEffect } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { FiSettings, FiLogOut } from 'react-icons/fi'
 import BrandLogo from './BrandLogo.jsx'
 import { useAuth } from '../../app/AuthContext.jsx'
@@ -30,6 +30,12 @@ function UserAvatar({ firstName, lastName, photo }) {
 function UserDropdown({ user, onLogout }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -58,12 +64,13 @@ function UserDropdown({ user, onLogout }) {
 
       {open && (
         <div className="absolute right-0 top-[calc(100%+8px)] z-50 w-44 overflow-hidden rounded-xl border border-uape-border-soft bg-uape-form-bg shadow-lg">
-          <span
-            className="flex items-center gap-3 px-4 py-3 text-sm text-uape-muted opacity-40 cursor-not-allowed select-none"
+          <button
+            onClick={() => navigate('/settings')}
+            className="flex w-full items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-uape-white"
           >
             <FiSettings size={15} />
             Settings
-          </span>
+          </button>
           <button
             onClick={onLogout}
             className="flex w-full items-center gap-3 px-4 py-3 text-sm text-uape-muted transition hover:bg-white/5 hover:text-red-400"

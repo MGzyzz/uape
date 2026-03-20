@@ -3,6 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from api.views import LoginView, RegisterView, GoogleAuthView, ProfileView, OnboardingView, VerifyEmailView, ResendVerificationView
 from accounts.views.assessment import AssessmentSubmitView, AssessmentResultsView
+from accounts.views.change_password import ChangePasswordView
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -17,4 +18,5 @@ urlpatterns = [
     path('onboarding/', OnboardingView.as_view(), name='onboarding'),
     path('assessment/submit/', AssessmentSubmitView.as_view(), name='assessment_submit'),
     path('assessment/results/', AssessmentResultsView.as_view(), name='assessment_results'),
+    path('auth/change-password/', ChangePasswordView.as_view(), name='change_password'),
 ]

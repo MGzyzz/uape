@@ -1,0 +1,431 @@
+/* ─── Settings Page Layout ───────────────────────────────────────────────── */
+
+.uape-settings-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 120px 120px;
+}
+
+.uape-settings-header {
+  margin-bottom: 40px;
+}
+
+.uape-settings-page-title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 44px;
+  color: var(--color-uape-white);
+}
+
+.uape-settings-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────── */
+
+.uape-settings-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+}
+
+.uape-settings-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  color: var(--color-uape-muted);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.uape-settings-tab-btn:hover {
+  background: var(--color-uape-border-soft);
+  color: var(--color-uape-white);
+}
+
+.uape-settings-tab-btn--active {
+  background: var(--color-uape-surface-strong);
+  color: var(--color-uape-white);
+}
+
+/* ─── Content panel ──────────────────────────────────────────────────────── */
+
+.uape-settings-content {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--color-uape-border-soft);
+  border-radius: 20px;
+  background: var(--color-uape-surface-strong);
+  min-height: 480px;
+}
+
+.uape-settings-tab-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.uape-settings-tab-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+/* ─── Section heading ────────────────────────────────────────────────────── */
+
+.uape-settings-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--color-uape-white);
+  margin: 0;
+}
+
+.uape-settings-section-sub {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-uape-muted);
+  margin: -16px 0 0;
+}
+
+/* ─── Avatar ─────────────────────────────────────────────────────────────── */
+
+.uape-settings-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.uape-settings-avatar-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.uape-settings-avatar-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 1000px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-uape-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uape-settings-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uape-settings-avatar-initials {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-uape-white);
+}
+
+.uape-settings-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-uape-white);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.uape-settings-avatar-btn:hover .uape-settings-avatar-overlay {
+  opacity: 1;
+}
+
+.uape-settings-avatar-hint-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-uape-white);
+  margin: 0 0 4px;
+}
+
+.uape-settings-avatar-hint-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+.uape-settings-file-input {
+  display: none;
+}
+
+/* ─── Fields ─────────────────────────────────────────────────────────────── */
+
+.uape-settings-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.uape-settings-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.uape-settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uape-settings-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-uape-muted);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.uape-settings-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid var(--color-uape-border-soft);
+  background: #1b1e20;
+  color: var(--color-uape-white);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.uape-settings-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.uape-settings-input--readonly {
+  color: var(--color-uape-muted);
+  cursor: default;
+}
+
+.uape-settings-input--error {
+  border-color: #eb4823;
+}
+
+.uape-settings-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--color-uape-border-soft);
+  background: #1b1e20;
+  color: var(--color-uape-white);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s ease;
+  line-height: 1.5;
+}
+
+.uape-settings-textarea:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ─── Password field ─────────────────────────────────────────────────────── */
+
+.uape-settings-pw-wrap {
+  position: relative;
+}
+
+.uape-settings-pw-wrap .uape-settings-input {
+  padding-right: 48px;
+}
+
+.uape-settings-pw-eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-uape-muted);
+  padding: 0;
+  line-height: 0;
+  transition: color 0.15s ease;
+}
+
+.uape-settings-pw-eye:hover {
+  color: var(--color-uape-white);
+}
+
+/* ─── Errors & feedback ──────────────────────────────────────────────────── */
+
+.uape-settings-error {
+  font-size: 14px;
+  color: #eb4823;
+  margin: 0;
+}
+
+.uape-settings-field-error {
+  font-size: 13px;
+  color: #eb4823;
+  margin: -4px 0 0;
+}
+
+/* ─── Actions row ────────────────────────────────────────────────────────── */
+
+.uape-settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.uape-settings-save-btn {
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.uape-settings-saved-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #30A14E;
+  font-weight: 500;
+}
+
+/* ─── Diagnostic tab ─────────────────────────────────────────────────────── */
+
+.uape-settings-diagnostic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.uape-settings-diag-card {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-uape-border-soft);
+  background: #1b1e20;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uape-settings-diag-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uape-settings-diag-lang {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-uape-white);
+}
+
+.uape-settings-diag-level {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.uape-settings-diag-score-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.uape-settings-diag-score-num {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-uape-white);
+}
+
+.uape-settings-diag-score-pct {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-uape-white);
+}
+
+.uape-settings-diag-bar-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 100px;
+  background: var(--color-uape-border-soft);
+  overflow: hidden;
+}
+
+.uape-settings-diag-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 0.6s ease;
+}
+
+.uape-settings-diag-date {
+  font-size: 13px;
+  color: var(--color-uape-muted);
+  margin: 0;
+}
+
+.uape-settings-retake-btn {
+  background: none;
+  border: 1px solid var(--color-uape-border-soft);
+  border-radius: 10px;
+  color: var(--color-uape-muted);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 10px 20px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.uape-settings-retake-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--color-uape-white);
+}
+
+/* ─── Empty state ────────────────────────────────────────────────────────── */
+
+.uape-settings-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 0;
+}
+
+.uape-settings-empty-text {
+  font-size: 15px;
+  color: var(--color-uape-muted);
+  margin: 0;
+}

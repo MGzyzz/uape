@@ -102,3 +102,29 @@ export async function resendVerification(email) {
   const response = await client.post('/auth/resend-verification/', { email })
   return response.data
 }
+
+/**
+ * Update the current user's profile (avatar, bio, phone).
+ * @param {FormData} formData
+ * @returns {{ email: string, first_name: string, last_name: string, avatar: string|null, bio: string, phone: string }}
+ */
+export async function updateProfile(formData) {
+  const response = await client.patch('/profile/', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  const data = response.data
+  if (data.avatar && !data.avatar.startsWith('http')) {
+    data.avatar = `${MEDIA_BASE}${data.avatar}`
+  }
+  return data
+}
+
+/**
+ * Change the current user's password.
+ * @param {{ current_password: string, new_password: string }} data
+ * @returns {{ detail: string }}
+ */
+export async function changePassword(data) {
+  const response = await client.post('/auth/change-password/', data)
+  return response.data
+}

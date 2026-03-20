@@ -18,6 +18,7 @@ const FavoritesPage      = lazy(() => import('../pages/favorites/ui/FavoritesPag
 const AboutUsPage        = lazy(() => import('../pages/about-us/ui/AboutUsPage.jsx'))
 const DiagnosticPage     = lazy(() => import('../pages/diagnostic/ui/DiagnosticPage.jsx'))
 const DiagnosticTestPage = lazy(() => import('../pages/diagnostic/ui/DiagnosticTestPage.jsx'))
+const SettingsPage       = lazy(() => import('../pages/settings/ui/SettingsPage.jsx'))
 
 function PageLoader() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/diagnostic" element={<DiagnosticPage />} />
         <Route path="/diagnostic/test" element={<ProtectedRoute><DiagnosticTestPage /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
         <Route path="/diagnostic/result" element={<Navigate to="/diagnostic" replace />} />
         <Route path="/playlist/:id" element={<CourseDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
