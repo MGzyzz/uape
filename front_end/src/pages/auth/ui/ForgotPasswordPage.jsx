@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { forgotPassword } from '../../../api/auth.js'
+import './AuthForms.css'
 
 function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
@@ -33,7 +34,7 @@ function ForgotPasswordPage() {
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader compact />
 
-      <main className="uape-section-shell flex flex-1 items-center justify-center py-25">
+      <main className="uape-section-shell uape-auth-form-main flex flex-1 items-center justify-center py-25">
         <div className="uape-verify-content flex flex-col gap-8">
 
           {status !== 'sent' ? (

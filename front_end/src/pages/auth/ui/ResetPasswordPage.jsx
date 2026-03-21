@@ -4,8 +4,9 @@ import { FiEye, FiEyeOff } from 'react-icons/fi'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import PasswordStrength from '../../../shared/ui/PasswordStrength.jsx'
-import { PW_RULES } from '../../../shared/ui/pwRules.js'
+import { validatePwRules } from '../../../shared/ui/pwRules.js'
 import { resetPassword } from '../../../api/auth.js'
+import './AuthForms.css'
 
 function ResetPasswordPage() {
   const [searchParams] = useSearchParams()
@@ -22,7 +23,7 @@ function ResetPasswordPage() {
     return (
       <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
         <SiteHeader compact />
-        <main className="uape-section-shell flex flex-1 items-center justify-center py-25">
+        <main className="uape-section-shell uape-auth-form-main flex flex-1 items-center justify-center py-25">
           <div className="uape-verify-content flex flex-col items-center gap-8 text-center">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
               <rect width="64" height="64" rx="32" fill="#3A1A1A" />
@@ -46,7 +47,7 @@ function ResetPasswordPage() {
     return (
       <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
         <SiteHeader compact />
-        <main className="uape-section-shell flex flex-1 items-center justify-center py-25">
+        <main className="uape-section-shell uape-auth-form-main flex flex-1 items-center justify-center py-25">
           <div className="uape-verify-content flex flex-col items-center gap-8 text-center">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
               <rect width="64" height="64" rx="32" fill="#1A3A1A" />
@@ -70,8 +71,8 @@ function ResetPasswordPage() {
   }
 
   const validate = () => {
-    const failed = PW_RULES.find(r => !r.test(password))
-    if (failed) return failed.label
+    const pwError = validatePwRules(password)
+    if (pwError) return pwError
     if (password !== confirm) return 'Passwords do not match'
     return null
   }
@@ -96,7 +97,7 @@ function ResetPasswordPage() {
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
       <SiteHeader compact />
 
-      <main className="uape-section-shell flex flex-1 items-center justify-center py-25">
+      <main className="uape-section-shell uape-auth-form-main flex flex-1 items-center justify-center py-25">
         <div className="uape-verify-content flex flex-col gap-8">
 
           <div className="flex flex-col gap-2">

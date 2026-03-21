@@ -7,7 +7,7 @@ import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 import { getProfile, updateProfile, saveUser, changePassword } from '../../../api/auth.js'
 import PasswordStrength from '../../../shared/ui/PasswordStrength.jsx'
-import { PW_RULES } from '../../../shared/ui/pwRules.js'
+import { validatePwRules } from '../../../shared/ui/pwRules.js'
 
 const TABS = [
   { id: 'profile',  label: 'Profile',  icon: FiUser },
@@ -54,15 +54,23 @@ function ProfileTab({ setUser, showToast }) {
   const [avatarFile, setAvatarFile] = useState(null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
+  const [loadError, setLoadError] = useState(false)
   const fileRef = useRef(null)
 
-  useEffect(() => {
+  const loadProfile = useCallback(() => {
+    setLoadError(false)
     getProfile().then(data => {
       setProfile(data)
       setFirstName(data.first_name ?? '')
       setLastName(data.last_name ?? '')
-    }).catch(() => {})
+    }).catch(() => setLoadError(true))
   }, [])
+
+  useEffect(() => { loadProfile() }, [loadProfile])
+
+  useEffect(() => {
+    return () => { if (avatarPreview) URL.revokeObjectURL(avatarPreview) }
+  }, [avatarPreview])
 
   const handleAvatarChange = (e) => {
     const file = e.target.files?.[0]
@@ -91,6 +99,7 @@ function ProfileTab({ setUser, showToast }) {
       saveUser(newUser)
       setUser(prev => ({ ...prev, ...newUser }))
       setAvatarFile(null)
+      setAvatarPreview(null)
       showToast('Changes saved')
     } catch (err) {
       setError(err?.response?.data?.detail ?? 'Failed to save. Please try again.')
@@ -101,6 +110,19 @@ function ProfileTab({ setUser, showToast }) {
 
   const displayAvatar = avatarPreview ?? profile?.avatar ?? null
   const initials = `${profile?.first_name?.[0] ?? ''}${profile?.last_name?.[0] ?? ''}`.toUpperCase()
+
+  if (loadError) {
+    return (
+      <div className="uape-settings-tab-content">
+        <div className="uape-settings-empty">
+          <p className="uape-settings-empty-text">Failed to load profile. Check your connection.</p>
+          <button className="uape-orange-btn uape-settings-save-btn" onClick={loadProfile}>
+            Try again
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   if (!profile) {
     return (
@@ -239,10 +261,14 @@ function SecurityTab({ showToast }) {
     if (!next) {
       e.next = 'Required'
     } else {
-      const failed = PW_RULES.filter(r => !r.test(next))
-      if (failed.length) e.next = failed[0].label
+      const pwError = validatePwRules(next)
+      if (pwError) e.next = pwError
     }
-    if (next && confirm && next !== confirm) e.confirm = 'Passwords do not match'
+    if (!confirm) {
+      e.confirm = 'Required'
+    } else if (next !== confirm) {
+      e.confirm = 'Passwords do not match'
+    }
     return e
   }
 

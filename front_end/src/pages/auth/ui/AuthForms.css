@@ -1,0 +1,16 @@
+/* ─── Auth forms responsive (ForgotPasswordPage, ResetPasswordPage) ──────── */
+/* Overrides uape-section-shell horizontal padding on narrow viewports       */
+
+@media (max-width: 768px) {
+  .uape-auth-form-main {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .uape-auth-form-main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

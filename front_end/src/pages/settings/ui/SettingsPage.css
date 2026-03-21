@@ -507,3 +507,88 @@
   color: var(--color-uape-muted);
   margin: 0;
 }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .uape-settings-page {
+    padding: 48px 60px 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .uape-settings-page {
+    padding: 40px 32px 80px;
+  }
+
+  .uape-settings-page-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .uape-settings-header {
+    margin-bottom: 28px;
+  }
+
+  .uape-settings-layout {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .uape-settings-sidebar {
+    width: 100%;
+    flex-direction: row;
+    position: static;
+    overflow-x: auto;
+    gap: 4px;
+    padding-bottom: 4px;
+  }
+
+  .uape-settings-tab-btn {
+    width: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .uape-settings-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .uape-settings-page {
+    padding: 28px 20px 64px;
+  }
+
+  .uape-settings-page-title {
+    font-size: 26px;
+    line-height: 32px;
+  }
+
+  .uape-settings-header {
+    margin-bottom: 20px;
+  }
+
+  .uape-settings-tab-content {
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .uape-settings-section-title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .uape-settings-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .uape-settings-avatar-row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .uape-settings-skeleton-hint-text {
+    width: 160px;
+  }
+}

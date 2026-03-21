@@ -106,7 +106,7 @@ export async function resendVerification(email) {
 /**
  * Update the current user's profile (avatar, bio, phone).
  * @param {FormData} formData
- * @returns {{ email: string, first_name: string, last_name: string, avatar: string|null, bio: string, phone: string }}
+ * @returns {Promise<{ email: string, first_name: string, last_name: string, avatar: string|null, bio: string, phone: string }>}
  */
 export async function updateProfile(formData) {
   const response = await client.patch('/profile/', formData, {
@@ -122,7 +122,7 @@ export async function updateProfile(formData) {
 /**
  * Change the current user's password.
  * @param {{ current_password: string, new_password: string }} data
- * @returns {{ detail: string }}
+ * @returns {Promise<{ detail: string }>}
  */
 export async function changePassword(data) {
   const response = await client.post('/auth/change-password/', data)
