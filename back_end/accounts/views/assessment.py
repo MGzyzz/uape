@@ -18,7 +18,8 @@ class AssessmentSubmitView(APIView):
 
         language = serializer.validated_data['language']
         score = serializer.validated_data['score']
-        level = compute_level(score)
+        total = serializer.validated_data['total']
+        level = compute_level(score, total)
 
         result, created = AssessmentResult.objects.update_or_create(
             user=request.user,

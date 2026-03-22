@@ -2,14 +2,16 @@ from django.conf import settings
 from django.db import models
 
 
-def compute_level(score: int) -> str:
-    # 35 scoreable questions (36 total minus 1 mini_task)
-    # beginner  ≤31%:  0–11
-    # intermediate ≤65%: 12–23
-    # advanced  >65%:  24–35
-    if score <= 11:
+def compute_level(score: int, total: int) -> str:
+    # 0–25%  → beginner
+    # 26–75% → intermediate
+    # 76–100% → advanced
+    if total == 0:
         return 'beginner'
-    elif score <= 23:
+    pct = score / total * 100
+    if pct <= 25:
+        return 'beginner'
+    elif pct <= 75:
         return 'intermediate'
     return 'advanced'
 

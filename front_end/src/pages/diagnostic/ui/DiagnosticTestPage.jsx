@@ -348,6 +348,10 @@ export default function DiagnosticTestPage() {
 
   async function handleSubmit() {
     setSubmitting(true)
+    const scoreableQuestions = sortedQuestions.filter(
+      (q) => q.type !== 'mini_task' && q.type !== 'find_error'
+    )
+    const total = scoreableQuestions.length
     const score = answers.reduce((acc, ans, i) => {
       const q = sortedQuestions[i]
       if (!q || q.type === 'mini_task' || q.type === 'find_error') return acc
@@ -360,7 +364,7 @@ export default function DiagnosticTestPage() {
     }, 0)
 
     try {
-      const data = await submitAssessment(language, score)
+      const data = await submitAssessment(language, score, total)
       setCachedResult(language, data.level, data.score)
       navigate('/diagnostic', { state: { scrollToResult: true } })
     } catch {

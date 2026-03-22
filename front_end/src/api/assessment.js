@@ -24,8 +24,8 @@ export function clearCachedResults() {
   localStorage.removeItem(LS_KEY)
 }
 
-export async function submitAssessment(language, score) {
-  const res = await client.post('/assessment/submit/', { language, score })
+export async function submitAssessment(language, score, total) {
+  const res = await client.post('/assessment/submit/', { language, score, total })
   return res.data
 }
 
