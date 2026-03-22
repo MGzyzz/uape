@@ -14,7 +14,8 @@ function DiagnosticPage() {
   const location = useLocation()
   const { isAuth } = useAuth()
   const resultRef = useRef(null)
-  const [assessmentResult, setAssessmentResult] = useState(() => {
+
+  const initialCached = (() => {
     const cached = getCachedResults()
     const keys = Object.keys(cached)
     if (keys.length > 0) {
@@ -22,7 +23,10 @@ function DiagnosticPage() {
       return { level: cached[firstKey].level, language: firstKey }
     }
     return null
-  })
+  })()
+
+  const [assessmentResult, setAssessmentResult] = useState(initialCached)
+  const [loading, setLoading] = useState(isAuth && !initialCached)
 
   const scrollToResult = useRef(location.state?.scrollToResult)
   useEffect(() => {
@@ -46,6 +50,7 @@ function DiagnosticPage() {
           }
         })
         .catch(() => {})
+        .finally(() => setLoading(false))
     }
   }, [isAuth])
 
@@ -60,7 +65,7 @@ function DiagnosticPage() {
     <div className="min-h-screen bg-uape-bg text-uape-white">
       <SiteHeader />
       <main>
-        {!assessmentResult && (
+        {!loading && !assessmentResult && (
           <section className="uape-diagnostic-section">
             <div className="uape-section-shell uape-diagnostic-inner">
 
@@ -108,7 +113,7 @@ function DiagnosticPage() {
           </section>
         )}
 
-        {assessmentResult && (
+        {!loading && assessmentResult && (
           <>
             <div ref={resultRef}>
               <AssessmentResultSection
