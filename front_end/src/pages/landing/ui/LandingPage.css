@@ -7,7 +7,16 @@
 
 /* Hero */
 
+.uape-hero-section {
+  position: relative;
+  padding-bottom: 402px;
+}
+
 .uape-hero-video-wrapper {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   max-width: 1200px;
   overflow: hidden;
