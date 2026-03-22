@@ -212,7 +212,7 @@ function AuthPage({ mode }) {
             placeholder="example@gmail.com"
             value={fields.email}
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={isSignup ? handleBlur : undefined}
             className={`h-14 w-121 rounded-lg border bg-uape-form-bg px-5 py-4 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.email ? 'border-red-500' : 'border-uape-border-soft'}`}
           />
           {fieldErrors.email && <FieldError msg={fieldErrors.email} />}
@@ -237,7 +237,7 @@ function AuthPage({ mode }) {
               placeholder="Enter your password"
               value={fields.password}
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={isSignup ? handleBlur : undefined}
               className={`h-14 w-121 rounded-lg border bg-uape-form-bg px-5 py-4 pr-12 text-base text-uape-white outline-none transition placeholder:text-uape-muted/60 focus:border-uape-accent ${fieldErrors.password ? 'border-red-500' : 'border-uape-border-soft'}`}
             />
             <button

@@ -20,24 +20,46 @@ const MONACO_LANG = {
   cpp: 'cpp',
 }
 
-// Page 1: all theory, Page 2: find_error + what_output, Page 3: mini_task
+// Page 1: all theory, Page 2: what_output, Page 3: find_error (debugging), Page 4+: mini_task
 function buildPages(questions) {
-  const theory  = questions.filter((q) => q.type === 'theory')
-  const codeMcq = questions.filter((q) => q.type === 'find_error' || q.type === 'what_output')
-  const mini    = questions.filter((q) => q.type === 'mini_task')
+  const theory     = questions.filter((q) => q.type === 'theory')
+  const codeOut    = questions.filter((q) => q.type === 'what_output')
+  const debugging  = questions.filter((q) => q.type === 'find_error')
+  const mini       = questions.filter((q) => q.type === 'mini_task')
 
   const pages = []
-  if (theory.length)  pages.push({ start: 0, questions: theory })
-  if (codeMcq.length) pages.push({ start: theory.length, questions: codeMcq })
-  mini.forEach((q, i) => pages.push({ start: theory.length + codeMcq.length + i, questions: [q] }))
+  if (theory.length)    pages.push({ start: 0, questions: theory })
+  if (codeOut.length)   pages.push({ start: theory.length, questions: codeOut })
+  if (debugging.length) pages.push({ start: theory.length + codeOut.length, questions: debugging })
+  mini.forEach((q, i) => pages.push({ start: theory.length + codeOut.length + debugging.length + i, questions: [q] }))
   return pages
 }
 
 // ─── Header ───────────────────────────────────────────────────────────────────
 
-function DiagnosticHeader({ onExit, onBack, step, totalPages }) {
+function getPageLabel(page) {
+  if (!page) return null
+  const types = page.questions.map((q) => q.type)
+  const count = page.questions.length
+  if (types.includes('mini_task')) {
+    return { title: 'Mini task', count: `${count} Task${count !== 1 ? 's' : ''}` }
+  }
+  if (types.includes('find_error') && !types.includes('what_output')) {
+    return { title: 'Debugging', count: `${count} Problem${count !== 1 ? 's' : ''}` }
+  }
+  if (types.includes('what_output') && !types.includes('find_error')) {
+    return { title: 'Code Understanding', count: `${count} Questions` }
+  }
+  if (types.includes('find_error') && types.includes('what_output')) {
+    return { title: 'Code Understanding', count: `${count} Questions` }
+  }
+  return { title: 'Theoretical questions', count: `${count} Questions` }
+}
+
+function DiagnosticHeader({ onExit, onBack, step, totalPages, currentPage }) {
   const totalSteps = (totalPages || 3) + 1
   const pct = Math.round(((step + 1) / totalSteps) * 100)
+  const label = getPageLabel(currentPage)
   return (
     <header className="uape-header-auth-bg sticky top-0 z-20 border-b border-uape-border-soft backdrop-blur-[80px]">
       <div className="uape-section-shell uape-diagnostic-navbar-shell">
@@ -50,10 +72,12 @@ function DiagnosticHeader({ onExit, onBack, step, totalPages }) {
                 <img src={arrowLeftIcon} alt="" className="uape-diagnostic-back-icon" />
                 <span>Back</span>
               </button>
-              <div className="uape-diagnostic-navbar-info">
-                <span className="uape-diagnostic-navbar-title">Test questions</span>
-                <span className="uape-diagnostic-navbar-count">{TOTAL_QUESTIONS} Questions</span>
-              </div>
+              {label && (
+                <div className="uape-diagnostic-navbar-info">
+                  <span className="uape-diagnostic-navbar-title">{label.title}</span>
+                  <span className="uape-diagnostic-navbar-count">{label.count}</span>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -143,11 +167,11 @@ function MonacoCodeBlock({ code, language }) {
 
 // ─── Monaco full code editor (mini_task) ──────────────────────────────────────
 
-function MonacoCodeEditor({ value, onChange, language }) {
+function MonacoCodeEditor({ value, onChange, language, height = 312 }) {
   return (
     <div className="uape-diagnostic-monaco-editor">
       <Editor
-        height={300}
+        height={height}
         language={MONACO_LANG[language] || 'plaintext'}
         value={value ?? ''}
         theme="vs-dark"
@@ -197,8 +221,31 @@ function CheckboxOption({ label, selected, onToggle }) {
 
 // ─── Single question block ─────────────────────────────────────────────────────
 
-function QuestionBlock({ question, globalIndex, selectedAnswer, textAnswer, onSelect, onToggle, onTextChange, isUnanswered, isActive, language }) {
+function MiniTaskPrompt({ text }) {
+  const lines = text.split('\n').map((line) => line.trim()).filter(Boolean)
+  const title = lines[0] ?? ''
+  const requirements = lines.filter((line) => line.startsWith('- ')).map((line) => line.slice(2))
+
+  return (
+    <div className="uape-diagnostic-mini-task-prompt">
+      <p className="uape-diagnostic-q-text">{title}</p>
+      {requirements.length > 0 && (
+        <>
+          <p className="uape-diagnostic-mini-task-label">Requirements:</p>
+          <ul className="uape-diagnostic-mini-task-list">
+            {requirements.map((item, idx) => (
+              <li key={idx} className="uape-diagnostic-mini-task-item">{item}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  )
+}
+
+function QuestionBlock({ question, globalIndex, displayNumber, selectedAnswer, textAnswer, onSelect, onToggle, onTextChange, isUnanswered, isActive, language }) {
   const isMiniTask = question.type === 'mini_task'
+  const isDebugging = question.type === 'find_error'
   const isMulti = question.multi === true
   const selectedArr = Array.isArray(selectedAnswer) ? selectedAnswer : []
 
@@ -207,15 +254,22 @@ function QuestionBlock({ question, globalIndex, selectedAnswer, textAnswer, onSe
       className={`uape-diagnostic-q-row${isActive ? ' uape-diagnostic-q-row--active' : ''}`}
       data-qidx={globalIndex}
     >
-      <span className={`uape-diagnostic-q-num${isUnanswered ? ' uape-diagnostic-q-num--error' : ''}`}>{globalIndex + 1}.</span>
+      {!isMiniTask && (
+        <span className={`uape-diagnostic-q-num${isUnanswered ? ' uape-diagnostic-q-num--error' : ''}`}>{displayNumber}.</span>
+      )}
       <div className="uape-diagnostic-q-content">
-        <p className="uape-diagnostic-q-text">{question.question}</p>
-
         {isMiniTask ? (
+          <MiniTaskPrompt text={question.question} />
+        ) : (
+          <p className="uape-diagnostic-q-text">{question.question}</p>
+        )}
+
+        {(isMiniTask || isDebugging) ? (
           <MonacoCodeEditor
-            value={textAnswer}
+            value={textAnswer || (isDebugging ? question.code : '')}
             onChange={onTextChange}
             language={language}
+            height={isDebugging ? 200 : 312}
           />
         ) : (
           <>
@@ -264,7 +318,8 @@ export default function DiagnosticTestPage() {
 
   const sortedQuestions = language ? [
     ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'theory'),
-    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'find_error' || q.type === 'what_output'),
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'what_output'),
+    ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'find_error'),
     ...DIAGNOSTIC_DATA[language].filter((q) => q.type === 'mini_task'),
   ] : []
 
@@ -279,7 +334,7 @@ export default function DiagnosticTestPage() {
   function isPageAnswered(page) {
     return page.questions.every((q, i) => {
       const idx = page.start + i
-      if (q.type === 'mini_task') return (textAnswers[idx] ?? '').trim() !== ''
+      if (q.type === 'mini_task' || q.type === 'find_error') return (textAnswers[idx] ?? '').trim() !== ''
       if (q.multi) return Array.isArray(answers[idx]) && answers[idx].length > 0
       return answers[idx] !== null
     })
@@ -295,7 +350,7 @@ export default function DiagnosticTestPage() {
     setSubmitting(true)
     const score = answers.reduce((acc, ans, i) => {
       const q = sortedQuestions[i]
-      if (!q || q.type === 'mini_task') return acc
+      if (!q || q.type === 'mini_task' || q.type === 'find_error') return acc
       if (q.multi) {
         const correct = Array.isArray(q.answer) ? [...q.answer].sort() : [q.answer]
         const selected = Array.isArray(ans) ? [...ans].sort() : []
@@ -324,7 +379,7 @@ export default function DiagnosticTestPage() {
             .filter((globalIdx) => {
               const q = sortedQuestions[globalIdx]
               if (!q) return false
-              if (q.type === 'mini_task') return (textAnswers[globalIdx] ?? '').trim() === ''
+              if (q.type === 'mini_task' || q.type === 'find_error') return (textAnswers[globalIdx] ?? '').trim() === ''
               if (q.multi) return !(Array.isArray(answers[globalIdx]) && answers[globalIdx].length > 0)
               return answers[globalIdx] === null
             })
@@ -448,7 +503,7 @@ export default function DiagnosticTestPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-uape-bg text-uape-white">
-      <DiagnosticHeader onExit={handleExit} onBack={handleBack} step={step} totalPages={totalPages} />
+      <DiagnosticHeader onExit={handleExit} onBack={handleBack} step={step} totalPages={totalPages} currentPage={currentPage} />
 
       <main className="flex flex-1 flex-col">
         <div className="mx-auto w-full max-w-2xl flex-1 px-4 pt-10 sm:px-6">
@@ -468,6 +523,7 @@ export default function DiagnosticTestPage() {
                     key={question.id}
                     question={question}
                     globalIndex={globalIdx}
+                    displayNumber={i + 1}
                     selectedAnswer={answers[globalIdx]}
                     textAnswer={textAnswers[globalIdx]}
                     isUnanswered={unansweredSet.has(globalIdx)}
