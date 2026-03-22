@@ -31,7 +31,7 @@ const struggleCards = [
 
 function ProblemsSection() {
   return (
-    <section id="problems" className="bg-uape-bg">
+    <section id="problems" className="bg-uape-bg pb-[160px]">
       <div className="uape-section-shell flex flex-col gap-[60px]">
         <h2 className="font-figtree text-center text-[44px] font-semibold leading-13">Why is learning programming hard?</h2>
         <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-4">

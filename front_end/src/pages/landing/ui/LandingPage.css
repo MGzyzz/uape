@@ -1,6 +1,25 @@
 /* ─── Landing Page ──────────────────────────────────────────────────────── */
 
+.uape-landing-bg {
+  background-color: #0C0D0F;
+  --color-uape-bg: #0C0D0F;
+}
+
 /* Hero */
+
+.uape-hero-video-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  overflow: hidden;
+  border-radius: 26px;
+}
+
+.uape-hero-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 26px;
+}
 
 .uape-hero-title {
   max-width: 1000px;

@@ -28,7 +28,7 @@ function LandingPage() {
   if (isAuth) return null
 
   return (
-    <div className="min-h-screen bg-uape-bg text-uape-white">
+    <div className="uape-landing-bg min-h-screen text-uape-white">
       <SiteHeader />
 
       <main>

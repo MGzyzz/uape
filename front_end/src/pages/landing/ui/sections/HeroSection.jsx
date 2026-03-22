@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import DiagnosticTicker from '../../../../shared/ui/DiagnosticTicker.jsx'
 import { useAuth } from '../../../../app/AuthContext.jsx'
+import heroVideo from '../../assets/2026-03-22 13-10-57.mp4'
 
 function HeroSection() {
   const { isAuth } = useAuth()
   return (
-    <section className="uape-page-container uape-page-gutter flex flex-col items-center pb-20 pt-30 text-center">
+    <section className="uape-page-container uape-page-gutter flex flex-col items-center pt-30 text-center">
       <h1
         className="uape-hero-title max-w-5xl font-bold text-white"
       >
@@ -35,7 +35,16 @@ function HeroSection() {
         </a>
       </div>
 
-      <DiagnosticTicker />
+      <div className="uape-hero-video-wrapper">
+        <video
+          className="uape-hero-video"
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </div>
     </section>
   )
 }
