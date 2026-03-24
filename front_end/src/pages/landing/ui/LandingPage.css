@@ -28,6 +28,8 @@
   height: auto;
   display: block;
   border-radius: 26px;
+  pointer-events: none;
+  user-select: none;
 }
 
 .uape-hero-title {

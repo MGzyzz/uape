@@ -168,10 +168,8 @@ export default function OnboardingPage() {
   const [showError, setShowError] = useState(false)
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate('/login')
-      return
-    }
+    if (!isAuth) return
+
     getOnboarding().then((data) => {
       if (data.field) setField(data.field)
       if (data.occupation) setOccupation(data.occupation)
@@ -180,7 +178,7 @@ export default function OnboardingPage() {
       const resumeStep = Math.min(data.current_step + 1, TOTAL_STEPS)
       setStep(resumeStep || 1)
     }).catch(() => {})
-  }, [navigate, isAuth])
+  }, [isAuth])
 
   async function handleSaveExit() {
     setSaving(true)

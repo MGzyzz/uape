@@ -26,7 +26,7 @@ function DiagnosticPage() {
   })()
 
   const [assessmentResult, setAssessmentResult] = useState(initialCached)
-  const [loading, setLoading] = useState(isAuth && !initialCached)
+  const [loading, setLoading] = useState(!initialCached)
 
   const scrollToResult = useRef(location.state?.scrollToResult)
   useEffect(() => {
@@ -39,19 +39,24 @@ function DiagnosticPage() {
 
   useEffect(() => {
     const cached = getCachedResults()
-    if (Object.keys(cached).length > 0) return
-    if (isAuth) {
-      getAssessmentResults()
-        .then((list) => {
-          if (list.length > 0) {
-            const first = list[0]
-            setCachedResult(first.language, first.level, first.score)
-            setAssessmentResult({ level: first.level, language: first.language })
-          }
-        })
-        .catch(() => {})
-        .finally(() => setLoading(false))
+    if (Object.keys(cached).length > 0) {
+      setLoading(false)
+      return
     }
+    if (!isAuth) {
+      setLoading(false)
+      return
+    }
+    getAssessmentResults()
+      .then((list) => {
+        if (list.length > 0) {
+          const first = list[0]
+          setCachedResult(first.language, first.level, first.score)
+          setAssessmentResult({ level: first.level, language: first.language })
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
   }, [isAuth])
 
   function handleStartNewDiagnostic() {

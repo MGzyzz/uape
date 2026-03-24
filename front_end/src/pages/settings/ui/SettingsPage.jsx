@@ -1,6 +1,5 @@
 import './SettingsPage.css'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { FiUser, FiShield, FiCamera, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi'
 import SiteHeader from '../../../shared/ui/SiteHeader.jsx'
 import SiteFooter from '../../../shared/ui/SiteFooter.jsx'
@@ -381,14 +380,9 @@ function SecurityTab({ showToast }) {
 /* ─── Main Page ──────────────────────────────────────────────────────────── */
 
 function SettingsPage() {
-  const navigate = useNavigate()
   const { user, isAuth, setUser } = useAuth()
   const [activeTab, setActiveTab] = useState('profile')
   const { toast, showToast } = useToast()
-
-  useEffect(() => {
-    if (!isAuth) navigate('/login')
-  }, [isAuth, navigate])
 
   if (!user) return null
 

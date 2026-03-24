@@ -7,7 +7,7 @@ function CtaSection() {
   return (
     <section className="relative">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-[#181A1B]" aria-hidden="true" />
-      <div className="uape-page-container uape-page-gutter relative z-10 grid gap-7 pb-20 lg:grid-cols-[586px_586px]">
+      <div className="uape-page-container uape-page-gutter relative z-10 grid gap-7 pt-[160px] pb-[10px] lg:grid-cols-[586px_586px]">
         <article
           className="uape-shadow-soft-32 flex h-[420px] flex-col gap-8 rounded-[24px] bg-[#27292A] px-10 pb-[60px] pt-[60px]"
         >
@@ -27,7 +27,7 @@ function CtaSection() {
         </article>
 
         <article
-          className="uape-shadow-soft-32 relative h-[408px] overflow-hidden rounded-[24px]"
+          className="uape-shadow-soft-32 relative h-[420px] overflow-hidden rounded-[24px]"
         >
           <img
             src={ctaImage}

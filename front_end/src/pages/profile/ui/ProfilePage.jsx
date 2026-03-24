@@ -15,10 +15,7 @@ function ProfilePage() {
   const [occupation, setOccupation] = useState(null)
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate('/login')
-      return
-    }
+    if (!isAuth) return
 
     let ignore = false
 
@@ -55,7 +52,7 @@ function ProfilePage() {
       ignore = true
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuth, navigate])
+  }, [isAuth])
 
   if (!user) return null
 

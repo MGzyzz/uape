@@ -57,7 +57,7 @@ function getPageLabel(page) {
 }
 
 function DiagnosticHeader({ onExit, onBack, step, totalPages, currentPage }) {
-  const totalSteps = (totalPages || 3) + 1
+  const totalSteps = (totalPages || 4) + 1
   const pct = Math.round(((step + 1) / totalSteps) * 100)
   const label = getPageLabel(currentPage)
   return (
@@ -334,7 +334,7 @@ export default function DiagnosticTestPage() {
   function isPageAnswered(page) {
     return page.questions.every((q, i) => {
       const idx = page.start + i
-      if (q.type === 'mini_task' || q.type === 'find_error') return (textAnswers[idx] ?? '').trim() !== ''
+      if (q.type === 'mini_task' || q.type === 'find_error') return true
       if (q.multi) return Array.isArray(answers[idx]) && answers[idx].length > 0
       return answers[idx] !== null
     })
@@ -383,7 +383,7 @@ export default function DiagnosticTestPage() {
             .filter((globalIdx) => {
               const q = sortedQuestions[globalIdx]
               if (!q) return false
-              if (q.type === 'mini_task' || q.type === 'find_error') return (textAnswers[globalIdx] ?? '').trim() === ''
+              if (q.type === 'mini_task' || q.type === 'find_error') return false
               if (q.multi) return !(Array.isArray(answers[globalIdx]) && answers[globalIdx].length > 0)
               return answers[globalIdx] === null
             })
