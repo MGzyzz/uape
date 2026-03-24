@@ -40,8 +40,8 @@ const bottomMarkers = Array.from({ length: 99 }, (_, index) => index)
 
 function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="relative overflow-hidden bg-uape-bg">
-      <div className="uape-page-container uape-page-gutter py-16">
+    <section id="how-it-works" className="uape-section-gap relative overflow-hidden bg-uape-bg">
+      <div className="uape-page-container uape-page-gutter pb-16">
         <div className="flex flex-col gap-[60px] lg:hidden">
           <h2 className="text-center font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%]">
             How it works

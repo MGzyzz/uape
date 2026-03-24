@@ -64,7 +64,7 @@ function TechnologyIcon({ item }) {
 function TechnologySection() {
   const { isAuth } = useAuth()
   return (
-    <section id="technology" className="bg-uape-bg">
+    <section id="technology" className="uape-section-gap bg-uape-bg">
       <div className="uape-section-shell flex flex-col gap-[104px] lg:flex-row lg:items-start lg:justify-between">
         <div className="flex w-[409px] flex-col gap-7">
           <div className="flex w-[409px] flex-col gap-4">

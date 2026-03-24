@@ -33,7 +33,7 @@ const audienceCards = [
 
 function AudienceSection() {
   return (
-    <section id="for-whom">
+    <section id="for-whom" className="uape-section-gap">
       <div className="uape-section-shell flex flex-col gap-[60px]">
         <h2 className="text-center font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
           Who the platform is for

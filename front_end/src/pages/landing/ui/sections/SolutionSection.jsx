@@ -1,3 +1,4 @@
+import './SolutionSection.css'
 import skillLevelImg from '../../assets/solution/skill-level.png'
 import saveTimeImg from '../../assets/solution/save-time.png'
 import frame157Img from '../../assets/solution/adaptive-learning-card-front.png'
@@ -19,8 +20,8 @@ const solutionIcons = [
 
 function SolutionSection() {
   return (
-    <section id="solution" className="bg-uape-header">
-      <div className="uape-section-shell flex flex-col gap-[60px] pt-[80px] pb-[100px]">
+    <section id="solution" className="uape-section-gap bg-uape-header">
+      <div className="uape-section-shell uape-solution-shell flex flex-col gap-15">
         <h2 className="font-figtree text-[44px] font-semibold leading-13">How UAPE helps you learn effectively</h2>
 
         <div className="flex flex-col gap-7">

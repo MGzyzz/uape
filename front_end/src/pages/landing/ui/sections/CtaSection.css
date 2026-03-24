@@ -1,0 +1,73 @@
+/* ─── CTA Section ────────────────────────────────────────────────────────── */
+
+.uape-cta-section {
+  position: relative;
+  background: linear-gradient(to bottom, transparent 0, transparent 370px, #181A1B 370px, #181A1B 100%);
+}
+
+.uape-cta-grid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 586px 586px;
+  gap: 28px;
+  padding-top: 160px;
+  padding-bottom: 10px;
+}
+
+.uape-cta-card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  height: 420px;
+  border-radius: 24px;
+  background-color: #27292A;
+  padding: 60px 40px;
+  box-shadow: 0 0 32px 0 #0000001f;
+}
+
+.uape-cta-title {
+  width: 506px;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: var(--color-uape-white);
+}
+
+.uape-cta-desc {
+  width: 440px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-uape-muted);
+}
+
+.uape-cta-image-card {
+  position: relative;
+  height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 0 32px 0 #0000001f;
+}
+
+.uape-cta-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.uape-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 163px;
+  height: 48px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}

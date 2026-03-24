@@ -1,3 +1,4 @@
+import './CtaSection.css'
 import { Link } from 'react-router-dom'
 import ctaImage from '../../assets/working-process.png'
 import { useAuth } from '../../../../app/AuthContext.jsx'
@@ -5,34 +6,29 @@ import { useAuth } from '../../../../app/AuthContext.jsx'
 function CtaSection() {
   const { isAuth } = useAuth()
   return (
-    <section className="relative">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-[#181A1B]" aria-hidden="true" />
-      <div className="uape-page-container uape-page-gutter relative z-10 grid gap-7 pt-[160px] pb-[10px] lg:grid-cols-[586px_586px]">
-        <article
-          className="uape-shadow-soft-32 flex h-[420px] flex-col gap-8 rounded-[24px] bg-[#27292A] px-10 pb-[60px] pt-[60px]"
-        >
-          <h3 className="w-[506px] font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
+    <section className="uape-cta-section">
+      <div className="uape-page-container uape-page-gutter uape-cta-grid">
+        <article className="uape-cta-card">
+          <h3 className="uape-cta-title">
             Start learning with a clear understanding of your level
           </h3>
-          <p className="w-[440px] font-figtree text-[16px] font-normal leading-6 tracking-[0%] text-[#FFFFFFC2]">
+          <p className="uape-cta-desc">
             UAPE helps you enhance your skills, expand you knowledge, and prepare for technical interviews with
             confidence.
           </p>
           <Link
             to={isAuth ? '/diagnostic' : '/login'}
-            className="uape-orange-btn font-figtree inline-flex h-12 w-[163px] items-center justify-center rounded-[8px] px-6 py-3 text-[16px] font-normal leading-6 tracking-[0%]"
+            className="uape-orange-btn uape-cta-btn"
           >
             Start diagnostic
           </Link>
         </article>
 
-        <article
-          className="uape-shadow-soft-32 relative h-[420px] overflow-hidden rounded-[24px]"
-        >
+        <article className="uape-cta-image-card">
           <img
             src={ctaImage}
             alt="Developer working at a desk with code on monitor"
-            className="h-full w-full object-cover"
+            className="uape-cta-image"
           />
         </article>
       </div>

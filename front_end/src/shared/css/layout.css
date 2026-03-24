@@ -17,6 +17,11 @@
   padding-right: 120px;
 }
 
+/* Standard vertical gap between landing sections — goes on the <section> element, not the shell */
+.uape-section-gap {
+  margin-top: 160px;
+}
+
 /* Max-width + centering only (pair with uape-page-gutter for padding) */
 .uape-page-container {
   width: 100%;

@@ -28,7 +28,7 @@ const steps = [
 function AssessmentSection() {
   const { isAuth } = useAuth()
   return (
-    <section id="assessment" className="bg-uape-bg">
+    <section id="assessment" className="uape-section-gap bg-uape-bg">
       <div className="uape-section-shell flex flex-col gap-[60px]">
         <h2 className="text-center font-figtree text-[44px] font-semibold leading-[52px] tracking-[0%] text-white">
           How we determine your level

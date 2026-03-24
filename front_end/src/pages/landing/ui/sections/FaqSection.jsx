@@ -37,8 +37,8 @@ function FaqSection() {
   const toggle = (index) => setOpenIndex(openIndex === index ? null : index)
 
   return (
-    <section id="faq" className="bg-uape-bg">
-      <div className="uape-page-container uape-page-gutter flex flex-col items-center gap-25 py-16">
+    <section id="faq" className="uape-section-gap bg-uape-bg">
+      <div className="uape-page-container uape-page-gutter flex flex-col items-center gap-25 pb-0">
 
         {/* Heading */}
         <div className="h-[104px] w-[386px] text-center">
