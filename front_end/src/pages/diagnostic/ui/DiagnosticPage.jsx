@@ -9,6 +9,33 @@ import DiagnosticRecommendationsSection from './DiagnosticRecommendationsSection
 import { getCachedResults, getAssessmentResults, setCachedResult, clearCachedResults } from '../../../api/assessment.js'
 import { useAuth } from '../../../app/AuthContext.jsx'
 
+function DiagnosticPageSkeleton() {
+  return (
+    <section className="uape-diagnostic-section" aria-hidden="true">
+      <div className="uape-section-shell uape-diagnostic-inner">
+        <div className="uape-diagnostic-left">
+          <div className="uape-diagnostic-text-group">
+            <div className="uape-skeleton uape-diagnostic-skeleton-title" />
+            <div className="uape-diagnostic-body">
+              <div className="uape-skeleton uape-diagnostic-skeleton-line uape-diagnostic-skeleton-line--full" />
+              <div className="uape-skeleton uape-diagnostic-skeleton-line uape-diagnostic-skeleton-line--long" />
+              <div className="uape-skeleton uape-diagnostic-skeleton-line uape-diagnostic-skeleton-line--medium" />
+              <div className="uape-skeleton uape-diagnostic-skeleton-line uape-diagnostic-skeleton-line--full" />
+              <div className="uape-skeleton uape-diagnostic-skeleton-line uape-diagnostic-skeleton-line--short" />
+              <div className="uape-skeleton uape-diagnostic-skeleton-line uape-diagnostic-skeleton-line--medium" />
+            </div>
+          </div>
+          <div className="uape-skeleton uape-diagnostic-skeleton-btn" />
+        </div>
+
+        <div className="uape-diagnostic-right">
+          <div className="uape-skeleton uape-diagnostic-skeleton-visual" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function DiagnosticPage() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -26,7 +53,7 @@ function DiagnosticPage() {
   })()
 
   const [assessmentResult, setAssessmentResult] = useState(initialCached)
-  const [loading, setLoading] = useState(!initialCached)
+  const [loading, setLoading] = useState(() => !initialCached && isAuth)
 
   const scrollToResult = useRef(location.state?.scrollToResult)
   useEffect(() => {
@@ -40,11 +67,9 @@ function DiagnosticPage() {
   useEffect(() => {
     const cached = getCachedResults()
     if (Object.keys(cached).length > 0) {
-      setLoading(false)
       return
     }
     if (!isAuth) {
-      setLoading(false)
       return
     }
     getAssessmentResults()
@@ -70,6 +95,8 @@ function DiagnosticPage() {
     <div className="min-h-screen bg-uape-bg text-uape-white">
       <SiteHeader />
       <main>
+        {loading && <DiagnosticPageSkeleton />}
+
         {!loading && !assessmentResult && (
           <section className="uape-diagnostic-section">
             <div className="uape-section-shell uape-diagnostic-inner">
