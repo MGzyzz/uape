@@ -89,7 +89,7 @@ export function ContentCard({ item, buttonLabel, onToggle, contentType }) {
 
         <p className="uape-learn-meta">{item.author} • {item.followers}</p>
 
-        <ContentTags tags={item.tags} />
+        <ContentTags tags={item.tags} limit={3} />
 
         <div className="uape-learn-actions flex items-center gap-4">
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn" onClick={(e) => e.stopPropagation()}>
@@ -140,7 +140,7 @@ export function ChannelCard({ item, onToggle }) {
 
       <p className="uape-learn-channel-description">{item.description}</p>
 
-      <ContentTags tags={item.tags} />
+      <ContentTags tags={item.tags} limit={3} />
 
       <div className="uape-learn-channel-footer">
         <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">

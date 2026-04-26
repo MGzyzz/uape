@@ -107,7 +107,7 @@ function ContentCard({ item, buttonLabel, contentType, onToggle }) {
           <p className="uape-favorites-card-description">{item.description}</p>
         ) : null}
 
-        <ContentTags tags={item.tags} />
+        <ContentTags tags={item.tags} limit={3} />
 
         <div className="uape-favorites-card-actions">
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn" onClick={(e) => e.stopPropagation()}>
@@ -158,7 +158,7 @@ function ChannelCard({ item, onToggle }) {
 
       {item.description ? <p className="uape-learn-channel-description">{item.description}</p> : null}
 
-      <ContentTags tags={item.tags} />
+      <ContentTags tags={item.tags} limit={3} />
 
       <div className="uape-learn-channel-footer">
         <a href={item.url} target="_blank" rel="noopener noreferrer" className="uape-orange-btn uape-learn-primary-btn">

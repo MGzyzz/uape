@@ -2,7 +2,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-uape-bg: #0e1011;
+  --color-uape-bg: #0D0F11;
   --color-uape-white: #ffffff;
   --color-uape-muted: #ffffffc2;
   --color-uape-accent: #eb4823;

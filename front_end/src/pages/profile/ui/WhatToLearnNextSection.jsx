@@ -91,7 +91,7 @@ export default function WhatToLearnNextSection() {
                 key={section.id}
                 title={section.title}
                 subtitle={section.subtitle}
-                items={section.playlists}
+                items={section.playlists.slice(0, 3)}
                 renderCard={(item) => (
                   <ContentCard
                     key={item.id}
@@ -111,7 +111,7 @@ export default function WhatToLearnNextSection() {
                 key={section.id}
                 title={section.title}
                 subtitle={section.subtitle}
-                items={section.videos}
+                items={section.videos.slice(0, 3)}
                 renderCard={(item) => (
                   <ContentCard
                     key={item.id}
@@ -130,7 +130,7 @@ export default function WhatToLearnNextSection() {
               <ChannelsSection
                 key={section.id}
                 title={section.title}
-                items={section.channels}
+                items={section.channels.slice(0, 6)}
                 onToggle={(id) => toggleFavorite(section.id, 'channel', id)}
               />
             )
