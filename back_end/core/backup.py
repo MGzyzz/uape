@@ -3,10 +3,14 @@ import os
 import tempfile
 from datetime import datetime
 
+from django.contrib.auth import get_user_model
 from django.contrib import admin, messages
 from django.core import management
+from django.db.models.signals import post_save
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
+from accounts.signals import create_user_profile
 
 
 def backup_view(request):
@@ -55,7 +59,12 @@ def backup_view(request):
                         f.write(chunk)
                     tmp_path = f.name
 
-                management.call_command('loaddata', tmp_path, verbosity=0)
+                user_model = get_user_model()
+                post_save.disconnect(create_user_profile, sender=user_model)
+                try:
+                    management.call_command('loaddata', tmp_path, verbosity=0)
+                finally:
+                    post_save.connect(create_user_profile, sender=user_model)
                 messages.success(request, f'База данных успешно восстановлена из «{backup_file.name}».')
             except Exception as e:
                 messages.error(request, f'Ошибка при импорте: {e}')

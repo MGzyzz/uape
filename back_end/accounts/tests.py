@@ -1,11 +1,15 @@
+import json
+import os
+import tempfile
 import uuid
 from datetime import timedelta
 
+from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from accounts.models import User, EmailVerification, AssessmentResult
+from accounts.models import User, EmailVerification, AssessmentResult, Profile
 from accounts.models.assessment_result import compute_level
 
 
@@ -49,6 +53,48 @@ class RegisterViewTest(TestCase):
             'password': 'securepass123',
         }, content_type='application/json')
         self.assertIn('detail', response.json())
+
+
+class ProfileFixtureLoadTest(TestCase):
+    def test_loaddata_does_not_create_duplicate_profile_for_fixture_users(self):
+        fixture = [
+            {
+                'model': 'accounts.user',
+                'pk': 7,
+                'fields': {
+                    'email': 'fixture@example.com',
+                    'password': 'pbkdf2_sha256$260000$test$hash',
+                    'first_name': 'Fixture',
+                    'last_name': 'User',
+                    'is_active': True,
+                },
+            },
+            {
+                'model': 'accounts.profile',
+                'pk': 11,
+                'fields': {
+                    'user': 7,
+                    'avatar': '',
+                    'bio': 'Loaded from fixture',
+                    'phone': '+77000000000',
+                },
+            },
+        ]
+
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.json', delete=False, encoding='utf-8'
+        ) as fixture_file:
+            json.dump(fixture, fixture_file)
+            fixture_path = fixture_file.name
+
+        try:
+            call_command('loaddata', fixture_path, verbosity=0)
+        finally:
+            os.unlink(fixture_path)
+
+        profile = Profile.objects.get(user_id=7)
+        self.assertEqual(profile.pk, 11)
+        self.assertEqual(Profile.objects.filter(user_id=7).count(), 1)
 
 
 class VerifyEmailViewTest(TestCase):
