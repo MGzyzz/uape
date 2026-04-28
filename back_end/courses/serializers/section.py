@@ -12,4 +12,4 @@ class SectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Section
-        fields = ('id', 'title', 'subtitle', 'content_type', 'order', 'playlists', 'videos', 'channels')
+        fields = ('id', 'title', 'subtitle', 'content_type', 'order', 'is_featured', 'playlists', 'videos', 'channels')

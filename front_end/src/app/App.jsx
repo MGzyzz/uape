@@ -36,10 +36,35 @@ function ScrollToTop() {
   return null
 }
 
+function PageTitle() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    const map = {
+      '/': 'UAPE',
+      '/login': 'Sign In',
+      '/signup': 'Sign Up',
+      '/profile': 'Profile',
+      '/favorites': 'My Learning',
+      '/onboarding': 'Onboarding',
+      '/settings': 'Settings',
+      '/about-us': 'About Us',
+      '/diagnostic': 'Diagnostic',
+      '/diagnostic/test': 'Diagnostic Test',
+      '/verify-email-sent': 'Verify Email',
+      '/verify-email': 'Verify Email',
+      '/forgot-password': 'Forgot Password',
+      '/reset-password': 'Reset Password',
+    }
+    document.title = map[pathname] ?? 'UAPE'
+  }, [pathname])
+  return null
+}
+
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <PageTitle />
       <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<LandingPage />} />

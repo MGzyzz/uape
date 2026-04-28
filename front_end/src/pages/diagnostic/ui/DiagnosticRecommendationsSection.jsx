@@ -58,7 +58,7 @@ export default function DiagnosticRecommendationsSection({ language }) {
     return (
       <section className="uape-diagnostic-rec-root">
         <div className="uape-page-gutter uape-page-container">
-          <h1 className="uape-learn-page-title">Recommended playlists and videos for you</h1>
+          <h1 className="uape-learn-page-title">Recommended courses based on your level</h1>
           <SkeletonSection />
           <SkeletonSection />
         </div>
@@ -71,7 +71,7 @@ export default function DiagnosticRecommendationsSection({ language }) {
   return (
     <section className="uape-diagnostic-rec-root">
       <div className="uape-page-gutter uape-page-container">
-        <h1 className="uape-learn-page-title">Recommended playlists and videos for you</h1>
+        <h1 className="uape-learn-page-title">Recommended courses based on your level</h1>
 
         {sections.map((section) => {
           if (section.content_type === 'playlist' && section.playlists.length > 0) {

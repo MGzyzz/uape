@@ -12,6 +12,106 @@ import FavoriteIcon from '../../../shared/ui/FavoriteIcon.jsx'
 import ContentTags from '../../../shared/ui/ContentTags.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 
+// ─── Default rich-text fallbacks by tag ───────────────────────────────────────
+
+const WHY_DEFAULTS = {
+  javascript: `<p><strong>Beginner-Friendly:</strong> No prior coding experience needed — all frontend concepts are explained in simple language.</p>
+<p><strong>Structured Learning:</strong> Topics are presented logically, so you build a strong foundation in HTML, CSS, and JavaScript before moving on.</p>
+<p><strong>Hands-On Coding:</strong> You'll create real web pages and interactive features as you learn, helping you retain skills faster.</p>
+<p><strong>Free and Accessible:</strong> Full access via YouTube — study at your own pace from anywhere.</p>
+<p><strong>Practical Outcomes:</strong> You'll not only understand web technologies, but also how to think like a frontend developer.</p>`,
+
+  python: `<p><strong>Beginner-Friendly:</strong> No prior coding experience needed — all Python concepts are explained step by step in plain language.</p>
+<p><strong>Structured Learning:</strong> Topics progress logically from syntax and variables to functions, OOP, and real-world projects.</p>
+<p><strong>Hands-On Coding:</strong> You'll write real Python scripts and build practical programs as you go.</p>
+<p><strong>Free and Accessible:</strong> Full access via YouTube — study at your own pace from anywhere.</p>
+<p><strong>Practical Outcomes:</strong> You'll be ready for data science, automation, web development, or any Python-based career path.</p>`,
+
+  java: `<p><strong>Beginner-Friendly:</strong> No prior experience needed — Java syntax and OOP concepts are introduced from scratch.</p>
+<p><strong>Structured Learning:</strong> From setup and basics to classes, interfaces, and collections — everything in logical order.</p>
+<p><strong>Hands-On Coding:</strong> Build real Java applications and reinforce concepts through practical exercises.</p>
+<p><strong>Free and Accessible:</strong> Full access via YouTube — study at your own pace from anywhere.</p>
+<p><strong>Practical Outcomes:</strong> You'll be equipped for Android development, backend systems, or enterprise software engineering.</p>`,
+
+  'c++': `<p><strong>Beginner-Friendly:</strong> Starts with the fundamentals — no prior experience with compiled languages required.</p>
+<p><strong>Structured Learning:</strong> Covers memory management, pointers, OOP, and the STL in a logical, easy-to-follow progression.</p>
+<p><strong>Hands-On Coding:</strong> Write real C++ programs and gain confidence with hands-on examples throughout.</p>
+<p><strong>Free and Accessible:</strong> Full access via YouTube — study at your own pace from anywhere.</p>
+<p><strong>Practical Outcomes:</strong> You'll be ready for systems programming, game development, or competitive programming.</p>`,
+
+  'c#': `<p><strong>Beginner-Friendly:</strong> No prior .NET or OOP knowledge needed — all C# concepts are introduced clearly from the start.</p>
+<p><strong>Structured Learning:</strong> Covers syntax, classes, LINQ, async programming, and Unity-ready skills in a clear progression.</p>
+<p><strong>Hands-On Coding:</strong> Build real apps and practice every concept with code as you follow along.</p>
+<p><strong>Free and Accessible:</strong> Full access via YouTube — study at your own pace from anywhere.</p>
+<p><strong>Practical Outcomes:</strong> You'll be prepared for .NET backend development, Unity game development, or enterprise applications.</p>`,
+}
+
+const WHAT_DEFAULTS = {
+  javascript: `<p>By the end of this course, you'll be able to:</p>
+<ul>
+<li>Set up your frontend development environment with a code editor and browser.</li>
+<li>Build your first web pages using HTML.</li>
+<li>Style pages with CSS and create layouts using modern techniques.</li>
+<li>Add interactivity with JavaScript, including events, loops, and conditional logic.</li>
+<li>Work with DOM elements to dynamically update your web pages.</li>
+<li>Create reusable functions and modular code for cleaner projects.</li>
+<li>Build complete, responsive web projects with confidence.</li>
+</ul>`,
+
+  python: `<p>By the end of this course, you'll be able to:</p>
+<ul>
+<li>Set up Python and write your first scripts with confidence.</li>
+<li>Work with variables, data types, and control flow structures.</li>
+<li>Use functions, modules, and packages to organize your code.</li>
+<li>Understand object-oriented programming with classes and inheritance.</li>
+<li>Read and write files, handle errors, and work with external libraries.</li>
+<li>Build small practical projects like tools, scrapers, or data analyzers.</li>
+<li>Apply Python skills to real-world tasks in automation, data, or web development.</li>
+</ul>`,
+
+  java: `<p>By the end of this course, you'll be able to:</p>
+<ul>
+<li>Set up a Java development environment and write your first programs.</li>
+<li>Understand variables, data types, loops, and conditional logic.</li>
+<li>Apply object-oriented principles: classes, objects, inheritance, and polymorphism.</li>
+<li>Use Java collections, generics, and the standard library effectively.</li>
+<li>Handle exceptions and write robust, error-tolerant code.</li>
+<li>Build console and GUI-based Java applications from scratch.</li>
+<li>Prepare for Android development or backend Java frameworks.</li>
+</ul>`,
+
+  'c++': `<p>By the end of this course, you'll be able to:</p>
+<ul>
+<li>Set up a C++ compiler and write, compile, and run your first programs.</li>
+<li>Understand pointers, memory management, and references.</li>
+<li>Work with arrays, strings, and the Standard Template Library (STL).</li>
+<li>Apply OOP principles: classes, constructors, destructors, and inheritance.</li>
+<li>Use templates and understand generic programming.</li>
+<li>Write efficient, low-level code suitable for systems and game development.</li>
+<li>Tackle competitive programming problems with C++ confidence.</li>
+</ul>`,
+
+  'c#': `<p>By the end of this course, you'll be able to:</p>
+<ul>
+<li>Set up Visual Studio and write your first C# console applications.</li>
+<li>Master OOP in C#: classes, interfaces, inheritance, and generics.</li>
+<li>Use LINQ, collections, and the .NET standard library.</li>
+<li>Handle async/await and build responsive programs.</li>
+<li>Work with files, databases, and APIs in the .NET ecosystem.</li>
+<li>Build desktop or web applications using .NET frameworks.</li>
+<li>Get started with Unity scripting using your C# foundation.</li>
+</ul>`,
+}
+
+function getDefaultByTag(tags, map) {
+  if (!tags?.length) return null
+  for (const tag of tags) {
+    const key = tag.name.replace('#', '').toLowerCase()
+    if (map[key]) return map[key]
+  }
+  return null
+}
+
 // ─── "About This Course" template ─────────────────────────────────────────────
 
 const ABOUT_TEMPLATE =
@@ -25,19 +125,20 @@ function buildAbout(language) {
 // ─── Small helpers ─────────────────────────────────────────────────────────────
 
 function Tags({ tags }) {
-  return <ContentTags tags={tags} />
+  return <ContentTags tags={tags} limit={3} />
 }
 
 // ─── Rich-text блоки (HTML из CKEditor5) ──────────────────────────────────────
 
-function RichTextSection({ title, html }) {
-  if (!html) return null
+function RichTextSection({ title, html, fallback }) {
+  const content = html || fallback
+  if (!content) return null
   return (
     <div className="uape-detail-content-section">
       <h2 className="uape-detail-section-title">{title}</h2>
       <div
         className="uape-detail-rich-text"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }}
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
       />
     </div>
   )
@@ -111,7 +212,7 @@ function RecommendedSection({ items, onToggle }) {
   return (
     <div className="uape-learn-section">
       <div className="uape-learn-section-header flex items-start justify-between">
-        <h2 className="uape-learn-section-title">Recommended playlists for you</h2>
+        <h2 className="uape-learn-section-title">Courses that may be of interest</h2>
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={canPrev ? () => setIdx((i) => Math.max(0, i - 1)) : undefined}
@@ -164,6 +265,7 @@ export default function CourseDetailPage() {
       .then(([pl, rec]) => {
         setPlaylist(pl)
         setFavorited(pl.favorited)
+        document.title = pl.title
         if (rec?.playlists?.length) {
           setRecommended(rec.playlists.filter((p) => p.id !== Number(id)))
         }
@@ -236,7 +338,13 @@ function DetailContent({ playlist, favorited, onToggleMain, recommended, onToggl
   if (playlist.videoCount) metaParts.push(`${playlist.videoCount} Videos`)
   if (playlist.duration) metaParts.push(playlist.duration)
 
-  const hasAbout = Boolean(playlist.language || playlist.whyThisCourse || playlist.whatYouWillLearn)
+  const hasAbout = Boolean(
+    playlist.language ||
+    playlist.whyThisCourse ||
+    playlist.whatYouWillLearn ||
+    getDefaultByTag(playlist.tags, WHY_DEFAULTS) ||
+    getDefaultByTag(playlist.tags, WHAT_DEFAULTS)
+  )
 
   return (
     <>
@@ -348,10 +456,18 @@ function DetailContent({ playlist, favorited, onToggleMain, recommended, onToggl
                 </div>
 
                 {/* Why This Course? */}
-                <RichTextSection title="Why This Course?" html={playlist.whyThisCourse} />
+                <RichTextSection
+                  title="Why This Course?"
+                  html={playlist.whyThisCourse}
+                  fallback={getDefaultByTag(playlist.tags, WHY_DEFAULTS)}
+                />
 
                 {/* What You Will Learn */}
-                <RichTextSection title="What You Will Learn" html={playlist.whatYouWillLearn} />
+                <RichTextSection
+                  title="What You Will Learn"
+                  html={playlist.whatYouWillLearn}
+                  fallback={getDefaultByTag(playlist.tags, WHAT_DEFAULTS)}
+                />
               </div>
             )}
           </div>

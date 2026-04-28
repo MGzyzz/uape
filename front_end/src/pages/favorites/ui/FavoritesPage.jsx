@@ -264,7 +264,7 @@ function FavoritesContent({ sections, onRemove, recommended, onRecommendedToggle
         if (filtered.length === 0) return null
         return (
           <CarouselSection
-            title="Courses that may be of interest"
+            title="Recommended playlists for you"
             items={filtered}
             renderCard={(item) => (
               <ContentCard

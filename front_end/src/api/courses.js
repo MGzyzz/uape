@@ -83,6 +83,7 @@ function normalizeSection(s) {
     subtitle: s.subtitle,
     content_type: s.content_type,
     order: s.order,
+    is_featured: Boolean(s.is_featured),
     playlists: (s.playlists ?? []).map(normalizePlaylist),
     videos: (s.videos ?? []).map(normalizeVideo),
     channels: (s.channels ?? []).map(normalizeChannel),
