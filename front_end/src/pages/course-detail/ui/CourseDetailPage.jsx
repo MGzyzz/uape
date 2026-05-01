@@ -104,12 +104,22 @@ const WHAT_DEFAULTS = {
 }
 
 function getDefaultByTag(tags, map) {
-  if (!tags?.length) return null
-  for (const tag of tags) {
-    const key = tag.name.replace('#', '').toLowerCase()
-    if (map[key]) return map[key]
+  if (tags?.length) {
+    for (const tag of tags) {
+      const key = tag.name.replace('#', '').trim().toLowerCase()
+      if (map[key]) return map[key]
+    }
   }
-  return null
+  return map.javascript
+}
+
+function hasVisibleRichText(html) {
+  if (!html) return false
+  const text = html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;|&#160;/gi, ' ')
+    .trim()
+  return text.length > 0
 }
 
 // ─── "About This Course" template ─────────────────────────────────────────────
@@ -131,7 +141,7 @@ function Tags({ tags }) {
 // ─── Rich-text блоки (HTML из CKEditor5) ──────────────────────────────────────
 
 function RichTextSection({ title, html, fallback }) {
-  const content = html || fallback
+  const content = hasVisibleRichText(html) ? html : fallback
   if (!content) return null
   return (
     <div className="uape-detail-content-section">
