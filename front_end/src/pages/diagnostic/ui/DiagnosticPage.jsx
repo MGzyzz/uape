@@ -154,7 +154,7 @@ function DiagnosticPage() {
                 onStartNew={handleStartNewDiagnostic}
               />
             </div>
-            <DiagnosticRecommendationsSection language={assessmentResult.language} />
+            <DiagnosticRecommendationsSection language={assessmentResult.language} level={assessmentResult.level} />
           </>
         )}
       </main>

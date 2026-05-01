@@ -1,12 +1,11 @@
 import './WhatToLearnNextSection.css'
 import { useState, useEffect } from 'react'
-import { getSections, getSectionsByTag, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
-import { getCachedResults } from '../../../api/assessment.js'
+import { getSections, getPlaylists, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
+import { getAssessmentResults } from '../../../api/assessment.js'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 import { SkeletonSection, ContentCard, ChannelsSection } from '../../../shared/ui/CourseSectionCards.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 
-const LANG_TO_TAG = { csharp: 'c#', cpp: 'c++' }
 const LANG_DISPLAY = { python: 'Python', javascript: 'JavaScript', java: 'Java', csharp: 'C#', cpp: 'C++' }
 
 // ─── Root export ──────────────────────────────────────────────────────────────
@@ -18,55 +17,48 @@ export default function WhatToLearnNextSection() {
   const { isAuth } = useAuth()
 
   useEffect(() => {
-    const assessedLangs = Object.keys(getCachedResults())
+    const fetches = [getSections()]
+    if (isAuth) {
+      fetches.push(getRecommended().catch(() => null))
+      fetches.push(getAssessmentResults().catch(() => []))
+      fetches.push(getPlaylists().catch(() => []))
+    }
 
-    const mainFetches = [getSections()]
-    if (isAuth) mainFetches.push(getRecommended().catch(() => null))
+    Promise.all(fetches)
+      .then((results) => {
+        const allSections = results[0]
+        const recommended = isAuth ? (results[1] ?? null) : null
+        const assessmentResults = isAuth ? (results[2] ?? []) : []
+        const allPlaylists = isAuth ? (results[3] ?? []) : []
 
-    const tagFetches = assessedLangs.map((lang) =>
-      getSectionsByTag(LANG_TO_TAG[lang] ?? lang).catch(() => [])
-    )
+        const recentLang = assessmentResults[0]?.language
+        const langDisplay = recentLang ? (LANG_DISPLAY[recentLang] ?? recentLang) : null
 
-    Promise.all([Promise.all(mainFetches), Promise.all(tagFetches)])
-      .then(([mainResults, langSectionsList]) => {
-        const allSections = mainResults[0]
-        const recommended = isAuth ? mainResults[1] : null
+        const recommendedIds = new Set((recommended?.playlists ?? []).map((p) => p.id))
+        const popularPlaylists = allPlaylists.filter((p) => !recommendedIds.has(p.id))
 
-        const popularSections = assessedLangs
-          .map((lang, i) => {
-            const tagName = `#${(LANG_TO_TAG[lang] ?? lang)}`
-            const seen = new Set()
-            const playlists = (langSectionsList[i] ?? [])
-              .flatMap((s) => s.playlists)
-              .filter((p) => {
-                if (seen.has(p.id)) return false
-                if (!p.tags.some((t) => t.name.toLowerCase() === tagName)) return false
-                seen.add(p.id)
-                return true
-              })
-            if (playlists.length === 0) return null
-            const displayName = LANG_DISPLAY[lang] ?? lang
-            return {
-              id: `popular-${lang}`,
-              title: `Popular playlists for ${displayName}`,
-              subtitle: `Curated tutorials and playlists to boost your ${displayName} skills`,
-              content_type: 'playlist',
-              is_featured: false,
-              playlists,
-              videos: [],
-              channels: [],
-            }
-          })
-          .filter(Boolean)
+        const popularSection = isAuth && popularPlaylists.length > 0 ? {
+          id: 'popular',
+          title: langDisplay ? `Popular playlists for ${langDisplay}` : 'Popular playlists',
+          subtitle: langDisplay
+            ? `Curated tutorials and playlists to boost your ${langDisplay} skills`
+            : 'Curated tutorials and playlists to boost your skills',
+          content_type: 'playlist',
+          is_featured: false,
+          displayLimit: 6,
+          playlists: popularPlaylists,
+          videos: [],
+          channels: [],
+        } : null
 
-        const filtered = allSections.filter((s) => s.is_featured || s.content_type === 'channel')
+        const channelSections = allSections.filter((s) => s.content_type === 'channel')
 
         const finalSections = []
         if (recommended && (recommended.playlists?.length > 0 || recommended.videos?.length > 0 || recommended.channels?.length > 0)) {
           finalSections.push(recommended)
         }
-        finalSections.push(...popularSections)
-        finalSections.push(...filtered)
+        if (popularSection) finalSections.push(popularSection)
+        finalSections.push(...channelSections)
 
         setSections(finalSections)
       })
@@ -139,7 +131,7 @@ export default function WhatToLearnNextSection() {
                 key={section.id}
                 title={section.title}
                 subtitle={section.subtitle}
-                items={section.playlists.slice(0, 3)}
+                items={section.playlists.slice(0, section.displayLimit ?? 3)}
                 renderCard={(item) => (
                   <ContentCard
                     key={item.id}

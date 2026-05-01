@@ -97,7 +97,8 @@ export async function getSections() {
 
 export async function getPlaylists() {
   const res = await client.get('/courses/playlists/')
-  return res.data.map(normalizePlaylist)
+  const items = Array.isArray(res.data) ? res.data : (res.data.results ?? [])
+  return items.map(normalizePlaylist)
 }
 
 export async function getVideos() {

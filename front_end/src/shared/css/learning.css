@@ -1,5 +1,13 @@
 /* ─── Shared learning cards & channels ─────────────────────────────────── */
 
+.uape-learn-page-title {
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  color: var(--color-uape-white);
+  margin: 0 0 48px;
+}
+
 .uape-learn-content-card {
   background-color: var(--color-uape-header);
   border-radius: 16px;
