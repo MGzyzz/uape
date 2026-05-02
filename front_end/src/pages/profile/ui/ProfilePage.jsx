@@ -10,7 +10,6 @@ import WhatToLearnNextSection from './WhatToLearnNextSection.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
 
 function ProfilePage() {
-  const navigate = useNavigate()
   const { user, isAuth, setUser } = useAuth()
   const [occupation, setOccupation] = useState(null)
 

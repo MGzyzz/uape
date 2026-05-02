@@ -1,10 +1,16 @@
 import './WhatToLearnNextSection.css'
 import { useState, useEffect } from 'react'
-import { getSections, getPlaylists, getRecommended, addBookmark, removeBookmark } from '../../../api/courses.js'
+import { getSections, getPlaylists, getRecommended, getChannelsByTags, addBookmark, removeBookmark } from '../../../api/courses.js'
 import { getAssessmentResults } from '../../../api/assessment.js'
+import { getOnboarding } from '../../../api/onboarding.js'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 import { SkeletonSection, ContentCard, ChannelsSection } from '../../../shared/ui/CourseSectionCards.jsx'
 import { useAuth } from '../../../app/AuthContext.jsx'
+import {
+  getOnboardingRecommendationTags,
+  pickPrimaryTagFromChannels,
+  tagDisplayName,
+} from '../../../shared/recommendationTags.js'
 
 const LANG_DISPLAY = { python: 'Python', javascript: 'JavaScript', java: 'Java', csharp: 'C#', cpp: 'C++' }
 
@@ -17,19 +23,26 @@ export default function WhatToLearnNextSection() {
   const { isAuth } = useAuth()
 
   useEffect(() => {
-    const fetches = [getSections()]
-    if (isAuth) {
-      fetches.push(getRecommended().catch(() => null))
-      fetches.push(getAssessmentResults().catch(() => []))
-      fetches.push(getPlaylists().catch(() => []))
-    }
+    let ignore = false
 
-    Promise.all(fetches)
-      .then((results) => {
+    async function loadSections() {
+      try {
+        const fetches = [getSections()]
+        if (isAuth) {
+          fetches.push(getRecommended().catch(() => null))
+          fetches.push(getAssessmentResults().catch(() => []))
+          fetches.push(getPlaylists().catch(() => []))
+          fetches.push(getOnboarding().catch(() => null))
+        }
+
+        const results = await Promise.all(fetches)
+        if (ignore) return
+
         const allSections = results[0]
         const recommended = isAuth ? (results[1] ?? null) : null
         const assessmentResults = isAuth ? (results[2] ?? []) : []
         const allPlaylists = isAuth ? (results[3] ?? []) : []
+        const onboarding = isAuth ? (results[4] ?? null) : null
 
         const recentLang = assessmentResults[0]?.language
         const langDisplay = recentLang ? (LANG_DISPLAY[recentLang] ?? recentLang) : null
@@ -52,18 +65,51 @@ export default function WhatToLearnNextSection() {
         } : null
 
         const channelSections = allSections.filter((s) => s.content_type === 'channel')
+        const configuredChannelIds = new Set(channelSections.flatMap((section) => section.channels.map((channel) => channel.id)))
+        const channelTags = getOnboardingRecommendationTags(onboarding)
+        if (recentLang) channelTags.push(recentLang)
+
+        let recommendedChannelsSection = null
+        if (isAuth && channelTags.length > 0) {
+          const taggedChannels = await getChannelsByTags(channelTags).catch(() => [])
+          if (ignore) return
+
+          const recommendedChannels = taggedChannels.filter((channel) => !configuredChannelIds.has(channel.id))
+          if (recommendedChannels.length > 0) {
+            const primaryTag = pickPrimaryTagFromChannels(recommendedChannels, channelTags)
+            recommendedChannelsSection = {
+              id: `recommended-channels-${primaryTag}`,
+              title: `Recommended channels to learn ${tagDisplayName(primaryTag)}`,
+              subtitle: null,
+              content_type: 'channel',
+              playlists: [],
+              videos: [],
+              channels: recommendedChannels,
+            }
+          }
+        }
 
         const finalSections = []
         if (recommended && (recommended.playlists?.length > 0 || recommended.videos?.length > 0 || recommended.channels?.length > 0)) {
           finalSections.push(recommended)
         }
         if (popularSection) finalSections.push(popularSection)
+        if (recommendedChannelsSection) finalSections.push(recommendedChannelsSection)
         finalSections.push(...channelSections)
 
         setSections(finalSections)
-      })
-      .catch(() => setError(true))
-      .finally(() => setLoading(false))
+      } catch {
+        if (!ignore) setError(true)
+      } finally {
+        if (!ignore) setLoading(false)
+      }
+    }
+
+    loadSections()
+
+    return () => {
+      ignore = true
+    }
   }, [isAuth])
 
   function toggleFavorite(sectionId, contentType, itemId) {

@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
@@ -6,6 +7,7 @@ from accounts.models import User, UserOnboarding
 from courses.models import Bookmark, Channel, Playlist, Section, Tag, Video
 
 
+@override_settings(ALLOWED_HOSTS=['testserver'], SECURE_SSL_REDIRECT=False)
 class FavoritesApiTest(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
@@ -106,6 +108,15 @@ class FavoritesApiTest(APITestCase):
         self.assertEqual(data[0]['title'], 'Python')
         self.assertEqual(data[0]['playlists'][0]['id'], self.playlist.id)
         self.assertTrue(data[0]['playlists'][0]['favorited'])
+
+    def test_channels_endpoint_filters_by_tag_without_channel_section(self):
+        response = self.client.get(reverse('channel-list'), {'tag': 'python'})
+
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]['id'], self.channel.id)
+        self.assertEqual(data[0]['tags'][0]['name'], 'python')
 
     def test_recommended_endpoint_marks_bookmarked_items_as_favorited(self):
         Bookmark.objects.create(

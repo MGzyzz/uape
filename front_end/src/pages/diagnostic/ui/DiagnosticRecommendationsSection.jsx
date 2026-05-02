@@ -1,8 +1,9 @@
 import './DiagnosticRecommendationsSection.css'
 import { useState, useEffect } from 'react'
-import { getSectionsByTag, getPlaylists, addBookmark, removeBookmark } from '../../../api/courses.js'
+import { getSectionsByTag, getPlaylists, getChannelsByTag, addBookmark, removeBookmark } from '../../../api/courses.js'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 import { SkeletonSection, ContentCard, ChannelsSection } from '../../../shared/ui/CourseSectionCards.jsx'
+import { normalizeTagName } from '../../../shared/recommendationTags.js'
 
 const LANG_DISPLAY = { python: 'Python', javascript: 'JavaScript', java: 'Java', csharp: 'C#', cpp: 'C++' }
 
@@ -43,12 +44,13 @@ export default function DiagnosticRecommendationsSection({ language, level = 'be
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const tagMatch = `#${language.toLowerCase()}`
+    const normalizedLanguageTag = normalizeTagName(language)
+    const tagMatch = `#${normalizedLanguageTag}`
     const langDisplay = LANG_DISPLAY[language.toLowerCase()] ?? language
     const growthAreas = getGrowthAreas(level, language.toLowerCase())
 
-    Promise.all([getSectionsByTag(language), getPlaylists()])
-      .then(([tagged, allPlaylists]) => {
+    Promise.all([getSectionsByTag(language), getPlaylists(), getChannelsByTag(language)])
+      .then(([tagged, allPlaylists, taggedChannels]) => {
         // Section 1: playlists filtered by test language
         const seenPl = new Set()
         const langPlaylists = []
@@ -99,9 +101,11 @@ export default function DiagnosticRecommendationsSection({ language, level = 'be
 
         // Section 3: channels filtered by test language tag (same logic as section 1)
         const seenCh = new Set()
-        const allChannels = tagged
+        const sectionChannels = tagged
           .filter((s) => s.content_type === 'channel')
           .flatMap((s) => s.channels)
+
+        const allChannels = [...taggedChannels, ...sectionChannels]
           .filter((c) => {
             if (seenCh.has(c.id)) return false
             if (!c.tags.some((t) => t.name.toLowerCase() === tagMatch)) return false

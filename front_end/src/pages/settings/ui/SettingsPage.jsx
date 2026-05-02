@@ -380,7 +380,7 @@ function SecurityTab({ showToast }) {
 /* ─── Main Page ──────────────────────────────────────────────────────────── */
 
 function SettingsPage() {
-  const { user, isAuth, setUser } = useAuth()
+  const { user, setUser } = useAuth()
   const [activeTab, setActiveTab] = useState('profile')
   const { toast, showToast } = useToast()
 

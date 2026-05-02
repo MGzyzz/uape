@@ -1,5 +1,12 @@
 import client from './client'
 
+function normalizeTagParam(tag) {
+  const value = String(tag ?? '').trim().replace(/^#/, '').toLowerCase()
+  if (value === 'cpp') return 'c++'
+  if (value === 'csharp') return 'c#'
+  return value
+}
+
 function formatCount(n) {
   if (!n) return ''
   if (n >= 1_000_000) {
@@ -106,8 +113,21 @@ export async function getVideos() {
   return res.data.map(normalizeVideo)
 }
 
+export async function getChannelsByTag(tagName) {
+  const res = await client.get(`/courses/channels/?tag=${encodeURIComponent(normalizeTagParam(tagName))}`)
+  return res.data.map(normalizeChannel)
+}
+
+export async function getChannelsByTags(tagNames) {
+  const tags = [...new Set(tagNames.map(normalizeTagParam).filter(Boolean))]
+  if (tags.length === 0) return []
+
+  const res = await client.get(`/courses/channels/?tags=${encodeURIComponent(tags.join(','))}`)
+  return res.data.map(normalizeChannel)
+}
+
 export async function getSectionsByTag(tagName) {
-  const res = await client.get(`/courses/sections/?tag=${encodeURIComponent(tagName.toLowerCase())}`)
+  const res = await client.get(`/courses/sections/?tag=${encodeURIComponent(normalizeTagParam(tagName))}`)
   return res.data.map(normalizeSection)
 }
 
