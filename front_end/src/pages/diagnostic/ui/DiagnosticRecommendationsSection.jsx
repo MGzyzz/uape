@@ -1,6 +1,6 @@
 import './DiagnosticRecommendationsSection.css'
 import { useState, useEffect } from 'react'
-import { getSectionsByTag, getSections, getPlaylists, addBookmark, removeBookmark } from '../../../api/courses.js'
+import { getSectionsByTag, getPlaylists, addBookmark, removeBookmark } from '../../../api/courses.js'
 import CarouselSection from '../../../shared/ui/CarouselSection.jsx'
 import { SkeletonSection, ContentCard, ChannelsSection } from '../../../shared/ui/CourseSectionCards.jsx'
 
@@ -47,8 +47,8 @@ export default function DiagnosticRecommendationsSection({ language, level = 'be
     const langDisplay = LANG_DISPLAY[language.toLowerCase()] ?? language
     const growthAreas = getGrowthAreas(level, language.toLowerCase())
 
-    Promise.all([getSectionsByTag(language), getPlaylists(), getSections()])
-      .then(([tagged, allPlaylists, allSections]) => {
+    Promise.all([getSectionsByTag(language), getPlaylists()])
+      .then(([tagged, allPlaylists]) => {
         // Section 1: playlists filtered by test language
         const seenPl = new Set()
         const langPlaylists = []
@@ -97,13 +97,14 @@ export default function DiagnosticRecommendationsSection({ language, level = 'be
           })
         }
 
-        // Section 3: all channels merged into one
+        // Section 3: channels filtered by test language tag (same logic as section 1)
         const seenCh = new Set()
-        const allChannels = allSections
+        const allChannels = tagged
           .filter((s) => s.content_type === 'channel')
           .flatMap((s) => s.channels)
           .filter((c) => {
             if (seenCh.has(c.id)) return false
+            if (!c.tags.some((t) => t.name.toLowerCase() === tagMatch)) return false
             seenCh.add(c.id)
             return true
           })
