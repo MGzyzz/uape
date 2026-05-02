@@ -61,7 +61,7 @@ class FavoritesApiTest(APITestCase):
         self.playlist_section.playlists.add(self.playlist)
         UserOnboarding.objects.create(
             user=self.user,
-            field='',
+            field='Data Analysis',
             occupation='Developer',
             skills=['python'],
             current_step=3,

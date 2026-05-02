@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
 
@@ -23,7 +24,10 @@ class ChannelListView(ListAPIView):
             tag_names.extend(t.strip() for t in tags.split(',') if t.strip())
 
         if tag_names:
-            return qs.filter(tags__name__in=tag_names).distinct()
+            tag_filter = models.Q()
+            for tag_name in set(tag_names):
+                tag_filter |= models.Q(tags__name__iexact=tag_name)
+            return qs.filter(tag_filter).distinct()
 
         return qs
 

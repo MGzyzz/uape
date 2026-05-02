@@ -160,6 +160,13 @@
   margin: 0;
 }
 
+.uape-learn-channel-description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+}
+
 .uape-learn-channel-footer {
   margin-top: auto;
   padding-top: 4px;
