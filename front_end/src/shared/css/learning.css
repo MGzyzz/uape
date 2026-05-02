@@ -126,6 +126,13 @@
   gap: 12px;
 }
 
+.uape-learn-channel-header {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 28px;
+  align-items: start;
+  gap: 12px;
+}
+
 .uape-learn-channel-avatar {
   width: 48px;
   height: 48px;
@@ -140,12 +147,18 @@
   flex-shrink: 0;
 }
 
+.uape-learn-channel-heading {
+  min-width: 0;
+}
+
 .uape-learn-channel-name {
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
   color: var(--color-uape-white);
   margin: 0;
+  min-width: 0;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

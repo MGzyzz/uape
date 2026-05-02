@@ -116,7 +116,7 @@ export function ChannelCard({ item, onToggle }) {
 
   return (
     <div className="uape-learn-channel-card">
-      <div className="flex items-start gap-3">
+      <div className="uape-learn-channel-header">
         <div className="uape-learn-channel-avatar">
           {item.avatar_url
             ? <img src={item.avatar_url} alt={item.name} className="h-full w-full object-cover rounded-full" />
@@ -124,7 +124,7 @@ export function ChannelCard({ item, onToggle }) {
           }
         </div>
 
-        <div className="uape-flex-1-min-w-0">
+        <div className="uape-learn-channel-heading">
           <p className="uape-learn-channel-name">{item.name}</p>
           <p className="uape-learn-channel-followers">{item.followers}</p>
         </div>
